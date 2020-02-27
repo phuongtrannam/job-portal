@@ -3,3 +3,6 @@
 @import "app/theme/styles/bootstrap.scss";
 @import "app/theme/styles/template.scss";
 @import "app/theme/styles/woocommerce.scss";
+@import "~leaflet/dist/leaflet.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

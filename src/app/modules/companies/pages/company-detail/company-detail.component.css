@@ -63,3 +63,6 @@ ul.page-numbers > li > a:hover, ul.page-numbers > li > a.current,
     vertical-align: middle;
     margin: 0;
 } */
+
+::ng-deep .mat-ink-bar {
+    background-color:#82b440 !important;}
