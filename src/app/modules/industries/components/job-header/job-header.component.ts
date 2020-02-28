@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { IndustriesService } from '../../industries.service';
+
 @Component({
-  selector: 'app-job-detail',
-  templateUrl: './job-detail.component.html',
-  styleUrls: ['./job-detail.component.css'],
+  selector: 'app-job-header',
+  templateUrl: './job-header.component.html',
+  styleUrls: ['./job-header.component.css'],
   providers: [IndustriesService]
 })
-export class JobDetailComponent implements OnInit {
+export class JobHeaderComponent implements OnInit {
 
 
 
