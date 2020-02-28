@@ -1,0 +1,78 @@
+<main id="main" class="site-main" role="main">
+
+    <div class="employers-listing-wrapper main-items-wrapper layout-type-grid" data-display_mode="grid">
+        <div class="jobs-alert-ordering-wrapper">
+            <div class="results-count">
+                Hiển thị <span class="first">1</span> – <span class="last">6</span> trong {{numberOfCompanies}} kết
+                quả tìm được</div>
+            <div class="jobs-ordering-wrapper">
+                <form class="jobs-ordering" method="get"
+                    action="https://apusthemes.com/wp-demo/careerup/employer-list-v2/">
+                    <div class="label">Sắp xếp theo:</div>
+                    <select name="filter-orderby" class="orderby select2-hidden-accessible" tabindex="-1"
+                        aria-hidden="true">
+                        <option value="menu_order">Default</option>
+                        <option value="newest" selected="selected">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="random">Random</option>
+                    </select>
+                    <!-- <span class="select2 select2-container select2-container--default" dir="ltr" style="width: auto;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-filter-orderby-h0-container"><span class="select2-selection__rendered" id="select2-filter-orderby-h0-container" title="Newest">Newest</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span>
+                        </span><span class="dropdown-wrapper" aria-hidden="true"></span></span> -->
+                    <input type="hidden" name="paged" value="1">
+                </form>
+            </div>
+        </div>
+
+        <div class="employers-wrapper items-wrapper">
+            <div class="row">
+                <div *ngFor="let company of listCompanies | paginate: { itemsPerPage: 6, currentPage: p }"
+                    class="col-sm-6 col-md-4 col-xs-12 md-clearfix sm-clearfix">
+                    <article id="" class="">
+                        <div class="employer-grid">
+                            <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i
+                                    class="fa fa-star text-theme"></i></span>
+                            <div class="open-job">
+                                <span class="text-theme">{{company.numberOfJob}}</span> Open Jobs </div>
+                            <div class="employer-thumbnail">
+                                <a href="/companies/viettel">
+                                    <img width="180" height="75"
+                                        src="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/brand3.jpg"
+                                        class="attachment-full size-full wp-post-image" alt=""> </a>
+                            </div>
+                            <div class="employer-information">
+                                <div class="employer-title-wrapper">
+                                    <h2 class="employer-title"><a href="/companies/viettel"
+                                            rel="bookmark">{{company.name}}</a></h2>
+                                </div>
+                                <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
+                                    class="text-theme">{{company.industry}}</a>
+
+                                <div class="employer-location">
+                                    <i class="flaticon-location-pin"></i>
+                                    <a
+                                        href="https://apusthemes.com/wp-demo/careerup/employer-location/new-york/">{{company.location}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- #post-## -->
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="employers-pagination-wrapper main-pagination-wrapper">
+        <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel="">
+        </pagination-controls>
+        <!-- <ul class="pagination ">
+                <li><span class="page-numbers current">1</span></li>
+                <li><a class="page-numbers" href="https://apusthemes.com/wp-demo/careerup/employer-list-v2/page/2/">2</a></li>
+                <li><a class="next page-numbers" href="https://apusthemes.com/wp-demo/careerup/employer-list-v2/page/2/">Next <i class="flaticon-right-arrow"></i></a></li>
+            </ul> -->
+    </div>
+
+</main>
+<!-- .site-main -->
