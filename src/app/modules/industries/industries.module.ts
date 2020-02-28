@@ -6,6 +6,7 @@ import { IndustryListComponent } from './pages/industry-list/industry-list.compo
 import { JobDetailComponent } from './pages/job-detail/job-detail.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster'
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     IndustriesRoutingModule,
     MatTabsModule,
     NgxPaginationModule,
-    LeafletModule
+    LeafletModule,
+    LeafletMarkerClusterModule
   ],
   declarations: [
     IndustryListComponent,

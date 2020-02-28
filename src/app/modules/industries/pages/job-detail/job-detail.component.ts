@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IndustriesService } from '../../industries.service';
-import { icon, latLng, LatLng, Layer, marker, tileLayer } from 'leaflet';
+// import { icon, latLng, LatLng, Layer, marker, tileLayer } from 'leaflet';
+import * as L from 'leaflet';
+import 'leaflet.markercluster';
 @Component({
   selector: 'app-job-detail',
   templateUrl: './job-detail.component.html',
@@ -9,69 +11,62 @@ import { icon, latLng, LatLng, Layer, marker, tileLayer } from 'leaflet';
 })
 export class JobDetailComponent implements OnInit {
 
-  optionsSpec: any = {
-    layers: [{ url: 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', attribution: 'Open Street Map' }],
-    zoom: 5,
-    center: [46.879966, -121.726909]
+  // Open Street Map Definition
+  LAYER_OSM = {
+    id: 'openstreetmap',
+    name: 'Open Street Map',
+    enabled: false,
+    layer: L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Open Street Map'
+    })
   };
 
-  // Leaflet bindings
-  zoom = this.optionsSpec.zoom;
-  center = latLng(this.optionsSpec.center);
+  // Values to bind to Leaflet Directive
+  layersControlOptions = { position: 'bottomright' };
+  baseLayers = {
+    'Open Street Map': this.LAYER_OSM.layer
+  };
   options = {
-    layers: [tileLayer(this.optionsSpec.layers[0].url, { attribution: this.optionsSpec.layers[0].attribution })],
-    zoom: this.optionsSpec.zoom,
-    center: latLng(this.optionsSpec.center)
+    zoom: 3,
+    center: L.latLng([46.879966, -121.726909])
   };
 
-  // Form bindings
-  formZoom = this.zoom;
-  zoomLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-  lat = this.center.lat;
-  lng = this.center.lng;
+  // Marker cluster stuff
+  markerClusterGroup: L.MarkerClusterGroup;
+  markerClusterData: L.Marker[] = [];
+  markerClusterOptions: L.MarkerClusterGroupOptions;
 
-  // Marker layer
-  markers: Layer[] = [];
-
-  addMarker() {
-    const newMarker = marker(
-      [46.879966 + 0.1 * (Math.random() - 0.5), -121.726909 + 0.1 * (Math.random() - 0.5)],
-      {
-        icon: icon({
-          iconSize: [25, 41],
-          iconAnchor: [13, 41],
-          iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png',
-          shadowUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png'
-        })
-      }
-    );
-
-    this.markers.push(newMarker);
-  }
-  // Output binding for center
-  onCenterChange(center: LatLng) {
-    setTimeout(() => {
-      this.lat = center.lat;
-      this.lng = center.lng;
-    });
-  }
-
-  onZoomChange(zoom: number) {
-    setTimeout(() => {
-      this.formZoom = zoom;
-    });
-  }
-
-  doApply() {
-    this.center = latLng(this.lat, this.lng);
-    this.zoom = this.formZoom;
-  }
+  // Generators for lat/lon values
+  generateLat() { return Math.random() * 360 - 180; }
+  generateLon() { return Math.random() * 180 - 90; }
 
   constructor(private industriesService: IndustriesService) {
 
   }
   ngOnInit() {
-    this.addMarker();
+    this.refreshData();
+
+  }
+  refreshData(): void {
+    this.markerClusterData = this.generateData(1000);
   }
 
+  generateData(count: number): L.Marker[] {
+
+    const data: L.Marker[] = [];
+
+    for (let i = 0; i < count; i++) {
+
+      const icon = L.icon({
+        iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-shadow.png'
+      });
+
+      data.push(L.marker([this.generateLon(), this.generateLat()], { icon }));
+    }
+
+    return data;
+
+  }
 }

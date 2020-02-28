@@ -99,7 +99,14 @@
                                 <div class="widget">
                                     <h3 class="widget-title">Phân bố công việc</h3>
                                     <div class="job-detail-map-location">
-                                        
+                                        <div leaflet style="height: 260px;"
+                                            [leafletOptions]="options"
+                                            [leafletBaseLayers]="baseLayers"
+                                            [leafletLayersControlOptions]="layersControlOptions"
+                                            [leafletMarkerCluster]="markerClusterData"
+                                            [leafletMarkerClusterOptions]="markerClusterOptions"
+                                            (leafletMarkerClusterReady)="markerClusterReady($event)">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="job-detail-statistic flex-middle-sm">
