@@ -1,0 +1,68 @@
+/* ul.page-numbers > li > span:hover, ul.page-numbers > li > span.current, 
+ul.page-numbers > li > a:hover, ul.page-numbers > li > a.current, 
+.pagination > li > span:hover, .pagination > li > span.current, 
+.pagination > li > a:hover, .pagination > li > a.current, 
+.apus-pagination > li > span:hover, .apus-pagination > li > span.current, 
+.apus-pagination > li > a:hover, .apus-pagination > li > a.current {
+    color: #fff;
+    background: #82b440;
+} */
+
+/* .pagination /deep/ ul.page-numbers, .ngx-pagination, .apus-pagination {
+    padding: 12px 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    text-align: center !important;
+    font-size: 16px !important;
+    background: #f0f0f0 !important;
+    border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    -ms-border-radius: 4px !important;
+    -o-border-radius: 4px !important;
+}
+
+.pagination /deep/ .ngx-pagination {
+    display: inline-block !important;
+    padding-left: 0 !important;
+    margin: 28px 0 !important;
+    border-radius: 0 !important;
+} */
+
+.pagination /deep/ .ngx-pagination .current {
+    background: #82b440 !important;
+    color: #fff !important;
+    cursor: default;
+}
+
+/* .pagination /deep/ .ngx-pagination a{
+    text-align: center;
+    font-family: "Nunito";
+    font-weight: 400;
+    font-size: 16px;
+    padding: 9px 12px;
+    display: inline-block;
+    float: none;
+    color: #222;
+    border-radius: 4px !important;
+    -webkit-border-radius: 4px !important;
+    -moz-border-radius: 4px !important;
+    -ms-border-radius: 4px !important;
+    -o-border-radius: 4px !important;
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    -o-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+    background: transparent;
+    min-width: 46px;
+    margin: 0;
+    border: 0;
+}
+
+.pagination /deep/ .ngx-pagination li{
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+} */
+
+::ng-deep .mat-ink-bar {
+    background-color:#82b440 !important;}
