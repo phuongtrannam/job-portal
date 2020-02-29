@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IndustryListComponent } from './pages/industry-list/industry-list.component';
 import { JobDetailComponent } from './pages/job-detail/job-detail.component';
+import { JobListComponent } from './pages/job-list/job-list.component';
 
 const routes: Routes = [
   {
@@ -10,9 +11,14 @@ const routes: Routes = [
     component: IndustryListComponent
   },
   {
-    path: ':id',
+    path: 'job/:id',
     component: JobDetailComponent,
-  }
+  },
+  {
+    path: 'job-category/:id',
+    component: JobListComponent,
+  },
+  
 ];
 
 @NgModule({
