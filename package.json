@@ -23,6 +23,7 @@
     "@angular/router": "~8.2.14",
     "@asymmetrik/ngx-leaflet": "^6.0.1",
     "@asymmetrik/ngx-leaflet-markercluster": "^3.0.0",
+    "angular-count-to": "0.0.3",
     "angular-material": "^1.1.21",
     "apexcharts": "^3.16.0",
     "hammerjs": "^2.0.8",

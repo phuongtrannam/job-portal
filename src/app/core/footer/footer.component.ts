@@ -6,20 +6,14 @@ import * as $ from 'jquery';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-
+  count = {
+    countTo: 2401,
+    from: 0,
+    duration: 1
+  };
   constructor() {
 
-    $('.elementor-counter-number').each(function () {
-      $(this).prop('Counter', 0).animate({
-              Counter: $(this).data('value')
-          }, {
-          duration: 1000,
-          easing: 'swing',
-          step: function (now) {                      
-              $(this).text(this.Counter.toFixed(2));
-          }
-      });
-  });
+
   }
 
   ngOnInit() {

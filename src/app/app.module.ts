@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { CountToModule } from 'angular-count-to';
 
 @NgModule({
   declarations: [
@@ -21,6 +21,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     LeafletModule.forRoot(),
     BrowserAnimationsModule,
+    CountToModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
