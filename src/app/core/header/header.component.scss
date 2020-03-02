@@ -4,3 +4,9 @@
 nav a {
     color: #ffffff!important;
 }
+.header-element {
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: #3c3c3c;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
+}
