@@ -7,14 +7,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
+// import { HomeComponent } from './modules/home/pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CountToModule } from 'angular-count-to';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    // HomeComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -22,6 +26,7 @@ import { CountToModule } from 'angular-count-to';
     LeafletModule.forRoot(),
     BrowserAnimationsModule,
     CountToModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
