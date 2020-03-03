@@ -1,12 +1,4 @@
-.carousel-wrapper {
-    overflow: hidden;
-  }
-.carousel {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    width: 600px;
-}
-.carousel-inner {
-    display: flex;
+.my-carousel{
+    width: 100%;
+    height: 50vh;
 }

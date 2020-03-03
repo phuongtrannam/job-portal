@@ -10,7 +10,7 @@ import { FooterComponent } from './core/footer/footer.component';
 // import { HomeComponent } from './modules/home/pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CountToModule } from 'angular-count-to';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LeafletModule.forRoot(),
     BrowserAnimationsModule,
     CountToModule,
-    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
