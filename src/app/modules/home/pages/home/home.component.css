@@ -1,0 +1,17 @@
+.title-industry{
+    text-align: center;
+    color: #262626;
+    font-size: 25px;
+}
+.browse-job{
+    text-align: center;
+    margin-top: 32px;
+}
+
+.btn-outline.btn-primary:hover {
+    color: #fff;
+    border-color: #82b440;
+    background: #82b440;
+}
+
+

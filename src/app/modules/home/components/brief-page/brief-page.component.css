@@ -1,0 +1,38 @@
+.working-process {
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+}
+
+span.process-img {
+    width: 80px;
+    height: 80px;
+    margin: 15px auto 0;
+    position: relative;
+    display: inline-block;
+    color: #82b440;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+span.process-num {
+    position: absolute;
+    font-size: 60px;
+    font-weight: 600;
+    color: #bbc7e1;
+    left: -30px;
+    top: -10px;
+    opacity: 0.2;
+}
+
+.working-process h4 {
+    margin: 10px 0;
+}
+
+.working-process p {
+    padding: 2px 15px;
+    line-height: 1.9;
+}
