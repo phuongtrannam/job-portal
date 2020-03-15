@@ -1,4 +1,5 @@
-<div id="apus-main-content" style="padding-top: 0px;">
+
+<!-- <div id="apus-main-content" style="padding-top: 0px;">
     <section id="primary" class="content-area inner">
         <main id="main" class="site-main content" role="main">
             <div class="single-listing-wrapper" data-latitude="40.707257" data-longitude="-73.91773999999998">
@@ -7,36 +8,42 @@
                     class="employer-single-v1 container employer type-employer status-publish has-post-thumbnail">
                     <app-company-header></app-company-header>
                     <div class="panel-affix-wrapper" style="height: 80px;">
-                        <!-- <div class="header-tabs-wrapper panel-affix affix-top" style="width: 1140px; top: 0px;">
-                            <div class="header-tabs-nav">
-                                <ul class="nav">
-                                    <li class=""><a href="/companies/viettel#employer-detail-description">Description</a></li>
-                                    
-                                    <li class=""><a href="/companies/viettel#post-691">Education</a></li>
-                                    <li class=""><a href="#job-candidate-experience">Experience</a></li>
-                                    <li><a href="#job-candidate-portfolio">Portfolios</a></li>
-                                    <li class=""><a href="#job-candidate-skill">Skill</a></li>
-                                    <li class=""><a href="#job-candidate-award">Award</a></li>
-                                </ul>
-                            </div>
-                        </div> -->
                         <mat-tab-group class="header-tabs-wrapper panel-affix affix-top">
                             <mat-tab label="Thông tin chung" class="header-tabs-nav nav"> 
                                 <app-company-info></app-company-info>
                             </mat-tab>
-                            <mat-tab label="Phân tích tuyển dụng"> Content 2 </mat-tab>
+                            <mat-tab label="Phân tích tuyển dụng"> 
+                                <ng-template matTabContent>
+                                    <app-company-hiring></app-company-hiring>
+                                </ng-template>
+                                
+                            </mat-tab>
                             <mat-tab label="Third"> Content 3 </mat-tab>
                         </mat-tab-group>
                     </div>
                     
                 </article>
-                <!-- #post-## -->
-
             </div>
 
         </main>
-        <!-- .site-main -->
     </section>
-    <!-- .content-area -->
+</div> -->
 
-</div>
+<div id="apus-main-content" style="padding-top: 0px;">
+    <section id="main-container" class="main-content container inner">
+        <app-company-header></app-company-header>
+        <mat-tab-group class="header-tabs-wrapper panel-affix affix-top">
+            <mat-tab label="Thông tin chung" class="header-tabs-nav nav"> 
+                <app-company-info></app-company-info>
+            </mat-tab>
+            <mat-tab label="Phân tích tuyển dụng"> 
+                <ng-template matTabContent>
+                    <app-company-hiring></app-company-hiring>
+                </ng-template>
+                
+            </mat-tab>
+            <mat-tab label="Third"> Content 3 </mat-tab>
+        </mat-tab-group>
+    </section>
+    
+  </div>

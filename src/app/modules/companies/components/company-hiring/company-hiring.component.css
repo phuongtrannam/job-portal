@@ -1,0 +1,79 @@
+svg[data-prefix="fas"] {
+    width: 20px;
+    height: 20px;
+}
+.navbar-job {
+    box-shadow: 0 0 20px 0 rgba(62,28,131,0.1);
+}
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+    background: url(https://themerail.com/html/oficiona/images/bg/banner-4-bg.jpg);
+}
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.table-top-luong {
+    width: 100%;
+}
+.table-top-luong thead {
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 700;
+}
+.table-top-luong tbody tr:nth-child(2n+1) {
+    background: #f1f1f1;
+}
+.table-top-luong tbody td {
+    padding: 3px 8px;
+}
+.luong-cao-nhat-top-one {
+    font-size: 31px;
+    color: #555555;
+    font-weight: 700;
+}
+.luong-cao-nhat-top-one span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #82b440;
+}
+.timeline-select {
+    border-bottom: 1px solid #cccccc;
+}
+.timeline-select > div {
+    margin-bottom: -1px;
+    margin-right: 18px;
+    /* border-bottom: 1px solid #cccccc; */
+    padding-bottom: 8px;
+    /* margin-bottom: 12px; */
+    cursor: pointer;
+}
+.timeline-select > div.selected {
+    color: #82b440;
+    border-bottom: 1px solid #82b440;
+}
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+tr.mat-footer-row, tr.mat-row {
+    height: auto;
+}
+
+.mat-row:nth-child(even){
+    background-color:white ;
+    }
+
+.mat-row:nth-child(odd){
+    background-color:#f1f1f1;
+    }

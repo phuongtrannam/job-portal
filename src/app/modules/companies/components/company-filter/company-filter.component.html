@@ -54,21 +54,25 @@
                         <span class="find-me"></span>
                         <span class="clear-location hidden"><i class="ti-close"></i></span>
                     </div>
-                    <input type="hidden" name="filter-center-latitude" value="">
-                    <input type="hidden" name="filter-center-longitude" value="">
 
                     <div class="search_distance_wrapper clearfix">
                         <div class="search-distance-label">
                             Radius: <span class="text-distance">50</span> miles </div>
                         <div class="search-distance-wrapper">
-                            <input type="hidden" name="filter-distance" value="50">
+                            <!-- <input type="hidden" name="filter-distance" value="50">
                             <div
                                 class="search-distance-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
                                 <div class="ui-slider-handle distance-custom-handle ui-state-default ui-corner-all"
                                     data-value="50" style="left: 50%;"></div>
                                 <div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min"
                                     style="width: 50%;"></div>
-                            </div>
+                            </div> -->
+                            <!-- <mat-slider class="mat-slide-1" [disabled]="disabled" [invert]="invert" [max]="max"
+                                [min]="min" [step]="step" [thumbLabel]="thumbLabel" name = "slider-radius"
+                                [tickInterval]="getSliderTickInterval()" [(ngModel)]="value" [vertical]="vertical"  >
+                            </mat-slider> -->
+                            <mat-slider (input)="someValue = $event.value" [value]="someValue">
+                            </mat-slider>
                         </div>
                     </div>
                 </div>
