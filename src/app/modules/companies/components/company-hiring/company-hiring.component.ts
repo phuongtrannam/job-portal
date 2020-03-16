@@ -98,7 +98,7 @@ export class CompanyHiringComponent implements OnInit {
     var chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-cong-viec'), options);
     chart.render();
   }
-  showJobsHighestSalaryChart(jobsHighestSalary:  Array<any>): void {
+  showJobsHighestSalaryChart(jobsHighestSalary: Array<any>): void {
     let data = jobsHighestSalary;
     let jobNames = [];
     let salary = [];
@@ -156,7 +156,7 @@ export class CompanyHiringComponent implements OnInit {
     var chart = new ApexCharts(document.querySelector('#cong-viec-duoc-tra-luong-cao-nhat'), options);
     chart.render();
   }
-  showJobDistributionByAgeChart(jobDemandByAge:  Array<any>): void{
+  showJobDistributionByAgeChart(jobDemandByAge: Array<any>): void{
     // tslint:disable-next-line: no-unused-expression
     let data = jobDemandByAge;
     let ageRange = [];
@@ -219,7 +219,7 @@ export class CompanyHiringComponent implements OnInit {
     var chart = new ApexCharts(document.querySelector("#nhu-cau-viec-lam-theo-do-tuoi"), options);
     chart.render();
   }
-  showJobDemandByMonthChart(jobDemandByMonth:  Array<any>): void{
+  showJobDemandByMonthChart(jobDemandByMonth: Array<any>): void{
     // tslint:disable-next-line: no-unused-expression
     
     let data = jobDemandByMonth;
