@@ -70,7 +70,7 @@ export class MarketsService {
             },
             {
                 name: 'Nhân viên giao nhận',
-                value: 3500,
+                value: 6500,
                 growth: 1.3,
             },
             {
@@ -80,22 +80,22 @@ export class MarketsService {
             },
             {
                 name: 'Công nhân cơ khí',
-                value: 2000,
+                value: 5000,
                 growth: 0.2,
             },
             {
                 name: 'Kĩ sư xây dựng',
-                value: 1500,
+                value: 3500,
                 growth: -2.1,
             },
             {
                 name: 'Nhân viên kinh doanh',
-                value: 1200,
+                value: 4200,
                 growth: 3.0,
             },
             {
                 name: 'Lái xe',
-                value: 1000,
+                value: 3000,
                 growth: -2.5,
             },
         ];

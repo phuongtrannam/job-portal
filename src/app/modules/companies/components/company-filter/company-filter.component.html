@@ -10,7 +10,7 @@
                 </label>
                 <div class="form-group-inner inner" style="display: block;">
                     <input type="text" name="filter-title" class="form-control" value=""
-                        id="employer_filter_widget-2_title" placeholder="e.g. web design">
+                        id="employer_filter_widget-2_title" placeholder="VD: Vingroup">
                 </div>
             </div>
             <!-- /.form-group -->
@@ -22,19 +22,19 @@
                     <ul class="terms-list circle-check">
                         <li class="list-item ">
                             <input id="Accounting / Finance" type="checkbox" name="filter-category[]" value="73">
-                            <label for="Accounting / Finance">Accounting / Finance</label>
+                            <label for="Accounting / Finance">Tài chính, kế toán</label>
 
                             <span class="count">(5)</span>
                         </li>
                         <li class="list-item ">
                             <input id="Automotive Jobs" type="checkbox" name="filter-category[]" value="74">
-                            <label for="Automotive Jobs">Automotive Jobs</label>
+                            <label for="Automotive Jobs">Giáo dục</label>
 
                             <span class="count">(2)</span>
                         </li>
                         <li class="list-item ">
                             <input id="Education Training" type="checkbox" name="filter-category[]" value="75">
-                            <label for="Education Training">Education Training</label>
+                            <label for="Education Training">Y tế</label>
 
                             <span class="count">(1)</span>
                         </li>
@@ -49,39 +49,19 @@
                 <div class="form-group-inner inner">
                     <div class="action-location">
                         <input type="text" name="filter-center-location" class="form-control" value=""
-                            id="employer_filter_widget-2_center-location" placeholder="All Location" autocomplete="off">
+                            id="employer_filter_widget-2_center-location" placeholder="Hà Nội,..." autocomplete="off">
                         <div class="leaflet-geocode-container"></div>
                         <span class="find-me"></span>
                         <span class="clear-location hidden"><i class="ti-close"></i></span>
                     </div>
 
-                    <div class="search_distance_wrapper clearfix">
-                        <div class="search-distance-label">
-                            Radius: <span class="text-distance">50</span> miles </div>
-                        <div class="search-distance-wrapper">
-                            <!-- <input type="hidden" name="filter-distance" value="50">
-                            <div
-                                class="search-distance-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                                <div class="ui-slider-handle distance-custom-handle ui-state-default ui-corner-all"
-                                    data-value="50" style="left: 50%;"></div>
-                                <div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min"
-                                    style="width: 50%;"></div>
-                            </div> -->
-                            <!-- <mat-slider class="mat-slide-1" [disabled]="disabled" [invert]="invert" [max]="max"
-                                [min]="min" [step]="step" [thumbLabel]="thumbLabel" name = "slider-radius"
-                                [tickInterval]="getSliderTickInterval()" [(ngModel)]="value" [vertical]="vertical"  >
-                            </mat-slider> -->
-                            <mat-slider (input)="someValue = $event.value" [value]="someValue">
-                            </mat-slider>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- /.form-group -->
             <div class="form-group form-group-founded-date toggle-field ">
 
                 <label for="filter-founded-date" class="heading-label">
-                    Founded Date <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    Năm thành lập <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </label>
                 <div class="form-group-inner">
                     <div class="from-to-wrapper">
@@ -129,7 +109,7 @@
             <!-- /.form-group -->
 
             <div class="form-group">
-                <button class="button">Filter <i class="flaticon-right-arrow"></i></button>
+                <button class="button">Lọc kết quả <i class="flaticon-right-arrow"></i></button>
             </div>
             <!-- /.form-group -->
         </form>

@@ -241,7 +241,7 @@ export class DashboardComponent implements OnInit {
         enabled: false
       },
       chart: {
-        type: 'bar',
+        type: 'line',
         height: '100px',
         toolbar: {
           show: false,
