@@ -171,3 +171,12 @@ svg[data-prefix="fas"] {
     color: #8b91a0;
     font-size: 14px;
   }
+
+  .mat-expansion-panel-header-title {
+    color: #82b440;
+    font-size: 28px;
+    font-weight: 600;
+    font-style: normal;
+    font-family: "Nunito", Arial, sans-serif;
+    justify-content: center !important;
+  }

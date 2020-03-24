@@ -19,7 +19,7 @@ export class MarketsService {
                 hiring: 56,
             },
             {
-                name: 'Ăn xin',
+                name: 'Phi công',
                 value: 35,
                 growth: 1.3,
                 hiring: 80,
@@ -49,7 +49,7 @@ export class MarketsService {
                 hiring: 30,
             },
             {
-                name: 'Bốc vác',
+                name: 'Y tá',
                 value: 10,
                 growth: -2.5,
                 hiring: 100,
