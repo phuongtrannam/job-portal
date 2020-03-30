@@ -6,29 +6,27 @@
 
             <div class="form-group form-group-title  ">
                 <label for="job_filter_widget-2_title" class="heading-label">
-                    Search Keywords </label>
+                    Tên công việc </label>
                 <div class="form-group-inner inner">
                     <input type="text" name="filter-title" class="form-control" value="" id="job_filter_widget-2_title"
-                        placeholder="e.g. web design">
+                        placeholder="VD: Kĩ sư xây dựng">
                 </div>
             </div>
             <!-- /.form-group -->
             <div class="form-group form-group-center-location toggle-field ">
                 <label for="job_filter_widget-2_center-location" class="heading-label">
-                    Location <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    Nơi làm việc <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </label>
                 <div class="form-group-inner inner">
                     <div class="action-location">
                         <input type="text" name="filter-center-location" class="form-control" value=""
-                            id="job_filter_widget-2_center-location" placeholder="All Location" autocomplete="off">
+                            id="job_filter_widget-2_center-location" placeholder="VD: Hà Nội" autocomplete="off">
                         <div class="leaflet-geocode-container"></div>
                         <span class="find-me"></span>
                         <span class="clear-location hidden"><i class="ti-close"></i></span>
                     </div>
-                    <input type="hidden" name="filter-center-latitude" value="">
-                    <input type="hidden" name="filter-center-longitude" value="">
 
-                    <div class="search_distance_wrapper clearfix">
+                    <!-- <div class="search_distance_wrapper clearfix">
                         <div class="search-distance-label">
                             Radius: <span class="text-distance">50</span> miles </div>
                         <div class="search-distance-wrapper">
@@ -41,13 +39,13 @@
                                     style="width: 50%;"></div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <!-- /.form-group -->
             <div class="form-group form-group-category toggle-field  tax-checklist-field">
                 <label class="heading-label">
-                    Category <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    Lĩnh vực <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </label>
                 <div class="form-group-inner">
                     <div class="scroll-wrapper terms-list circle-check level-0" style="position: relative;">
@@ -57,51 +55,51 @@
                                 <div class="list-item-inner">
                                     <input id="Accounting / Finance" type="checkbox" name="filter-category[]"
                                         value="59">
-                                    <label for="Accounting / Finance">Accounting / Finance</label><span
+                                    <label for="Accounting / Finance">Tài chính/ Kế toán</label><span
                                         class="count">(3)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Construction / Facilities" type="checkbox" name="filter-category[]"
                                         value="60">
-                                    <label for="Construction / Facilities">Construction / Facilities</label><span
+                                    <label for="Construction / Facilities">Xây dựng</label><span
                                         class="count">(1)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Design &amp; Multimedia" type="checkbox" name="filter-category[]"
                                         value="61">
-                                    <label for="Design &amp; Multimedia">Design &amp; Multimedia</label><span
+                                    <label for="Design &amp; Multimedia">Đa phương tiện</label><span
                                         class="count">(2)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Education Training" type="checkbox" name="filter-category[]" value="62">
-                                    <label for="Education Training">Education Training</label><span
+                                    <label for="Education Training">Giáo dục</label><span
                                         class="count">(3)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Health" type="checkbox" name="filter-category[]" value="63">
-                                    <label for="Health">Health</label><span class="count">(3)</span></div>
+                                    <label for="Health">Y tế</label><span class="count">(3)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Human Resource" type="checkbox" name="filter-category[]" value="64">
-                                    <label for="Human Resource">Human Resource</label><span class="count">(1)</span>
+                                    <label for="Human Resource">May mặc</label><span class="count">(1)</span>
                                 </div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Restaurant / Food Service" type="checkbox" name="filter-category[]"
                                         value="65">
-                                    <label for="Restaurant / Food Service">Restaurant / Food Service</label><span
+                                    <label for="Restaurant / Food Service">Nhà hàng/ Khách sạn</label><span
                                         class="count">(2)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Telecommunications" type="checkbox" name="filter-category[]" value="66">
-                                    <label for="Telecommunications">Telecommunications</label><span
+                                    <label for="Telecommunications">Viễn thông</label><span
                                         class="count">(1)</span></div>
                             </li>
                         </ul>
@@ -125,7 +123,7 @@
             <!-- /.form-group -->
             <div class="form-group form-group-type toggle-field  tax-radios-field">
                 <label for="job_filter_widget-2_type" class="heading-label">
-                    Job Type <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    Loại công việc <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </label>
 
                 <div class="form-group-inner">
@@ -135,28 +133,24 @@
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Freelance" type="radio" name="filter-type" value="19">
-                                    <label for="Freelance">Freelance</label><span class="count">(2)</span></div>
+                                    <label for="Freelance">Bán thời gian</label><span class="count">(2)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Full Time" type="radio" name="filter-type" value="16">
-                                    <label for="Full Time">Full Time</label><span class="count">(7)</span></div>
+                                    <label for="Full Time">Toàn thời gian</label><span class="count">(7)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Internship" type="radio" name="filter-type" value="20">
-                                    <label for="Internship">Internship</label><span class="count">(1)</span></div>
+                                    <label for="Internship">Thực tập sinh</label><span class="count">(1)</span></div>
                             </li>
                             <li class="list-item">
                                 <div class="list-item-inner">
                                     <input id="Part Time" type="radio" name="filter-type" value="17">
-                                    <label for="Part Time">Part Time</label><span class="count">(2)</span></div>
+                                    <label for="Part Time">Thời vụ</label><span class="count">(2)</span></div>
                             </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Temporary" type="radio" name="filter-type" value="18">
-                                    <label for="Temporary">Temporary</label><span class="count">(1)</span></div>
-                            </li>
+                           
                         </ul>
                         <div class="scroll-element scroll-x" style="">
                             <div class="scroll-element_outer">
@@ -178,29 +172,29 @@
             <!-- /.form-group -->
             <div class="clearfix form-group form-group-salary toggle-field ">
                 <label for="filter-salary" class="heading-label">
-                    Salary <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    Lương <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </label>
                 <div class="form-group-inner">
                     <div class="salary_types-wrapper circle-check">
                         <div class="list-item">
                             <input type="radio" name="filter-salary-type" class="form-control" value="monthly"
                                 id="job_filter_widget-2_monthly">
-                            <label for="job_filter_widget-2_monthly">Monthly</label>
+                            <label for="job_filter_widget-2_monthly">Tháng</label>
                         </div>
                         <div class="list-item">
                             <input type="radio" name="filter-salary-type" class="form-control" value="weekly"
                                 id="job_filter_widget-2_weekly">
-                            <label for="job_filter_widget-2_weekly">Weekly</label>
+                            <label for="job_filter_widget-2_weekly">Tuần</label>
                         </div>
                         <div class="list-item">
                             <input type="radio" name="filter-salary-type" class="form-control" value="hourly"
                                 id="job_filter_widget-2_hourly">
-                            <label for="job_filter_widget-2_hourly">Hourly</label>
+                            <label for="job_filter_widget-2_hourly">Giờ</label>
                         </div>
                         <div class="list-item">
                             <input type="radio" name="filter-salary-type" class="form-control" value="yearly"
                                 id="job_filter_widget-2_yearly">
-                            <label for="job_filter_widget-2_yearly">Yearly</label>
+                            <label for="job_filter_widget-2_yearly">Năm</label>
                         </div>
                     </div>
                     <div class="from-to-wrapper">
@@ -222,7 +216,7 @@
                 </div>
             </div>
             <!-- /.form-group -->
-            <div class="form-group form-group-date-posted toggle-field ">
+            <!-- <div class="form-group form-group-date-posted toggle-field ">
                 <label for="job_filter_widget-2_date-posted" class="heading-label">
                     Date Posted <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </label>
@@ -261,11 +255,11 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
             <!-- /.form-group -->
-            <div class="form-group form-group-6 toggle-field hide-content">
+            <!-- <div class="form-group form-group-6 toggle-field hide-content">
                 <label class="heading-label">
-                    Industry <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    Lĩnh vực <i class="fa fa-angle-up" aria-hidden="true"></i>
                 </label>
                 <div class="form-group-inner">
                     <ul class="terms-list circle-check">
@@ -308,11 +302,11 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
             <!-- /.form-group -->
             <div class="form-group form-group-4 toggle-field hide-content">
                 <label class="heading-label">
-                    Qualification <i class="fa fa-angle-up" aria-hidden="true"></i>
+                    Bằng cấp <i class="fa fa-angle-up" aria-hidden="true"></i>
                 </label>
                 <div class="form-group-inner">
                     <ul class="terms-list circle-check">
@@ -341,7 +335,7 @@
                 </div>
             </div>
             <!-- /.form-group -->
-            <div class="form-group form-group-4 toggle-field hide-content">
+            <!-- <div class="form-group form-group-4 toggle-field hide-content">
                 <label class="heading-label">
                     Career Level <i class="fa fa-angle-up" aria-hidden="true"></i>
                 </label>
@@ -379,11 +373,11 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
             <!-- /.form-group -->
 
             <div class="form-group">
-                <button class="button">Fillter <i class="flaticon-right-arrow"></i></button>
+                <button class="button">Lọc kết quả <i class="flaticon-right-arrow"></i></button>
             </div>
             <!-- /.form-group -->
         </form>
