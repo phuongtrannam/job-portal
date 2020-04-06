@@ -125,120 +125,12 @@ export class DashboardComponent implements OnInit {
     });
     var options = {
       series: [{
+        name: 'col',
+        type: 'line',
         data: numOfJobs
-      }],
-      legend: {
-        show: false
-      },
-      dataLabels: {
-        enabled: false
-      },
-      chart: {
-        type: 'bar',
-        height: '100px',
-        toolbar: {
-          show: false,
-        },
-      },
-      plotOptions: {
-        bar: {
-          // horizontal: true,
-          dataLabels: {
-            position: 'top', // top, center, bottom
-          },
-        }
-      },
-      yaxis: {
-        show: false,
-        lines: {
-          show: false,
-        }
-      },
-      xaxis: {
-        labels: {
-          show: false,
-        },
-        lines: {
-          show: false,
-        }
-      },
-      grid: {
-        show: false,
-      },
-      
-      colors: ['#36a800', '#545454'],
-    };
-
-    var chart = new ApexCharts(document.querySelector('#so-luong-cong-ty'), options);
-    chart.render();
-  }
-  showTopJobsHiringChart2(jobsHighestHiring:  Array<any>): void{
-    let data = jobsHighestHiring;
-    let jobNames = [];
-    let numOfJobs = [];
-    data.forEach(function (obj) {
-      jobNames.push(obj.name);
-      numOfJobs.push(obj.value);
-    });
-    var options = {
-      series: [{
-        data: numOfJobs
-      }],
-      legend: {
-        show: false
-      },
-      dataLabels: {
-        enabled: false
-      },
-      chart: {
-        type: 'bar',
-        height: '100px',
-        toolbar: {
-          show: false,
-        },
-      },
-      plotOptions: {
-        bar: {
-          // horizontal: true,
-          dataLabels: {
-            position: 'top', // top, center, bottom
-          },
-        }
-      },
-      yaxis: {
-        show: false,
-        lines: {
-          show: false,
-        }
-      },
-      xaxis: {
-        labels: {
-          show: false,
-        },
-        lines: {
-          show: false,
-        }
-      },
-      grid: {
-        show: false,
-      },
-      
-      colors: ['#36a800', '#545454'],
-    };
-
-    var chart = new ApexCharts(document.querySelector('#luong-trung-binh'), options);
-    chart.render();
-  }
-  showTopJobsHiringChart3(jobsHighestHiring:  Array<any>): void{
-    let data = jobsHighestHiring;
-    let jobNames = [];
-    let numOfJobs = [];
-    data.forEach(function (obj) {
-      jobNames.push(obj.name);
-      numOfJobs.push(obj.value);
-    });
-    var options = {
-      series: [{
+      }, {
+        name: 'linechart',
+        type: 'column',
         data: numOfJobs
       }],
       legend: {
@@ -280,7 +172,143 @@ export class DashboardComponent implements OnInit {
         show: false,
       },
       
-      colors: ['#36a800', '#545454'],
+      colors: ['#36a800', '#82b440'],
+    };
+
+    var chart = new ApexCharts(document.querySelector('#so-luong-cong-ty'), options);
+    chart.render();
+  }
+  showTopJobsHiringChart2(jobsHighestHiring:  Array<any>): void{
+    let data = jobsHighestHiring;
+    let jobNames = [];
+    let numOfJobs = [];
+    data.forEach(function (obj) {
+      jobNames.push(obj.name);
+      numOfJobs.push(obj.value);
+    });
+    var options = {
+      series: [{
+        name: 'col',
+        type: 'line',
+        data: numOfJobs
+      }, {
+        name: 'linechart',
+        type: 'column',
+        data: numOfJobs
+      }],
+      legend: {
+        show: false
+      },
+      dataLabels: {
+        enabled: false
+      },
+      chart: {
+        type: 'line',
+        height: '100px',
+        toolbar: {
+          show: false,
+        },
+      },
+      plotOptions: {
+        bar: {
+          // horizontal: true,
+          dataLabels: {
+            position: 'top', // top, center, bottom
+          },
+        }
+      },
+      yaxis: {
+        show: false,
+        lines: {
+          show: false,
+        }
+      },
+      xaxis: {
+        labels: {
+          show: false,
+        },
+        lines: {
+          show: false,
+        }
+      },
+      grid: {
+        show: false,
+      },
+      
+      colors: ['#36a800', '#82b440'],
+    };
+
+    var chart = new ApexCharts(document.querySelector('#luong-trung-binh'), options);
+    chart.render();
+  }
+  showTopJobsHiringChart3(jobsHighestHiring:  Array<any>): void{
+    let data = jobsHighestHiring;
+    let jobNames = [];
+    let numOfJobs = [];
+    data.forEach(function (obj) {
+      jobNames.push(obj.name);
+      numOfJobs.push(obj.value);
+    });
+    var options = {
+      series: [{
+        name: 'col',
+        type: 'line',
+        data: numOfJobs
+      }, {
+        name: 'linechart',
+        type: 'column',
+        data: numOfJobs
+      }],
+      legend: {
+        show: false
+      },
+      dataLabels: {
+        enabled: false
+      },
+      chart: {
+        type: 'line',
+        height: '100px',
+        toolbar: {
+          show: false,
+        },
+
+        events: {
+          // dataPointSelection: function(e, chart, opts) {
+          //   console.log("Inside the dataPointSelection Event");
+          // },
+          click: function(e, chart, opts) {
+              // console.log("Inside the click Event");
+              window.location.replace("http://www.w3schools.com");
+          }
+        }
+      },
+      plotOptions: {
+        bar: {
+          // horizontal: true,
+          dataLabels: {
+            position: 'top', // top, center, bottom
+          },
+        }
+      },
+      yaxis: {
+        show: false,
+        lines: {
+          show: false,
+        }
+      },
+      xaxis: {
+        labels: {
+          show: false,
+        },
+        lines: {
+          show: false,
+        }
+      },
+      grid: {
+        show: false,
+      },
+      
+      colors: ['#36a800', '#82b440'],
     };
 
     var chart = new ApexCharts(document.querySelector('#tuoi-trung-binh'), options);
