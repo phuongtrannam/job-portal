@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MarketsService } from '../../markets.service';
 import 'apexcharts';
+import { collectExternalReferences } from '@angular/compiler';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -31,6 +32,12 @@ export class DashboardComponent implements OnInit {
     });
     var options = {
       series: [{
+        name: 'col',
+        type: 'line',
+        data: numOfJobs
+      }, {
+        name: 'linechart',
+        type: 'column',
         data: numOfJobs
       }],
       legend: {
@@ -40,7 +47,7 @@ export class DashboardComponent implements OnInit {
         enabled: false
       },
       chart: {
-        type: 'bar',
+        type: 'line',
         height: '100px',
         toolbar: {
           show: false,
@@ -72,7 +79,7 @@ export class DashboardComponent implements OnInit {
         show: false,
       },
       
-      colors: ['#36a800', '#545454'],
+      colors: ['#36a800', '#82b440'],
       // dataLabels: {
       //   enabled: true,
       //   formatter: function (val) {
