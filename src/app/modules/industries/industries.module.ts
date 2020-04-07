@@ -11,9 +11,11 @@ import { IndustryListingComponent } from './components/industry-listing/industry
 import { JobSearchComponent } from './components/job-search/job-search.component';
 import { JobFilterComponent } from './components/job-filter/job-filter.component';
 import { JobListingComponent } from './components/job-listing/job-listing.component';
+import { JobAnalysisComponent } from './components/job-analysis/job-analysis.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster'
+import { MatTableModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -22,7 +24,8 @@ import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluste
     MatTabsModule,
     NgxPaginationModule,
     LeafletModule,
-    LeafletMarkerClusterModule
+    LeafletMarkerClusterModule,
+    MatTableModule,
   ],
   declarations: [
     IndustryListComponent,
@@ -34,7 +37,8 @@ import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluste
     JobSearchComponent,
     JobFilterComponent,
     JobListingComponent,
-
+    JobAnalysisComponent,
+    
   ]
 })
 export class IndustriesModule { }
