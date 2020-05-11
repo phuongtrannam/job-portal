@@ -276,6 +276,7 @@ export class DashboardComponent implements OnInit {
           // dataPointSelection: function(e, chart, opts) {
           //   console.log("Inside the dataPointSelection Event");
           // },
+          
           click: function(e, chart, opts) {
               // console.log("Inside the click Event");
               window.location.replace("http://www.w3schools.com");

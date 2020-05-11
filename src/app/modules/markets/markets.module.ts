@@ -6,6 +6,7 @@ import { MarketsRoutingModule } from './markets-routing.module';
 import { MarketAnalysisComponent } from './pages/market-analysis/market-analysis.component';
 import { MarketChartComponent } from './components/market-chart/market-chart.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MarketsRoutingModule,
     MatTableModule,
     MatExpansionModule,
+    NgxPageScrollCoreModule,
   ]
 })
 export class MarketsModule { }

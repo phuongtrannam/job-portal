@@ -13,6 +13,7 @@ import { CompanyHiringComponent } from './components/company-hiring/company-hiri
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MatTableModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -24,6 +25,8 @@ import { MatTableModule } from '@angular/material';
     LeafletModule,
     MatSliderModule,
     MatTableModule,
+    HttpClientModule,
+    
   ],
   declarations: [
     CompanyListComponent,

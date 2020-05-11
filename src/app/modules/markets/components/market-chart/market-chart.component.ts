@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MarketsService } from '../../markets.service';
 import 'apexcharts';
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll-core';
+
 @Component({
   selector: 'app-market-chart',
   templateUrl: './market-chart.component.html',
@@ -27,8 +29,9 @@ export class MarketChartComponent implements OnInit {
   public averageWageByIndustry: any[];
 
 
-  constructor(private marketsService: MarketsService) {
-
+  constructor(private marketsService: MarketsService, private pageScrollService: PageScrollService) {
+    // PageScrollConfig.defaultScrollOffset = 200;
+    // PageScrollConfig.defaultDuration = 250;
   }
   ngOnInit() {
     this.jobsHighestSalary = this.marketsService.getListJobsHighestSalary();
@@ -372,6 +375,15 @@ export class MarketChartComponent implements OnInit {
         width: '100%',
         height: 350,
         type: 'pie',
+        events: {
+          dataPointSelection: function(event, chartContext, config) {
+            console.log( config.dataPointIndex);
+          },
+          click: function(e, chart, opts) {
+            // console.log("Inside the click Event");
+            window.location.href = "industries/job-category/education-training";
+          }
+        }
       },
     labels: industries,
     theme: {

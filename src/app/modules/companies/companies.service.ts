@@ -1,81 +1,69 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 
+
+const httpOptions = {
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'my-auth-token'
+    })
+};
 @Injectable()
 export class CompaniesService {
-    constructor() { }
-
-
-    getListCompanies() {
-        return [
-            {
-                name: 'Viettel',
-                industry: 'Viễn thông',
-                location: 'Hà Nội',
-                numberOfJob: 50,
-            },
-            {
-                name: 'Cengroup',
-                industry: 'Bất động sản',
-                location: 'Hà Nội',
-                numberOfJob: 150,
-            },
-            {
-                name: 'Herbal Ltd',
-                industry: 'Giáo dục',
-                location: 'Hà Nội',
-                numberOfJob: 100,
-            },
-            {
-                name: 'Vingroup',
-                industry: 'Bán lẻ',
-                location: 'Hà Nội',
-                numberOfJob: 50,
-            },
-            {
-                name: 'Personnel Ltd',
-                industry: 'Giáo dục',
-                location: 'Hà Nội',
-                numberOfJob: 80,
-            },
-            {
-                name: 'Michael MC',
-                industry: 'Tài Chính',
-                location: 'Hà Nội',
-                numberOfJob: 50,
-            },
-            {
-                name: 'Shiseido Co',
-                industry: 'Ngân hàng',
-                location: 'Hà Nội',
-                numberOfJob: 50,
-            },
-            {
-                name: 'Shiseido Co',
-                industry: 'Giáo dục',
-                location: 'Hà Nội',
-                numberOfJob: 50,
-            },
-        ];
+    rootUrl = 'http://localhost:8080/companies';
+    postData = {
+        id: 'C188',
     }
-    getCompanyInfo(id: string) {
-        var info = {
-            name: 'Shiseido Co',
-            industry: 'Accounting / Finance',
-            location: 'New York',
-            phonenumber: '+610123456',
-            website: 'www.themeforest.com',
-            logo: '',
-            latitude: 46.879966,
-            longitude: -121.726909,
-            teamSize: 50,
-            views: 1584,
-            numberOfJob: 2,
-            foundedDate: 2002,
-            description: '',
-            officeImage: [],
+    constructor(private http: HttpClient) {
+    }
+
+    getCompanyList() {
+        const specificPath = '/get_company_list';
+        const url = this.rootUrl + specificPath;
+        return this.http.get(url);
+    }
+
+    getBusinessLinesOfCompany(idCompany: string) {
+        const postData = {
+            id: idCompany,
         };
-        return info;
+        const specificPath = '/get_business_lines_of_the_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
     }
+
+    getCompanyInfo(idCompany: string) {
+        const postData = {
+            id: idCompany,
+        };
+        const specificPath = '/get_company_info';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getRelatedCompanies(idCompany: string) {
+        const postData = {
+            id: idCompany,
+        };
+        const specificPath = '/get_related_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getRecentJobsByCompany(idCompany: string) {
+        const postData = {
+            id: idCompany,
+        };
+        const specificPath = '/get_recent_job_by_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+
+
+    
 
     getNumberOfJob() {
         return [

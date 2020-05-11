@@ -33,6 +33,61 @@ export class CompanyInfoComponent implements OnInit {
   // Marker layer
   markers: Layer[] = [];
 
+  businessLinesOfCompany = [];
+  companyInfo = {};
+  relatedCompanies = [];
+  recentJobsByCompany = [];
+
+  constructor(private companiesService: CompaniesService) {
+
+  }
+  ngOnInit() {
+    this.addMarker();
+    // this.showBusinessLinesOfCompany('C188');
+    // this.showCompanyInfo('C188');
+    // this.showRelatedCompanies('C188');
+    // this.showRecentJobByCompany('C188');
+    
+  }
+
+  showBusinessLinesOfCompany(idCompany: string){
+    this.companiesService.getBusinessLinesOfCompany(idCompany)
+      .subscribe((data: any) => {
+        console.log("showBusinessLinesOfCompany");
+        console.log(data.result);
+        this.businessLinesOfCompany = data.result;
+      });
+  }
+
+  showCompanyInfo(idCompany: string){
+    this.companiesService.getCompanyInfo(idCompany)
+      .subscribe((data: any) => {
+        console.log("showCompanyInfo");
+        console.log(data.result);
+        this.companyInfo = data.result;
+      });
+  }
+
+  showRelatedCompanies(idCompany: string){
+    this.companiesService.getRelatedCompanies(idCompany)
+      .subscribe((data: any) => {
+        console.log("showRelatedCompany");
+        console.log(data.result);
+        this.relatedCompanies = data.result;
+      });
+  }
+
+  showRecentJobsByCompany(idCompany: string){
+    this.companiesService.getRecentJobsByCompany(idCompany)
+      .subscribe((data: any) => {
+        console.log("showRecentJobByCompany");
+        console.log(data.result);
+        this.recentJobsByCompany = data.result;
+      });
+  }
+
+
+
   addMarker() {
     const newMarker = marker(
       [46.879966 + 0.1 * (Math.random() - 0.5), -121.726909 + 0.1 * (Math.random() - 0.5)],
@@ -67,11 +122,6 @@ export class CompanyInfoComponent implements OnInit {
     this.zoom = this.formZoom;
   }
 
-  constructor(private companiesService: CompaniesService) {
-
-  }
-  ngOnInit() {
-    this.addMarker();
-  }
+  
 
 }
