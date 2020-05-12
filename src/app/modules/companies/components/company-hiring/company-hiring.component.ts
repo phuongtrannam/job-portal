@@ -9,6 +9,9 @@ import { CompaniesService } from '../../companies.service';
 export class CompanyHiringComponent implements OnInit {
   hiringTableColumns = ['name', 'value', 'growth'];
   salaryTableColumns = ['name', 'value', 'growth', 'hiring'];
+  public numberOfJob: any[];
+  public jobsHighestSalary: any[];
+
 
 
   jobDemandByPeriodOfTimeTable = ['timestamp', 'province', 'value'];
@@ -20,18 +23,13 @@ export class CompanyHiringComponent implements OnInit {
   jobDemandByPeriodOfTime = [];
   jobDemandByLiteracy = [];
 
-  public numberOfJob: any[];
-  public jobsHighestSalary: any[];
-
-
-
   constructor(private companiesService: CompaniesService) {
 
   }
   ngOnInit() {
-    this.showJobDistributionByAgeChart('C188');
-    // this.showJobDemandByPeriodOfTime('C188');
-    // this.showJobDemandByLiteracy('C188');
+    this.showJobDemandByAgeChart('C188');
+    this.showJobDemandByPeriodOfTime('C188');
+    this.showJobDemandByLiteracy('C188');
 
   }
   // showRecruitmentDemandChart(idCompany: string): void {
@@ -151,7 +149,7 @@ export class CompanyHiringComponent implements OnInit {
   //   var chart = new ApexCharts(document.querySelector('#cong-viec-duoc-tra-luong-cao-nhat'), options);
   //   chart.render();
   // }
-  showJobDistributionByAgeChart(idCompany: string): void {
+  showJobDemandByAgeChart(idCompany: string): void {
 
     this.companiesService.getJobDemandByAge(idCompany)
       .subscribe((data: any) => {
