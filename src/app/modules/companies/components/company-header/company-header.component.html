@@ -1,7 +1,7 @@
 <!-- heading -->
 <div class="candidate-detail-header">
     <div class="flex-middle-sm row">
-        <div class="col-xs-12 col-sm-9">
+        <div class="col-xs-12 col-sm-12">
             <div class="flex-middle">
 
                 <div class="employer-thumbnail flex-middle">
@@ -13,16 +13,16 @@
 
                 <div class="candidate-information">
                     <div class="title-wrapper">
-                        <h1 class="candidate-title">Viettel</h1> <span class="featured" data-toggle="tooltip"
+                        <h2 class="candidate-title">{{companyInfo.name}}</h2> <span class="featured" data-toggle="tooltip"
                             title="" data-original-title="featured"><i class="fa fa-star text-theme"></i></span>
                     </div>
                     <a class="text-theme"
                         href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/">Viễn thông</a>
                     <div class="job-metas-cadidate">
                         <div class="employer-website"><i class="fa fa-link text-theme"></i><a
-                                href="http://www.themeforest.com">www.viettel.com</a></div>
+                                href="http://www.themeforest.com">{{companyInfo.website}}</a></div>
                         <div class="employer-phone"><i class="fa fa-phone text-theme"></i><a
-                                href="tel:+610 123 456">+610 123 456</a></div>
+                                href="tel:+610 123 456">+{{companyInfo.phonenumber}}</a></div>
                     </div>
                     <div class="job-metas-cadidate">
                         <div class="employer-email"><i class="fa fa-envelope-o text-theme"></i><a

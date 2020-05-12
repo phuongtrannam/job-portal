@@ -9,23 +9,24 @@ import { CompaniesService } from '../../companies.service';
 })
 export class CompanyListingComponent implements OnInit {
   companyList = [];
-  
+  numberOfCompanies;
   constructor(private companiesService: CompaniesService) {
 
   }
   ngOnInit() {
     this.showCompanyList();
     
-    // this.listCompanies = this.companiesService.getListCompanies();
-    // this.numberOfCompanies = this.listCompanies.length;
+    
   }
 
   showCompanyList() {
     this.companiesService.getCompanyList()
-      .subscribe((data: any[]) => {
-        console.log("test http service");
-        console.log(data);
-        this.companyList = data;
+      .subscribe((data: any) => {
+        console.log("getCompanyList");
+        console.log(data.result);
+        this.companyList = data.result;
+        this.numberOfCompanies = this.companyList.length;
+        console.log("number of company " +this.numberOfCompanies);
       });
   }
   

@@ -43,11 +43,20 @@ export class CompanyInfoComponent implements OnInit {
   }
   ngOnInit() {
     this.addMarker();
-    // this.showBusinessLinesOfCompany('C188');
-    // this.showCompanyInfo('C188');
-    // this.showRelatedCompanies('C188');
-    // this.showRecentJobByCompany('C188');
+    this.showCompanyInfo('C188');
+    this.showBusinessLinesOfCompany('C188');
+    this.showRelatedCompanies('C188');
+    this.showRecentJobsByCompany('C188');
     
+  }
+
+  showCompanyInfo(idCompany: string){
+    this.companiesService.getCompanyInfo(idCompany)
+      .subscribe((data: any) => {
+        console.log("showCompanyInfo");
+        console.log(data.result);
+        this.companyInfo = data.result;
+      });
   }
 
   showBusinessLinesOfCompany(idCompany: string){
@@ -59,14 +68,7 @@ export class CompanyInfoComponent implements OnInit {
       });
   }
 
-  showCompanyInfo(idCompany: string){
-    this.companiesService.getCompanyInfo(idCompany)
-      .subscribe((data: any) => {
-        console.log("showCompanyInfo");
-        console.log(data.result);
-        this.companyInfo = data.result;
-      });
-  }
+  
 
   showRelatedCompanies(idCompany: string){
     this.companiesService.getRelatedCompanies(idCompany)
