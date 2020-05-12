@@ -16,6 +16,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster'
 import { MatTableModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { MatTableModule } from '@angular/material';
     LeafletModule,
     LeafletMarkerClusterModule,
     MatTableModule,
+    HttpClientModule,
   ],
   declarations: [
     IndustryListComponent,
