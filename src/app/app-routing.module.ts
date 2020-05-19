@@ -1,8 +1,13 @@
+import { RegionComponent } from './region/region.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
+  {
+    path: 'region',
+    component: RegionComponent
+  },
   {
     path: 'companies',
     loadChildren: () => import('./modules/companies/companies.module').then(m => m.CompaniesModule),

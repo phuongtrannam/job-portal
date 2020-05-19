@@ -10,6 +10,7 @@ import { FooterComponent } from './core/footer/footer.component';
 // import { HomeComponent } from './modules/home/pages/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CountToModule } from 'angular-count-to';
+import { RegionComponent } from './region/region.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { CountToModule } from 'angular-count-to';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    RegionComponent,
     // HomeComponent,
 
   ],
