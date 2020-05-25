@@ -11,6 +11,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CountToModule } from 'angular-count-to';
 import { RegionComponent } from './region/region.component';
+import { LuotDangTinTheoNganhNgheComponent } from './region/luot-dang-tin-theo-nganh-nghe/luot-dang-tin-theo-nganh-nghe.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { RegionComponent } from './region/region.component';
     HeaderComponent,
     FooterComponent,
     RegionComponent,
+    LuotDangTinTheoNganhNgheComponent,
     // HomeComponent,
 
   ],
