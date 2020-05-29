@@ -6,3 +6,27 @@
 @import "~leaflet/dist/leaflet.css";
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+header {
+    padding: 20px 0px;
+}
+button.white {
+    background-color: #ffffff;
+    border: 1px solid #38943d;
+    color: #38933d;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    outline: none;
+}
+button.green {
+    background-color: #65c36b;
+    background-image: -webkit-gradient(linear, left top, right top, from(#5aaf60), to(#36923b));
+    background-image: linear-gradient(to right, #5aaf60, #36923b);
+    border: 1px solid #38943d;
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 4px;
+    outline: none;
+}
