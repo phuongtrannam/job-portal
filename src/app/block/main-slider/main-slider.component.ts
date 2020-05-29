@@ -39,8 +39,8 @@ export class MainSliderComponent implements OnInit {
           spaceBetween: 5,
         },
         '@1.50': {
-          slidesPerView: 4,
-          spaceBetween: 5,
+          slidesPerView: 1,
+          spaceBetween: 0,
         },
       }
     });

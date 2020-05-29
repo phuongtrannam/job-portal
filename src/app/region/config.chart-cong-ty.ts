@@ -1,11 +1,11 @@
-export const chartViecLamMoi = {
+export const chartCongTy = {
     series: [{
     name: 'series1',
-    data: [31, 40, 28, 51]
+    data: [31, 40, 38, 51, 60]
   }],
     chart: {
     height: 130,
-    type: 'area',
+    type: 'line',
     zoom: {
         enabled: false
     },
@@ -18,7 +18,7 @@ export const chartViecLamMoi = {
     enabled: false
   },
   stroke: {
-    curve: 'smooth',
+    curve: 'straight',
     width: [3, 0]
     // colors: []
   },
@@ -57,7 +57,7 @@ export const chartViecLamMoi = {
     }
   },
   grid: {
-      // show: false
+    //   show: false
   },
   tooltip: {
     x: {
