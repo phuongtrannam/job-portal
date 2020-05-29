@@ -1,16 +1,22 @@
 .static {
-    background-color: #65c36b;
-    background-image: -webkit-gradient(linear, left top, right top, from(#4fca57), to(#2d9032));
-    background-image: linear-gradient(to right, #5aaf60, #36923b);
+    // background-color: #65c36b;
+    // background-image: -webkit-gradient(linear, left top, right top, from(#4fca57), to(#2d9032));
+    // background-image: linear-gradient(to right, #5aaf60, #36923b);
+    background: #e8e8e8;
     padding: 10px;
     border-radius: 6px;
     border: none;
     .title {
         color: #fff;
+        color: #333333;
     }
     .highlight {
         color: #fff;
         font-size: 30px;
         font-weight: 700;
+        color: #333333;
+    }
+    .small-chart {
+        margin-top: -20px;
     }
 }

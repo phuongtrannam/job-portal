@@ -1,8 +1,9 @@
 export const luotDangTinTheoNganhNghe = {
     series: [44, 55, 41, 17, 15],
     chart: {
-    type: 'donut',
+        type: 'donut',
     },
+    color: ['#37933c'],
     responsive: [{
         breakpoint: 480,
         options: {
