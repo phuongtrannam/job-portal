@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material';
 import { IndustriesRoutingModule } from './industries-routing.module';
 import { IndustryListComponent } from './pages/industry-list/industry-list.component';
+import { IndustryDetailComponent } from './pages/industry-detail/industry-detail.component';
 import { JobDetailComponent } from './pages/job-detail/job-detail.component';
 import { JobListComponent } from './pages/job-list/job-list.component';
 import { JobHeaderComponent } from './components/job-header/job-header.component';
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   declarations: [
     IndustryListComponent,
+    IndustryDetailComponent,
     JobDetailComponent,
     JobListComponent,
     JobHeaderComponent,
