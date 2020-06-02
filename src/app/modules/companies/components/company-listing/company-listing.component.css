@@ -1,6 +1,50 @@
 
 .pagination /deep/ .ngx-pagination .current {
-    background: #82b440 !important;
+    background: #38933d !important;
     color: #fff !important;
     cursor: default;
+}
+
+.employer-grid:hover {
+    border-color: #38933d;
+}
+
+.text-theme {
+    color: #38933d !important;
+}
+
+
+.btn-theme.btn-outline {
+    color: #38933d;
+    background-color: transparent;
+    border-color: #38933d; /*set the color you want here*/
+}
+.btn-theme.btn-outline:hover, .btn-theme.btn-outline:focus, .btn-theme.btn-outline:active, .btn-theme.btn-outline.active, .open>.dropdown-toggle.btn-theme.btn-outline {
+    color: #fff;
+    background-color: #38933d;
+    border-color: #38933d; /*set the color you want here*/
+}
+
+.job-list-v1:hover {
+    border-color: #38933d;
+}
+
+a:hover, a:active{
+    color: #38933d;
+  }
+
+  .filter-listing-form .button {
+    width: 100%;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    display: block;
+    border: none;
+    padding: 11px;
+    background-color: #38933d;
+    color: #fff;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    transition: all 0.4s ease-in-out 0s;
 }

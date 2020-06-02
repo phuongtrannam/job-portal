@@ -1,4 +1,4 @@
-<aside class="sidebar sidebar-left" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+<!-- <aside class="sidebar sidebar-left" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
     <div class="close-sidebar-btn hidden-lg hidden-md"> <i class="ti-close"></i> <span>Close</span></div>
     <aside class="widget widget_employer_filter_widget">
         <form method="get" action="https://apusthemes.com/wp-demo/careerup/employer-list-v2/"
@@ -13,7 +13,6 @@
                         id="employer_filter_widget-2_title" placeholder="VD: Vingroup">
                 </div>
             </div>
-            <!-- /.form-group -->
             <div class="form-group form-group-category toggle-field ">
                 <label class="heading-label">
                     Lĩnh vực hoạt động <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -41,7 +40,6 @@
                     </ul>
                 </div>
             </div>
-            <!-- /.form-group -->
             <div class="form-group form-group-center-location toggle-field ">
                 <label for="employer_filter_widget-2_center-location" class="heading-label">
                     Vị trí <i class="fa fa-angle-down" aria-hidden="true"></i>
@@ -57,7 +55,6 @@
 
                 </div>
             </div>
-            <!-- /.form-group -->
             <div class="form-group form-group-founded-date toggle-field ">
 
                 <label for="filter-founded-date" class="heading-label">
@@ -83,7 +80,6 @@
                     <input type="hidden" name="filter-founded-date-to" class="filter-to" value="2005">
                 </div>
             </div>
-            <!-- /.form-group -->
             <div class="form-group form-group-3 toggle-field hide-content">
                 <label for="employer_filter_widget-2_3" class="heading-label">
                     Số lượng nhân sự <i class="fa fa-angle-up" aria-hidden="false"></i>
@@ -106,13 +102,88 @@
                     </ul>
                 </div>
             </div>
-            <!-- /.form-group -->
 
             <div class="form-group">
                 <button class="button">Lọc kết quả <i class="flaticon-right-arrow"></i></button>
             </div>
-            <!-- /.form-group -->
         </form>
 
     </aside>
+</aside> -->
+
+<aside class="sidebar widget">
+    <!-- <aside class="widget"> -->
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Từ khóa </label>
+            <input type="text" class="form-control" placeholder="vd. cen group">
+        </div>
+    </form>
+
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Khu vực </label>
+            <input type="text" class="form-control" placeholder="vd. Hà Nội">
+        </div>
+    </form>
+
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Ngành nghề
+            </label>
+            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *cdkVirtualFor="let item of industries">
+                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </form>
+    
+
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Số lượng nhân sự </label>
+            <div class="row">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Từ:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="nhân viên">
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Đến:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="nhân viên">
+            </div>
+        </div>
+    </form>
+
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Mức lương trung bình </label>
+            <div class="row">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Từ:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Đến:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
+            </div>
+        </div>
+    </form>
+
+
+    
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <button class="button">Lọc kết quả <i class="fa fa-chevron-right"></i></button>
+        </div>
+    </form>
+    
+    <!-- </aside> -->
 </aside>

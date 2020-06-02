@@ -1,22 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatTabsModule, MatSliderModule } from '@angular/material';
-import { CompaniesRoutingModule } from './companies-routing.module';
-import { CompanyListComponent } from './pages/company-list/company-list.component';
-import { CompanyDetailComponent } from './pages/company-detail/company-detail.component';
-import { CompanyFilterComponent } from './components/company-filter/company-filter.component';
-import { CompanyListingComponent } from './components/company-listing/company-listing.component';
-import { CompanyHeaderComponent } from './components/company-header/company-header.component';
-import { CompanyInfoComponent } from './components/company-info/company-info.component';
-import { CompanyHiringComponent } from './components/company-hiring/company-hiring.component';
+import { JobsRoutingModule } from './jobs-routing.module';
+import { JobListComponent } from './pages/job-list/job-list.component';
+import { JobDetailComponent } from './pages/job-detail/job-detail.component';
+import { JobFilterComponent } from './components/job-filter/job-filter.component';
+import { JobListingComponent } from './components/job-listing/job-listing.component';
+import { JobHighlightComponent } from './components/job-highlight/job-highlight.component';
+import { JobHeaderComponent } from './components/job-header/job-header.component';
+import { JobDescriptionComponent } from './components/job-description/job-description.component';
+import { JobAnalysisComponent } from './components/job-analysis/job-analysis.component';
+
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { MatTableModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
-
-
-
 
 import {A11yModule} from '@angular/cdk/a11y';
 // import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -51,9 +49,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSliderModule} from '@angular/material/slider';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSortModule} from '@angular/material/sort';
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
@@ -67,22 +68,23 @@ import {ObserversModule} from '@angular/cdk/observers';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {PlatformModule} from '@angular/cdk/platform';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    CompaniesRoutingModule,
+    JobsRoutingModule,
     NgxPaginationModule,
     MatTabsModule,
-    LeafletModule,
-    MatSliderModule,
-    MatTableModule,
-    HttpClientModule,
     MatCardModule,
     MatCheckboxModule,
     ScrollingModule,
+    LeafletModule,
     MatListModule,
+    MatTableModule,
     MatRadioModule,
+    HttpClientModule,
+    
   ],
   exports: [
     PlatformModule,
@@ -136,13 +138,17 @@ import {PlatformModule} from '@angular/cdk/platform';
     ScrollingModule,
   ],
   declarations: [
-    CompanyListComponent,
-    CompanyDetailComponent,
-    CompanyFilterComponent,
-    CompanyListingComponent,
-    CompanyHeaderComponent,
-    CompanyInfoComponent,
-    CompanyHiringComponent,
+    JobListComponent,
+    JobDetailComponent,
+    JobHighlightComponent,
+    JobFilterComponent,
+    JobListingComponent,
+    JobHeaderComponent,
+    JobDescriptionComponent,
+    JobAnalysisComponent,
+    // CompanyHeaderComponent,
+    // CompanyInfoComponent,
+    // CompanyHiringComponent,
   ]
 })
-export class CompaniesModule { }
+export class JobsModule { }

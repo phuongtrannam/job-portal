@@ -1,0 +1,9 @@
+.job-single-v7 .job-detail-information ul li {
+    width: 20%;
+}
+
+.employer-detail-detail .icon, .job-detail-detail .icon {
+    color: #38933d;
+    font-size: 30px;
+    float: left;
+}

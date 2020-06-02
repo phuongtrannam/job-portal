@@ -24,7 +24,7 @@ export class JobAnalysisComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.showJobDemandByAgeChart('J1');
+    // this.showJobDemandByAgeChart('J1');
   }
 
   // showJobDemandByMonthChart(jobDemandByMonth: Array<any>): void{

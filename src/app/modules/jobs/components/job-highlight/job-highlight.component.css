@@ -1,0 +1,23 @@
+.trending-keywords {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.trending-keywords li {
+    display: inline-block;
+    margin-right: 5px;
+}
+.trending-keywords .title {
+    color: #262626;
+}
+
+.form-search .trending-keywords {
+    margin-top: 30px;
+}
+.item a { 
+    color: #6a6a6a;
+}
+.item a:hover, .item a:active{
+    color: #38933d;
+  }
+  
