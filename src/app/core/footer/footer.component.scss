@@ -10,10 +10,10 @@
     margin-right: 20px;
 }
 .elementor-counter-number{
-    color: #fff;
+    color: #37933c;
     font-family: "Roboto",Sans-serif;
     font-size: 25px;
-    font-weight: 400;
+    font-weight: 800;
 }
 .elementor-counter-title{
     text-align: center;
@@ -24,13 +24,25 @@
 
 .footer-element {
     border-style: solid;
-    border-width: 0px 1px 0px 0px;
-    border-color: #3c3c3c;
+    border-width: 0px;
+    border-color: #c5c5c5;
     transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }
 hr {
-    margin-top: 16px;
-    margin-bottom: 28px;
+    margin-top: 0px;
+    margin-bottom: 8px;
     border: 0;
-    border-top: 1px solid #3c3c3c;
+    border-top: 1px solid #c5c5c5;
+}
+.bor-top {
+    border-top: 1px solid #ececec;
+}
+.static {
+    background: #f3f3f3;
+    padding: 20px 0;
+    border-top: 1px solid #e6e6e6;
+}
+.socials .social a {
+    color: #ffffff!important;
+    background: #37933c!important;
 }

@@ -3,12 +3,12 @@ export const luotDangTinTheoNganhNghe = {
     chart: {
         type: 'donut',
     },
-    color: ['#37933c'],
+    colors: ['#37933c'],
     responsive: [{
         breakpoint: 480,
         options: {
         chart: {
-            width: 200
+            width: 180
         },
         legend: {
             position: 'bottom'

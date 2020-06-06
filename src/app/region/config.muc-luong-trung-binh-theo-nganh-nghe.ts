@@ -13,6 +13,7 @@ export const mucLuongTrungBinhTheoNganhNghe = {
       show: false
     }
   },
+  colors: ['#37933c'],
   dataLabels: {
     enabled: true,
     textAnchor: 'start',
@@ -22,7 +23,6 @@ export const mucLuongTrungBinhTheoNganhNghe = {
     offsetX: 0,
     style: {
       fontSize: '12px',
-      colors: ['#36a800']
     }
   },
   plotOptions: {
@@ -36,16 +36,6 @@ export const mucLuongTrungBinhTheoNganhNghe = {
         // rangeBarOverlap: true,
         dataLabels: {
           position: 'top', // top, center, bottom
-        },
-        colors: {
-            ranges: [{
-                from: 0,
-                to: 100,
-                color: '#36a800'
-            }],
-            backgroundBarColors: [],
-            backgroundBarOpacity: 1,
-            backgroundBarRadius: 0,
         },
     }
   },
