@@ -3,7 +3,7 @@ export const luotDangTinTheoNganhNghe = {
     chart: {
         type: 'donut',
     },
-    colors: ['#37933c'],
+    colors: ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
     responsive: [{
         breakpoint: 480,
         options: {
