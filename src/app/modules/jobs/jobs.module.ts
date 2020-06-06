@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { JobsRoutingModule } from './jobs-routing.module';
 import { JobListComponent } from './pages/job-list/job-list.component';
 import { JobDetailComponent } from './pages/job-detail/job-detail.component';
@@ -58,8 +58,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
-
-
+import { MatFormFieldModule } from '@angular/material';
 // import {BrowserModule} from '@angular/platform-browser';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -73,6 +72,7 @@ import {PlatformModule} from '@angular/cdk/platform';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     JobsRoutingModule,
     NgxPaginationModule,
     MatTabsModule,
@@ -84,7 +84,9 @@ import {PlatformModule} from '@angular/cdk/platform';
     MatTableModule,
     MatRadioModule,
     HttpClientModule,
-    
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   exports: [
     PlatformModule,

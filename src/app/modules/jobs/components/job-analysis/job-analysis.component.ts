@@ -21,11 +21,7 @@ export class JobAnalysisComponent implements OnInit {
   jobDemandByLiteracyTable = ['literacy', 'numJob', 'growth'];
   jobDemandByLiteracy = new MatTableDataSource<any>([]);
 
-  jobs = [{id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150",},
-        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
-        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
-        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
-        ]
+  relatedJobs = [];
 
 
   constructor(private jobsService: JobsService) {
@@ -37,6 +33,7 @@ export class JobAnalysisComponent implements OnInit {
     this.showJobDemandAndAverageSalary('J1', 'P24');
     this.showJobDemandByAge('J1', 'P24');
     this.showJobDemandByLiteracy('J99', 'P24');
+    this.getRelatedJobs('J99');
     
   }
 
@@ -497,7 +494,14 @@ export class JobAnalysisComponent implements OnInit {
 
   }
 
-
+  getRelatedJobs(idJob: string): void {
+    this.jobsService.getRelatedJobs(idJob)
+      .subscribe((data: any) => {
+        console.log("getJobsRelated");
+        console.log(data.result);
+        this.relatedJobs = data.result;
+    });
+  }
 
   // showJobDemandByAgeChart(idJob: string): void {
   //   this.industriesService.getJobDemandByAge(idJob)

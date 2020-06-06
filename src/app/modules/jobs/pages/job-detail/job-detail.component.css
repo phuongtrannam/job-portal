@@ -67,4 +67,12 @@ ul.page-numbers > li > a:hover, ul.page-numbers > li > a.current,
 ::ng-deep .mat-ink-bar {
     background-color:#38933d !important;}
 
-    
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
