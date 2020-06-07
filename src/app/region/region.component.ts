@@ -14,11 +14,18 @@ declare var ApexCharts: any;
 })
 export class RegionComponent implements OnInit {
 
-  public quickTab: any = [
-    {name: 'Theo ngành nghề', selected: true},
-    {name: 'Theo vị trí công việc', selected: false},
-    {name: 'Theo công ty', selected: false},
-  ]
+  public quickTab1 = [
+    {name: 'Quý I', selected: true},
+    {name: 'Quý II', selected: false},
+    {name: 'Quý III', selected: false},
+    {name: 'Quý IV', selected: true}
+  ];
+  public quickTab2 = [
+    {name: 'Quý I', selected: true},
+    {name: 'Quý II', selected: false},
+    {name: 'Quý III', selected: false},
+    {name: 'Quý IV', selected: true}
+  ];
   constructor() { }
 
   ngOnInit() {

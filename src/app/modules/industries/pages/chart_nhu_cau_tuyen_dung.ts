@@ -1,16 +1,30 @@
-export const mucLuongTrungBinhTheoNganhNghe = {
+export const NhuCauTuyenDung = {
     series: [{
     name: 'Inflation',
-    data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
+    data: [2.3, 3.1, 4.0, 10.1]
   }],
+  title: {
+    text: 'Nhu cầu việc làm theo độ tuổi, giới tính',
+    align: 'left',
+    style: {
+      fontSize: '18px',
+      fontFamily: 'Nunito, Arial, sans-serif',
+      fontWeight: '600',
+    },
+  },
+  subtitle: {
+    text: 'Dữ liệu cập nhật lần cuối quý ',
+    align: 'left'
+  },
     chart: {
     height: 350,
-    type: 'bar',
+    type: 'line',
+    fontFamily: 'Helvetica, Arial, sans-serif',
     zoom: {
-      enabled: false
+      enabled: false,
     },
     toolbar: {
-      show: false
+      show: false,
     }
   },
   dataLabels: {
@@ -51,30 +65,22 @@ export const mucLuongTrungBinhTheoNganhNghe = {
   },
   xaxis: {
     categories: [
-      'Công nghệ Viễn thông',
-      'Công nghệ thông tin',
-      'Hướng dẫn viên du lịch',
-      'Kỹ sư công nghệ ô tô',
-      'Kỹ sư xây dựng công trình',
-      'Marketing- truyền thông',
-      'Nhân viên kinh doanh',
-      'Sinh học ứng dụng',
-      'Thiết kế công nghiệp',
-      'Khoa học môi trường',
-      'Kinh tế quốc tế',
-      'Thiết kế đồ họa'
+      'Quý I',
+      'Quý II',
+      'Quý III',
+      'Quý IV',
     ],
-    position: 'top',
+    position: 'bot',
     axisBorder: {
-      show: false
+      show: false,
     },
     axisTicks: {
-      show: false
+      show: false,
     },
     labels: {
       show: true,
       formatter: val => {
-        return val + 'tr';
+        return val + '';
       }
     },
     tooltip: {
@@ -83,17 +89,16 @@ export const mucLuongTrungBinhTheoNganhNghe = {
   },
   yaxis: {
     axisBorder: {
-      show: false
+      show: false,
     },
     axisTicks: {
       show: false,
     }
   },
-  title: {
-    text: 'Biểu đồ so sánh mức lương trung bình theo ngành nghề',
-    align: 'center',
-    style: {
-      color: '#333'
-    }
-  }
+  
+  fill: {
+    color: "#36a800"
+  },
+  
+
 };
