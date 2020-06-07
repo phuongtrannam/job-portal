@@ -67,15 +67,27 @@
         <div class="item" *ngFor="let item of quickTab" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
     </div>
 
+    <div class="chon-quy-wrap">
+        <div class="item" *ngFor="let item of quy; index as i" (click)="thayDoiQuy(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+    </div>
+    
 
     <div class="row">
         <div class="col-12"><h2>Phân bố việc làm theo ngành nghề</h2></div>
-        <div class="col-6">
+        <div class="col-7">
             <div id="muc-luong-trung-binh-theo-nganh-nghe"></div>
         </div>
-        <div class="col-6">
+        <div class="col-5">
             <div id="luot-dang-tin-theo-nganh-nghe"></div>
         </div>
-        
+    </div>
+    <div class="row">
+        <div class="col-12"><h2>Phân bố việc làm theo vị trí công việc</h2></div>
+        <div class="col-7">
+            <div id="muc-luong-trung-binh-theo-vi-tri-cong-viec"></div>
+        </div>
+        <div class="col-5">
+            <div id="luot-dang-tin-theo-vi-tri-cong-viec"></div>
+        </div>
     </div>
 </div>

@@ -18,7 +18,14 @@ export class RegionComponent implements OnInit {
     {name: 'Theo ngành nghề', selected: true},
     {name: 'Theo vị trí công việc', selected: false},
     {name: 'Theo công ty', selected: false},
-  ]
+  ];
+
+  public quy: any = [
+    {name: 'II/2019', selected: true},
+    {name: 'III/2019', selected: false},
+    {name: 'IV/2019', selected: false},
+    {name: 'I/2020', selected: false},
+  ];
   constructor() { }
 
   ngOnInit() {
@@ -32,6 +39,16 @@ export class RegionComponent implements OnInit {
     new ApexCharts(document.querySelector('#muc-luong-trung-binh-theo-nganh-nghe'), mucLuongTrungBinhTheoNganhNghe).render();
     new ApexCharts(document.querySelector('#luot-dang-tin-theo-nganh-nghe'), luotDangTinTheoNganhNghe).render();
 
+    new ApexCharts(document.querySelector('#muc-luong-trung-binh-theo-vi-tri-cong-viec'), mucLuongTrungBinhTheoNganhNghe).render();
+    new ApexCharts(document.querySelector('#luot-dang-tin-theo-vi-tri-cong-viec'), luotDangTinTheoNganhNghe).render();
+
+  }
+
+  thayDoiQuy(index) {
+    this.quy.forEach(element => {
+      element.selected = false;
+    });
+    this.quy[index].selected = true;
   }
 
 }
