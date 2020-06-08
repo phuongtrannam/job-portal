@@ -50,92 +50,124 @@
             <a href="#"><i class="fa fa-linkedin"></i></a>
             <a href="#"><i class="fa fa-dribbble"></i></a> </div>
 
-        <!-- realted companies -->
+        <!-- profile photos -->
         <div id="job-employer-portfolio" class="employer-detail-portfolio candidate-detail-portfolio widget">
-            <h4 class="widget-title">Công ty liên quan</h4>
+            <h4 class="widget-title">Thư viện ảnh</h4>
             <div class="content-bottom">
                 <div class="row">
-                    <div *ngFor="let company of relatedCompanies | paginate: { itemsPerPage: 6, currentPage: p }"
-                        class="col-xs-4 md-clearfix sm-clearfix">
-                        <article id="" class="">
-                            <div class="employer-grid">
-                                <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i
-                                        class="fa fa-star text-theme"></i></span>
-                                <div class="open-job">
-                                    <!-- <span class="text-theme">{{company.numberOfJob}}</span> Công việc </div> -->
-                                    <span class="text-theme">50</span> Công việc </div>
-                                <div class="employer-thumbnail">
-                                    <a href="/companies/viettel">
-                                        <img width="180" height="75"
-                                            src="https://thietkelogo.vn/wp-content/uploads/2015/12/viettel.png"
-                                            class="attachment-full size-full wp-post-image" alt=""> </a>
-                                </div>
-                                <div class="employer-information">
-                                    <div class="employer-title-wrapper">
-                                        <h6 class="employer-title"><a href="/companies/viettel"
-                                                rel="bookmark">{{company.name}}</a></h6>
-                                    </div>
-                                    <!-- <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
-                                    class="text-theme">{{company.website}}</a> -->
-
-                                    <div class="employer-location">
-                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        {{company.location}}
-                                        <!-- <a
-                                        href="https://apusthemes.com/wp-demo/careerup/employer-location/new-york/">{{company.location}}</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <!-- #post-## -->
-
+                    <div class="col-xs-4 sm-clearfix md-clearfix">
+                        <div class="photo-item education-item">
+                            <a href="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog5.jpg"
+                                class="item p-popup-image">
+                                <img width="300" height="200"
+                                    src="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog5-300x200.jpg"
+                                    class="attachment-medium size-medium" alt=""
+                                    srcset="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog5-300x200.jpg 300w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog5-768x512.jpg 768w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog5-1024x683.jpg 1024w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog5-600x400.jpg 600w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog5.jpg 1170w"
+                                    sizes="(max-width: 300px) 100vw, 300px"> </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 ">
+                        <div class="photo-item education-item">
+                            <a href="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog4.jpg"
+                                class="item p-popup-image">
+                                <img width="300" height="200"
+                                    src="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog4-300x200.jpg"
+                                    class="attachment-medium size-medium" alt=""
+                                    srcset="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog4-300x200.jpg 300w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog4-768x512.jpg 768w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog4-1024x683.jpg 1024w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog4-600x400.jpg 600w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog4.jpg 1170w"
+                                    sizes="(max-width: 300px) 100vw, 300px"> </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 ">
+                        <div class="photo-item education-item">
+                            <a href="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog3.jpg"
+                                class="item p-popup-image">
+                                <img width="300" height="200"
+                                    src="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog3-300x200.jpg"
+                                    class="attachment-medium size-medium" alt=""
+                                    srcset="https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog3-300x200.jpg 300w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog3-768x512.jpg 768w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog3-1024x683.jpg 1024w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog3-600x400.jpg 600w, https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/04/blog3.jpg 1170w"
+                                    sizes="(max-width: 300px) 100vw, 300px"> </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- current jobs -->
+        <!-- employer releated -->
         <div class="widget">
             <h4 class="widget-title">
                 <span>Công việc</span>
             </h4>
-
             <div class="widget-content">
-                <div *ngFor="let job of recentJobsByCompany"
-                    >
-                    <article class="job-list job_listing type-job_listing status-publish has-post-thumbnail hentry ">
-                        <div class="clearfix">
-                            <div class="job-information flex-middle no-padding width-full">
-                                <div class="inner">
-                                    <!-- <a class="text-theme type-job"
-                                        href="https://apusthemes.com/wp-demo/careerup/job-type/full-time/">Full
-                                        Time</a> -->
-                                        Full Time
-                                    <div class="job-title-wrapper">
-                                        <h2 class="job-title"><a
-                                                href="https://apusthemes.com/wp-demo/careerup/job/senior-staff-nurse/"
-                                                rel="bookmark">{{job.job_name}}</a></h2> <span class="featured"
-                                            data-toggle="tooltip" title="" data-original-title="featured"><i
-                                                class="fa fa-star text-theme"></i></span>
-                                    </div>
-                                    <div class="job-metas">
-                                        <div class="job-location"><i class="fa fa-map-marker"></i>{{job.province}}</div>
-                                        <div class="date"><i class="fa fa-calendar" aria-hidden="true"></i>04/06/2019
-                                        </div>
-                                        <div class="job-salary"><i class="fa fa-money"></i>$<span
-                                                class="price-text">{{job.min_salary}}</span> - <span class="price-text">{{job.max_salary}}</span> triệu
-                                        </div>
-                                    </div>
+                <article id="post-1318"
+                    class="job-list job_listing type-job_listing status-publish has-post-thumbnail hentry job_listing_type-full-time"
+                    data-latitude="40.71528899999999" data-longitude="-73.85611599999999">
+                    <div class="clearfix">
+                        <div class="job-information flex-middle no-padding width-full">
+                            <div class="inner">
+                                <a class="text-theme type-job"
+                                    href="https://apusthemes.com/wp-demo/careerup/job-type/full-time/">Full
+                                    Time</a>
+
+                                <div class="job-title-wrapper">
+                                    <h2 class="job-title"><a
+                                            href="https://apusthemes.com/wp-demo/careerup/job/senior-staff-nurse/"
+                                            rel="bookmark">Kĩ sư viễn thông</a></h2> <span class="featured"
+                                        data-toggle="tooltip" title="" data-original-title="featured"><i
+                                            class="fa fa-star text-theme"></i></span>
                                 </div>
-                                <div class="ali-right">
-                                    <div class="wrapper-shortlist">
-                                        <a href="javascript:void(0);" class="btn-add-job-shortlist" data-job_id="1318"
-                                            data-nonce="43ad379e72"><i class="fa fa-star"></i></a>
+                                <div class="job-metas">
+                                    <div class="job-location"><i class="fa fa-map-marker"></i>Hà Nội</div>
+                                    <div class="date"><i class="fa fa-calendar" aria-hidden="true"></i>04/06/2019
+                                    </div>
+                                    <div class="job-salary"><i class="fa fa-money"></i>$<span
+                                            class="price-text">18</span> - <span class="price-text">20</span> triệu
                                     </div>
                                 </div>
                             </div>
+                            <div class="ali-right">
+                                <div class="wrapper-shortlist">
+                                    <a href="javascript:void(0);" class="btn-add-job-shortlist" data-job_id="1318"
+                                        data-nonce="43ad379e72"><i class="fa fa-star"></i></a>
+                                </div>
+                            </div>
                         </div>
-                    </article>
-                </div>
+                    </div>
+                </article>
+                <!-- #post-## -->
+                <article id="post-691"
+                    class="job-list post-691 job_listing type-job_listing status-publish has-post-thumbnail hentry job_listing_type-full-time job_listing_category-restaurant-food-service job_listing_location-new-york"
+                    data-latitude="40.7219272" data-longitude="-73.91295029999998">
+                    <div class="clearfix">
+                        <div class="job-information flex-middle no-padding width-full">
+                            <div class="inner">
+                                <a class="text-theme type-job"
+                                    href="https://apusthemes.com/wp-demo/careerup/job-type/full-time/">Full
+                                    Time</a>
+
+                                <div class="job-title-wrapper">
+                                    <h2 class="job-title"><a
+                                            href="https://apusthemes.com/wp-demo/careerup/job/test-single-detail/"
+                                            rel="bookmark">Kế toán</a></h2> 
+                                            <!-- <span class="urgent">Urgent</span> -->
+                                </div>
+                                <div class="job-metas">
+                                    <div class="job-location"><i class="fa fa-map-marker"></i>Hà Nội</div>
+                                    <div class="date"><i class="fa fa-calendar"></i>07/05/2019
+                                    </div>
+                                    <div class="job-salary"><i class="fa fa-money"></i>$<span
+                                            class="price-text">13</span> - <span class="price-text">18</span> triệu
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ali-right">
+                                <div class="wrapper-shortlist">
+                                    <a href="javascript:void(0);" class="btn-add-job-shortlist" data-job_id="691"
+                                        data-nonce="43ad379e72"><i class="fa fa-star"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <!-- #post-## -->
             </div>
         </div>
     </div>
@@ -180,7 +212,7 @@
                         </div>
                         <div class="details">
                             <div class="text">Số lượng công việc</div>
-                            <div class="value">{{companyInfo.num_job}}</div>
+                            <div class="value">2</div>
                         </div>
                     </li>
 
@@ -190,7 +222,7 @@
                         </div>
                         <div class="details">
                             <div class="text">Vị trí</div>
-                            <div class="value">{{companyInfo.location}}</div>
+                            <div class="value">Flushing, NY, USA</div>
                         </div>
                     </li>
 
@@ -201,10 +233,8 @@
                         <div class="details">
                             <div class="text">Lĩnh vực hoạt động</div>
                             <div class="value">
-                                <div *ngFor="let industry of businessLinesOfCompany"> 
-                                    <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/">{{industry.name}}</a>
-                                </div>
-                                
+                                <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/">Accounting
+                                    / Finance</a>
                             </div>
                         </div>
                     </li>
@@ -215,7 +245,7 @@
                         </div>
                         <div class="details">
                             <div class="text">Năm thành lập</div>
-                            <div class="value">{{companyInfo.founded_year}}</div>
+                            <div class="value">2002</div>
                         </div>
                     </li>
                 </ul>

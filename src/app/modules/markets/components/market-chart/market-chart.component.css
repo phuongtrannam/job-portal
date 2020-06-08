@@ -180,13 +180,3 @@ svg[data-prefix="fas"] {
     font-family: "Nunito", Arial, sans-serif;
     justify-content: center !important;
   }
-
-  html { scroll-behavior: smooth; } 
-
-  div.sticky {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    background-color: #f3f3f3;
-    
-  }

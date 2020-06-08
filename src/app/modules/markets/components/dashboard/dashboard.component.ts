@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MarketsService } from '../../markets.service';
 import 'apexcharts';
-import { collectExternalReferences } from '@angular/compiler';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -32,12 +31,6 @@ export class DashboardComponent implements OnInit {
     });
     var options = {
       series: [{
-        name: 'col',
-        type: 'line',
-        data: numOfJobs
-      }, {
-        name: 'linechart',
-        type: 'column',
         data: numOfJobs
       }],
       legend: {
@@ -47,7 +40,7 @@ export class DashboardComponent implements OnInit {
         enabled: false
       },
       chart: {
-        type: 'line',
+        type: 'bar',
         height: '100px',
         toolbar: {
           show: false,
@@ -79,7 +72,7 @@ export class DashboardComponent implements OnInit {
         show: false,
       },
       
-      colors: ['#36a800', '#82b440'],
+      colors: ['#36a800', '#545454'],
       // dataLabels: {
       //   enabled: true,
       //   formatter: function (val) {
@@ -125,12 +118,6 @@ export class DashboardComponent implements OnInit {
     });
     var options = {
       series: [{
-        name: 'col',
-        type: 'line',
-        data: numOfJobs
-      }, {
-        name: 'linechart',
-        type: 'column',
         data: numOfJobs
       }],
       legend: {
@@ -140,7 +127,7 @@ export class DashboardComponent implements OnInit {
         enabled: false
       },
       chart: {
-        type: 'line',
+        type: 'bar',
         height: '100px',
         toolbar: {
           show: false,
@@ -172,7 +159,7 @@ export class DashboardComponent implements OnInit {
         show: false,
       },
       
-      colors: ['#36a800', '#82b440'],
+      colors: ['#36a800', '#545454'],
     };
 
     var chart = new ApexCharts(document.querySelector('#so-luong-cong-ty'), options);
@@ -188,12 +175,6 @@ export class DashboardComponent implements OnInit {
     });
     var options = {
       series: [{
-        name: 'col',
-        type: 'line',
-        data: numOfJobs
-      }, {
-        name: 'linechart',
-        type: 'column',
         data: numOfJobs
       }],
       legend: {
@@ -203,7 +184,7 @@ export class DashboardComponent implements OnInit {
         enabled: false
       },
       chart: {
-        type: 'line',
+        type: 'bar',
         height: '100px',
         toolbar: {
           show: false,
@@ -235,7 +216,7 @@ export class DashboardComponent implements OnInit {
         show: false,
       },
       
-      colors: ['#36a800', '#82b440'],
+      colors: ['#36a800', '#545454'],
     };
 
     var chart = new ApexCharts(document.querySelector('#luong-trung-binh'), options);
@@ -251,12 +232,6 @@ export class DashboardComponent implements OnInit {
     });
     var options = {
       series: [{
-        name: 'col',
-        type: 'line',
-        data: numOfJobs
-      }, {
-        name: 'linechart',
-        type: 'column',
         data: numOfJobs
       }],
       legend: {
@@ -271,17 +246,6 @@ export class DashboardComponent implements OnInit {
         toolbar: {
           show: false,
         },
-
-        events: {
-          // dataPointSelection: function(e, chart, opts) {
-          //   console.log("Inside the dataPointSelection Event");
-          // },
-          
-          click: function(e, chart, opts) {
-              // console.log("Inside the click Event");
-              window.location.replace("http://www.w3schools.com");
-          }
-        }
       },
       plotOptions: {
         bar: {
@@ -309,7 +273,7 @@ export class DashboardComponent implements OnInit {
         show: false,
       },
       
-      colors: ['#36a800', '#82b440'],
+      colors: ['#36a800', '#545454'],
     };
 
     var chart = new ApexCharts(document.querySelector('#tuoi-trung-binh'), options);

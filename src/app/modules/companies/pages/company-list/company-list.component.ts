@@ -9,16 +9,12 @@ import { CompaniesService } from '../../companies.service';
 })
 export class CompanyListComponent implements OnInit {
 
-  config = [];
+
   constructor(private companiesService: CompaniesService) {
 
   }
   ngOnInit() {
-    // this.showConfig();
-    // this.getBusinessLinesOfTheCompany();
+
   }
 
-  
-
-  
 }

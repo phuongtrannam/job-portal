@@ -5,43 +5,4 @@
 @import "app/theme/styles/woocommerce.scss";
 @import "~leaflet/dist/leaflet.css";
 html, body { height: 100%; }
-body { 
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
- }
-
-h1 {
-    font-size: 25px;
-    padding: 10px 0px 0px 0px;
-}
-h5 {
-    font-size: 15px;
-    font-weight: 400;
-    color: #525252;
-}
-header {
-    padding: 30px 0px;
-}
-button.white {
-    background-color: #ffffff;
-    border: 1px solid #38933d;
-    color: #38933d;
-    padding: 5px 12px;
-    border-radius: 3px;
-    font-weight: 400;
-    outline: none;
-    font-size: 15px;
-}
-button.green {
-    background-color: #38933d;
-    /* background-image: -webkit-gradient(linear, left top, right top, from(#5aaf60), to(#36923b)); */
-    /* background-image: linear-gradient(to right, #5aaf60, #36923b); */
-    /* border: 1px solid #38943d; */
-    color: #fff;
-    padding: 6px 14px;
-    border-radius: 3px;
-    outline: none;
-    border: none;
-    font-weight: 300;
-    font-size: 15px;
-}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

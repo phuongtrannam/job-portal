@@ -1,39 +1,12 @@
-header {
-    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18)
+.header {
+    background-color: #292929!important;
 }
-.navbar-link a {
-    text-transform: uppercase;
-    color: #333;
-    font-size: 14px;
-    text-decoration: none;
+nav a {
+    color: #ffffff!important;
 }
-.navbar-link a.selected {
-    background: #38933d;
-    color: #fff;
-    border-radius: 3px;
-}
-.logo {
-    margin-right: 33px;
-    font-weight: 800;
-    font-size: 19px;
-}
-.main-search {
-    position: relative;
-    width: 220px;
-    margin-top: -6px;
-    margin-left: 20px;
-    .search {
-        border: 1px solid #ccc;
-        padding: 8px 8px;
-        font-size: 14px;
-        border-radius: 3px;
-        width: 100%;
-    }
-    .search-button {
-        border: none;
-        background: transparent;
-        position: absolute;
-        right: 3px;
-        top: 5px;
-    }
+.header-element {
+    border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    border-color: #3c3c3c;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
 }

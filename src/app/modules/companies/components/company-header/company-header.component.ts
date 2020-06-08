@@ -8,19 +8,11 @@ import { CompaniesService } from '../../companies.service';
   providers: [CompaniesService]
 })
 export class CompanyHeaderComponent implements OnInit {
-  companyInfo = {};
+
   constructor(private companiesService: CompaniesService) {
 
   }
   ngOnInit() {
-    this.showCompanyInfo('C188');
   }
-  showCompanyInfo(idCompany: string){
-    this.companiesService.getCompanyInfo(idCompany)
-      .subscribe((data: any) => {
-        console.log("showCompanyInfo");
-        console.log(data.result);
-        this.companyInfo = data.result;
-      });
-  }
+
 }

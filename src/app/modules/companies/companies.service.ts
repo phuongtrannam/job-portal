@@ -1,94 +1,81 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
-
-const httpOptions = {
-    headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'my-auth-token'
-    })
-};
 @Injectable()
 export class CompaniesService {
-    rootUrl = 'http://localhost:8080/companies';
-    // postData = {
-    //     id: 'C188',
-    // }
-    constructor(private http: HttpClient) {
-    }
+    constructor() { }
 
-    getCompanyList() {
-        const specificPath = '/get_company_list';
-        const url = this.rootUrl + specificPath;
-        return this.http.get(url);
-    }
 
-    getBusinessLinesOfCompany(idCompany: string) {
-        const postData = {
-            id: idCompany,
+    getListCompanies() {
+        return [
+            {
+                name: 'Viettel',
+                industry: 'Viễn thông',
+                location: 'Hà Nội',
+                numberOfJob: 50,
+            },
+            {
+                name: 'Cengroup',
+                industry: 'Bất động sản',
+                location: 'Hà Nội',
+                numberOfJob: 150,
+            },
+            {
+                name: 'Herbal Ltd',
+                industry: 'Giáo dục',
+                location: 'Hà Nội',
+                numberOfJob: 100,
+            },
+            {
+                name: 'Vingroup',
+                industry: 'Bán lẻ',
+                location: 'Hà Nội',
+                numberOfJob: 50,
+            },
+            {
+                name: 'Personnel Ltd',
+                industry: 'Giáo dục',
+                location: 'Hà Nội',
+                numberOfJob: 80,
+            },
+            {
+                name: 'Michael MC',
+                industry: 'Tài Chính',
+                location: 'Hà Nội',
+                numberOfJob: 50,
+            },
+            {
+                name: 'Shiseido Co',
+                industry: 'Ngân hàng',
+                location: 'Hà Nội',
+                numberOfJob: 50,
+            },
+            {
+                name: 'Shiseido Co',
+                industry: 'Giáo dục',
+                location: 'Hà Nội',
+                numberOfJob: 50,
+            },
+        ];
+    }
+    getCompanyInfo(id: string) {
+        var info = {
+            name: 'Shiseido Co',
+            industry: 'Accounting / Finance',
+            location: 'New York',
+            phonenumber: '+610123456',
+            website: 'www.themeforest.com',
+            logo: '',
+            latitude: 46.879966,
+            longitude: -121.726909,
+            teamSize: 50,
+            views: 1584,
+            numberOfJob: 2,
+            foundedDate: 2002,
+            description: '',
+            officeImage: [],
         };
-        const specificPath = '/get_business_lines_of_the_company';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
+        return info;
     }
-
-    getCompanyInfo(idCompany: string) {
-        const postData = {
-            id: idCompany,
-        };
-        const specificPath = '/get_company_info';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
-    }
-
-    getRelatedCompanies(idCompany: string) {
-        const postData = {
-            id: idCompany,
-        };
-        const specificPath = '/get_related_company';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
-    }
-
-    getRecentJobsByCompany(idCompany: string) {
-        const postData = {
-            id: idCompany,
-        };
-        const specificPath = '/get_recent_job_by_company';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
-    }
-
-    getJobDemandByPeriodOfTime(idCompany: string) {
-        const postData = {
-            id: idCompany,
-        };
-        const specificPath = '/get_job_demand_by_period_of_time';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
-    }
-
-    getJobDemandByLiteracy(idCompany: string) {
-        const postData = {
-            id: idCompany,
-        };
-        const specificPath = '/get_job_demand_by_literacy';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
-    }
-
-    getJobDemandByAge(idCompany: string) {
-        const postData = {
-            id: idCompany,
-        };
-        const specificPath = '/get_job_demand_by_age';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
-    }
-
-    
 
     getNumberOfJob() {
         return [
@@ -246,8 +233,99 @@ export class CompaniesService {
             },
         ];
     }
-   
+    getJobDemandByMonth() {
+        return [
+            {
+                timestamp: 'QIV/2017',
+                value: 6200,
+                growth: 0.5,
+            },
+            {
+                timestamp: 'QIII/2017',
+                value: 5500,
+                growth: -10,
+            },
+            {
+                timestamp: 'QI/2018',
+                value: 5200,
+                growth: -1,
+            },
+            {
+                timestamp: 'QII/2018',
+                value: 4500,
+                growth: -2,
+            },
+            {
+                timestamp: 'QIII/2018',
+                value: 6000,
+                growth: 5,
+            },
+            {
+                timestamp: 'QIV/2018',
+                value: 5600,
+                growth: -3,
+            },
+            {
+                timestamp: 'QI/2019',
+                value: 5500,
+                growth: -0.5,
+            },
+            {
+                timestamp: 'QII/2019',
+                value: 5100,
+                growth: -4,
+            },
+            {
+                timestamp: 'QIII/2019',
+                value: 6100,
+                growth: 11,
+            },
+            {
+                timestamp: 'QIV/2019',
+                value: 5500,
+                growth: -5,
+            },
+        ];
+    }
 
-  
+    getJobDemandByLiteracy() {
+        return [
+            {
+                name: 'Trung học cơ sở',
+                value: 5000,
+                growth: -3.5,
+            },
+            {
+                name: 'Trung học phổ thông',
+                value: 1000,
+                growth: -1.5,
+            },
+            {
+                name: 'Đại học',
+                value: 10000,
+                growth: -0.5,
+            },
+            {
+                name: 'Cao học',
+                value: 3000,
+                growth: 2.5,
+            },
+            {
+                name: 'Cao đẳng',
+                value: 8000,
+                growth: 5.0,
+            },
+            {
+                name: 'Trung cấp nghề',
+                value: 9500,
+                growth: 4.5,
+            },
+            {
+                name: 'Khác',
+                value: 9000,
+                growth: 0.5,
+            },
+        ];
+    }
 
 } 

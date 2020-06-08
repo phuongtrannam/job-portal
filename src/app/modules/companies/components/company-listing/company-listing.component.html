@@ -25,15 +25,14 @@
 
         <div class="employers-wrapper items-wrapper">
             <div class="row">
-                <div *ngFor="let company of companyList | paginate: { itemsPerPage: 6, currentPage: p }"
+                <div *ngFor="let company of listCompanies | paginate: { itemsPerPage: 6, currentPage: p }"
                     class="col-sm-6 col-md-4 col-xs-12 md-clearfix sm-clearfix">
                     <article id="" class="">
                         <div class="employer-grid">
                             <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i
                                     class="fa fa-star text-theme"></i></span>
                             <div class="open-job">
-                                <!-- <span class="text-theme">{{company.numberOfJob}}</span> Công việc </div> -->
-                                <span class="text-theme">50</span> Công việc </div>
+                                <span class="text-theme">{{company.numberOfJob}}</span> Công việc </div>
                             <div class="employer-thumbnail">
                                 <a href="/companies/viettel">
                                     <img width="180" height="75"
@@ -45,14 +44,13 @@
                                     <h2 class="employer-title"><a href="/companies/viettel"
                                             rel="bookmark">{{company.name}}</a></h2>
                                 </div>
-                                <!-- <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
-                                    class="text-theme">{{company.website}}</a> -->
+                                <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
+                                    class="text-theme">{{company.industry}}</a>
 
                                 <div class="employer-location">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                    {{company.location}}
-                                    <!-- <a
-                                        href="https://apusthemes.com/wp-demo/careerup/employer-location/new-york/">{{company.location}}</a> -->
+                                    <i class="flaticon-location-pin"></i>
+                                    <a
+                                        href="https://apusthemes.com/wp-demo/careerup/employer-location/new-york/">{{company.location}}</a>
                                 </div>
                             </div>
                         </div>
