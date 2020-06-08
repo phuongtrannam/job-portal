@@ -14,6 +14,11 @@ const routes: Routes = [
     data: { preload: true }
   },
   {
+    path: 'jobs',
+    loadChildren: () => import('./modules/jobs/jobs.module').then(m => m.JobsModule),
+    data: { preload: true }
+  },
+  {
     path: 'industries',
     loadChildren: () => import('./modules/industries/industries.module').then(m => m.IndustriesModule)
   },

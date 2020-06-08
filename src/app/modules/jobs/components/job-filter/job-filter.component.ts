@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { JobsService } from '../../jobs.service';
 
 @Component({
-  selector: 'app-company-filter',
-  templateUrl: './company-filter.component.html',
-  styleUrls: ['./company-filter.component.css'],
-  providers: []
+  selector: 'app-job-filter',
+  templateUrl: './job-filter.component.html',
+  styleUrls: ['./job-filter.component.css'],
+  providers: [JobsService]
 })
-export class CompanyFilterComponent implements OnInit {
-
+export class JobFilterComponent implements OnInit {
   private defaultSelected = 0;
   private selection: number;
   private jobTypes = [{ id: 1, name: "fulltime" }, { id: 2, name: "freelance" }, { id: 3, name: "Parttime" }];
@@ -28,28 +28,14 @@ export class CompanyFilterComponent implements OnInit {
     { checked: false, name: "Du lịch" },
     { checked: false, name: "Nông nghiệp" },
   ];
-  // autoTicks = false;
-  // disabled = false;
-  // invert = false;
-  // max = 100;
-  // min = 0;
-  // showTicks = false;
-  // step = 1;
-  // thumbLabel = false;
-  // value = 0;
-  // vertical = false;
-  // tickInterval = 1;
-  // getSliderTickInterval(): number | 'auto' {
-  //   if (this.showTicks) {
-  //     return this.autoTicks ? 'auto' : this.tickInterval;
-  //   }
+  levelCareer =  [
+    { checked: false, name: "Manager" },
+    { checked: false, name: "Senior" },
+    { checked: false, name: "Fresher" },
+    { checked: false, name: "Junior" },
+  ];
 
-  //   return 0;
-  // }
-
-  someValue = 0;
-
-  constructor() {
+  constructor(private jobsService: JobsService) {
 
   }
   ngOnInit() {

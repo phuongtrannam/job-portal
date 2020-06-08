@@ -1,0 +1,75 @@
+<!-- <div id="apus-main-content" style="padding-top: 0px;">
+    <section class="detail-version-v3">
+        <section id="primary" class="content-area container inner">
+            <main id="main" class="site-main content" role="main">
+                <div class="single-listing-wrapper" data-latitude="40.6677241" data-longitude="-73.9243783">
+
+                    <article id=""
+                        class="job-single-v3 job_listing type-job_listing status-publish has-post-thumbnail hentry is-urgent">
+                        <app-job-header></app-job-header>
+                        <div class="panel-affix-wrapper" style="height: 80px;">
+
+                            <mat-tab-group class="header-tabs-wrapper panel-affix affix-top">
+                                <mat-tab label="Thông tin chung" class="header-tabs-nav nav">
+                                    <app-job-description></app-job-description>
+                                </mat-tab>
+                                <mat-tab label="Phân tích tuyển dụng"> Content 2 </mat-tab>
+                            </mat-tab-group>
+                        </div>
+
+                    </article>
+                </div>
+            </main>
+        </section>
+    </section>
+</div> -->
+
+<!-- <div id="apus-main-content" style="padding-top: 0px;">
+    <section id="main-container" class="main-content container inner">
+        <app-job-header></app-job-header>
+        <mat-tab-group class="header-tabs-wrapper panel-affix affix-top">
+            <mat-tab label="Thông tin chung" class="header-tabs-nav nav">
+                <app-job-description></app-job-description>
+            </mat-tab>
+            <mat-tab label="Phân tích tuyển dụng">
+                <ng-template matTabContent>
+                    <app-job-analysis></app-job-analysis>
+                </ng-template>
+
+            </mat-tab>
+            <mat-tab label="Third"> Content 3 </mat-tab>
+        </mat-tab-group>
+    </section>
+
+</div> -->
+
+<div class="bg-gray pb-3">
+    <div class="container">
+        <app-job-header></app-job-header>
+        <!-- <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                        {{option}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form> -->
+
+        <form class="example-form">
+            <input type="text"
+                   placeholder="Search for a street"
+                   [formControl]="control"
+                   [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
+                {{street}}
+              </mat-option>
+            </mat-autocomplete>
+          </form>
+        <app-job-description></app-job-description>
+        <app-job-analysis></app-job-analysis>
+    </div>
+</div>

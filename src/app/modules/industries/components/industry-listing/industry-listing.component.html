@@ -1,161 +1,192 @@
-<div class="elementor-row">
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-                <a href="industries/job-category/media">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-youtube-square"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Thiết kế &amp; Đa phương tiện                                    </h4>
+<div class="bg-gray pb-3">
+    <div class="container">
+        <!-- <p>hello</p> -->
+        <form class="form-search">
+            <ul class="trending-keywords">
+                <li class="title">Trending Keywords:</li>
+                <li class="item" *ngFor="let industry of trendingindustrys">
+                    <a [href]="'/industries/' + industry.id">
+                        {{industry.name}}
+                    </a>
+                </li>
+            </ul>
+        </form>
+        <div class = "row">
+            <div class = "sidebar-wrapper col-md-3 col-sm-12 col-xs-12">
+                <aside class="sidebar widget">
+                    <!-- <aside class="widget"> -->
+                    <form class="filter-listing-form">
+                        <div class="form-group ">
+                            <label class="heading-label">
+                                Từ khóa </label>
+                            <input type="text" class="form-control" placeholder="vd. web developer">
+                        </div>
+                    </form>
+                
+                    <form class="filter-listing-form">
+                        <div class="form-group ">
+                            <label class="heading-label">
+                                Khu vực </label>
+                            <input type="text" class="form-control" placeholder="vd. Hà Nội">
+                        </div>
+                    </form>
+                
+                    <!-- <form class="filter-listing-form">
+                        <div class="form-group">
+                            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                                Ngành nghề
+                            </label>
+                            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem" *cdkVirtualFor="let item of industries">
+                                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                                        <br />
+                                    </mat-list-item>
+                                </mat-list>
+                            </cdk-virtual-scroll-viewport>
+                        </div>
+                    </form> -->
+                    
+                
+                    <form class="filter-listing-form">
+                        <div class="form-group ">
+                            <label class="heading-label">
+                                Mức lương </label>
+                            <div class="row">
+                                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">    </p>
+                                <div class="slidecontainer" style="color: black;">
+                                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                                  </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">    </p>
+                                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
+                            </div>
+                        </div>
+                    </form>
+                
+                    <form class="filter-listing-form">
+                        <div class="form-group">
+                            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                                Loại công việc
+                            </label>
+                            <mat-list role="list">
+                                <mat-list-item role="listitem" *ngFor="let x of industryTypes; let i = index">
+                                    <mat-radio-button [checked]="i == defaultSelected" [value]="x.id" (change)="selection = $event.value">
+                                        {{x.name}}
+                                    </mat-radio-button>
+                                </mat-list-item>
+                            </mat-list>
+                            <!-- <mat-card style="margin-top: 1rem"> -->
+                            <!-- Currently selected: {{selection}} -->
+                            <!-- </mat-card> -->
+                        </div>
+                    </form>
+                    
+                    <form class="filter-listing-form">
+                        <div class="form-group">
+                            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                                Học vấn
+                            </label>
+                            <!-- <mat-list role="list">
+                                    <mat-list-item role="listitem" *ngFor="let item of literacies">
+                                        <mat-checkbox [(ngModel)]="item.checked"></mat-checkbox>
+                                        <p style = "margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                                        <br />
+                                    </mat-list-item>
+                                </mat-list> -->
+                            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem" *cdkVirtualFor="let item of literacies">
+                                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                                        <br />
+                                    </mat-list-item>
+                                </mat-list>
+                            </cdk-virtual-scroll-viewport>
+                        </div>
+                    </form>
+                    
+                    <form class="filter-listing-form">
+                        <div class="form-group">
+                            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                                Cấp bậc
+                            </label>
+                            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                                <mat-list role="list">
+                                    <mat-list-item role="listitem" *cdkVirtualFor="let item of levelCareer">
+                                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                                        <br />
+                                    </mat-list-item>
+                                </mat-list>
+                            </cdk-virtual-scroll-viewport>
+                        </div>
+                    </form>
+                    
+                    <form class="filter-listing-form">
+                        <div class="form-group">
+                            <button class="button">Lọc kết quả <i class="fa fa-chevron-right"></i></button>
+                        </div>
+                    </form>
+                    
+                    <!-- </aside> -->
+                </aside>
+            </div>
+            <div class="col-sm-12 col-md-9 col-sm-12 col-xs-12" >
+                <main id="main" class="site-main layout-type-left-main" role="main">
 
-                                <div class="number"><strong>2</strong>Công việc</div>
+                    <div class="jobs-listing-wrapper main-items-wrapper" data-display_mode="list">
+                        <div class="jobs-alert-ordering-wrapper">
+                            <div class="results-count">
+                                Tìm được {{industrys.length}} công việc phù hợp</div>
+                            <div class="jobs-ordering-wrapper">
+                                <form class="jobs-ordering" >
+                                    <div class="label">Sắp xếp theo:</div>
+                                    <select name="filter-orderby" class="orderby select2-hidden-accessible" 
+                                        aria-hidden="true">
+                                        <option value="menu_order">Default</option>
+                                        <option value="newest" selected="selected">Newest</option>
+                                        <option value="oldest">Oldest</option>
+                                        <option value="random">Random</option>
+                                    </select>
+                                    <input type="hidden" name="paged" value="1">
+                                </form>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-
-                <a href="industries/job-category/education-training/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-graduation-cap"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Giáo dục                                    
-                                </h4>
-                                <div class="number"><strong>3</strong>Công việc</div>
-                            </div>
+                
+                        <div class="jobs-wrapper items-wrapper" *ngFor = "let industry of industrys| paginate: { itemsPerPage: 8, currentPage: p }">
+                            <article class="job-list-v1 job_listing type-job_listing status-publish has-post-thumbnail hentry job_listing_type-freelance job_listing_category-telecommunications industry_listing_location-new-york is-featured is-urgent">
+                                <div class="flex-sm">
+                                    <div class="job-information flex-middle">
+                                        <div class="inner">
+                                            <a class="type-industry" href="https://apusthemes.com/wp-demo/careerup/industry-type/freelance/">{{industry.industryType}}</a>
+                                            <div class="job-title-wrapper">
+                                                <h2 class="job-title"><a [href]="'/industries/' + industry.id" rel="bookmark">{{industry.name}}</a></h2> <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i class="fa fa-star text-theme"></i></span>
+                                            </div>
+                                            <div class="job-metas">
+                                                <!-- <div class="industry-location"><i class="fa fa-map-marker"></i>Hà Nội</div> -->
+                                                <div class="industry-salary">
+                                                    <i class="fa fa-money"></i>$<span class="price-text">{{industry.minSalary}}</span> - $<span class="price-text">{{industry.maxSalary}}</span> triệu</div>
+                                                <div class="job-location"><i class="fa fa-tasks"></i>{{industry.numindustry}}công việc</div>
+                                            </div>
+                                        </div>
+                                        <div class="ali-right hidden-xs">
+                                            <a class="btn btn-theme btn-outline" [href]="'/industries/' + industry.id">Chi tiết</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-
-                <a href="industries/job-category/accounting-finance/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-bar-chart"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Tài chính kế toán                                    
-                                </h4>
-                                <div class="number"><strong>3</strong> Công việc</div>
-                            </div>
-                        </div>
+                
+                    <div class="employers-pagination-wrapper main-pagination-wrapper">
+                        <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel="">
+                        </pagination-controls>
                     </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-
-                <a href="industries/job-category/human-resource/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-address-card-o"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    May mặc                                    
-                                </h4>
-                                <div class="number"><strong>1</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/telecommunications/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-signal"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Viễn thông                                    
-                                </h4>
-                                <div class="number"><strong>1</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/restaurant-food-service/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-cutlery"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Nhà hàng, khách sạn   
-                                </h4>
-                                <div class="number"><strong>2</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/construction-facilities/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-steam-square"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Xây dựng
-                                </h4>
-        
-                                <div class="number"><strong>1</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/health/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-heartbeat"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Y tế                                    
-                                </h4>
-                                <div class="number"><strong>3</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                
+                </main>
             </div>
         </div>
     </div>

@@ -1,0 +1,118 @@
+<aside class="sidebar widget">
+    <!-- <aside class="widget"> -->
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Từ khóa </label>
+            <input type="text" class="form-control" placeholder="vd. web developer">
+        </div>
+    </form>
+
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Khu vực </label>
+            <input type="text" class="form-control" placeholder="vd. Hà Nội">
+        </div>
+    </form>
+
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Ngành nghề
+            </label>
+            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *cdkVirtualFor="let item of industries">
+                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </form>
+    
+
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Mức lương </label>
+            <div class="row">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Từ:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
+            </div>
+            <div class="row" style="margin-top: 10px;">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Đến:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
+            </div>
+        </div>
+    </form>
+
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Loại công việc
+            </label>
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let x of jobTypes; let i = index">
+                    <mat-radio-button [checked]="i == defaultSelected" [value]="x.id" (change)="selection = $event.value">
+                        {{x.name}}
+                    </mat-radio-button>
+                </mat-list-item>
+            </mat-list>
+            <!-- <mat-card style="margin-top: 1rem"> -->
+            <!-- Currently selected: {{selection}} -->
+            <!-- </mat-card> -->
+        </div>
+    </form>
+    
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Học vấn
+            </label>
+            <!-- <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let item of literacies">
+                        <mat-checkbox [(ngModel)]="item.checked"></mat-checkbox>
+                        <p style = "margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list> -->
+            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *cdkVirtualFor="let item of literacies">
+                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </form>
+    
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Cấp bậc
+            </label>
+            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *cdkVirtualFor="let item of levelCareer">
+                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </form>
+    
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <button class="button">Lọc kết quả <i class="fa fa-chevron-right"></i></button>
+        </div>
+    </form>
+    
+    <!-- </aside> -->
+</aside>

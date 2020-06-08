@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { IndustriesRoutingModule } from './industries-routing.module';
-import { IndustryListComponent } from './pages/industry-list/industry-list.component';
-import { IndustryDetailComponent } from './pages/industry-detail/industry-detail.component';
-import { JobDetailComponent } from './pages/job-detail/job-detail.component';
+import { JobsRoutingModule } from './jobs-routing.module';
 import { JobListComponent } from './pages/job-list/job-list.component';
-import { JobHeaderComponent } from './components/job-header/job-header.component';
-import { JobDescriptionComponent } from './components/job-description/job-description.component';
-import { IndustryListingComponent } from './components/industry-listing/industry-listing.component';
-import { JobSearchComponent } from './components/job-search/job-search.component';
+import { JobDetailComponent } from './pages/job-detail/job-detail.component';
 import { JobFilterComponent } from './components/job-filter/job-filter.component';
 import { JobListingComponent } from './components/job-listing/job-listing.component';
+import { JobHighlightComponent } from './components/job-highlight/job-highlight.component';
+import { JobHeaderComponent } from './components/job-header/job-header.component';
+import { JobDescriptionComponent } from './components/job-description/job-description.component';
 import { JobAnalysisComponent } from './components/job-analysis/job-analysis.component';
+
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster'
 import { HttpClientModule } from '@angular/common/http';
+
 import {A11yModule} from '@angular/cdk/a11y';
 // import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -69,19 +67,13 @@ import {ObserversModule} from '@angular/cdk/observers';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {PlatformModule} from '@angular/cdk/platform';
 
+
 @NgModule({
   imports: [
     CommonModule,
-    IndustriesRoutingModule,
-    MatTabsModule,
-    NgxPaginationModule,
-    LeafletModule,
-    LeafletMarkerClusterModule,
-    MatTableModule,
-    HttpClientModule,
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    JobsRoutingModule,
     NgxPaginationModule,
     MatTabsModule,
     MatCardModule,
@@ -148,18 +140,17 @@ import {PlatformModule} from '@angular/cdk/platform';
     ScrollingModule,
   ],
   declarations: [
-    IndustryListComponent,
-    IndustryDetailComponent,
-    JobDetailComponent,
     JobListComponent,
-    JobHeaderComponent,
-    JobDescriptionComponent,
-    IndustryListingComponent,
-    JobSearchComponent,
+    JobDetailComponent,
+    JobHighlightComponent,
     JobFilterComponent,
     JobListingComponent,
+    JobHeaderComponent,
+    JobDescriptionComponent,
     JobAnalysisComponent,
-    
+    // CompanyHeaderComponent,
+    // CompanyInfoComponent,
+    // CompanyHiringComponent,
   ]
 })
-export class IndustriesModule { }
+export class JobsModule { }

@@ -1,0 +1,10 @@
+<form class="form-search">
+    <ul class="trending-keywords">
+        <li class="title">Trending Keywords:</li>
+        <li class="item" *ngFor="let job of trendingJobs">
+            <a [href]="'/jobs/' + job.id">
+                {{job.name}}
+            </a>
+        </li>
+    </ul>
+</form>
