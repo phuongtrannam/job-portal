@@ -16,6 +16,21 @@ export class JobsService {
     constructor(private http: HttpClient) {
     }
 
+    getCityList() {
+        const specificPath = '/city_list';
+        const url = this.rootUrl + specificPath;
+        return this.http.get(url);
+    }
+
+    getTopJob(numJobParam: string) {
+        const postData = {
+            numJob: numJobParam,
+        };
+        const specificPath = '/top_job';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
     getJobDemandByPeriodOfTime(idJobParam: string, idLocationParam: string) {
         const postData = {
             idJob: idJobParam,

@@ -4,6 +4,12 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { JobsService } from '../../jobs.service';
 
+export interface City {
+  name: string;
+  id: string;
+  area: string;
+}
+
 @Component({
   selector: 'app-job-detail',
   templateUrl: './job-detail.component.html',
@@ -13,28 +19,53 @@ import { JobsService } from '../../jobs.service';
 export class JobDetailComponent implements OnInit {
 
 
-
   constructor(private jobsService: JobsService) {
 
   }
+  selectedCity: City;
   control = new FormControl();
-  streets: string[] = ['Champs-Élysées', 'Lombard Street', 'Abbey Road', 'Fifth Avenue'];
-  filteredStreets: Observable<string[]>;
+  cityList: City[] = [{id: '1', name: 'Champs-Élysées', area: 'tnb'},
+              {id: '2', name: 'Lombard Street', area: 'tnb'},
+              {id: '3', name: 'Abbey Road', area: 'tnb'},
+              {id: '4', name: 'Fifth Avenue', area: 'tnb'}];
+  filteredOptions: Observable<City[]>;
 
   ngOnInit() {
-    this.filteredStreets = this.control.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+    this.getCityList();
+    
   }
 
-  private _filter(value: string): string[] {
-    const filterValue = this._normalizeValue(value);
-    return this.streets.filter(street => this._normalizeValue(street).includes(filterValue));
+  displayFn(cityList: City[]): (id: string) => string | null {
+    return (id: string) => { 
+      const correspondingOption = Array.isArray(cityList) ? cityList.find(option => option.id === id) : null;
+      return correspondingOption ? correspondingOption.name : '';
+    };
   }
 
-  private _normalizeValue(value: string): string {
-    return value.toLowerCase().replace(/\s/g, '');
+  private _filter(name: string): City[] {
+    const filterValue = name.toLowerCase();
+
+    return this.cityList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  onCitySelected(selectedCity) {
+    console.log('### Trigger');
+    console.log(this.selectedCity);
+  }
+  
+  getCityList(): void {
+    this.jobsService.getCityList()
+      .subscribe((data: any) => {
+        console.log("getCityList");
+        console.log(data.result);
+        this.cityList = data.result;
+        this.filteredOptions = this.control.valueChanges
+          .pipe(
+            startWith<string | City>(''),
+            map(value => typeof value === 'string' ? value : value.name),
+            map(name => name ? this._filter(name) : this.cityList.slice())
+          );
+        // console.log(this.filteredOptions);
+    });
+  }
 }

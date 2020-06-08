@@ -3,7 +3,7 @@
     <div class="jobs-listing-wrapper main-items-wrapper" data-display_mode="list">
         <div class="jobs-alert-ordering-wrapper">
             <div class="results-count">
-                Tìm được {{jobs.length}} công việc phù hợp</div>
+                Tìm được {{topJobSearch.length}} công việc phù hợp</div>
             <div class="jobs-ordering-wrapper">
                 <form class="jobs-ordering" >
                     <div class="label">Sắp xếp theo:</div>
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="jobs-wrapper items-wrapper" *ngFor = "let job of jobs| paginate: { itemsPerPage: 8, currentPage: p }">
+        <div class="jobs-wrapper items-wrapper" *ngFor = "let job of topJobSearch| paginate: { itemsPerPage: 8, currentPage: p }">
             <article class="job-list-v1 job_listing type-job_listing status-publish has-post-thumbnail hentry job_listing_type-freelance job_listing_category-telecommunications job_listing_location-new-york is-featured is-urgent">
                 <div class="flex-sm">
                     <div class="job-information flex-middle">
