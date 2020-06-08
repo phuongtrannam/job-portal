@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-
+import { BehaviorSubject } from 'rxjs';
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -15,6 +15,13 @@ export class JobsService {
     rootUrl = 'http://localhost:8080/jobs';
     constructor(private http: HttpClient) {
     }
+
+    // private jobSource = new BehaviorSubject('J1');
+    // selectedJob = this.jobSource.asObservable();
+
+    // changeSelectedJob(jobId: string){
+    //     this.jobSource.next(jobId);
+    // }
 
     getCityList() {
         const specificPath = '/city_list';

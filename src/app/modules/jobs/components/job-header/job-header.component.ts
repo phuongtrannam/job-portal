@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../jobs.service';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-job-header',
@@ -9,13 +11,14 @@ import { JobsService } from '../../jobs.service';
 })
 export class JobHeaderComponent implements OnInit {
 
-
-
-  constructor(private jobsService: JobsService) {
+  jobID$: Observable<any>;
+  selectedJobId: string;
+  constructor(private jobsService: JobsService,
+              private route: ActivatedRoute) {
 
   }
   ngOnInit() {
-
+    this.selectedJobId = this.route.snapshot.paramMap.get('id');
+    // console.log("idJob is: -- " + this.selectedJobId);
   }
-
 }

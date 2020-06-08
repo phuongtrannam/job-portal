@@ -22,17 +22,15 @@ export class JobDetailComponent implements OnInit {
   constructor(private jobsService: JobsService) {
 
   }
-  selectedCity: City;
+  selectedCity = 'P0';
   control = new FormControl();
   cityList: City[] = [{id: '1', name: 'Champs-Élysées', area: 'tnb'},
               {id: '2', name: 'Lombard Street', area: 'tnb'},
               {id: '3', name: 'Abbey Road', area: 'tnb'},
               {id: '4', name: 'Fifth Avenue', area: 'tnb'}];
   filteredOptions: Observable<City[]>;
-
   ngOnInit() {
     this.getCityList();
-    
   }
 
   displayFn(cityList: City[]): (id: string) => string | null {
@@ -48,9 +46,12 @@ export class JobDetailComponent implements OnInit {
     return this.cityList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  onCitySelected(selectedCity) {
-    console.log('### Trigger');
-    console.log(this.selectedCity);
+  onCitySelected(selectedCityId) {
+    // console.log('### Trigger');
+    // console.log(this.selectedCity);
+    // console.log(selectedCityId);
+    this.selectedCity = selectedCityId;
+    // console.log(this.selectedCity);
   }
   
   getCityList(): void {

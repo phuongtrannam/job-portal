@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { JobsService } from '../../jobs.service';
 import {MatTableDataSource} from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 declare var ApexCharts: any;
 @Component({
@@ -11,6 +13,7 @@ declare var ApexCharts: any;
 })
 export class JobAnalysisComponent implements OnInit {
 
+  @Input() selectedCity: string; 
 
   jobDemandAndAverageSalaryTable = ['timestamp', 'numJob', 'salary'];
   jobDemandAndAverageSalary = new MatTableDataSource<any>([]);
@@ -23,18 +26,33 @@ export class JobAnalysisComponent implements OnInit {
 
   relatedJobs = [];
 
+  jobID$: Observable<any>;
+  selectedJobId: string;
 
-  constructor(private jobsService: JobsService) {
+  constructor(private jobsService: JobsService,
+              private route: ActivatedRoute) {
 
   }
   ngOnInit() {
     // this.showJobDemandByPeriodOfTime('J1', 'P24');
     // this.showAverageSalary('J1', 'P24');
-    this.showJobDemandAndAverageSalary('J1', 'P24');
-    this.showJobDemandByAge('J1', 'P24');
-    this.showJobDemandByLiteracy('J99', 'P24');
-    this.getRelatedJobs('J99');
+    this.selectedJobId = this.route.snapshot.paramMap.get('id');
+    console.log("idJob is: -- " + this.selectedJobId);
+    this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
+    this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
+    this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
+    this.getRelatedJobs(this.selectedJobId);
     
+  }
+
+
+  ngOnChanges() {
+    // create header using child_id
+    console.log(this.selectedCity);
+    this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
+    this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
+    this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
+    this.getRelatedJobs(this.selectedJobId);
   }
 
   showJobDemandAndAverageSalary(idJob: string, idLocation: string): void {
