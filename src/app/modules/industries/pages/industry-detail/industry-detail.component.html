@@ -1,1 +1,184 @@
-<p>detail works</p>
+<!-- <div class="bg-gray">
+    <div class="container">
+
+    </div>
+</div> -->
+
+<div class="pb-3 bg-gray">
+    <div class="container">
+        <h2>Các công ty lớn trong lĩnh vực </h2>
+        <a href="/industries/:1/#jump">Click</a>
+        <div class="row row-cols-3">
+            <div class="col" *ngFor="let cty of congtylon_linhvuc">
+                
+                <article id="" class="">
+                    <div class="employer-grid">
+                        <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i
+                                class="fa fa-star text-theme"></i></span>
+                        <div class="open-job">
+                            <span class="text-theme">{{cty.soluong}}</span> Công việc </div>
+                        <div class="employer-thumbnail">
+                            <a href="/companies/viettel">
+                                <img width="200" height="80"
+                                    [src]="cty.imgsrc"
+                                    class="attachment-full size-full wp-post-image" alt=""> </a>
+                        </div>
+                        <div class="employer-information">
+                            <div class="employer-title-wrapper" style="height: 85px;">
+                                <h2 class="employer-title"><a href="/companies/viettel" rel="bookmark">{{cty.name}}</a>
+                                </h2>
+                            </div>
+                            <!-- <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
+                                class="text-theme">An toàn thông tin</a> -->
+
+                            <div class="employer-location">
+                                <i class="flaticon-location-pin"></i>
+                                <a href="https://apusthemes.com/wp-demo/careerup/employer-location/new-york/">{{cty.vitri}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>                  
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+<div class=" pb-3">
+    <div class="container">
+        <h2>Các biểu đồ phân tích</h2>
+        <div class="row row-cols-2">
+            <div class="col bg-white">
+                <div id="chart_nhu_cau_tuyen_dung"></div>
+            </div>
+            <div class="col bg-white">
+                <div id="chart_nhu_cau_kvc"></div>
+            </div>
+            <div class="col bg-white">
+                <div id="danh_sach_cty"></div>
+            </div>
+            <div class="col bg-white">
+                <div id="danh_sach_linh_vuc"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class=" pb-3" id="jump">
+    <div class="container">
+
+        <div class="" id="">
+            <h2>Phân bố việc làm theo độ tuổi, giới tính </h2>
+            
+            <div class="row row-cols-2">
+                <div class="col">
+                    
+                    <div class="chon-quy-wrap">
+                        <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                
+                                <th scope="col">Tuổi</th>
+                                <th scope="col">Nam</th>
+                                <th scope="col">Nữ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">18-25</th>
+                                <td>60%</td>
+                                <td>40%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">25-35</th>
+                                <td>80%</td>
+                                <td>20%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">35-50</th>
+                                <td>70%</td>
+                                <td>30%</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Trên 50</th>
+                                <td>50%</td>
+                                <td>50%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col ">
+                    <div id="dotuoi_gioitinh"></div>
+                </div>
+
+            </div>
+
+            <h2>Phân bố việc làm theo trình độ học vấn </h2>
+            
+            <div class="row row-cols-2">
+                <div class="col">
+                    <div class="chon-quy-wrap">
+                        <div class="item" *ngFor="let item of quy_hocvan; index as i" (click)="thayDoiQuy_hocvan(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Trình độ học vấn</th>
+                                <th scope="col">Số lượng tuyển dụng</th>
+                                <th scope="col">Tăng trưởng</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Trung học cơ sở</th>
+                                <td>5000</td>
+                                <td>-3.5%</td>                                    
+                            </tr>
+                            <tr>
+                                <th scope="row">Trung học phổ thông</th>
+                                <td>5000</td>
+                                <td>-3.5%</td>                                    
+                            </tr>
+                            <tr>
+                                <th scope="row">Đại học</th>
+                                <td>5000</td>
+                                <td>-3.5%</td>                                    
+                            </tr>
+                            <tr>
+                                <th scope="row">Cao học</th>
+                                <td>5000</td>
+                                <td>-3.5%</td>                                    
+                            </tr>
+                            <tr>
+                                <th scope="row">Cao đẳng</th>
+                                <td>5000</td>
+                                <td>-3.5%</td>                                    
+                            </tr>
+                            <tr>
+                                <th scope="row">Trung cấp nghề</th>
+                                <td>5000</td>
+                                <td>-3.5%</td>                                    
+                            </tr>
+                            <tr>
+                                <th scope="row">Khác</th>
+                                <td>5000</td>
+                                <td>-3.5%</td>                                    
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col ">
+                    <div id="trinhdo_hocvan"></div>
+                </div>
+
+            </div>
+        </div>
+
+        
+    </div>
+</div>

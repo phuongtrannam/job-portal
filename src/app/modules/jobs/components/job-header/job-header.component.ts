@@ -3,6 +3,7 @@ import { JobsService } from '../../jobs.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-job-header',
   templateUrl: './job-header.component.html',

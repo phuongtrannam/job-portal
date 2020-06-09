@@ -8,9 +8,20 @@ import { IndustriesService } from '../../industries.service';
   providers: [IndustriesService]
 })
 export class JobListingComponent implements OnInit {
+  jobs = [{id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150",},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},]
 
 
-  constructor(private industriesService: IndustriesService) {
+  constructor() {
 
   }
   ngOnInit() {

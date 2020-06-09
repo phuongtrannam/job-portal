@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../jobs.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+
 // import { icon, latLng, LatLng, Layer, marker, tileLayer } from 'leaflet';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';

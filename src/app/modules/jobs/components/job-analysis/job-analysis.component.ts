@@ -1,8 +1,10 @@
+
 import { Component, OnInit, Input } from '@angular/core';
 import { JobsService } from '../../jobs.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+
 
 declare var ApexCharts: any;
 @Component({
@@ -13,7 +15,9 @@ declare var ApexCharts: any;
 })
 export class JobAnalysisComponent implements OnInit {
 
+
   @Input() selectedCity: string;
+
 
   jobDemandAndAverageSalaryTable = ['timestamp', 'numJob', 'salary'];
   jobDemandAndAverageSalary = new MatTableDataSource<any>([]);
@@ -26,11 +30,13 @@ export class JobAnalysisComponent implements OnInit {
 
   relatedJobs = [];
 
+
   jobID$: Observable<any>;
   selectedJobId: string;
 
   constructor(private jobsService: JobsService,
     private route: ActivatedRoute) {
+
 
   }
   ngOnInit() {
@@ -52,7 +58,7 @@ export class JobAnalysisComponent implements OnInit {
     this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
     this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
     this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
-    this.getRelatedJobs(this.selectedJobId);
+
   }
 
   showJobDemandAndAverageSalary(idJob: string, idLocation: string): void {
@@ -520,9 +526,7 @@ export class JobAnalysisComponent implements OnInit {
         } else {
           alert("Khu vực bạn chọn không có dữ liệu về trình độ học vấn");
         }
-
       });
-
   }
 
   getRelatedJobs(idJob: string): void {

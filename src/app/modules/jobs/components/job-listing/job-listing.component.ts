@@ -8,13 +8,29 @@ import { JobsService } from '../../jobs.service';
   providers: [JobsService]
 })
 export class JobListingComponent implements OnInit {
+<<<<<<< HEAD
   topJobSearch = [];
   jobId: string;
+=======
+  jobs = [{id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150",},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},
+        {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},]
+
+>>>>>>> cuongnm
 
   constructor(private jobsService: JobsService) {
 
   }
   ngOnInit() {
+<<<<<<< HEAD
     this.getTopJob('50');
     // this.jobsService.selectedJob.subscribe(jobId => this.jobId = jobId);
     // console.log(this.jobId);
@@ -35,6 +51,9 @@ export class JobListingComponent implements OnInit {
         // this.jobDemandByPeriodOfTime = data.result;
         this.topJobSearch = data.result;
       });
+=======
+
+>>>>>>> cuongnm
   }
 
 }
