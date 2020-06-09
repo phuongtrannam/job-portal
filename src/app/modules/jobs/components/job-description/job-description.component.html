@@ -13,8 +13,8 @@
                                     </div>
                                     <div class="details">
                                         <div class="text">Mức lương</div>
-                                        <div class="value"><span class="price-text">15 triệu</span> - <span
-                                                class="price-text">180 triệu</span>/tháng</div>
+                                        <div class="value"><span class="price-text">{{jobInfo.minSalary}} triệu</span> - <span
+                                                class="price-text">{{jobInfo.maxSalary}} triệu</span>/tháng</div>
                                     </div>
                                 </li>
             
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="details">
                                         <div class="text">Ngành nghề</div>
-                                        <div class="value"> Công nghệ thông tin</div>
+                                        <div class="value" *ngFor = "let industry of jobInfo.industry"> {{industry}},</div>
                                     </div>
                                 </li>
             
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="details">
                                         <div class="text">Bằng cấp</div>
-                                        <div class="value"> Đại học/Cao đẳng</div>
+                                        <div class="value" *ngFor = "let literacy of jobInfo.literacy"> {{literacy}},</div>
                                     </div>
                                 </li>
             

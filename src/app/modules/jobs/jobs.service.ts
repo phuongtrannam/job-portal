@@ -85,4 +85,14 @@ export class JobsService {
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
+
+    getJobInfo(idJobParam: string) {
+        const postData = {
+            idJob: idJobParam,
+        };
+        const specificPath = '/get_job_info';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { JobsService } from '../../jobs.service';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,7 @@ declare var ApexCharts: any;
 })
 export class JobAnalysisComponent implements OnInit {
 
-  @Input() selectedCity: string; 
+  @Input() selectedCity: string;
 
   jobDemandAndAverageSalaryTable = ['timestamp', 'numJob', 'salary'];
   jobDemandAndAverageSalary = new MatTableDataSource<any>([]);
@@ -30,7 +30,7 @@ export class JobAnalysisComponent implements OnInit {
   selectedJobId: string;
 
   constructor(private jobsService: JobsService,
-              private route: ActivatedRoute) {
+    private route: ActivatedRoute) {
 
   }
   ngOnInit() {
@@ -42,7 +42,7 @@ export class JobAnalysisComponent implements OnInit {
     this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
     this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
     this.getRelatedJobs(this.selectedJobId);
-    
+
   }
 
 
@@ -62,91 +62,97 @@ export class JobAnalysisComponent implements OnInit {
         // console.log(data.result);
         // this.jobDemandByPeriodOfTime = data.result;
         const dataTable = [];
-        const milestones = data.timestamp;
-        const numJob = data.data;
-        const growthJob = data.growth;
+        if (Object.keys(data).length > 1) {
+          const milestones = data.timestamp;
+          const numJob = data.data;
+          const growthJob = data.growth;
+          this.jobsService.getAverageSalary(idJob, idLocation)
+            .subscribe((data1: any) => {
+              // const milestones = data.timestamp;
+              if (Object.keys(data1).length > 1) {
+                const salary = data1.data;
+                const growthSalary = data1.growth;
 
-        this.jobsService.getAverageSalary(idJob, idLocation)
-          .subscribe((data1: any) => {
-            // const milestones = data.timestamp;
-            const salary = data1.data;
-            const growthSalary = data1.growth;
-
-            for( var i = 0; i< milestones.length; i++){
-              const obj = {timestamp : '', numJob : 0, salary: 0.0, growthJob: 0.0, growthSalary: 0.0};
-              obj.timestamp = milestones[i];
-              obj.numJob = numJob[i];
-              obj.salary = salary[i];
-              obj.growthSalary = growthSalary[i];
-              obj.growthJob = growthJob[i];
-              dataTable.push(obj);
-            }
-            console.log("jobDemandAndAverageSalary");
-            console.log(dataTable);
-            this.jobDemandAndAverageSalary.data = dataTable;
-
-            var options = {
-              series: [{
-                name: 'Số lượng công việc',
-                type: 'column',
-                data: numJob
-              }, {
-                name: 'Lương trung bình',
-                type: 'line',
-                data: salary
-              }],
-              chart: {
-                height: 350,
-                type: 'line',
-              },
-              stroke: {
-                width: [0, 4]
-              },
-              colors: ['#38933d', '#8dc971'],
-              title: {
-                text: 'Nhu cầu việc làm và lương trung bình',
-                align: 'left',
-                style: {
-                  fontSize: '18px',
-                },
-              },
-              subtitle: {
-                text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
-                align: 'left'
-              },
-              dataLabels: {
-                enabled: true,
-                enabledOnSeries: [1]
-              },
-              labels:milestones,
-              xaxis: {
-                labels: {
-                  show: true,
-                },
-                axisBorder: {
-                  show: false
-                },
-                axisTicks: {
-                  show: false,
-                },
-              },
-              yaxis: [{
-                title: {
-                  text: 'Nhu cầu tuyển dụng',
-                },
-
-              }, {
-                opposite: true,
-                title: {
-                  text: 'Mức lương trung bình'
+                for (var i = 0; i < milestones.length; i++) {
+                  const obj = { timestamp: '', numJob: 0, salary: 0.0, growthJob: 0.0, growthSalary: 0.0 };
+                  obj.timestamp = milestones[i];
+                  obj.numJob = numJob[i];
+                  obj.salary = salary[i];
+                  obj.growthSalary = growthSalary[i];
+                  obj.growthJob = growthJob[i];
+                  dataTable.push(obj);
                 }
-              }]
-            };
+                console.log("jobDemandAndAverageSalary");
+                console.log(dataTable);
+                this.jobDemandAndAverageSalary.data = dataTable;
 
-            var chart = new ApexCharts(document.querySelector("#chart"), options);
-            chart.render();
+                const options = {
+                  series: [{
+                    name: 'Số lượng công việc',
+                    type: 'column',
+                    data: numJob
+                  }, {
+                    name: 'Lương trung bình',
+                    type: 'line',
+                    data: salary
+                  }],
+                  chart: {
+                    height: 350,
+                    type: 'line',
+                  },
+                  stroke: {
+                    width: [0, 4]
+                  },
+                  colors: ['#38933d', '#8dc971'],
+                  title: {
+                    text: 'Nhu cầu việc làm và lương trung bình',
+                    align: 'left',
+                    style: {
+                      fontSize: '18px',
+                    },
+                  },
+                  subtitle: {
+                    text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+                    align: 'left'
+                  },
+                  dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+                  },
+                  labels: milestones,
+                  xaxis: {
+                    labels: {
+                      show: true,
+                    },
+                    axisBorder: {
+                      show: false
+                    },
+                    axisTicks: {
+                      show: false,
+                    },
+                  },
+                  yaxis: [{
+                    title: {
+                      text: 'Nhu cầu tuyển dụng',
+                    },
 
-          });
+                  }, {
+                    opposite: true,
+                    title: {
+                      text: 'Mức lương trung bình'
+                    }
+                  }]
+                };
+
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+              } else {
+                alert("Khu vực bạn chọn không có dữ liệu về lương trung bình");
+              }
+            });
+        } else {
+          alert("Khu vực bạn chọn không có dữ liệu về số lượng việc làm");
+        }
       });
   }
   showJobDemandByPeriodOfTime(idJob: string, idLocation: string): void {
@@ -361,82 +367,84 @@ export class JobAnalysisComponent implements OnInit {
       .subscribe((data: any) => {
         console.log("getJobDemandByAge");
         // console.log(data.result);
-
-        const milestones = data.timestamps;
-        const ageRanges = data.ageRange;
-        const male = data[milestones[2]].male;
-        const female = data[milestones[2]].female;
-        const dataTable = [];
-        for(var i = 0; i<ageRanges.length; i++){
-          const obj = {ageRange : '', male : 0, female: 0.0};
-          obj.ageRange = ageRanges[i];
-          obj.male = male[i];
-          obj.female = female[i];
-          dataTable.push(obj);
-        }
-        this.jobDemandByAgeAndGender.data = dataTable;
-        var options = {
-          series: [{
-            name: ' Nam',
-            data: male
-          }, {
-            name: 'Nữ',
-            data: female
-          }],
-          chart: {
-            type: 'bar',
-            height: 350,
-            stacked: true,
-            toolbar: {
-              show: true
-            },
-            zoom: {
-              enabled: true
-            }
-          },
-          colors: ['#38933d', '#8dc971'],
-          title: {
-            text: 'Nhu cầu việc làm theo độ tuổi, giới tính',
-            align: 'left',
-            style: {
-              fontSize: '18px',
-            },
-          },
-          subtitle: {
-            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
-            align: 'left'
-          },
-          responsive: [{
-            breakpoint: 480,
-            options: {
-              legend: {
-                position: 'bottom',
-                offsetX: -10,
-                offsetY: 0
-              }
-            }
-          }],
-          plotOptions: {
-            bar: {
-              horizontal: true,
-            },
-          },
-          xaxis: {
-            // type: 'datetime',
-            categories: ageRanges,
-          },
-          legend: {
-            position: 'right',
-            offsetY: 40
-          },
-          fill: {
-            opacity: 1
+        if (Object.keys(data).length > 2) {
+          const milestones = data.timestamps;
+          const ageRanges = data.ageRange;
+          const male = data[milestones[2]].male;
+          const female = data[milestones[2]].female;
+          const dataTable = [];
+          for (var i = 0; i < ageRanges.length; i++) {
+            const obj = { ageRange: '', male: 0, female: 0.0 };
+            obj.ageRange = ageRanges[i];
+            obj.male = male[i];
+            obj.female = female[i];
+            dataTable.push(obj);
           }
-        };
+          this.jobDemandByAgeAndGender.data = dataTable;
+          const options = {
+            series: [{
+              name: ' Nam',
+              data: male
+            }, {
+              name: 'Nữ',
+              data: female
+            }],
+            chart: {
+              type: 'bar',
+              height: 350,
+              stacked: true,
+              toolbar: {
+                show: true
+              },
+              zoom: {
+                enabled: true
+              }
+            },
+            colors: ['#38933d', '#8dc971'],
+            title: {
+              text: 'Nhu cầu việc làm theo độ tuổi, giới tính',
+              align: 'left',
+              style: {
+                fontSize: '18px',
+              },
+            },
+            subtitle: {
+              text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+              align: 'left'
+            },
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: 'bottom',
+                  offsetX: -10,
+                  offsetY: 0
+                }
+              }
+            }],
+            plotOptions: {
+              bar: {
+                horizontal: true,
+              },
+            },
+            xaxis: {
+              // type: 'datetime',
+              categories: ageRanges,
+            },
+            legend: {
+              position: 'right',
+              offsetY: 40
+            },
+            fill: {
+              opacity: 1
+            }
+          };
 
-        var chart = new ApexCharts(document.querySelector("#nhu-cau-viec-lam-theo-do-tuoi"), options);
-        chart.render();
-
+          const chart = new ApexCharts(document.querySelector("#nhu-cau-viec-lam-theo-do-tuoi"), options);
+          chart.render();
+        } else {
+          alert("Khu vực bạn chọn không có dữ liệu về độ tuổi");
+        }
       });
   }
 
@@ -446,68 +454,73 @@ export class JobAnalysisComponent implements OnInit {
       .subscribe((data: any) => {
         console.log("getJobDemandByLiteracy");
         // console.log(data.result);
-        const milestones = data.timestamps;
-        const literacies = data.literacy;
-        const numJob = data[milestones[2]].data;
-        const growth = data[milestones[2]].growth;
-        const dataTable = [];
+        if (Object.keys(data).length > 2) {
+          const milestones = data.timestamps;
+          const literacies = data.literacy;
+          const numJob = data[milestones[2]].data;
+          const growth = data[milestones[2]].growth;
+          const dataTable = [];
 
-        for( var i = 0; i< literacies.length; i++){
-          const obj = {literacy : '', numJob : 0, growth: 0.0};
-          obj.literacy = literacies[i];
-          obj.numJob = numJob[i];
-          obj.growth = growth[i];
-          dataTable.push(obj);
-        }
-        console.log(dataTable);
-        this.jobDemandByLiteracy.data = dataTable;
+          for (var i = 0; i < literacies.length; i++) {
+            const obj = { literacy: '', numJob: 0, growth: 0.0 };
+            obj.literacy = literacies[i];
+            obj.numJob = numJob[i];
+            obj.growth = growth[i];
+            dataTable.push(obj);
+          }
+          console.log(dataTable);
+          this.jobDemandByLiteracy.data = dataTable;
 
-        var options = {
-          series: numJob,
-          chart: {
-            width: '100%',
-            height: 350,
-            type: 'donut',
-          },
-          color: ['#37933c'],
-          labels: literacies,
-          // theme: {
-          //   palette: 'palette2',
-          //   monochrome: {
-          //     enabled: true,
-          //     color: '#82b440',
-          //   }
-          // },
-    
-          title: {
-            text: "Biểu đồ phân bổ việc làm theo trình độ học vấn",
-            align: 'left',
-            style: {
-              fontSize: '18px',
-              fontWeight: 'bold',
-              fontFamily: undefined,
-              color: '#263238'
+          const options = {
+            series: numJob,
+            chart: {
+              width: '100%',
+              height: 350,
+              type: 'donut',
             },
-          },
-          subtitle: {
-            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
-            align: 'left'
-          },
-          responsive: [{
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200
+            color: ['#37933c'],
+            labels: literacies,
+            // theme: {
+            //   palette: 'palette2',
+            //   monochrome: {
+            //     enabled: true,
+            //     color: '#82b440',
+            //   }
+            // },
+
+            title: {
+              text: "Biểu đồ phân bổ việc làm theo trình độ học vấn",
+              align: 'left',
+              style: {
+                fontSize: '18px',
+                fontWeight: 'bold',
+                fontFamily: undefined,
+                color: '#263238'
               },
-              legend: {
-                position: 'bottom'
+            },
+            subtitle: {
+              text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+              align: 'left'
+            },
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
               }
-            }
-          }]
-        };
-    
-        var chart = new ApexCharts(document.querySelector("#nhu-cau-viec-lam-theo-trinh-do"), options);
-        chart.render();
+            }]
+          };
+
+          const chart = new ApexCharts(document.querySelector("#nhu-cau-viec-lam-theo-trinh-do"), options);
+          chart.render();
+        } else {
+          alert("Khu vực bạn chọn không có dữ liệu về trình độ học vấn");
+        }
+
       });
 
   }
@@ -518,7 +531,7 @@ export class JobAnalysisComponent implements OnInit {
         console.log("getJobsRelated");
         console.log(data.result);
         this.relatedJobs = data.result;
-    });
+      });
   }
 
   // showJobDemandByAgeChart(idJob: string): void {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../jobs.service';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 // import { icon, latLng, LatLng, Layer, marker, tileLayer } from 'leaflet';
 import * as L from 'leaflet';
 import 'leaflet.markercluster';
@@ -41,12 +43,30 @@ export class JobDescriptionComponent implements OnInit {
   // generateLat() { return Math.random() * 360 - 180; }
   // generateLon() { return Math.random() * 180 - 90; }
 
-  constructor(private jobsService: JobsService) {
+  jobID$: Observable<any>;
+  selectedJobId: string;
+  jobInfo = {name: '', minSalary: '', maxSalary: '', numJob: 0, literacy: [], industry: []};
+  constructor(private jobsService: JobsService,
+              private route: ActivatedRoute) {
 
   }
   ngOnInit() {
-    // this.refreshData();
+    this.selectedJobId = this.route.snapshot.paramMap.get('id');
+    // console.log("idJob is: -- " + this.selectedJobId);
+    this.jobInfoHeader(this.selectedJobId);
+  }
 
+  jobInfoHeader(idJob: string): void {
+    this.jobsService.getJobInfo(idJob)
+      .subscribe((data: any) => {
+        console.log("jobInfoHeader");
+        this.jobInfo.maxSalary = data.maxSalary;
+        this.jobInfo.minSalary = data.minSalary;
+        this.jobInfo.numJob = Math.floor(parseFloat(data.numJob));
+        this.jobInfo.name = data.name;
+        this.jobInfo.literacy = data.literacy;
+        this.jobInfo.industry = data.industry;
+      });
   }
   // refreshData(): void {
   //   this.markerClusterData = this.generateData(1000);
