@@ -3,6 +3,112 @@
     <div class="jobs-listing-wrapper main-items-wrapper" data-display_mode="list">
         <div class="jobs-alert-ordering-wrapper">
             <div class="results-count">
+                Tìm được {{jobs.length}} công việc phù hợp</div>
+            <div class="jobs-ordering-wrapper">
+                <form class="jobs-ordering" >
+                    <div class="label">Sắp xếp theo:</div>
+                    <select name="filter-orderby" class="orderby select2-hidden-accessible" 
+                        aria-hidden="true">
+                        <option value="menu_order">Default</option>
+                        <option value="newest" selected="selected">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="random">Random</option>
+                    </select>
+                    <input type="hidden" name="paged" value="1">
+                </form>
+            </div>
+        </div>
+
+        <div class="jobs-wrapper items-wrapper" *ngFor = "let job of jobs| paginate: { itemsPerPage: 8, currentPage: p }">
+            <article class="job-list-v1 job_listing type-job_listing status-publish has-post-thumbnail hentry job_listing_type-freelance job_listing_category-telecommunications job_listing_location-new-york is-featured is-urgent">
+                <div class="flex-sm">
+                    <div class="job-information flex-middle">
+                        <div class="inner">
+                            <a class="type-job" href="https://apusthemes.com/wp-demo/careerup/job-type/freelance/">{{job.jobType}}</a>
+                            <div class="job-title-wrapper">
+                                <h2 class="job-title"><a [href]="'/jobs/' + job.id" rel="bookmark">{{job.name}}</a></h2> <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i class="fa fa-star text-theme"></i></span>
+                            </div>
+                            <div class="job-metas">
+                                <!-- <div class="job-location"><i class="fa fa-map-marker"></i>Hà Nội</div> -->
+                                <div class="job-salary">
+                                    <i class="fa fa-money"></i>$<span class="price-text">{{job.minSalary}}</span> - $<span class="price-text">{{job.maxSalary}}</span> triệu</div>
+                                <div class="job-location"><i class="fa fa-tasks"></i>{{job.numJob}}công việc</div>
+                            </div>
+                        </div>
+                        <div class="ali-right hidden-xs">
+                            <a class="btn btn-theme btn-outline" [href]="'/jobs/' + job.id">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="employers-pagination-wrapper main-pagination-wrapper">
+        <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel="">
+        </pagination-controls>
+    </div>
+
+</main>
+<main id="main" class="site-main layout-type-left-main" role="main">
+
+    <div class="jobs-listing-wrapper main-items-wrapper" data-display_mode="list">
+        <div class="jobs-alert-ordering-wrapper">
+            <div class="results-count">
+                Tìm được {{jobs.length}} công việc phù hợp</div>
+            <div class="jobs-ordering-wrapper">
+                <form class="jobs-ordering" >
+                    <div class="label">Sắp xếp theo:</div>
+                    <select name="filter-orderby" class="orderby select2-hidden-accessible" 
+                        aria-hidden="true">
+                        <option value="menu_order">Default</option>
+                        <option value="newest" selected="selected">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="random">Random</option>
+                    </select>
+                    <input type="hidden" name="paged" value="1">
+                </form>
+            </div>
+        </div>
+
+        <div class="jobs-wrapper items-wrapper" *ngFor = "let job of jobs| paginate: { itemsPerPage: 8, currentPage: p }">
+            <article class="job-list-v1 job_listing type-job_listing status-publish has-post-thumbnail hentry job_listing_type-freelance job_listing_category-telecommunications job_listing_location-new-york is-featured is-urgent">
+                <div class="flex-sm">
+                    <div class="job-information flex-middle">
+                        <div class="inner">
+                            <a class="type-job" href="https://apusthemes.com/wp-demo/careerup/job-type/freelance/">{{job.jobType}}</a>
+                            <div class="job-title-wrapper">
+                                <h2 class="job-title"><a [href]="'/jobs/' + job.id" rel="bookmark">{{job.name}}</a></h2> <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i class="fa fa-star text-theme"></i></span>
+                            </div>
+                            <div class="job-metas">
+                                <!-- <div class="job-location"><i class="fa fa-map-marker"></i>Hà Nội</div> -->
+                                <div class="job-salary">
+                                    <i class="fa fa-money"></i>$<span class="price-text">{{job.minSalary}}</span> - $<span class="price-text">{{job.maxSalary}}</span> triệu</div>
+                                <div class="job-location"><i class="fa fa-tasks"></i>{{job.numJob}}công việc</div>
+                            </div>
+                        </div>
+                        <div class="ali-right hidden-xs">
+                            <a class="btn btn-theme btn-outline" [href]="'/jobs/' + job.id">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <div class="employers-pagination-wrapper main-pagination-wrapper">
+        <pagination-controls class="pagination" (pageChange)="p = $event" previousLabel="" nextLabel="">
+        </pagination-controls>
+    </div>
+
+</main>
+
+
+<main id="main" class="site-main layout-type-left-main" role="main">
+
+    <div class="jobs-listing-wrapper main-items-wrapper" data-display_mode="list">
+        <div class="jobs-alert-ordering-wrapper">
+            <div class="results-count">
                 Hiển thị <span class="first">1</span> – <span class="last">6</span> trong 10 kết
                 quả tìm được</div>
             <div class="jobs-ordering-wrapper">

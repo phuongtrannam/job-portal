@@ -1,0 +1,25 @@
+
+.pagination /deep/ .ngx-pagination .current {
+    background: #38933d !important;
+    color: #fff !important;
+    cursor: default;
+}
+
+.btn-theme.btn-outline {
+    color: #38933d;
+    background-color: transparent;
+    border-color: #38933d; /*set the color you want here*/
+}
+.btn-theme.btn-outline:hover, .btn-theme.btn-outline:focus, .btn-theme.btn-outline:active, .btn-theme.btn-outline.active, .open>.dropdown-toggle.btn-theme.btn-outline {
+    color: #fff;
+    background-color: #38933d;
+    border-color: #38933d; /*set the color you want here*/
+}
+
+.job-list-v1:hover {
+    border-color: #38933d;
+}
+
+a:hover, a:active{
+    color: #38933d;
+  }
