@@ -1,16 +1,16 @@
 import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
-
-// import { NhuCauTuyenDung } from './chart_nhu_cau_tuyen_dung';
-import { Component, OnInit } from '@angular/core';
-
-// import { chartDoTuoiTrungBinh } from './config.chart-do-tuoi-trung-binh     ';
-
+import { Component, OnInit, Input } from '@angular/core';
+import { IndustriesService } from '../../industries.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 declare var ApexCharts: any;
 
 @Component({
   selector: 'app-industry-detail',
   templateUrl: './industry-detail.component.html',
-  styleUrls: ['./industry-detail.component.scss']
+  styleUrls: ['./industry-detail.component.scss'],
+  providers: [IndustriesService]
 })
 export class IndustryDetailComponent {
   public congtylon_linhvuc = [
@@ -20,6 +20,73 @@ export class IndustryDetailComponent {
     { name: 'BKAV', soluong: 12, vitri: 'Đà Nẵng', imgsrc: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Bkav_logo.jpg' }
   ];
   
+ 
+  topCompanies = [];
+
+
+  jobID$: Observable<any>;
+  selectedJobId: string;
+
+  constructor(private industriesService: IndustriesService,
+    private route: ActivatedRoute) {
+
+
+  }
+
+  ngOnInit() {
+    this.getTopCompanies('I1', 'P24')
+    this.showDotuoiGioitinh();
+    this.showTrinhdoHocvan();
+    this.showNhuCauTuyenDungTheoLinhVuc();
+    // new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
+    this.showNhuCauKVC();
+    this.showNhuCauTuyenDung();    
+    this.showDanhSachNhuCtyTheoQuy();
+  }
+
+  getTopCompanies(industryId: string, idProvince: string): void {
+    this.industriesService.getTopCompanies(industryId, idProvince)
+      .subscribe((data: any) => {
+        console.log("getTopCompanies");
+        console.log(data.result);
+        this.topCompanies = data.result;
+      });
+  }
+
+  getJobDemandByPeriodOfTime(industryId: string, idProvince: string): void {
+    this.industriesService.getJobDemandByPeriodOfTime(industryId, idProvince)
+      .subscribe((data: any) => {
+        console.log("getJobDemandByPeriodOfTime");
+        console.log(data.result);
+        this.topCompanies = data.result;
+      });
+  }
+
+
+  public quy_dotuoi_gioitinh: any = [
+    {name: 'II/2019', selected: true},
+    {name: 'III/2019', selected: false},
+    {name: 'IV/2019', selected: false},
+    
+  ];
+  public quy_hocvan: any = [
+    {name: 'II/2019', selected: true},
+    {name: 'III/2019', selected: false},
+    {name: 'IV/2019', selected: false},
+    {name: 'I/2020', selected: false},
+  ];
+  thayDoiQuy_dotuoi_gioitinh(index) {
+    this.quy_dotuoi_gioitinh.forEach(element => {
+      element.selected = false;
+    });
+    this.quy_dotuoi_gioitinh[index].selected = true;
+  }
+  thayDoiQuy_hocvan(index) {
+    this.quy_hocvan.forEach(element => {
+      element.selected = false;
+    });
+    this.quy_hocvan[index].selected = true;
+  }
   showNhuCauKVC() {
     var numJob = [
       { name: 'Ha Noi', data: [8.1, 4.0, 10.1, 20] },
@@ -555,41 +622,5 @@ export class IndustryDetailComponent {
     };
     var chart= new ApexCharts(document.querySelector('#trinhdo_hocvan'), options);
     chart.render();
-  }
-  constructor() { }
-
-  ngOnInit() {
-    this.showDotuoiGioitinh();
-    this.showTrinhdoHocvan();
-    this.showNhuCauTuyenDungTheoLinhVuc();
-    // new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
-    this.showNhuCauKVC();
-    this.showNhuCauTuyenDung();    
-    this.showDanhSachNhuCtyTheoQuy();
-  }
-
-  public quy_dotuoi_gioitinh: any = [
-    {name: 'II/2019', selected: true},
-    {name: 'III/2019', selected: false},
-    {name: 'IV/2019', selected: false},
-    
-  ];
-  public quy_hocvan: any = [
-    {name: 'II/2019', selected: true},
-    {name: 'III/2019', selected: false},
-    {name: 'IV/2019', selected: false},
-    {name: 'I/2020', selected: false},
-  ];
-  thayDoiQuy_dotuoi_gioitinh(index) {
-    this.quy_dotuoi_gioitinh.forEach(element => {
-      element.selected = false;
-    });
-    this.quy_dotuoi_gioitinh[index].selected = true;
-  }
-  thayDoiQuy_hocvan(index) {
-    this.quy_hocvan.forEach(element => {
-      element.selected = false;
-    });
-    this.quy_hocvan[index].selected = true;
   }
 }

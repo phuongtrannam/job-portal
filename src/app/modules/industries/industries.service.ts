@@ -17,42 +17,82 @@ export class IndustriesService {
 
     }
 
-    // getIndustryList() {
-    //     const specificPath = '/get_industry_list';
-    //     const url = this.rootUrl + specificPath;
-    //     return this.http.get(url);
-    // }
+    getIndustryList() {
+        const specificPath = '/get_industry_list';
+        const url = this.rootUrl + specificPath;
+        return this.http.get(url);
+    }
 
-
-
-
-
-    getJobDemandByPeriodOfTime(idJob: string) {
+    getTopCompanies( industryIdParam: string, idProvinceParam: string) {
         const postData = {
-            id: idJob,
+            industryId: industryIdParam,
+            idProvince: idProvinceParam,
         };
-        const specificPath = '/get_job_demand_by_period_of_time';
+        const specificPath = '/get_top_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+    getJobDemandByPeriodOfTime( industryIdParam: string, idProvinceParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+            idProvince: idProvinceParam,
+        };
+        const specificPath = '/get_job_demand';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getJobDemandByAge(idJob: string) {
+    getTopHiringCompany(industryIdParam: string, idProvinceParam: string) {
         const postData = {
-            id: idJob,
+            industryId: industryIdParam,
+            idProvince: idProvinceParam,
+        };
+        const specificPath = '/get_top_hiring_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getTopHiringJob(industryIdParam: string, idProvinceParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+            idProvince: idProvinceParam,
+        };
+        const specificPath = '/get_top_hiring_job';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getHighestSalaryJob(industryIdParam: string, idProvinceParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+            idProvince: idProvinceParam,
+        };
+        const specificPath = '/get_highest_salary_job';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getJobDemandByAge(industryIdParam: string, idProvinceParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+            idProvince: idProvinceParam,
         };
         const specificPath = '/get_job_demand_by_age';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getJobDemandByLiteracy(idJob: string) {
+    getJobDemandByLiteracy(industryIdParam: string, idProvinceParam: string) {
         const postData = {
-            id: idJob,
+            industryId: industryIdParam,
+            idProvince: idProvinceParam,
         };
         const specificPath = '/get_job_demand_by_literacy';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
+
+   
 
     getAverageSalaryByPeriodOfTime(idJob: string) {
         const postData = {

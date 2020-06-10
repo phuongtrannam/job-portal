@@ -1,9 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { IndustriesService } from '../../industries.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-industry-listing',
   templateUrl: './industry-listing.component.html',
-  styleUrls: ['./industry-listing.component.css']
+  styleUrls: ['./industry-listing.component.css'],
+  providers: [IndustriesService]
 })
 export class IndustryListingComponent implements OnInit {
   trendingindustrys = [{ id: 'J1', name: 'Java Engineer' },
@@ -38,24 +43,25 @@ export class IndustryListingComponent implements OnInit {
   //   { checked: false, name: "Fresher" },
   //   { checked: false, name: "Junior" },
   // ];
-  industrys = [{ id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },
-  { id: "J1", name: "Dệt may", minSalary: "10", maxSalary: "20", industryType: "Tại xưởng", numindustry: "2150", },];
 
-  constructor() {
+  industryList = [];
+
+  constructor( private industriesService: IndustriesService,
+    private route: ActivatedRoute) {
 
   }
-  ngOnInit() {
 
+  ngOnInit() {
+    this.getIndustryList();
+  }
+
+  getIndustryList(): void {
+    this.industriesService.getIndustryList()
+      .subscribe((data: any) => {
+        console.log("getJobsRelated");
+        console.log(data.result);
+        this.industryList = data.result;
+      });
   }
 
 }
