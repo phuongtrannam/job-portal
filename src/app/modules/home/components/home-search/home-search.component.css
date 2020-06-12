@@ -4,3 +4,8 @@
 .my-item{
     color: #6d6d6d;
 }
+.btn-theme {
+    color: #fff;
+    background-color: #36A800 !important;
+    border-color: #36A800 !important;
+}

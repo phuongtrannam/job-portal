@@ -1,0 +1,14 @@
+.category-banner-inner .category-icon {
+    color: #36a800;
+}
+.category-banner-inner .style1 :hover{
+    background-color: #36a800;
+}
+span.process-img[_ngcontent-oiv-c7] {
+    width: 80px;
+    height: 80px;
+    margin: 15px auto 0;
+    position: relative;
+    display: inline-block;
+    color: #36a800 !important;
+}

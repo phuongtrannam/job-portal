@@ -84,7 +84,7 @@ export class JobAnalysisComponent implements OnInit {
               stroke: {
                 width: [0, 4]
               },
-              colors: ['#38933d', '#8dc971'],
+              colors: ["#36a800", '#8dc971'],
               title: {
                 text: 'Nhu cầu việc làm và lương trung bình',
                 align: 'left',
@@ -155,7 +155,7 @@ export class JobAnalysisComponent implements OnInit {
               show: false
             }
           },
-          colors: ['#37933c'],
+          colors: ['#36a800'],
           dataLabels: {
             enabled: false
           },
@@ -376,7 +376,7 @@ export class JobAnalysisComponent implements OnInit {
               enabled: true
             }
           },
-          colors: ['#38933d', '#8dc971'],
+          colors: ["#36a800", '#8dc971'],
           title: {
             text: 'Nhu cầu việc làm theo độ tuổi, giới tính',
             align: 'left',
@@ -451,7 +451,7 @@ export class JobAnalysisComponent implements OnInit {
             height: 350,
             type: 'donut',
           },
-          color: ['#37933c'],
+          colors: ['#36a800', '#00CCFF', '#00CCCC', '#33CC66', '#33CC33', '#77792e', '#9e9c00'],
           labels: literacies,
           // theme: {
           //   palette: 'palette2',
