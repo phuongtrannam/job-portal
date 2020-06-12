@@ -10,8 +10,8 @@ import { HomeService } from '../../home.service';
 export class HomeSearchComponent implements OnInit {
   public menu: any = [
     {name: 'Lĩnh vực', selected: true, placehoder: 'VD: CNTT', logo: 'fa fa-home'},
-    {name: 'Ngành nghề', selected: false, placehoder: 'VD: Lập trình Web', logo: 'fa fa-seach'},
-    {name: 'Công việc', selected: false, placehoder: 'VD: FullStack DEV', logo: 'fa fa-dragon '},
+    {name: 'Ngành nghề', selected: false, placehoder: 'VD: Lập trình Web', logo: 'fa fa-map-marker'},
+    {name: 'Công việc', selected: false, placehoder: 'VD: FullStack DEV', logo: 'fa fa-building '},
     
   ];
   logo= "fa fa-home";

@@ -4,13 +4,14 @@
     <div class="widget-job-search-form"
         style="background:url(https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/05/top-filter.jpg)">
         <div class="container">
+            <div class="seach-bar seach-suggest"></div>
             <form action="" class="form-search layout1"
                 method="GET">
                 <div class="chon-quy-wrap">
                     <div class="item" *ngFor="let item of menu; index as i" (click)="thayDoi(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
                 </div>
                 <div class="flex-middle-sm search-form-inner" style="margin-top: 10px;">
-                    <div class="form-group form-group-title  ">
+                    <div class="form-group form-group-title " style="width: 70%;">
                         <div class="form-group-inner inner">
                             <i class="{{logo}}"></i>
                             <input type="text" name="filter-title" class="form-control" value="" id="mDtwn_title"
@@ -20,6 +21,7 @@
                     <div class="form-group form-group-search">
                         <button class="btn-submit btn btn-block btn-theme" type="submit">Tìm kiếm</button>
                     </div>
+                    <br>
                 </div>
                 <!-- <div class="flex-middle-sm search-form-inner" style = "margin-top: 32px;">
                     <div class="form-group form-group-title  ">
