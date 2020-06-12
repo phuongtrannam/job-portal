@@ -30,7 +30,7 @@ export class IndustryDetailComponent {
     var options = {
       series: numJob,
       chart: {
-        height: 350,
+        height: 280,
         type: 'line',
         zoom: {
           enabled: false,
@@ -155,7 +155,7 @@ export class IndustryDetailComponent {
         align: 'left'
       },
       chart: {
-        height: 350,
+        height: 280,
         type: 'line',
         fontFamily: 'Helvetica, Arial, sans-serif',
         zoom: {
@@ -255,7 +255,7 @@ export class IndustryDetailComponent {
         colors: ['#36a800']
       },
       chart: {
-        height: 350,
+        height: 280,
         type: 'bar',
         zoom: {
           enabled: false
@@ -362,7 +362,7 @@ export class IndustryDetailComponent {
         colors: ['#36a800']
       },
       chart: {
-        height: 350,
+        height: 280,
         type: 'bar',
         zoom: {
           enabled: false
@@ -481,7 +481,8 @@ export class IndustryDetailComponent {
       colors: ["#36a800", '#8dc971'],
       chart: {
         type: 'bar',
-        height: 350,
+        height: 280,
+        width:400,
         stacked: true,
         toolbar: {
           show: false
@@ -532,7 +533,7 @@ export class IndustryDetailComponent {
     var options = {
       series: numJob,
       chart: {
-        width: 650,
+        width: 530,
         type: 'donut',
       },
       labels: label_data,
