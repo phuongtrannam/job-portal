@@ -15,8 +15,6 @@ export class CompanyListingComponent implements OnInit {
   }
   ngOnInit() {
     this.showCompanyList();
-    
-    
   }
 
   showCompanyList() {

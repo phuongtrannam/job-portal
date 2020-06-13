@@ -7,7 +7,7 @@ import { JobsService } from '../../jobs.service';
 export interface City {
   name: string;
   id: string;
-  area: string;
+  // area: string;
 }
 
 @Component({
@@ -24,10 +24,10 @@ export class JobDetailComponent implements OnInit {
   }
   selectedCity = 'P0';
   control = new FormControl();
-  cityList: City[] = [{id: '1', name: 'Champs-Élysées', area: 'tnb'},
-              {id: '2', name: 'Lombard Street', area: 'tnb'},
-              {id: '3', name: 'Abbey Road', area: 'tnb'},
-              {id: '4', name: 'Fifth Avenue', area: 'tnb'}];
+  cityList: City[] = [{id: '1', name: 'Champs-Élysées'},
+              {id: '2', name: 'Lombard Street'},
+              {id: '3', name: 'Abbey Road'},
+              {id: '4', name: 'Fifth Avenue'}];
   filteredOptions: Observable<City[]>;
   ngOnInit() {
     this.getCityList();

@@ -70,7 +70,7 @@
                     <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn(filteredOptions | async)" >
                       <mat-option (click)="onCitySelected(selectedCity)" *ngFor="let city of filteredOptions | async" 
                                     [value]="city.id">
-                        {{city.name}}({{city.area}})
+                        {{city.name}}
                       </mat-option>
                     </mat-autocomplete>
                   </form>

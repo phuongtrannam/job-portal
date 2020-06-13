@@ -106,8 +106,8 @@ export class JobAnalysisComponent implements OnInit {
   //   var chart = new ApexCharts(document.querySelector("#nhu-cau-tuyen-dung-thoi-gian"), options);
   //   chart.render();
   // }
-  showJobDemandByAgeChart(idJob: string): void {
-    this.industriesService.getJobDemandByAge(idJob)
+  showJobDemandByAgeChart(idJob: string, idProvince: string): void {
+    this.industriesService.getJobDemandByAge(idJob, idProvince)
       .subscribe((data: any) => {
         console.log("getJobDemandByAge");
         console.log(data.result);
