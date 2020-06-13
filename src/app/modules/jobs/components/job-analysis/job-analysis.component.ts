@@ -65,7 +65,7 @@ export class JobAnalysisComponent implements OnInit {
     this.jobsService.getJobDemandByPeriodOfTime(idJob, idLocation)
       .subscribe((data: any) => {
         console.log("getJobDemandByPeriodOfTime");
-        // console.log(data.result);
+        console.log(data);
         // this.jobDemandByPeriodOfTime = data.result;
         const dataTable = [];
         if (Object.keys(data).length > 1) {
@@ -373,12 +373,12 @@ export class JobAnalysisComponent implements OnInit {
     this.jobsService.getJobDemandByAge(idJob, idLocation)
       .subscribe((data: any) => {
         console.log("getJobDemandByAge");
-        // console.log(data.result);
+        console.log(data);
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
           const ageRanges = data.ageRange;
-          const male = data[milestones[2]].male;
-          const female = data[milestones[2]].female;
+          const male = data[milestones[milestones.length -1]].male;
+          const female = data[milestones[milestones.length -1]].female;
           const dataTable = [];
           for (var i = 0; i < ageRanges.length; i++) {
             const obj = { ageRange: '', male: 0, female: 0.0 };

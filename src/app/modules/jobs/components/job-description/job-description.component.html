@@ -7,7 +7,7 @@
                     <div class="job-detail-detail">
                         <ul class="list">
                             <div class="row">
-                                <li class="col-sm-4 col-xs-4">
+                                <li class="col-sm-6 col-xs-6">
                                     <div class="icon">
                                         <i class="fa fa-money"></i>
                                     </div>
@@ -19,7 +19,26 @@
                                     </div>
                                 </li>
             
-                                <li class="col-sm-4 col-xs-4">
+                            
+                                <!-- <li class="col-sm-4 col-xs-4">
+                                    <div class="icon">
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="text">Cấp bậc</div>
+                                        <div class="value"> Fresher</div>
+                                    </div>
+                                </li> -->
+                                <li class="col-sm-6 col-xs-6">
+                                    <div class="icon">
+                                        <i class="fa fa-cube"></i>
+                                    </div>
+                                    <div class="details">
+                                        <div class="text">Ngành nghề</div>
+                                        <div class="value" *ngFor = "let industry of jobInfo.industry" style="display:inline-block;"> {{industry}},</div>
+                                    </div>
+                                </li>
+                                <li class="col-sm-6 col-xs-6">
                                     <div class="icon">
                                         <i class="fa fa-venus-mars"></i>
                                     </div>
@@ -28,41 +47,16 @@
                                         <div class="value">Nam/Nữ</div>
                                     </div>
                                 </li>
-                                <li class="col-sm-4 col-xs-4">
-                                    <div class="icon">
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                    <div class="details">
-                                        <div class="text">Cấp bậc</div>
-                                        <div class="value"> Fresher</div>
-                                    </div>
-                                </li>
-                                <li class="col-sm-4 col-xs-4">
-                                    <div class="icon">
-                                        <i class="fa fa-cube"></i>
-                                    </div>
-                                    <div class="details">
-                                        <div class="text">Ngành nghề</div>
-                                        <div class="value" *ngFor = "let industry of jobInfo.industry"> {{industry}},</div>
-                                    </div>
-                                </li>
-            
-                                <li class="col-sm-4 col-xs-4">
+                                <li class="col-sm-6 col-xs-6">
                                     <div class="icon">
                                         <i class="fa fa-graduation-cap"></i>
                                     </div>
                                     <div class="details">
                                         <div class="text">Bằng cấp</div>
-                                        <div class="value" *ngFor = "let literacy of jobInfo.literacy"> {{literacy}},</div>
-
+                                        <div class="value" *ngFor = "let literacy of jobInfo.literacy" style="display:inline-block;"> {{literacy}},</div>
                                     </div>
                                 </li>
-            
-                                
-                                
                             </div>
-                            
-        
                         </ul>
                     </div>
                 </div>
