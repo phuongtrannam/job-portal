@@ -95,13 +95,13 @@ export class IndustryDetailComponent {
 
   ngOnInit() {
     this.getCityList();
-    this.getTopCompanies(this.selectedIndustryId, '1');
-    this.showJobDemandByPeriodOfTime(this.selectedIndustryId, '1');
-    this.showTopHiringCompany(this.selectedIndustryId, '1');
-    this.showTopHiringJob(this.selectedIndustryId, '1');
-    this.showHighestSalaryJob(this.selectedIndustryId, '1');
-    this.showJobDemandByAge(this.selectedIndustryId, '1');
-    this.showJobDemandByLiteracy(this.selectedIndustryId, '1');
+    this.getTopCompanies(this.selectedIndustryId, this.selectedCity);
+    this.showJobDemandByPeriodOfTime(this.selectedIndustryId, this.selectedCity);
+    this.showTopHiringCompany(this.selectedIndustryId, this.selectedCity);
+    this.showTopHiringJob(this.selectedIndustryId, this.selectedCity);
+    this.showHighestSalaryJob(this.selectedIndustryId, this.selectedCity);
+    this.showJobDemandByAge(this.selectedIndustryId, this.selectedCity);
+    this.showJobDemandByLiteracy(this.selectedIndustryId, this.selectedCity);
 
     // this.showDotuoiGioitinh();
     // this.showTrinhdoHocvan();
@@ -128,10 +128,18 @@ export class IndustryDetailComponent {
         console.log("getJobDemandByPeriodOfTime");
         console.log(data);
         const milestones = data["timestamps"];
-        const numJob = data[this.selectedIndustryId].data;
-        const growthJob = data[this.selectedIndustryId].growth;
-        const regionName = data[this.selectedIndustryId].name;
-
+        let numJob = [];
+        let growthJob = [];
+        let regionName = [];
+        if(this.selectedCity === 'P0'){
+          numJob = data['ALL'].data;
+          growthJob = data['ALL'].growth;
+          regionName = data['ALL'].name;
+        }else{
+          numJob = data[this.selectedIndustryId].data;
+          growthJob = data[this.selectedIndustryId].growth;
+          regionName = data[this.selectedIndustryId].name;
+        }
         const dataTable = [];
         for (let i = 0; i < milestones.length; i++) {
           const obj = { timestamp: '', numJob: 0, growth: 0.0 };
@@ -200,8 +208,8 @@ export class IndustryDetailComponent {
               colors: {
                 ranges: [{
                   from: 0,
-                  to: 100,
-                  color: '#36a800'
+                  to: 1000000000,
+                  color: '#37933c'
                 }],
                 backgroundBarColors: [],
                 backgroundBarOpacity: 1,
@@ -238,7 +246,7 @@ export class IndustryDetailComponent {
           },
 
           fill: {
-            color: "#36a800"
+            color: "#37933c"
           },
 
 
@@ -302,8 +310,8 @@ export class IndustryDetailComponent {
               colors: {
                 ranges: [{
                   from: 0,
-                  to: 100,
-                  color: '#36a800'
+                  to: 10000000000000,
+                  color: '#37933c'
                 }],
                 backgroundBarColors: [],
                 backgroundBarOpacity: 1,
@@ -407,8 +415,8 @@ export class IndustryDetailComponent {
               colors: {
                 ranges: [{
                   from: 0,
-                  to: 100,
-                  color: '#36a800'
+                  to: 100000000,
+                  color: '#37933c'
                 }],
                 backgroundBarColors: [],
                 backgroundBarOpacity: 1,
@@ -515,8 +523,8 @@ export class IndustryDetailComponent {
               colors: {
                 ranges: [{
                   from: 0,
-                  to: 100,
-                  color: '#36a800'
+                  to: 1000000000,
+                  color: '#37933c'
                 }],
                 backgroundBarColors: [],
                 backgroundBarOpacity: 1,
@@ -691,7 +699,7 @@ export class IndustryDetailComponent {
               type: 'donut',
 
             },
-            color: ['#37933c'],
+            colors: ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
             labels: literacyName,
             // theme: {
             //   palette: 'palette2',
