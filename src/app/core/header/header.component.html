@@ -6,20 +6,8 @@
             </div>
             <div>
                 <div class="row">
-                    <div class="navbar-link">
-                        <a class="p-2" href="/">Trang chủ</a>
-                    </div>
-                    <div class="navbar-link">
-                        <a class="p-2 selected" href="/markets">Thị trường</a>
-                    </div>
-                    <div class="navbar-link">
-                        <a class="p-2" href="/companies">Công ty</a>
-                    </div>
-                    <div class="navbar-link">
-                        <a class="p-2" href="industries">Vị trí công việc</a>
-                    </div>
-                    <div class="navbar-link">
-                        <a class="p-2" href="industries">Lĩnh vực</a>
+                    <div *ngFor="let item of menu" class="navbar-link">
+                        <a class="p-2" [ngClass]="{'selected': item.name === headerService.region}" [routerLink]="[item.name]">{{item.text}}</a>
                     </div>
                 </div>
             </div>

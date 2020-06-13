@@ -6,6 +6,7 @@ import { mucLuongTrungBinhTheoNganhNghe } from './config.muc-luong-trung-binh-th
 import { Component, OnInit } from '@angular/core';
 import { chartDoTuoiTrungBinh } from './config.chart-do-tuoi-trung-binh';
 import { chartCongTy } from './config.chart-cong-ty';
+import { HeaderService } from '../core/header/header.service';
 declare var ApexCharts: any;
 @Component({
   selector: 'app-region',
@@ -26,10 +27,12 @@ export class RegionComponent implements OnInit {
     {name: 'IV/2019', selected: false},
     {name: 'I/2020', selected: false},
   ];
-  constructor() { }
+  constructor(
+    public headerService: HeaderService
+  ) { }
 
   ngOnInit() {
-
+    this.headerService.region = '/region';
 
     new ApexCharts(document.querySelector('#chart-viec-lam-moi'), chartViecLamMoi).render();
     new ApexCharts(document.querySelector('#chart-cong-ty'), chartCongTy).render();

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../jobs.service';
+import { HeaderService } from 'src/app/core/header/header.service';
 
 @Component({
   selector: 'app-job-listing',
@@ -12,10 +13,12 @@ export class JobListingComponent implements OnInit {
   jobId: string;
 
 
-  constructor(private jobsService: JobsService) {
+  constructor(private jobsService: JobsService,
+    public headerService: HeaderService) {
 
   }
   ngOnInit() {
+    this.headerService.region = '/jobs';
     this.getTopJob('50');
     // this.jobsService.selectedJob.subscribe(jobId => this.jobId = jobId);
     // console.log(this.jobId);

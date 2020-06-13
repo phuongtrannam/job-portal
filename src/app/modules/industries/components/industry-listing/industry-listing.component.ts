@@ -3,6 +3,7 @@ import { IndustriesService } from '../../industries.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { HeaderService } from 'src/app/core/header/header.service';
 
 @Component({
   selector: 'app-industry-listing',
@@ -47,11 +48,13 @@ export class IndustryListingComponent implements OnInit {
   industryList = [];
 
   constructor( private industriesService: IndustriesService,
+    public headerService: HeaderService,
     private route: ActivatedRoute) {
 
   }
 
   ngOnInit() {
+    this.headerService.region = '/industries';
     this.getIndustryList();
   }
 

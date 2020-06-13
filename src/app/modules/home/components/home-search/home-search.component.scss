@@ -31,7 +31,7 @@
 
 .chon-quy-wrap {
     display: inline-block;
-    padding: 3px 5px;
+
     .item {
         display: inline-block;
         border-top: 1px solid #37933c;
@@ -40,6 +40,7 @@
         padding: 5px 15px;
         color: #37933c;
         cursor: pointer;
+        background: #fff;
     }
     .item:first-child {
         border-top-left-radius: 4px;
@@ -87,4 +88,12 @@
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
+}
+.search-form-inner .form-group {
+    border-left: 0px solid #fff;
+}
+.btn-theme {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
 }
