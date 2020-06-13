@@ -165,11 +165,11 @@ export class JobAnalysisComponent implements OnInit {
                 var chart = new ApexCharts(document.querySelector("#chart"), options);
                 chart.render();
               } else {
-                alert("Khu vực bạn chọn không có dữ liệu về lương trung bình");
+                // alert("Khu vực bạn chọn không có dữ liệu về lương trung bình");
               }
             });
         } else {
-          alert("Khu vực bạn chọn không có dữ liệu về số lượng việc làm");
+          // alert("Khu vực bạn chọn không có dữ liệu về số lượng việc làm");
         }
       });
   }
@@ -461,7 +461,7 @@ export class JobAnalysisComponent implements OnInit {
           const chart = new ApexCharts(document.querySelector("#nhu-cau-viec-lam-theo-do-tuoi"), options);
           chart.render();
         } else {
-          alert("Khu vực bạn chọn không có dữ liệu về độ tuổi");
+          // alert("Khu vực bạn chọn không có dữ liệu về độ tuổi");
         }
       });
   }
@@ -537,7 +537,7 @@ export class JobAnalysisComponent implements OnInit {
           const chart = new ApexCharts(document.querySelector("#nhu-cau-viec-lam-theo-trinh-do"), options);
           chart.render();
         } else {
-          alert("Khu vực bạn chọn không có dữ liệu về trình độ học vấn");
+          // alert("Khu vực bạn chọn không có dữ liệu về trình độ học vấn");
         }
       });
   }

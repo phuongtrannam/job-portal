@@ -29,6 +29,8 @@ export class IndustryDetailComponent {
 
 
   topCompanies = [];
+  jobDemandAndAverageSalaryTable = ['timestamp', 'numJob', 'salary'];
+  jobDemandAndAverageSalary = new MatTableDataSource<any>([]);
 
   jobDemandByIndustryTable = ['timestamp', 'numJob', 'growth'];
   jobDemandByIndustry = new MatTableDataSource<any>([]);
@@ -63,12 +65,24 @@ export class IndustryDetailComponent {
   }
 
   onCitySelected(selectedCityId) {
-    // console.log('### Trigger');
-    // console.log(this.selectedCity);
-    // console.log(selectedCityId);
     this.selectedCity = selectedCityId;
-    // console.log(this.selectedCity);
+    console.log("this.selectedCity " + this.selectedCity);
+    this.showJobDemandAndAverageSalary(this.selectedIndustryId, this.selectedCity);
+    this.showTopHiringCompany(this.selectedIndustryId, this.selectedCity);
+    this.showTopHiringJob(this.selectedIndustryId, this.selectedCity);
+    this.showHighestSalaryJob(this.selectedIndustryId, this.selectedCity);
+    this.showJobDemandByAge(this.selectedIndustryId, this.selectedCity);
+    this.showJobDemandByLiteracy(this.selectedIndustryId, this.selectedCity);
   }
+
+  // ngOnChanges() {
+  //   // create header using child_id
+  //   console.log(this.selectedCity);
+  //   this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
+  //   this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
+  //   this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
+
+  // }
 
   getCityList(): void {
     this.jobsService.getCityList()
@@ -87,8 +101,8 @@ export class IndustryDetailComponent {
   }
 
   constructor(private industriesService: IndustriesService,
-              private jobsService: JobsService,
-              private route: ActivatedRoute) {
+    private jobsService: JobsService,
+    private route: ActivatedRoute) {
     this.selectedIndustryId = this.route.snapshot.paramMap.get('id');
     console.log(this.selectedIndustryId + 'this.selectedIndustryId')
   }
@@ -96,20 +110,14 @@ export class IndustryDetailComponent {
   ngOnInit() {
     this.getCityList();
     this.getTopCompanies(this.selectedIndustryId, this.selectedCity);
-    this.showJobDemandByPeriodOfTime(this.selectedIndustryId, this.selectedCity);
+    this.showJobDemandAndAverageSalary(this.selectedIndustryId, this.selectedCity);
     this.showTopHiringCompany(this.selectedIndustryId, this.selectedCity);
+    this.showTopCompanyHighestSalary(this.selectedIndustryId, this.selectedCity);
     this.showTopHiringJob(this.selectedIndustryId, this.selectedCity);
     this.showHighestSalaryJob(this.selectedIndustryId, this.selectedCity);
     this.showJobDemandByAge(this.selectedIndustryId, this.selectedCity);
     this.showJobDemandByLiteracy(this.selectedIndustryId, this.selectedCity);
 
-    // this.showDotuoiGioitinh();
-    // this.showTrinhdoHocvan();
-    // this.showNhuCauTuyenDungTheoLinhVuc();
-    // // new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
-    // this.showNhuCauKVC();
-
-    // this.showDanhSachNhuCtyTheoQuy();
   }
 
   getTopCompanies(industryId: string, idProvince: string): void {
@@ -120,7 +128,126 @@ export class IndustryDetailComponent {
         this.topCompanies = data.result;
       });
   }
+  showJobDemandAndAverageSalary(industryId: string, idLocation: string): void {
+    this.industriesService.getJobDemandByPeriodOfTime(industryId, idLocation)
+      .subscribe((data: any) => {
+        console.log("getJobDemandByPeriodOfTime");
+        console.log(data);
+        // this.jobDemandByPeriodOfTime = data.result;
+        const dataTable = [];
+        if (Object.keys(data).length > 1) {
+          const milestones = data["timestamps"];
+          let numJob = [];
+          let growthJob = [];
+          let regionName = [];
+          if (this.selectedCity === 'P0') {
+            numJob = data['ALL'].data;
+            growthJob = data['ALL'].growth;
+            regionName = data['ALL'].name;
+          } else {
+            numJob = data[this.selectedIndustryId].data;
+            growthJob = data[this.selectedIndustryId].growth;
+            regionName = data[this.selectedIndustryId].name;
+          }
+          this.industriesService.getAverageSalary(industryId, idLocation)
+            .subscribe((data1: any) => {
+              // const milestones = data.timestamp;
+              console.log("getAverageSalary");
+              console.log(data1);
+              if (Object.keys(data1).length > 1) {
+                let salary = [];
+                let growthSalary = [];
+                if (this.selectedCity === 'P0') {
+                  salary = data['ALL'].data;
+                  growthSalary = data['ALL'].growth;
+                } else {
+                  salary = data[this.selectedIndustryId].data;
+                  growthSalary = data[this.selectedIndustryId].growth;
+                }
 
+                for (var i = 0; i < milestones.length; i++) {
+                  const obj = { timestamp: '', numJob: 0, salary: 0.0, growthJob: 0.0, growthSalary: 0.0 };
+                  obj.timestamp = milestones[i];
+                  obj.numJob = numJob[i];
+                  obj.salary = salary[i];
+                  obj.growthSalary = growthSalary[i];
+                  obj.growthJob = growthJob[i];
+                  dataTable.push(obj);
+
+                }
+                console.log("jobDemandAndAverageSalary");
+                console.log(dataTable);
+                this.jobDemandAndAverageSalary.data = dataTable;
+
+                const options = {
+                  series: [{
+                    name: 'Số lượng công việc',
+                    type: 'column',
+                    data: numJob
+                  }, {
+                    name: 'Lương trung bình',
+                    type: 'line',
+                    data: salary
+                  }],
+                  chart: {
+                    height: 350,
+                    type: 'line',
+                  },
+                  stroke: {
+                    width: [0, 4]
+                  },
+                  colors: ['#38933d', '#8dc971'],
+                  title: {
+                    text: 'Nhu cầu việc làm và lương trung bình',
+                    align: 'left',
+                    style: {
+                      fontSize: '18px',
+                    },
+                  },
+                  subtitle: {
+                    text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+                    align: 'left'
+                  },
+                  dataLabels: {
+                    enabled: true,
+                    enabledOnSeries: [1]
+                  },
+                  labels: milestones,
+                  xaxis: {
+                    labels: {
+                      show: true,
+                    },
+                    axisBorder: {
+                      show: false
+                    },
+                    axisTicks: {
+                      show: false,
+                    },
+                  },
+                  yaxis: [{
+                    title: {
+                      text: 'Nhu cầu tuyển dụng',
+                    },
+
+                  }, {
+                    opposite: true,
+                    title: {
+                      text: 'Mức lương trung bình'
+                    }
+                  }]
+                };
+
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+              } else {
+                // alert("Khu vực bạn chọn không có dữ liệu về lương trung bình");
+              }
+            });
+        } else {
+          // alert("Khu vực bạn chọn không có dữ liệu về số lượng việc làm");
+        }
+      });
+  }
 
   showJobDemandByPeriodOfTime(idIndustry: string, idLocation: string) {
     this.industriesService.getJobDemandByPeriodOfTime(idIndustry, idLocation)
@@ -131,11 +258,11 @@ export class IndustryDetailComponent {
         let numJob = [];
         let growthJob = [];
         let regionName = [];
-        if(this.selectedCity === 'P0'){
+        if (this.selectedCity === 'P0') {
           numJob = data['ALL'].data;
           growthJob = data['ALL'].growth;
           regionName = data['ALL'].name;
-        }else{
+        } else {
           numJob = data[this.selectedIndustryId].data;
           growthJob = data[this.selectedIndustryId].growth;
           regionName = data[this.selectedIndustryId].name;
@@ -154,48 +281,33 @@ export class IndustryDetailComponent {
         const options = {
           series: [{
             name: 'Số lượng công việc',
-            type: 'line',
             data: numJob
           }],
-          title: {
-            text: 'Nhu cầu việc làm theo thời gian tại ' + regionName,
-            align: 'left',
-            style: {
-              fontSize: '18px',
-              fontFamily: 'Nunito, Arial, sans-serif',
-              fontWeight: '600',
-            },
-          },
-          subtitle: {
-            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
-            align: 'left'
-          },
           chart: {
             height: 350,
-            type: 'line',
-            fontFamily: 'Helvetica, Arial, sans-serif',
+            type: 'bar',
             zoom: {
-              enabled: false,
+              enabled: false
             },
             toolbar: {
-              show: false,
+              show: false
             }
           },
           dataLabels: {
             enabled: true,
             textAnchor: 'start',
             formatter: val => {
-              return val + 'việc làm';
+              return val + 'công việc';
             },
             offsetX: 0,
             style: {
               fontSize: '12px',
-              colors: ['#36a800']
+              colors: ['#333']
             }
           },
           plotOptions: {
             bar: {
-              horizontal: true,
+              horizontal: false,
               startingShape: 'flat',
               endingShape: 'flat',
               columnWidth: '70%',
@@ -203,7 +315,7 @@ export class IndustryDetailComponent {
               distributed: false,
               // rangeBarOverlap: true,
               dataLabels: {
-                position: 'top', // top, center, bottom
+                position: 'bot', // top, center, bottom
               },
               colors: {
                 ranges: [{
@@ -219,17 +331,17 @@ export class IndustryDetailComponent {
           },
           xaxis: {
             categories: milestones,
-            position: 'bot',
+            position: 'top',
             axisBorder: {
-              show: false,
+              show: false
             },
             axisTicks: {
-              show: false,
+              show: false
             },
             labels: {
               show: true,
               formatter: val => {
-                return val + '';
+                return '';
               }
             },
             tooltip: {
@@ -238,20 +350,27 @@ export class IndustryDetailComponent {
           },
           yaxis: {
             axisBorder: {
-              show: false,
+              show: false
             },
             axisTicks: {
               show: false,
             }
           },
-
-          fill: {
-            color: "#37933c"
+          title: {
+            text: 'Nhu cầu tuyển dụng theo thời gian - ' + regionName,
+            align: 'left',
+            style: {
+              fontSize: '18px',
+              fontFamily: 'Nunito, Arial, sans-serif',
+              fontWeight: '600',
+            },
           },
-
-
+          subtitle: {
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+            align: 'left'
+          },
         };
-        let chart = new ApexCharts(document.querySelector("#chart_nhu_cau_tuyen_dung"), options);
+        let chart = new ApexCharts(document.querySelector('#nhu_cau_tuyen_dung'), options);
         chart.render();
       });
 
@@ -356,12 +475,118 @@ export class IndustryDetailComponent {
             },
           },
           subtitle: {
-            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[-1],
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
             align: 'left'
           },
         };
         const chart = new ApexCharts(document.querySelector('#nhu-cau_tuyen_dung_theo_cong_ty'), options);
         chart.render();
+      });
+  }
+
+  showTopCompanyHighestSalary(idIndustry: string, idLocation: string) {
+    this.industriesService.getTopCompanyHighestSalary(idIndustry, idLocation)
+      .subscribe((data: any) => {
+        console.log("getTopCompanyHighestSalary");
+        console.log(data);
+        // const milestones = data['timestamps'];
+        // const numJob = data[milestones[milestones.length - 1]].data;
+        // const companyObj = data[milestones[milestones.length - 1]].company;
+        // const companyName = companyObj.map(function (el) { return el.name; })
+        // const options = {
+        //   series: [{
+        //     name: 'Số lượng công việc',
+        //     data: numJob
+        //   }],
+        //   chart: {
+        //     height: 350,
+        //     type: 'bar',
+        //     zoom: {
+        //       enabled: false
+        //     },
+        //     toolbar: {
+        //       show: false
+        //     }
+        //   },
+        //   dataLabels: {
+        //     enabled: true,
+        //     textAnchor: 'start',
+        //     formatter: val => {
+        //       return val + '';
+        //     },
+        //     offsetX: 0,
+        //     style: {
+        //       fontSize: '12px',
+        //       colors: ['#36a800']
+        //     }
+        //   },
+        //   plotOptions: {
+        //     bar: {
+        //       horizontal: true,
+        //       startingShape: 'flat',
+        //       endingShape: 'flat',
+        //       columnWidth: '70%',
+        //       barHeight: '70%',
+        //       distributed: false,
+        //       // rangeBarOverlap: true,
+        //       dataLabels: {
+        //         position: 'bot', // top, center, bottom
+        //       },
+        //       colors: {
+        //         ranges: [{
+        //           from: 0,
+        //           to: 10000000000000,
+        //           color: '#37933c'
+        //         }],
+        //         backgroundBarColors: [],
+        //         backgroundBarOpacity: 1,
+        //         backgroundBarRadius: 0,
+        //       },
+        //     }
+        //   },
+        //   xaxis: {
+        //     categories: companyName,
+        //     position: 'top',
+        //     axisBorder: {
+        //       show: false
+        //     },
+        //     axisTicks: {
+        //       show: false
+        //     },
+        //     labels: {
+        //       show: true,
+        //       formatter: val => {
+        //         return '';
+        //       }
+        //     },
+        //     tooltip: {
+        //       enabled: true,
+        //     }
+        //   },
+        //   yaxis: {
+        //     axisBorder: {
+        //       show: false
+        //     },
+        //     axisTicks: {
+        //       show: false,
+        //     }
+        //   },
+        //   title: {
+        //     text: 'Các công ty có nhu cầu tuyển dụng lớn',
+        //     align: 'left',
+        //     style: {
+        //       fontSize: '18px',
+        //       fontFamily: 'Nunito, Arial, sans-serif',
+        //       fontWeight: '600',
+        //     },
+        //   },
+        //   subtitle: {
+        //     text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+        //     align: 'left'
+        //   },
+        // };
+        // const chart = new ApexCharts(document.querySelector('#cong_ty_tra_luong_cao'), options);
+        // chart.render();
       });
   }
   showTopHiringJob(idIndustry: string, idLocation: string) {
@@ -461,7 +686,7 @@ export class IndustryDetailComponent {
             },
           },
           subtitle: {
-            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[-1],
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
             align: 'left'
           },
         };
@@ -569,7 +794,7 @@ export class IndustryDetailComponent {
             },
           },
           subtitle: {
-            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[-1],
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
             align: 'left'
           },
         };

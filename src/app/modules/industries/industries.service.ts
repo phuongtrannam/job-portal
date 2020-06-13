@@ -50,7 +50,15 @@ export class IndustriesService {
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
-
+    getAverageSalary(industryIdParam: string, idProvinceParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+            locationId: idProvinceParam,
+        };
+        const specificPath = '/get_salary';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
     getTopHiringCompany(industryIdParam: string, idProvinceParam: string) {
         const postData = {
             industryId: industryIdParam,
@@ -60,7 +68,15 @@ export class IndustriesService {
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
-
+    getTopCompanyHighestSalary(industryIdParam: string, idProvinceParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+            locationId: idProvinceParam,
+        };
+        const specificPath = '/get_top_salary_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
     getTopHiringJob(industryIdParam: string, idProvinceParam: string) {
         const postData = {
             industryId: industryIdParam,
@@ -103,12 +119,5 @@ export class IndustriesService {
 
    
 
-    getAverageSalaryByPeriodOfTime(idJob: string) {
-        const postData = {
-            id: idJob,
-        };
-        const specificPath = '/get_average_salary_by_period_of_time';
-        const url = this.rootUrl + specificPath;
-        return this.http.post(url, postData, httpOptions);
-    }
+    
 } 

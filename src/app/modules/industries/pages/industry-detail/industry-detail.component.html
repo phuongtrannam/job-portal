@@ -69,37 +69,44 @@
         </div>
     </div>
 </div>
-<div class=" pb-3" id="jump1">
+<div class=" pb-3" >
     <div class="container">
         <h2>Các phân tích thị trường việc làm</h2>
         <div class="row row-cols-2">
+            
+        </div>
+    </div>
+</div>
+<div class=" pb-3" id="jump1">
+    <div class="container">
+        <div class="row row-cols-2">
             <div class="col ">
-                <div id="chart_nhu_cau_tuyen_dung"></div>
+                <div id="chart"></div>
             </div>
             <div class="col">
-                
-                <div class="chon-quy-wrap">
-                    <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
-                </div>
-                <table mat-table [dataSource]="jobDemandByIndustry" class="table-top-luong mt-3">
+                <table mat-table [dataSource]="jobDemandAndAverageSalary" class="table-top-luong mt-3">
                     <ng-container matColumnDef="timestamp">
                         <th mat-header-cell *matHeaderCellDef>Thời gian</th>
                         <td mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
                     </ng-container>
                     <ng-container matColumnDef="numJob">
-                        <th mat-header-cell *matHeaderCellDef>Số lượng</th>
-                        <td mat-cell *matCellDef="let element"> {{element.numJob}} </td>
-                    </ng-container>
-                    <ng-container matColumnDef="growth">
-                        <th mat-header-cell *matHeaderCellDef>Tăng trưởng</th>
-                        <td mat-cell *matCellDef="let element" [class.text-success]="element.growth >= 0"
-                            [class.text-danger]="element.growth < 0">
-                            <p [hidden]="element.growth < 0">+{{element.growth}}%</p>
-                            <p [hidden]="element.growth >= 0">{{element.growth}}%</p>
+                        <th mat-header-cell *matHeaderCellDef>Nhu cầu</th>
+                        <td mat-cell *matCellDef="let element" [class.text-success]="element.growthJob >= 0"
+                            [class.text-danger]="element.growthJob < 0">
+                            <p [hidden]="element.growthJob < 0">{{element.numJob}}(+{{element.growthJob}}%)</p>
+                            <p [hidden]="element.growthJob >= 0">{{element.numJob}}({{element.growthJob}}%)</p>
                         </td>
                     </ng-container>
-                    <tr mat-header-row *matHeaderRowDef="jobDemandByIndustryTable"></tr>
-                    <tr mat-row *matRowDef="let row; columns: jobDemandByIndustryTable;"></tr>
+                    <ng-container matColumnDef="salary">
+                        <th mat-header-cell *matHeaderCellDef>Lương TB</th>
+                        <td mat-cell *matCellDef="let element" [class.text-success]="element.growthSalary >= 0"
+                            [class.text-danger]="element.growthSalary < 0">
+                            <p [hidden]="element.growthSalary < 0">{{element.salary}}(+{{element.growthSalary}}%)</p>
+                            <p [hidden]="element.growthSalary >= 0">{{element.salary}}({{element.growthSalary}}%)</p>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="jobDemandAndAverageSalaryTable"></tr>
+                    <tr mat-row *matRowDef="let row; columns: jobDemandAndAverageSalaryTable;"></tr>
                 </table>
             </div>
         </div>
@@ -115,9 +122,10 @@
                 <div id="nhu-cau_tuyen_dung_theo_cong_ty"></div>
             </div>
             <div class="col">
-                
-                
-                
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
+                <div id="cong_ty_tra_luong_cao"></div>
             </div>
         </div>
         <div class="row row-cols-2">
