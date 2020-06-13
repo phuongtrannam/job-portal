@@ -13,5 +13,10 @@
     border-color: #82b440;
     background: #82b440;
 }
+.btn-theme {
+    color: #fff;
+    background-color: #36A800 !important;
+    border-color: #36A800 !important;
+}
 
 

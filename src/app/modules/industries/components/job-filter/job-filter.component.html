@@ -1,386 +1,118 @@
-<aside class="sidebar sidebar-left" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
-    <div class="close-sidebar-btn hidden-lg hidden-md"> <i class="ti-close"></i> <span>Close</span></div>
-    <aside class="widget widget_job_filter_widget">
-        <form method="get" action="https://apusthemes.com/wp-demo/careerup/job-list-v5/"
-            class="filter-job-form filter-listing-form">
+<aside class="sidebar widget">
+    <!-- <aside class="widget"> -->
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Từ khóa </label>
+            <input type="text" class="form-control" placeholder="vd. web developer">
+        </div>
+    </form>
 
-            <div class="form-group form-group-title  ">
-                <label for="job_filter_widget-2_title" class="heading-label">
-                    Tên công việc </label>
-                <div class="form-group-inner inner">
-                    <input type="text" name="filter-title" class="form-control" value="" id="job_filter_widget-2_title"
-                        placeholder="VD: Kĩ sư xây dựng">
-                </div>
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Khu vực </label>
+            <input type="text" class="form-control" placeholder="vd. Hà Nội">
+        </div>
+    </form>
+
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Ngành nghề
+            </label>
+            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *cdkVirtualFor="let item of industries">
+                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </form>
+    
+
+    <form class="filter-listing-form">
+        <div class="form-group ">
+            <label class="heading-label">
+                Mức lương </label>
+            <div class="row">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Từ:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9 " name= placeholder="triệu đồng">
             </div>
-            <!-- /.form-group -->
-            <div class="form-group form-group-center-location toggle-field ">
-                <label for="job_filter_widget-2_center-location" class="heading-label">
-                    Nơi làm việc <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </label>
-                <div class="form-group-inner inner">
-                    <div class="action-location">
-                        <input type="text" name="filter-center-location" class="form-control" value=""
-                            id="job_filter_widget-2_center-location" placeholder="VD: Hà Nội" autocomplete="off">
-                        <div class="leaflet-geocode-container"></div>
-                        <span class="find-me"></span>
-                        <span class="clear-location hidden"><i class="ti-close"></i></span>
-                    </div>
-
-                    <!-- <div class="search_distance_wrapper clearfix">
-                        <div class="search-distance-label">
-                            Radius: <span class="text-distance">50</span> miles </div>
-                        <div class="search-distance-wrapper">
-                            <input type="hidden" name="filter-distance" value="50">
-                            <div
-                                class="search-distance-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
-                                <div class="ui-slider-handle distance-custom-handle ui-state-default ui-corner-all"
-                                    data-value="50" style="left: 50%;"></div>
-                                <div class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min"
-                                    style="width: 50%;"></div>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
+            <div class="row" style="margin-top: 10px;">
+                <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Đến:</p>
+                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
             </div>
-            <!-- /.form-group -->
-            <div class="form-group form-group-category toggle-field  tax-checklist-field">
-                <label class="heading-label">
-                    Lĩnh vực <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </label>
-                <div class="form-group-inner">
-                    <div class="scroll-wrapper terms-list circle-check level-0" style="position: relative;">
-                        <ul class="terms-list circle-check level-0 scroll-content scroll-scrolly_visible"
-                            style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 195px;">
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Accounting / Finance" type="checkbox" name="filter-category[]"
-                                        value="59">
-                                    <label for="Accounting / Finance">Tài chính/ Kế toán</label><span
-                                        class="count">(3)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Construction / Facilities" type="checkbox" name="filter-category[]"
-                                        value="60">
-                                    <label for="Construction / Facilities">Xây dựng</label><span
-                                        class="count">(1)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Design &amp; Multimedia" type="checkbox" name="filter-category[]"
-                                        value="61">
-                                    <label for="Design &amp; Multimedia">Đa phương tiện</label><span
-                                        class="count">(2)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Education Training" type="checkbox" name="filter-category[]" value="62">
-                                    <label for="Education Training">Giáo dục</label><span
-                                        class="count">(3)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Health" type="checkbox" name="filter-category[]" value="63">
-                                    <label for="Health">Y tế</label><span class="count">(3)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Human Resource" type="checkbox" name="filter-category[]" value="64">
-                                    <label for="Human Resource">May mặc</label><span class="count">(1)</span>
-                                </div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Restaurant / Food Service" type="checkbox" name="filter-category[]"
-                                        value="65">
-                                    <label for="Restaurant / Food Service">Nhà hàng/ Khách sạn</label><span
-                                        class="count">(2)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Telecommunications" type="checkbox" name="filter-category[]" value="66">
-                                    <label for="Telecommunications">Viễn thông</label><span
-                                        class="count">(1)</span></div>
-                            </li>
-                        </ul>
-                        <div class="scroll-element scroll-x scroll-scrolly_visible" style="">
-                            <div class="scroll-element_outer">
-                                <div class="scroll-element_size"></div>
-                                <div class="scroll-element_track"></div>
-                                <div class="scroll-bar" style="width: 86px;"></div>
-                            </div>
-                        </div>
-                        <div class="scroll-element scroll-y scroll-scrolly_visible" style="">
-                            <div class="scroll-element_outer">
-                                <div class="scroll-element_size"></div>
-                                <div class="scroll-element_track"></div>
-                                <div class="scroll-bar" style="height: 129px; top: 0px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.form-group -->
-            <div class="form-group form-group-type toggle-field  tax-radios-field">
-                <label for="job_filter_widget-2_type" class="heading-label">
-                    Loại công việc <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </label>
+        </div>
+    </form>
 
-                <div class="form-group-inner">
-                    <div class="scroll-wrapper terms-list circle-check level-0" style="position: relative;">
-                        <ul class="terms-list circle-check level-0 scroll-content"
-                            style="height: auto; margin-bottom: 0px; margin-right: 0px; max-height: 180px;">
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Freelance" type="radio" name="filter-type" value="19">
-                                    <label for="Freelance">Bán thời gian</label><span class="count">(2)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Full Time" type="radio" name="filter-type" value="16">
-                                    <label for="Full Time">Toàn thời gian</label><span class="count">(7)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Internship" type="radio" name="filter-type" value="20">
-                                    <label for="Internship">Thực tập sinh</label><span class="count">(1)</span></div>
-                            </li>
-                            <li class="list-item">
-                                <div class="list-item-inner">
-                                    <input id="Part Time" type="radio" name="filter-type" value="17">
-                                    <label for="Part Time">Thời vụ</label><span class="count">(2)</span></div>
-                            </li>
-                           
-                        </ul>
-                        <div class="scroll-element scroll-x" style="">
-                            <div class="scroll-element_outer">
-                                <div class="scroll-element_size"></div>
-                                <div class="scroll-element_track"></div>
-                                <div class="scroll-bar" style="width: 100px;"></div>
-                            </div>
-                        </div>
-                        <div class="scroll-element scroll-y" style="">
-                            <div class="scroll-element_outer">
-                                <div class="scroll-element_size"></div>
-                                <div class="scroll-element_track"></div>
-                                <div class="scroll-bar" style="height: 100px;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /.form-group -->
-            <div class="clearfix form-group form-group-salary toggle-field ">
-                <label for="filter-salary" class="heading-label">
-                    Lương <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </label>
-                <div class="form-group-inner">
-                    <div class="salary_types-wrapper circle-check">
-                        <div class="list-item">
-                            <input type="radio" name="filter-salary-type" class="form-control" value="monthly"
-                                id="job_filter_widget-2_monthly">
-                            <label for="job_filter_widget-2_monthly">Tháng</label>
-                        </div>
-                        <div class="list-item">
-                            <input type="radio" name="filter-salary-type" class="form-control" value="weekly"
-                                id="job_filter_widget-2_weekly">
-                            <label for="job_filter_widget-2_weekly">Tuần</label>
-                        </div>
-                        <div class="list-item">
-                            <input type="radio" name="filter-salary-type" class="form-control" value="hourly"
-                                id="job_filter_widget-2_hourly">
-                            <label for="job_filter_widget-2_hourly">Giờ</label>
-                        </div>
-                        <div class="list-item">
-                            <input type="radio" name="filter-salary-type" class="form-control" value="yearly"
-                                id="job_filter_widget-2_yearly">
-                            <label for="job_filter_widget-2_yearly">Năm</label>
-                        </div>
-                    </div>
-                    <div class="from-to-wrapper">
-                        <span class="inner">
-                            <span class="from-text">$<span class="price-text">10</span></span>
-                            <span class="space">-</span>
-                            <span class="to-text">$<span class="price-text">180</span></span>
-                        </span>
-                    </div>
-                    <div class="salary-range-slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                        data-max="180" data-min="10">
-                        <div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 0%; width: 100%;">
-                        </div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"
-                            style="left: 0%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all"
-                            tabindex="0" style="left: 100%;"></span>
-                    </div>
-                    <input type="hidden" name="filter-salary-from" class="filter-from" value="10">
-                    <input type="hidden" name="filter-salary-to" class="filter-to" value="180">
-                </div>
-            </div>
-            <!-- /.form-group -->
-            <!-- <div class="form-group form-group-date-posted toggle-field ">
-                <label for="job_filter_widget-2_date-posted" class="heading-label">
-                    Date Posted <i class="fa fa-angle-down" aria-hidden="true"></i>
-                </label>
-
-                <div class="form-group-inner">
-                    <ul class="terms-list circle-check">
-                        <li class="list-item ">
-                            <input id="Last Hour" type="radio" name="filter-date-posted" value="1hour">
-                            <label for="Last Hour">Last Hour</label>
-
-                        </li>
-                        <li class="list-item ">
-                            <input id="Last 24 hours" type="radio" name="filter-date-posted" value="24hours">
-                            <label for="Last 24 hours">Last 24 hours</label>
-
-                        </li>
-                        <li class="list-item ">
-                            <input id="Last 7 days" type="radio" name="filter-date-posted" value="7days">
-                            <label for="Last 7 days">Last 7 days</label>
-
-                        </li>
-                        <li class="list-item ">
-                            <input id="Last 14 days" type="radio" name="filter-date-posted" value="14days">
-                            <label for="Last 14 days">Last 14 days</label>
-
-                        </li>
-                        <li class="list-item ">
-                            <input id="Last 30 days" type="radio" name="filter-date-posted" value="30days">
-                            <label for="Last 30 days">Last 30 days</label>
-
-                        </li>
-                        <li class="list-item ">
-                            <input id="All" type="radio" name="filter-date-posted" value="all" checked="checked">
-                            <label for="All">All</label>
-
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
-            <!-- /.form-group -->
-            <!-- <div class="form-group form-group-6 toggle-field hide-content">
-                <label class="heading-label">
-                    Lĩnh vực <i class="fa fa-angle-up" aria-hidden="true"></i>
-                </label>
-                <div class="form-group-inner">
-                    <ul class="terms-list circle-check">
-                        <li class="list-item ">
-                            <input id="Development" type="checkbox" name="filter-custom-industry[]" value="development">
-                            <label for="Development">Development</label>
-
-                            <span class="count">(1)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Management" type="checkbox" name="filter-custom-industry[]" value="management">
-                            <label for="Management">Management</label>
-
-                            <span class="count">(2)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Finance" type="checkbox" name="filter-custom-industry[]" value="finance">
-                            <label for="Finance">Finance</label>
-
-                            <span class="count">(9)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Html &amp; Css" type="checkbox" name="filter-custom-industry[]" value="html-css">
-                            <label for="Html &amp; Css">Html &amp; Css</label>
-
-                            <span class="count">(5)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Banking" type="checkbox" name="filter-custom-industry[]" value="banking">
-                            <label for="Banking">Banking</label>
-
-                            <span class="count">(3)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Designer Graphics" type="checkbox" name="filter-custom-industry[]"
-                                value="designer-graphics">
-                            <label for="Designer Graphics">Designer Graphics</label>
-
-                            <span class="count">(6)</span>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
-            <!-- /.form-group -->
-            <div class="form-group form-group-4 toggle-field hide-content">
-                <label class="heading-label">
-                    Bằng cấp <i class="fa fa-angle-up" aria-hidden="true"></i>
-                </label>
-                <div class="form-group-inner">
-                    <ul class="terms-list circle-check">
-                        <li class="list-item ">
-                            <input id="Certificate" type="checkbox" name="filter-custom-qualification[]"
-                                value="Certificate">
-                            <label for="Certificate">Certificate</label>
-
-                            <span class="count">(12)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Associate Degree" type="checkbox" name="filter-custom-qualification[]"
-                                value="Associate Degree">
-                            <label for="Associate Degree">Associate Degree</label>
-
-                            <span class="count">(4)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Bachelor Degree" type="checkbox" name="filter-custom-qualification[]"
-                                value="Bachelor Degree">
-                            <label for="Bachelor Degree">Bachelor Degree</label>
-
-                            <span class="count">(1)</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /.form-group -->
-            <!-- <div class="form-group form-group-4 toggle-field hide-content">
-                <label class="heading-label">
-                    Career Level <i class="fa fa-angle-up" aria-hidden="true"></i>
-                </label>
-                <div class="form-group-inner">
-                    <ul class="terms-list circle-check">
-                        <li class="list-item ">
-                            <input id="Manager" type="checkbox" name="filter-custom-career-level[]" value="manager">
-                            <label for="Manager">Manager</label>
-
-                            <span class="count">(4)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Officer" type="checkbox" name="filter-custom-career-level[]" value="officer">
-                            <label for="Officer">Officer</label>
-
-                            <span class="count">(4)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Student" type="checkbox" name="filter-custom-career-level[]" value="student">
-                            <label for="Student">Student</label>
-
-                            <span class="count">(9)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Executive" type="checkbox" name="filter-custom-career-level[]" value="executive">
-                            <label for="Executive">Executive</label>
-
-                            <span class="count">(1)</span>
-                        </li>
-                        <li class="list-item ">
-                            <input id="Others" type="checkbox" name="filter-custom-career-level[]" value="others">
-                            <label for="Others">Others</label>
-
-                            <span class="count">(7)</span>
-                        </li>
-                    </ul>
-                </div>
-            </div> -->
-            <!-- /.form-group -->
-
-            <div class="form-group">
-                <button class="button">Lọc kết quả <i class="flaticon-right-arrow"></i></button>
-            </div>
-            <!-- /.form-group -->
-        </form>
-
-    </aside>
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Loại công việc
+            </label>
+            <mat-list role="list">
+                <mat-list-item role="listitem" *ngFor="let x of jobTypes; let i = index">
+                    <mat-radio-button [checked]="i == defaultSelected" [value]="x.id" (change)="selection = $event.value">
+                        {{x.name}}
+                    </mat-radio-button>
+                </mat-list-item>
+            </mat-list>
+            <!-- <mat-card style="margin-top: 1rem"> -->
+            <!-- Currently selected: {{selection}} -->
+            <!-- </mat-card> -->
+        </div>
+    </form>
+    
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Học vấn
+            </label>
+            <!-- <mat-list role="list">
+                    <mat-list-item role="listitem" *ngFor="let item of literacies">
+                        <mat-checkbox [(ngModel)]="item.checked"></mat-checkbox>
+                        <p style = "margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list> -->
+            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *cdkVirtualFor="let item of literacies">
+                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </form>
+    
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
+                Cấp bậc
+            </label>
+            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+                <mat-list role="list">
+                    <mat-list-item role="listitem" *cdkVirtualFor="let item of levelCareer">
+                        <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
+                        <p style="margin-bottom: 6px; margin-left: 8px;">{{item.name}}</p>
+                        <br />
+                    </mat-list-item>
+                </mat-list>
+            </cdk-virtual-scroll-viewport>
+        </div>
+    </form>
+    
+    <form class="filter-listing-form">
+        <div class="form-group">
+            <button class="button">Lọc kết quả <i class="fa fa-chevron-right"></i></button>
+        </div>
+    </form>
+    
+    <!-- </aside> -->
 </aside>

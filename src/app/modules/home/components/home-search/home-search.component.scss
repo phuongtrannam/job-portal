@@ -23,41 +23,7 @@
     -webkit-align-items: center;
     align-items: center;
 }
-.static {
-    // background-color: #65c36b;
-    // background-image: -webkit-gradient(linear, left top, right top, from(#4fca57), to(#2d9032));
-    // background-image: linear-gradient(to right, #5aaf60, #36923b);
-    background: #ffffff;
-    padding: 10px;
-    border-radius: 6px;
-    border: none;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 8px;
-    .title {
-        color: #fff;
-        color: #333333;
-    }
-    .highlight {
-        font-size: 32px;
-        font-weight: 400;
-        color: #333333;
-        line-height: 70px;
-    }
-    .small-chart {
-        margin-top: -20px;
-    }
-    .grow {
-        // background: #37933c;
-        // color: #fff;
-        // border-radius: 3px;
-        // padding: 1px 3px 1px 4px;
 
-        background: #e2e2e2;
-        color: #37933c;
-        border-radius: 3px;
-        padding: 1px 3px 1px 4px;
-        font-weight: 500;
-    }
-}
 
 .bg-gray {
     background: #f3f3f3;
@@ -94,4 +60,31 @@
 }
 .employer-grid .featured:before {
     border-color: #36a800 #36a800 transparent transparent;
+}
+
+.my-title{
+    color: #262626;
+}
+.my-item{
+    color: #6d6d6d;
+}
+.btn-theme {
+    color: #fff;
+    background-color: #36A800 !important;
+    border-color: #36A800 !important;
+}
+
+.search-suggest[_ngcontent-c3] {
+    box-shadow: 0 0 14px #64908624;
+}
+.search-bar[_ngcontent-c3] {
+    height: 54px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 14px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 4px;
 }

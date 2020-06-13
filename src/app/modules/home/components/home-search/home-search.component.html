@@ -1,9 +1,28 @@
-<aside class="widget widget_apus_job_simple_search">
+<div class="container"> 
+    <br><br><br><br>
+    
     <div class="widget-job-search-form"
         style="background:url(https://apusthemes.com/wp-demo/careerup/wp-content/uploads/2019/05/top-filter.jpg)">
         <div class="container">
-            <form action="https://apusthemes.com/wp-demo/careerup/job-list-v5/" class="form-search layout1"
+            <div class="seach-bar seach-suggest"></div>
+            <form action="" class="form-search layout1"
                 method="GET">
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of menu; index as i" (click)="thayDoi(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
+                <div class="flex-middle-sm search-form-inner" style="margin-top: 10px;">
+                    <div class="form-group form-group-title " style="width: 70%;">
+                        <div class="form-group-inner inner">
+                            <i class="{{logo}}"></i>
+                            <input type="text" name="filter-title" class="form-control" value="" id="mDtwn_title"
+                                [placeholder]="ph">
+                        </div>
+                    </div>
+                    <div class="form-group form-group-search">
+                        <button class="btn-submit btn btn-block btn-theme" type="submit">Tìm kiếm</button>
+                    </div>
+                    <br>
+                </div>
                 <!-- <div class="flex-middle-sm search-form-inner" style = "margin-top: 32px;">
                     <div class="form-group form-group-title  ">
                         <div class="form-group-inner inner">
@@ -28,63 +47,29 @@
                         <button class="btn-submit btn btn-block btn-theme" type="submit">Search</button>
                     </div>
                 </div> -->
-                <div class="flex-middle-sm search-form-inner" style = "margin-top: 32px;">
-                    <div class="form-group form-group-title  ">
-                        <div class="form-group-inner inner">
-                            <i class="fa fa-search"></i>
-                            <input type="text" name="filter-title" class="form-control" value="" id="mDtwn_title"
-                                placeholder="Tên công việc">
-                        </div>
-                    </div>
-                    <!-- <div class="form-group form-group-center-location  ">
-                        <div class="form-group-inner inner">
-                            <i class="fa fa-map-marker"></i>
-                            <div class="action-location">
-                                <input type="text" name="filter-center-location" class="form-control" value=""
-                                    id="mDtwn_center-location" placeholder="Location" autocomplete="off">
-                                <div class="leaflet-geocode-container"></div>
-                                <span class="find-me"></span>
-                                <span class="clear-location hidden"><i class="ti-close"></i></span>
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="form-group form-group-category   tax-select-field">
-                        <div class="form-group-inner inner">
-                            <select name="filter-category" class="form-control select2-hidden-accessible"
-                                id="mDtwn_category" data-placeholder="All Categories" tabindex="-1" aria-hidden="true">
-                                <option value="">Ngành nghề</option>
-                                <option value="59"> Accounting / Finance(3)</option>
-                                <option value="60"> Construction / Facilities(1)</option>
-                                <option value="61"> Design &amp; Multimedia(2)</option>
-                                <option value="62"> Education Training(3)</option>
-                                <option value="63"> Health(3)</option>
-                                <option value="64"> Human Resource(1)</option>
-                                <option value="65"> Restaurant / Food Service(2)</option>
-                                <option value="66"> Telecommunications(1)</option>
-                            </select>
-                        </div>
-                    </div><!-- /.form-group -->
-                    <div class="form-group form-group-search">
-                        <button class="btn-submit btn btn-block btn-theme" type="submit">Tìm kiếm</button>
-                    </div>
-                </div>
-                <div class="content-trending">
+                
+                
+                <!-- <div class="content-trending">
                     <ul class="trending-keywords">
                         <li class="my-title">Công việc nổi bật:</li>
                         <li class="my-item"><a
-                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Designer">Thiết kế thời trang</a>
+                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Designer">Thiết
+                                kế thời trang</a>
                         </li>
                         <li class="my-item"><a
-                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Developer">Kĩ sư xây dựng</a>
+                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Developer">Kĩ sư
+                                xây dựng</a>
                         </li>
                         <li class="my-item"><a
-                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Web">Lập trình viên Web</a>
+                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Web">Lập trình
+                                viên Web</a>
                         </li>
                         <li class="my-item"><a
                                 href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=IOS">Bác sĩ</a>
                         </li>
                         <li class="my-item"><a
-                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=PHP">Kĩ sư cơ khí</a>
+                                href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=PHP">Kĩ sư cơ
+                                khí</a>
                         </li>
                         <li class="my-item"><a
                                 href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Senior">Senior</a>
@@ -93,8 +78,9 @@
                                 href="https://apusthemes.com/wp-demo/careerup/job-list-v5/?filter_title=Engineer">Engineer</a>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>
-</aside>
+
+</div>

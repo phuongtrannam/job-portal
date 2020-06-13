@@ -87,6 +87,7 @@ export class JobAnalysisComponent implements OnInit {
                   obj.growthSalary = growthSalary[i];
                   obj.growthJob = growthJob[i];
                   dataTable.push(obj);
+
                 }
                 console.log("jobDemandAndAverageSalary");
                 console.log(dataTable);
@@ -185,7 +186,7 @@ export class JobAnalysisComponent implements OnInit {
               show: false
             }
           },
-          colors: ['#37933c'],
+          colors: ['#36a800'],
           dataLabels: {
             enabled: false
           },
@@ -483,6 +484,7 @@ export class JobAnalysisComponent implements OnInit {
               width: '100%',
               height: 350,
               type: 'donut',
+
             },
             color: ['#37933c'],
             labels: literacies,
