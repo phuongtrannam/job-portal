@@ -4,11 +4,12 @@ import { IndustriesService } from '../../industries.service';
 @Component({
   selector: 'app-job-analysis',
   templateUrl: './job-analysis.component.html',
-  styleUrls: ['./job-analysis.component.css'],
+  styleUrls: ['./job-analysis.component.scss'],
   providers: [IndustriesService]
 })
 export class JobAnalysisComponent implements OnInit {
 
+  
 
   jobDemandByPeriodOfTimeTable = ['timestamp', 'province', 'value'];
   jobDemandByLiteracyTable = ['timestamp', 'literacy', 'value'];

@@ -10,7 +10,7 @@ declare var ApexCharts: any;
 @Component({
   selector: 'app-job-analysis',
   templateUrl: './job-analysis.component.html',
-  styleUrls: ['./job-analysis.component.css'],
+  styleUrls: ['./job-analysis.component.scss'],
   providers: [JobsService]
 })
 export class JobAnalysisComponent implements OnInit {
@@ -18,7 +18,12 @@ export class JobAnalysisComponent implements OnInit {
 
   @Input() selectedCity: string;
 
-
+  public quy: any = [
+    {name: 'III/2019', selected: false},
+    {name: 'IV/2019', selected: false},
+    {name: 'I/2020', selected: false},
+    {name: 'II/2020', selected: true},
+  ];
   jobDemandAndAverageSalaryTable = ['timestamp', 'numJob', 'salary'];
   jobDemandAndAverageSalary = new MatTableDataSource<any>([]);
 
@@ -38,6 +43,12 @@ export class JobAnalysisComponent implements OnInit {
     private route: ActivatedRoute) {
 
 
+  }
+  thayDoiQuy(index) {
+    this.quy.forEach(element => {
+      element.selected = false;
+    });
+    this.quy[index].selected = true;
   }
   ngOnInit() {
     // this.showJobDemandByPeriodOfTime('J1', 'P24');
@@ -486,7 +497,7 @@ export class JobAnalysisComponent implements OnInit {
               type: 'donut',
 
             },
-            color: ['#37933c'],
+            colors:  ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
             labels: literacies,
             // theme: {
             //   palette: 'palette2',
@@ -535,8 +546,8 @@ export class JobAnalysisComponent implements OnInit {
     this.jobsService.getRelatedJobs(idJob)
       .subscribe((data: any) => {
         console.log("getJobsRelated");
-        console.log(data.result);
-        this.relatedJobs = data.result;
+        console.log(data.result.slice(4));
+        this.relatedJobs = data.result.slice(4);
       });
   }
 
