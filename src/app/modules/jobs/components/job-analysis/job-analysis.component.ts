@@ -464,8 +464,8 @@ export class JobAnalysisComponent implements OnInit {
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
           const literacies = data.literacy;
-          const numJob = data[milestones[2]].data;
-          const growth = data[milestones[2]].growth;
+          const numJob = data[milestones[milestones.length -1]].data;
+          const growth = data[milestones[milestones.length -1]].growth;
           const dataTable = [];
 
           for (var i = 0; i < literacies.length; i++) {
