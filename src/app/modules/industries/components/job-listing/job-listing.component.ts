@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IndustriesService } from '../../industries.service';
+import { HeaderService } from 'src/app/core/header/header.service';
 
 @Component({
   selector: 'app-job-listing',
@@ -21,11 +22,13 @@ export class JobListingComponent implements OnInit {
         {id: "J1", name: "Lập trình viên", minSalary: "10", maxSalary:"20", jobType: "Freelance", numJob: "2150"},]
 
 
-  constructor() {
+  constructor(
+    public headerService: HeaderService
+  ) {
 
   }
   ngOnInit() {
-
+    this.headerService.region = '/industries';
   }
 
 }

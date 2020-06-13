@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../home.service';
+import { HeaderService } from 'src/app/core/header/header.service';
 
 @Component({
   selector: 'app-home-search',
@@ -25,11 +26,12 @@ export class HomeSearchComponent implements OnInit {
     this.logo=this.menu[index].logo;
     this.ph= this.menu[index].placehoder;
   }
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService,
+    public headerService: HeaderService) {
 
   }
   ngOnInit() {
-
+    this.headerService.region = '/';
   }
 
 }
