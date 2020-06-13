@@ -138,10 +138,15 @@
 </div> -->
 
 <div class="row content-job-detail" style="margin: auto;">
-    <div class="row"><h3 class="title-detail-job">Phân tích thị trường</h3></div>
-    <div class = "row">
+        <h3 class="title-detail-job">Phân tích thị trường</h3>
+        <div class="chon-quy-wrap">
+            <div class="item" *ngFor="let item of quy; index as i" (click)="thayDoiQuy(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+        </div>
+        <div class = "row">
         <div class="col-7 mt-3">
+            
             <div id="chart"></div>
+
         </div>
         <div class="col-5 mt-3">
             <table mat-table [dataSource]="jobDemandAndAverageSalary" class="table-top-luong mt-3">

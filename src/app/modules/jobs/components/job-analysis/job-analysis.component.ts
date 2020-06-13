@@ -10,7 +10,7 @@ declare var ApexCharts: any;
 @Component({
   selector: 'app-job-analysis',
   templateUrl: './job-analysis.component.html',
-  styleUrls: ['./job-analysis.component.css'],
+  styleUrls: ['./job-analysis.component.scss'],
   providers: [JobsService]
 })
 export class JobAnalysisComponent implements OnInit {
@@ -18,7 +18,12 @@ export class JobAnalysisComponent implements OnInit {
 
   @Input() selectedCity: string;
 
-
+  public quy: any = [
+    {name: 'II/2019', selected: true},
+    {name: 'III/2019', selected: false},
+    {name: 'IV/2019', selected: false},
+    {name: 'I/2020', selected: false},
+  ];
   jobDemandAndAverageSalaryTable = ['timestamp', 'numJob', 'salary'];
   jobDemandAndAverageSalary = new MatTableDataSource<any>([]);
 
@@ -38,6 +43,12 @@ export class JobAnalysisComponent implements OnInit {
     private route: ActivatedRoute) {
 
 
+  }
+  thayDoiQuy(index) {
+    this.quy.forEach(element => {
+      element.selected = false;
+    });
+    this.quy[index].selected = true;
   }
   ngOnInit() {
     // this.showJobDemandByPeriodOfTime('J1', 'P24');
@@ -481,12 +492,10 @@ export class JobAnalysisComponent implements OnInit {
           const options = {
             series: numJob,
             chart: {
-              width: '100%',
-              height: 350,
+              width: 530,
               type: 'donut',
-
             },
-            color: ['#37933c'],
+            colors: ['#36a800', '#00CCFF', '#00CCCC', '#33CC66', '#33CC33', '#77792e', '#9e9c00'],
             labels: literacies,
             // theme: {
             //   palette: 'palette2',
