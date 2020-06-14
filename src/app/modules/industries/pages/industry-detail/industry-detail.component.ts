@@ -26,8 +26,7 @@ export class IndustryDetailComponent {
     { name: 'Gear.Inc', soluong: 15, vitri: 'Hanoi', imgsrc: 'https://cdn.itviec.com/employers/gear-inc/logo/w170/5FJEvYXV6fCJt46bYY6ccgD2/gear-inc-logo.png' },
     { name: 'BKAV', soluong: 12, vitri: 'Đà Nẵng', imgsrc: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Bkav_logo.jpg' }
   ];
-
-
+  
   topCompanies = [];
 
   jobDemandByIndustryTable = ['timestamp', 'numJob', 'growth'];

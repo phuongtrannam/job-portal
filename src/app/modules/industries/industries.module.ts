@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { BrowserModule } from '@angular/platform-browser';
+
+
+
+import { RouterModule, Router } from '@angular/router';
+
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { IndustriesRoutingModule } from './industries-routing.module';
 import { IndustryListComponent } from './pages/industry-list/industry-list.component';
@@ -71,6 +77,7 @@ import {PlatformModule} from '@angular/cdk/platform';
 
 @NgModule({
   imports: [
+    RouterModule,
     CommonModule,
     IndustriesRoutingModule,
     MatTabsModule,
