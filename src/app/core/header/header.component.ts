@@ -10,11 +10,10 @@ import { HeaderService } from './header.service';
 export class HeaderComponent implements OnInit {
   public menu: any = [ 
     {name: '/', text: 'Trang chủ'},
-    {name: '/markets', text: 'Thị trường'},
-    {name: '/companies', text: 'Công ty'},
-    {name: '/jobs', text: 'Vị trí công việc'},
-    {name: '/industries', text: 'Lĩnh vực'},
     {name: '/region', text: 'Khu vực'},
+    {name: '/industries', text: 'Lĩnh vực'},
+    {name: '/jobs', text: 'Vị trí công việc'},
+    {name: '/companies', text: 'Công ty'}
   ];
   constructor(
     private router: Router,
