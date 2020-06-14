@@ -18,7 +18,7 @@ export class JobListingComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.headerService.region = '/jobs';
+    this.headerService.regions = '/jobs';
     this.getTopJob('50');
     // this.jobsService.selectedJob.subscribe(jobId => this.jobId = jobId);
     // console.log(this.jobId);

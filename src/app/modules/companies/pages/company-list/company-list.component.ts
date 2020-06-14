@@ -16,7 +16,7 @@ export class CompanyListComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.headerService.region = '/companies';
+    this.headerService.regions = '/companies';
     // this.showConfig();
     // this.getBusinessLinesOfTheCompany();
   }

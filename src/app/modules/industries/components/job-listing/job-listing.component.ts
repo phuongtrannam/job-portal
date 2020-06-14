@@ -28,7 +28,7 @@ export class JobListingComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.headerService.region = '/industries';
+    this.headerService.regions = '/industries';
   }
 
 }

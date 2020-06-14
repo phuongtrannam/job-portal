@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  {
-    path: 'region',
-    component: RegionComponent
-  },
+  // {
+  //   path: 'region',
+  //   component: RegionComponent
+  // },
   {
     path: 'companies',
     loadChildren: () => import('./modules/companies/companies.module').then(m => m.CompaniesModule),
@@ -16,6 +16,11 @@ const routes: Routes = [
   {
     path: 'jobs',
     loadChildren: () => import('./modules/jobs/jobs.module').then(m => m.JobsModule),
+    data: { preload: true }
+  },
+  {
+    path: 'regions',
+    loadChildren: () => import('./modules/regions/regions.module').then(m => m.RegionsModule),
     data: { preload: true }
   },
   {

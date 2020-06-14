@@ -16,7 +16,7 @@ export class MarketAnalysisComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.headerService.region = '/markets';
+    this.headerService.regions = '/markets';
   }
 
 }

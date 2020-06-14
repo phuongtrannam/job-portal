@@ -32,7 +32,7 @@ export class RegionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.headerService.region = '/region';
+    this.headerService.regions = '/region';
 
     new ApexCharts(document.querySelector('#chart-viec-lam-moi'), chartViecLamMoi).render();
     new ApexCharts(document.querySelector('#chart-cong-ty'), chartCongTy).render();

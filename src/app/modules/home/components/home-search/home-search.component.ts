@@ -31,7 +31,7 @@ export class HomeSearchComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.headerService.region = '/';
+    this.headerService.regions = '/';
   }
 
 }
