@@ -158,11 +158,11 @@ export class IndustryDetailComponent {
                 let salary = [];
                 let growthSalary = [];
                 if (this.selectedCity === 'P0') {
-                  salary = data['ALL'].data;
-                  growthSalary = data['ALL'].growth;
+                  salary = data1['ALL'].data;
+                  growthSalary = data1['ALL'].growth;
                 } else {
-                  salary = data[this.selectedIndustryId].data;
-                  growthSalary = data[this.selectedIndustryId].growth;
+                  salary = data1[this.selectedIndustryId].data;
+                  growthSalary = data1[this.selectedIndustryId].growth;
                 }
 
                 for (var i = 0; i < milestones.length; i++) {
