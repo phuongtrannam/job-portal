@@ -35,14 +35,14 @@
                                 <!-- <span class="text-theme">{{company.numberOfJob}}</span> Công việc </div> -->
                                 <span class="text-theme">50</span> Công việc </div>
                             <div class="employer-thumbnail">
-                                <a href="/companies/viettel">
+                                <a [routerLink]="['/companies', company.id]" rel="bookmark">
                                     <img width="180" height="75"
                                         src="https://thietkelogo.vn/wp-content/uploads/2015/12/viettel.png"
                                         class="attachment-full size-full wp-post-image" alt=""> </a>
                             </div>
                             <div class="employer-information">
                                 <div class="employer-title-wrapper">
-                                    <h2 class="employer-title"><a href="/companies/viettel"
+                                    <h2 class="employer-title"><a [routerLink]="['/companies', company.id]" rel="bookmark"
                                             rel="bookmark">{{company.name}}</a></h2>
                                 </div>
                                 <!-- <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
