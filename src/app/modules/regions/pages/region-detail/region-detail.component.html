@@ -9,11 +9,11 @@
                     <div class="title">Việc làm mới</div>
                     <div class="d-flex">
                         <div class="d-flex flex-column">
-                            <div class="highlight">30K</div>
-                            <div class="grow">+3.5%</div>
+                            <div class="highlight">{{newJob}}K</div>
+                            <div class="grow">{{newJobGrowth}}%</div>
                         </div>
                         <div class="">
-                            <div class="small-chart" id="chart-viec-lam-moi"></div>
+                            <div class="small-chart" style = "width: 165px !important;" id="chart-viec-lam-moi"></div>
                         </div>
                     </div>
                 </div>
@@ -23,11 +23,11 @@
                     <div class="title">Lương trung bình</div>
                     <div class="d-flex">
                         <div class="d-flex flex-column">
-                            <div class="highlight">25tr</div>
-                            <div class="grow">+3.5%</div>
+                            <div class="highlight">{{averageSalary}}tr</div>
+                            <div class="grow">+{{averageSalaryGrowth}}%</div>
                         </div>
                         <div class="">
-                            <div class="small-chart" id="chart-luong-trung-binh"></div>
+                            <div class="small-chart" style = "width: 190px !important;" id="chart-luong-trung-binh"></div>
                         </div>
                     </div>
                 </div>
@@ -37,11 +37,11 @@
                     <div class="title">Số công ty</div>
                     <div class="d-flex">
                         <div class="d-flex flex-column">
-                            <div class="highlight">950</div>
-                            <div class="grow">+0.5%</div>
+                            <div class="highlight">{{numCompany}}K</div>
+                            <div class="grow">+{{numCompanyGrowth}}%</div>
                         </div>
                         <div class="">
-                            <div class="small-chart" id="chart-cong-ty"></div>
+                            <div class="small-chart" style = "width: 165px !important;" id="chart-cong-ty"></div>
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,15 @@
             <div class="col-3">
                 <div class="d-flex flex-column static">
                     <div class="title">Độ tuổi trung bình</div>
-                    <div id="chart-do-tuoi-trung-binh"></div>
+                    <div class="d-flex">
+                        <div class="d-flex flex-column">
+                            <div class="highlight">{{numCompany}}K</div>
+                            <div class="grow">+{{numCompanyGrowth}}%</div>
+                        </div>
+                        <div class="">
+                            <div class="small-chart" style = "width: 165px !important;" id="chart-do-tuoi-trung-binh"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,20 +75,42 @@
 
     <div class="row">
         <div class="col-12"><h2>Phân bố việc làm theo ngành nghề</h2></div>
-        <div class="col-7">
-            <div id="muc-luong-trung-binh-theo-nganh-nghe"></div>
+        <div class="col-6">
+            <div id="nhu-cau-theo-nganh-nghe"></div>
         </div>
-        <div class="col-5">
-            <div id="luot-dang-tin-theo-nganh-nghe"></div>
+        <div class="col-6">
+            <div id="muc-luong-trung-binh-theo-nganh-nghe"></div>
         </div>
     </div>
     <div class="row">
         <div class="col-12"><h2>Phân bố việc làm theo vị trí công việc</h2></div>
-        <div class="col-7">
+        <div class="col-6">
+            <div id="nhu-cau-theo-vi-tri-cong-viec"></div>
+        </div>
+        <div class="col-6">
             <div id="muc-luong-trung-binh-theo-vi-tri-cong-viec"></div>
         </div>
-        <div class="col-5">
-            <div id="luot-dang-tin-theo-vi-tri-cong-viec"></div>
-        </div>
+        
     </div>
+    <div class="row">
+        <div class="col-12"><h2>Phân bố việc làm theo vị trí công ty</h2></div>
+        <div class="col-6">
+            <div id="nhu-cau-tuyen-dung-theo-cong-ty"></div>
+        </div>
+        <div class="col-6">
+            <div id="muc-luong-trung-binh-theo-cong-ty"></div>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-12"><h2>Phân bố việc làm theo nhân khẩu học</h2></div>
+        <div class="col-6">
+            <div id="nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh"></div>
+        </div>
+        <div class="col-6">
+            <div id="nhu-cau-tuyen-dung-theo-trinh-do-hoc-van"></div>
+        </div>
+        
+    </div>
+    
 </div>

@@ -8,6 +8,9 @@ export const chartDoTuoiTrungBinh = {
   dataLabels: {
     enabled: false
   },
+  legend: {
+    show: false
+  },
   responsive: [{
     breakpoint: 480,
     options: {
@@ -16,7 +19,8 @@ export const chartDoTuoiTrungBinh = {
         height: 150,
       },
       legend: {
-        position: 'bottom'
+        show: false,
+        position: 'top'
       }
     }
   }]

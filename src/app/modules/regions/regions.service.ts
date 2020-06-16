@@ -27,79 +27,79 @@ export class RegionsService {
 
     getDashboardData(locationIdParam: string) {
         const postData = {
-            numJob: locationIdParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_dashboard_data';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getAverageSalaryByIndustry(idLocationParam: string) {
+    getAverageSalaryByIndustry(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_average_salary_by_industry';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getJobDemandByIndustry(idLocationParam: string) {
+    getJobDemandByIndustry(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_job_demand_by_industry';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getHighestSalaryJobs(idLocationParam: string) {
+    getHighestSalaryJobs(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_highest_salary_jobs';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getHighestDemandJobs(idLocationParam: string) {
+    getHighestDemandJobs(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_highest_demand_jobs';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getHighestPayingCompanies(idLocationParam: string) {
+    getHighestPayingCompanies(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_highest_paying_companies';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getTopHiringCompanies(idLocationParam: string) {
+    getTopHiringCompanies(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_top_hiring_companies';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getJobDemandByAge(idLocationParam: string) {
+    getJobDemandByAge(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_job_demand_by_age';
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
 
-    getJobDemandByLiteracy(idLocationParam: string) {
+    getJobDemandByLiteracy(locationIdParam: string) {
         const postData = {
-            idLocation: idLocationParam,
+            locationId: locationIdParam,
         };
         const specificPath = '/get_job_demand_by_literacy';
         const url = this.rootUrl + specificPath;
