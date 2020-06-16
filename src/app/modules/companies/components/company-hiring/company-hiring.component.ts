@@ -27,9 +27,9 @@ export class CompanyHiringComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.showJobDemandByAgeChart('C188');
-    this.showJobDemandByPeriodOfTime('C188');
-    this.showJobDemandByLiteracy('C188');
+    this.showJobDemandByAgeChart('1');
+    this.showJobDemandByPeriodOfTime('1');
+    this.showJobDemandByLiteracy('1');
 
   }
   // showRecruitmentDemandChart(idCompany: string): void {
