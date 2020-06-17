@@ -33,6 +33,8 @@ export class RegionDetailComponent implements OnInit {
   averageAge = 0.0;
   averageAgeGrowth = 0.0;
 
+  dataJobDemandByIndustry;
+  dataAverageSalaryByIndustry;
   public quickTab: any = [
     { name: 'Theo ngành nghề', selected: true },
     { name: 'Theo vị trí công việc', selected: false },
@@ -45,6 +47,21 @@ export class RegionDetailComponent implements OnInit {
     { name: 'I/2020', selected: false },
     { name: 'II/2020', selected: true },
   ];
+
+  public timeIndustryChart: any = [
+    { name: 'III/2019', selected: false },
+    { name: 'IV/2019', selected: false },
+    { name: 'I/2020', selected: false },
+    { name: 'II/2020', selected: true },
+  ];
+
+  public timeJobChart: any = [
+    { name: 'III/2019', selected: false },
+    { name: 'IV/2019', selected: false },
+    { name: 'I/2020', selected: false },
+    { name: 'II/2020', selected: true },
+  ];
+
   jobDemandByAgeAndGenderTable = ['ageRange', 'male', 'female'];
   jobDemandByAgeAndGender = new MatTableDataSource<any>([]);
 
@@ -66,14 +83,14 @@ export class RegionDetailComponent implements OnInit {
     this.headerService.regions = '/regions';
     // this.getCityList();
     // this.getDashboardData(this.selectedCity);
-    // this.showJobDemandByIndustry(this.selectedCity);
-    // this.showAverageSalaryByIndustry(this.selectedCity);
-    // this.showHighestDemandJobs(this.selectedCity);
-    // this.showHighestSalaryJobs(this.selectedCity);
+    this.showJobDemandByIndustry(this.selectedCity);
+    this.showAverageSalaryByIndustry(this.selectedCity);
+    this.showHighestDemandJobs(this.selectedCity);
+    this.showHighestSalaryJobs(this.selectedCity);
     // this.showTopHiringCompanies(this.selectedCity);
     // this.showHighestPayingCompanies(this.selectedCity);
     // this.showJobDemandByAge(this.selectedCity);
-    this.showJobDemandByLiteracy(this.selectedCity);
+    // this.showJobDemandByLiteracy(this.selectedCity);
     new ApexCharts(document.querySelector('#chart-viec-lam-moi'), chartViecLamMoi).render();
     new ApexCharts(document.querySelector('#chart-cong-ty'), chartCongTy).render();
     new ApexCharts(document.querySelector('#chart-luong-trung-binh'), chartLuongTrungBinh).render();
@@ -123,7 +140,25 @@ export class RegionDetailComponent implements OnInit {
         // console.log(this.filteredOptions);
       });
   }
-
+  changeTimeIndustryChart(index) {
+    this.timeIndustryChart.forEach(element => {
+      element.selected = false;
+    });
+    this.timeIndustryChart[index].selected = true;
+    console.log(index);
+    this.reloadJobDemandByIndustry(index);
+    this.reloadAverageSalaryBYIndustry(index);
+  }
+  changeTimeJobChart(index) {
+    this.timeJobChart.forEach(element => {
+      element.selected = false;
+    });
+    this.timeJobChart[index].selected = true;
+    console.log(index);
+    // this.reloadJobDemandByIndustry(index);
+    // this.reloadAverageSalaryBYIndustry(index);
+    
+  }
   thayDoiQuy(index) {
     this.quy.forEach(element => {
       element.selected = false;
@@ -143,7 +178,7 @@ export class RegionDetailComponent implements OnInit {
         this.numCompany = Math.ceil(data.result.numCompany.data / 1000);
         this.numCompanyGrowth = data.result.numCompany.growth;
         this.averageAge = data.result.averageAge.data;
-        this.averageAgeGrowth =  data.result.averageAge.growth;
+        this.averageAgeGrowth = data.result.averageAge.growth;
       });
   }
   showJobDemandChart() {
@@ -220,9 +255,10 @@ export class RegionDetailComponent implements OnInit {
   showJobDemandByIndustry(locationId: string) {
     this.regionsService.getJobDemandByIndustry(locationId)
       .subscribe((data: any) => {
-        console.log("getJobDemandByIndustry");
+        console.log('getJobDemandByIndustry');
         console.log(data);
-        const milestones = data['timestamps'];
+        this.dataJobDemandByIndustry = data;
+        const milestones = data.timestamps;
         const numJob = data.result[milestones[milestones.length - 1]].numJob;
         const industryObj = data.result[milestones[milestones.length - 1]].industry;
         const industryName = industryObj.map(function (el) { return el.name; })
@@ -322,13 +358,115 @@ export class RegionDetailComponent implements OnInit {
         chart.render();
       });
   }
-
+  reloadJobDemandByIndustry(index: number) {
+    document.getElementById('nhu-cau-theo-nganh-nghe').innerHTML = '';
+    const milestones = this.dataJobDemandByIndustry.timestamps;
+    const numJob = this.dataJobDemandByIndustry.result[milestones[index]].numJob;
+    const industryObj = this.dataJobDemandByIndustry.result[milestones[index]].industry;
+    const industryName = industryObj.map(function (el) { return el.name; })
+    const options = {
+      series: [{
+        name: 'Số lượng công việc',
+        data: numJob
+      }],
+      chart: {
+        height: 350,
+        type: 'bar',
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        formatter: val => {
+          return val + '';
+        },
+        offsetX: 0,
+        style: {
+          fontSize: '12px',
+          colors: ['#36a800']
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          startingShape: 'flat',
+          endingShape: 'flat',
+          columnWidth: '70%',
+          barHeight: '70%',
+          distributed: false,
+          // rangeBarOverlap: true,
+          dataLabels: {
+            position: 'bot', // top, center, bottom
+          },
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 100000000,
+              color: '#37933c'
+            }],
+            backgroundBarColors: [],
+            backgroundBarOpacity: 1,
+            backgroundBarRadius: 0,
+          },
+        }
+      },
+      xaxis: {
+        categories: industryName,
+        position: 'top',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: val => {
+            return '';
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        }
+      },
+      title: {
+        text: 'Phân bố việc làm theo lĩnh vực nghề nghiệp',
+        align: 'left',
+        style: {
+          fontSize: '18px',
+          fontFamily: 'Nunito, Arial, sans-serif',
+          fontWeight: '600',
+        },
+      },
+      subtitle: {
+        text: 'Dữ liệu cập nhật quý ' + milestones[index],
+        align: 'left'
+      },
+    };
+    // const chart = new ApexCharts(document.querySelector('#nhu-cau-theo-nganh-nghe'), options);
+    // chart.render();
+    new ApexCharts(document.querySelector('#nhu-cau-theo-nganh-nghe'), options).render();
+  }
   showAverageSalaryByIndustry(locationId: string) {
     this.regionsService.getAverageSalaryByIndustry(locationId)
       .subscribe((data: any) => {
-        console.log("getAverageSalaryByIndustry");
+        console.log('getAverageSalaryByIndustry');
         console.log(data);
-        const milestones = data['timestamps'];
+        this.dataAverageSalaryByIndustry = data;
+        const milestones = data.timestamps;
         const numJob = data.result[milestones[milestones.length - 1]].numJob;
         const salary = data.result[milestones[milestones.length - 1]].salary;
         const industryObj = data.result[milestones[milestones.length - 1]].industry;
@@ -429,7 +567,108 @@ export class RegionDetailComponent implements OnInit {
         chart.render();
       });
   }
-
+  reloadAverageSalaryBYIndustry(index: number) {
+    document.getElementById('muc-luong-trung-binh-theo-nganh-nghe').innerHTML = '';
+    const milestones = this.dataAverageSalaryByIndustry.timestamps;
+    const numJob = this.dataAverageSalaryByIndustry.result[milestones[index]].numJob;
+    const salary = this.dataAverageSalaryByIndustry.result[milestones[index]].salary;
+    const industryObj = this.dataAverageSalaryByIndustry.result[milestones[index]].industry;
+    const industryName = industryObj.map(function (el) { return el.name; })
+    const options = {
+      series: [{
+        name: 'Mức lương trung bình',
+        data: salary
+      }],
+      chart: {
+        height: 350,
+        type: 'bar',
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        formatter: val => {
+          return val + '';
+        },
+        offsetX: 0,
+        style: {
+          fontSize: '12px',
+          colors: ['#36a800']
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          startingShape: 'flat',
+          endingShape: 'flat',
+          columnWidth: '70%',
+          barHeight: '70%',
+          distributed: false,
+          // rangeBarOverlap: true,
+          dataLabels: {
+            position: 'bot', // top, center, bottom
+          },
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 100000000,
+              color: '#37933c'
+            }],
+            backgroundBarColors: [],
+            backgroundBarOpacity: 1,
+            backgroundBarRadius: 0,
+          },
+        }
+      },
+      xaxis: {
+        categories: industryName,
+        position: 'top',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: val => {
+            return '';
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        }
+      },
+      title: {
+        text: 'Mức lương trung bình theo lĩnh vực nghề nghiệp',
+        align: 'left',
+        style: {
+          fontSize: '18px',
+          fontFamily: 'Nunito, Arial, sans-serif',
+          fontWeight: '600',
+        },
+      },
+      subtitle: {
+        text: 'Dữ liệu cập nhật quý ' + milestones[index],
+        align: 'left'
+      },
+    };
+    const chart = new ApexCharts(document.querySelector('#muc-luong-trung-binh-theo-nganh-nghe'), options);
+    chart.render();
+  }
   showHighestDemandJobs(locationId: string) {
     this.regionsService.getHighestDemandJobs(locationId)
       .subscribe((data: any) => {
@@ -756,9 +995,9 @@ export class RegionDetailComponent implements OnInit {
         console.log("getHighestPayingCompanies");
         console.log(data);
         const milestones = data['timestamps'];
-        const numJob = data.result[milestones[milestones.length - 1]].numJob.slice(0,10);
-        const salary = data.result[milestones[milestones.length - 1]].salary.slice(0,10);
-        const companyObj = data.result[milestones[milestones.length - 1]].company.slice(0,10);
+        const numJob = data.result[milestones[milestones.length - 1]].numJob.slice(0, 10);
+        const salary = data.result[milestones[milestones.length - 1]].salary.slice(0, 10);
+        const companyObj = data.result[milestones[milestones.length - 1]].company.slice(0, 10);
         const companyName = companyObj.map(function (el) { return el.name; })
         const options = {
           series: [{

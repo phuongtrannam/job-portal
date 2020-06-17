@@ -68,13 +68,16 @@
         <div class="item" *ngFor="let item of quickTab" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
     </div>
 
-    <div class="chon-quy-wrap">
-        <div class="item" *ngFor="let item of quy; index as i" (click)="thayDoiQuy(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
-    </div>
+    
     
 
     <div class="row">
-        <div class="col-12"><h2>Phân bố việc làm theo ngành nghề</h2></div>
+        <div class="col-12">
+            <!-- <h2>Phân bố việc làm theo ngành nghề</h2> -->
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeIndustryChart; index as i" (click)="changeTimeIndustryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
         <div class="col-6">
             <div id="nhu-cau-theo-nganh-nghe"></div>
         </div>
@@ -83,7 +86,12 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12"><h2>Phân bố việc làm theo vị trí công việc</h2></div>
+        <div class="col-12">
+            <!-- <h2>Phân bố việc làm theo vị trí công việc</h2> -->
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeJobChart; index as i" (click)="changeTimeJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
         <div class="col-6">
             <div id="nhu-cau-theo-vi-tri-cong-viec"></div>
         </div>
