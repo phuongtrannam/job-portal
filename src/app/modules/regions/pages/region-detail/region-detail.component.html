@@ -1,7 +1,26 @@
 <div class="bg-gray pb-3">
     <div class="container">
-        <h1>Quận Cầu Giấy</h1>
-        <h5>Thành phố Hà Nội / Việt Nam</h5>
+        <h1 *ngIf = "selectedCity != 'P0'">{{selectedCityName}} / Việt Nam</h1>
+        <h1 *ngIf = "selectedCity == 'P0'">Việt Nam</h1>
+        <div class = "row">
+            <div class="col-sm-4 col-xs-4">
+                <h4>Chọn khu vực phân tích</h4>
+            </div>
+            <div class="col-sm-8 col-xs-8">
+                <form class="example-form">
+                    <input type="text" [(ngModel)]="selectedCity" style="width: 100%;margin-top: 14px;margin-bottom: 14px;"
+                           placeholder="Chọn khu vực cần phân tích (Mặc định chọn khu vực toàn quốc)"
+                           [formControl]="control"
+                           [matAutocomplete]="auto" >
+                    <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn(filteredOptions | async)" >
+                      <mat-option (click)="onCitySelected(selectedCity)" *ngFor="let city of filteredOptions | async" 
+                                    [value]="city.id">
+                        {{city.name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </form>
+            </div>
+        </div>
         <app-main-slider></app-main-slider>
         <div class="row">
             <div class="col-3">
@@ -101,7 +120,12 @@
         
     </div>
     <div class="row">
-        <div class="col-12"><h2>Phân bố việc làm theo vị trí công ty</h2></div>
+        <div class="col-12">
+            <!-- <h2>Phân bố việc làm theo công ty</h2> -->
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeCompanyChart; index as i" (click)="changeCompanyChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
         <div class="col-6">
             <div id="nhu-cau-tuyen-dung-theo-cong-ty"></div>
         </div>
@@ -111,7 +135,12 @@
         
     </div>
     <div class="row">
-        <div class="col-12"><h2>Phân bố việc làm theo nhân khẩu học</h2></div>
+        <div class="col-12">
+            <h2>Phân bố việc làm theo nhân khẩu học</h2>
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeDemoGraphicChart; index as i" (click)="changeTimeDemographicChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
         <div class="col-6">
             <div id="nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh"></div>
         </div>
