@@ -8,6 +8,10 @@ const routes: Routes = [
     path: '',
     component: RegionDetailComponent
   },
+  {
+    path: ':id',
+    component: RegionDetailComponent
+  },
   // {
   //   path: ':id',
   //   component: JobDetailComponent,

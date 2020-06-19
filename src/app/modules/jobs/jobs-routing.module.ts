@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: ':id',
     component: JobDetailComponent,
+  },
+  {
+    path: 'search/:id',
+    component: JobListComponent,
   }
 ];
 

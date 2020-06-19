@@ -28,7 +28,14 @@ export class JobsService {
         const url = this.rootUrl + specificPath;
         return this.http.get(url);
     }
-
+    searchJob(queryContentParam: string) {
+        const postData = {
+            queryContent: queryContentParam,
+        };
+        const specificPath = '/basic_search_job';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
     getTopJob(numJobParam: string) {
         const postData = {
             numJob: numJobParam,

@@ -1,24 +1,63 @@
-<div class="container"> 
+<div class="container">
     <br><br><br><br>
-    
+
     <div class="widget-job-search-form">
         <div class="container">
             <div class="seach-bar seach-suggest"></div>
-            <form action="" class="form-search layout1"
-                method="GET">
+            <form action="" class="form-search layout1" method="GET">
                 <div class="chon-quy-wrap">
-                    <div class="item" *ngFor="let item of menu; index as i" (click)="thayDoi(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                    <div class="item" *ngFor="let item of menu; index as i" (click)="changeSearchType(i)"
+                        [ngClass]="{'selected': item.selected}">{{item.name}}</div>
                 </div>
                 <div class="flex-middle-sm search-form-inner">
                     <div class="form-group form-group-title " style="width: calc(100% - 147px);">
-                        <div class="form-group-inner inner">
+                        <!-- <div class="form-group-inner inner">
                             <i class="{{logo}}"></i>
                             <input type="text" name="filter-title" class="form-control" value="" id="mDtwn_title"
                                 [placeholder]="ph">
+                        </div> -->
+                        <div [hidden]="selectedType !== 1"  class="form-group-inner inner">
+                            <i class="{{logo}}"></i>
+                            <input type="text" [(ngModel)]="selectedCity"
+                                style="width: 100%;margin-top: 14px;margin-bottom: 14px;outline: none;"
+                                [placeholder]="ph"
+                                [formControl]="controlCity" [matAutocomplete]="auto1">
+                            <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFnCity(filteredOptionsCity | async)">
+                                <mat-option (click)="onCitySelected(selectedCity)"
+                                    *ngFor="let city of filteredOptionsCity | async" [value]="city.id">
+                                    {{city.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                        <div [hidden]="selectedType != 2"  class="form-group-inner inner">
+                            <i class="{{logo}}"></i>
+                            <input type="text" [(ngModel)]="selectedIndustry"
+                                style="width: 100%;margin-top: 14px;margin-bottom: 14px;outline: none;"
+                                [placeholder]="ph"
+                                [formControl]="controlIndustry" [matAutocomplete]="auto2">
+                            <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFnIndustry(filteredOptionsIndustry | async)">
+                                <mat-option (click)="onIndustrySelected(selectedIndustry)"
+                                    *ngFor="let industry of filteredOptionsIndustry | async" [value]="industry.id">
+                                    {{industry.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </div>
+                        <div [hidden]="selectedType !== 3 "  class="form-group-inner inner">
+                            <i class="{{logo}}"></i>
+                            <input type="text" name="filter-title" class="form-control" value="" id="mDtwn_title"
+                            [(ngModel)]="jobName" [placeholder]="ph">
+                        </div>
+                        <div [hidden]="selectedType !== 4"  class="form-group-inner inner">
+                            <i class="{{logo}}"></i>
+                            <input type="text" name="filter-title" class="form-control" value="" id="mDtwn_title"
+                            [(ngModel)]="companyName" [placeholder]="ph">
                         </div>
                     </div>
-                    <div class="form-group form-group-search">
-                        <button class="btn-submit btn btn-block btn-theme" type="submit">Tìm kiếm</button>
+                    <div [hidden]="selectedType !== 3" class="form-group form-group-search">
+                        <button class="btn-submit btn btn-block btn-theme" (click)="searchJob(jobName)" type="submit">Tìm kiếm</button>
+                    </div>
+                    <div [hidden]="selectedType !== 4" class="form-group form-group-search">
+                        <button class="btn-submit btn btn-block btn-theme" (click)="searchCompany(companyName)" type="submit">Tìm kiếm</button>
                     </div>
                     <br>
                 </div>
@@ -46,8 +85,8 @@
                         <button class="btn-submit btn btn-block btn-theme" type="submit">Search</button>
                     </div>
                 </div> -->
-                
-                
+
+
                 <!-- <div class="content-trending">
                     <ul class="trending-keywords">
                         <li class="my-title">Công việc nổi bật:</li>

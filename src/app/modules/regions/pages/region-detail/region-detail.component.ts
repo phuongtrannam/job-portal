@@ -10,6 +10,7 @@ import { chartViecLamMoi } from './config.chart-viec-lam-moi';
 import { MatTableDataSource } from '@angular/material/table';
 import { chartDoTuoiTrungBinh } from './config.chart-do-tuoi-trung-binh';
 import { chartCongTy } from './config.chart-cong-ty';
+import { ActivatedRoute } from '@angular/router';
 declare var ApexCharts: any;
 export interface City {
   name: string;
@@ -95,7 +96,8 @@ export class RegionDetailComponent implements OnInit {
   jobDemandByLiteracy = new MatTableDataSource<any>([]);
   constructor(private regionsService: RegionsService,
               private jobsService: JobsService,
-              public headerService: HeaderService) {
+              public headerService: HeaderService,
+              private route: ActivatedRoute) {
 
   }
   selectedCity = 'P0';
@@ -108,6 +110,11 @@ export class RegionDetailComponent implements OnInit {
   filteredOptions: Observable<City[]>;
   ngOnInit() {
     this.headerService.regions = '/regions';
+    this.selectedCity = this.route.snapshot.paramMap.get('id');
+    if(this.selectedCity == null){
+      this.selectedCity = 'P0';
+    }
+    console.log("daydaydaya" + this.selectedCity)
     this.getCityList();
     this.getDashboardData(this.selectedCity);
     this.showJobDemandByIndustry(this.selectedCity);
@@ -168,6 +175,9 @@ export class RegionDetailComponent implements OnInit {
         console.log('getCityList');
         console.log(data.result);
         this.cityList = data.result;
+        if(this.selectedCity != null || this.selectedCity !== 'P0'){
+          this.selectedCityName = this.cityList.find(x => x.id ===  this.selectedCity).name;
+        } 
         this.filteredOptions = this.control.valueChanges
           .pipe(
             startWith<string | City>(''),

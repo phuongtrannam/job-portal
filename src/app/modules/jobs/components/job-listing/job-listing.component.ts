@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JobsService } from '../../jobs.service';
 import { HeaderService } from 'src/app/core/header/header.service';
-
+import { ActivatedRoute } from '@angular/router';
+import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 @Component({
   selector: 'app-job-listing',
   templateUrl: './job-listing.component.html',
@@ -12,14 +13,22 @@ export class JobListingComponent implements OnInit {
   topJobSearch = [];
   jobId: string;
 
-
+  searchJobTerm = '';
   constructor(private jobsService: JobsService,
-    public headerService: HeaderService) {
+              public headerService: HeaderService,
+              private route: ActivatedRoute) {
 
   }
   ngOnInit() {
     this.headerService.regions = '/jobs';
-    this.getTopJob('50');
+    this.searchJobTerm = this.route.snapshot.paramMap.get('id');
+    console.log('this.searchJobTerm ' + this.searchJobTerm);
+    if(this.searchJobTerm == null ){
+      this.getTopJob('50');
+    }else{
+      this.searchJob(this.searchJobTerm)
+    }
+    
     // this.jobsService.selectedJob.subscribe(jobId => this.jobId = jobId);
     // console.log(this.jobId);
     // this.changeJobId();
@@ -35,10 +44,16 @@ export class JobListingComponent implements OnInit {
     this.jobsService.getTopJob(numJob)
       .subscribe((data: any) => {
         console.log("getTopJob");
-        // console.log(data.result);
-        // this.jobDemandByPeriodOfTime = data.result;
+        console.log(data.result);
         this.topJobSearch = data.result;
       });
   }
-
+  searchJob(jobNameParam: string ){
+    this.jobsService.searchJob(jobNameParam)
+      .subscribe((data: any) => {
+        console.log('searchJob');
+        console.log(data);
+        this.topJobSearch = data.result;
+    });
+  }
 }
