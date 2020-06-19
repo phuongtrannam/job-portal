@@ -13,7 +13,8 @@
 <div class="bg-gray pb-3">
     <div class="container">
         <div class="inner-info">
-            <a class="text-theme type-job" href="https://apusthemes.com/wp-demo/careerup/job-type/part-time/">Full Time</a>
+            <h3 *ngIf = "selectedCity == 'P0'" class="text-theme type-job">Việt Nam</h3>
+            <h3 *ngIf = "selectedCity != 'P0'" class="text-theme type-job">{{selectedCityName}} / Việt Nam</h3>
             <div class="job-title-wrapper">
                 <h1 class="job-detail-title">{{jobInfo.name}}</h1> 
             </div>

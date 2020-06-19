@@ -66,9 +66,9 @@ export class JobAnalysisComponent implements OnInit {
   ngOnChanges() {
     // create header using child_id
     console.log(this.selectedCity);
-    this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
-    this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
-    this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
+    // this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
+    // this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
+    // this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
 
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompaniesService } from '../../companies.service';
 import { icon, latLng, LatLng, Layer, marker, tileLayer } from 'leaflet';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-company-info',
   templateUrl: './company-info.component.html',
@@ -37,23 +38,24 @@ export class CompanyInfoComponent implements OnInit {
   companyInfo = {};
   relatedCompanies = [];
   recentJobsByCompany = [];
-
-  constructor(private companiesService: CompaniesService) {
+  selectedJobId: string;
+  constructor(private companiesService: CompaniesService,
+              private route: ActivatedRoute) {
 
   }
   ngOnInit() {
-    this.addMarker();
-    this.showCompanyInfo('C188');
-    this.showBusinessLinesOfCompany('C188');
-    this.showRelatedCompanies('C188');
-    this.showRecentJobsByCompany('C188');
-    
+    // this.addMarker();
+    this.selectedJobId = this.route.snapshot.paramMap.get('id');
+    this.showCompanyInfo(this.selectedJobId);
+    this.showBusinessLinesOfCompany(this.selectedJobId);
+    this.showRelatedCompanies(this.selectedJobId);
+    this.showRecentJobsByCompany(this.selectedJobId);
   }
 
   showCompanyInfo(idCompany: string){
     this.companiesService.getCompanyInfo(idCompany)
       .subscribe((data: any) => {
-        console.log("showCompanyInfo");
+        console.log('showCompanyInfo');
         console.log(data.result);
         this.companyInfo = data.result;
       });
@@ -62,18 +64,17 @@ export class CompanyInfoComponent implements OnInit {
   showBusinessLinesOfCompany(idCompany: string){
     this.companiesService.getBusinessLinesOfCompany(idCompany)
       .subscribe((data: any) => {
-        console.log("showBusinessLinesOfCompany");
+        console.log('showBusinessLinesOfCompany');
         console.log(data.result);
         this.businessLinesOfCompany = data.result;
       });
   }
 
-  
 
   showRelatedCompanies(idCompany: string){
     this.companiesService.getRelatedCompanies(idCompany)
       .subscribe((data: any) => {
-        console.log("showRelatedCompany");
+        console.log('showRelatedCompany');
         console.log(data.result);
         this.relatedCompanies = data.result;
       });
@@ -82,7 +83,7 @@ export class CompanyInfoComponent implements OnInit {
   showRecentJobsByCompany(idCompany: string){
     this.companiesService.getRecentJobsByCompany(idCompany)
       .subscribe((data: any) => {
-        console.log("showRecentJobByCompany");
+        console.log('showRecentJobByCompany');
         console.log(data.result);
         this.recentJobsByCompany = data.result;
       });
@@ -123,7 +124,5 @@ export class CompanyInfoComponent implements OnInit {
     this.center = latLng(this.lat, this.lng);
     this.zoom = this.formZoom;
   }
-
-  
 
 }

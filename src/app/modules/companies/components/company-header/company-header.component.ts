@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompaniesService } from '../../companies.service';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-company-header',
   templateUrl: './company-header.component.html',
@@ -9,11 +9,14 @@ import { CompaniesService } from '../../companies.service';
 })
 export class CompanyHeaderComponent implements OnInit {
   companyInfo = {};
-  constructor(private companiesService: CompaniesService) {
+  selectedJobId: string;
+  constructor(private companiesService: CompaniesService,
+              private route: ActivatedRoute) {
 
   }
   ngOnInit() {
-    this.showCompanyInfo('C188');
+    this.selectedJobId = this.route.snapshot.paramMap.get('id');
+    this.showCompanyInfo(this.selectedJobId);
   }
   showCompanyInfo(idCompany: string){
     this.companiesService.getCompanyInfo(idCompany)

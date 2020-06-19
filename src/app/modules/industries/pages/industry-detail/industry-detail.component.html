@@ -1,10 +1,3 @@
-<!-- <div class="bg-gray">
-    <div class="container">
-
-    </div>
-</div> -->
-
-
 <div class="pb-3 bg-gray">
     <div class="container">
         <h2>Các công ty lớn trong lĩnh vực </h2>
@@ -115,37 +108,37 @@
 <div class=" pb-3" id="jump2">
     <div class="container">
         <div class="row row-cols-2">
-            <div class="col ">
-                <div class="chon-quy-wrap">
-                    <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
-                </div>
-                <div id="nhu-cau_tuyen_dung_theo_cong_ty"></div>
-            </div>
-            <div class="col">
-                <div class="chon-quy-wrap">
-                    <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
-                </div>
-                <div id="cong_ty_tra_luong_cao"></div>
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeCompanyChart; index as i" (click)="changeTimeCompanyChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
             </div>
         </div>
         <div class="row row-cols-2">
             <div class="col ">
-                <div class="chon-quy-wrap">
-                    <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
-                </div>
+                <div id="nhu-cau_tuyen_dung_theo_cong_ty"></div>
+            </div>
+            <div class="col">
+                <div id="cong_ty_tra_luong_cao"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" pb-3" id="jump2">
+    <div class="container"> 
+        <div class="row row-cols-2">
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeJobChart; index as i" (click)="changeTimeJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="row row-cols-2">
+            <div class="col ">
                 <div id="nhu-cau_tuyen_dung_theo_cong_viec"></div>
             </div>
             <div class="col">
-                
-                <div class="chon-quy-wrap">
-                    <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
-                </div>
                 <div id="viec_duoc_tra_luong_cao"></div>
             </div>
         </div>
     </div>
 </div>
-
 <div class=" pb-3" id="jump3">
     <div class="container">
 
@@ -157,9 +150,8 @@
                     <div id="nhu-cau-viec-lam-theo-do-tuoi"></div>
                 </div>
                 <div class="col">
-                    
                     <div class="chon-quy-wrap">
-                        <div class="item" *ngFor="let item of quy_dotuoi_gioitinh; index as i" (click)="thayDoiQuy_dotuoi_gioitinh(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                        <div class="item" *ngFor="let item of timeAgeChart; index as i" (click)="changeTimeAgeChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
                     </div>
                     <table mat-table [dataSource]="jobDemandByAgeAndGender" class="table-top-luong mt-3">
                         <ng-container matColumnDef="ageRange">
@@ -191,7 +183,7 @@
                 </div>
                 <div class="col">
                     <div class="chon-quy-wrap">
-                        <div class="item" *ngFor="let item of quy_hocvan; index as i" (click)="thayDoiQuy_hocvan(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                        <div class="item" *ngFor="let item of timeLiteracyChart; index as i" (click)="changeTimeLiteracyChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
                     </div>
                     <table mat-table [dataSource]="jobDemandByLiteracy" class="table-top-luong mt-3">
                         <ng-container matColumnDef="literacy">

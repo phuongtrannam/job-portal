@@ -41,6 +41,7 @@ export class RegionDetailComponent implements OnInit {
   dataHighestPayingCompany;
   dataJobDemandByAge;
   dataJobDemandByLiteracy;
+  
   public quickTab: any = [
     { name: 'Theo ngành nghề', selected: true },
     { name: 'Theo vị trí công việc', selected: false },
@@ -74,12 +75,19 @@ export class RegionDetailComponent implements OnInit {
     { name: 'I/2020', selected: false },
     { name: 'II/2020', selected: true },
   ];
-  public timeDemoGraphicChart: any = [
+  public timeAgeAndGenderChart: any = [
     { name: 'III/2019', selected: false },
     { name: 'IV/2019', selected: false },
     { name: 'I/2020', selected: false },
     { name: 'II/2020', selected: true },
   ];
+  public timeLiteracyChart: any = [
+    { name: 'III/2019', selected: false },
+    { name: 'IV/2019', selected: false },
+    { name: 'I/2020', selected: false },
+    { name: 'II/2020', selected: true },
+  ];
+  
   jobDemandByAgeAndGenderTable = ['ageRange', 'male', 'female'];
   jobDemandByAgeAndGender = new MatTableDataSource<any>([]);
 
@@ -198,13 +206,20 @@ export class RegionDetailComponent implements OnInit {
     this.reloadHighestPayingCompany(index);
   }
 
-  changeTimeDemographicChart(index) {
-    this.timeDemoGraphicChart.forEach(element => {
+  changeAgeAndGenderChart(index) {
+    this.timeAgeAndGenderChart.forEach(element => {
       element.selected = false;
     });
-    this.timeDemoGraphicChart[index].selected = true;
+    this.timeAgeAndGenderChart[index].selected = true;
     console.log(index);
     this.reloadJobDemandByAge(index);
+  }
+  changeLiteracyChart(index) {
+    this.timeLiteracyChart.forEach(element => {
+      element.selected = false;
+    });
+    this.timeLiteracyChart[index].selected = true;
+    console.log(index);
     this.reloadJobDemandByLiteracy(index);
   }
   thayDoiQuy(index) {
@@ -1569,15 +1584,15 @@ export class RegionDetailComponent implements OnInit {
           const ageRanges = data.ageRange;
           const male = data[milestones[milestones.length - 1]].male;
           const female = data[milestones[milestones.length - 1]].female;
-          // const dataTable = [];
-          // for (var i = 0; i < ageRanges.length; i++) {
-          //   const obj = { ageRange: '', male: 0, female: 0.0 };
-          //   obj.ageRange = ageRanges[i];
-          //   obj.male = male[i];
-          //   obj.female = female[i];
-          //   dataTable.push(obj);
-          // }
-          // this.jobDemandByAgeAndGender.data = dataTable;
+          const dataTable = [];
+          for (let i = 0; i < ageRanges.length; i++) {
+            const obj = { ageRange: '', male: 0, female: 0.0 };
+            obj.ageRange = ageRanges[i];
+            obj.male = male[i];
+            obj.female = female[i];
+            dataTable.push(obj);
+          }
+          this.jobDemandByAgeAndGender.data = dataTable;
           const options = {
             series: [{
               name: ' Nam',
@@ -1651,15 +1666,15 @@ export class RegionDetailComponent implements OnInit {
       const ageRanges = this.dataJobDemandByAge.ageRange;
       const male = this.dataJobDemandByAge[milestones[index]].male;
       const female = this.dataJobDemandByAge[milestones[index]].female;
-      // const dataTable = [];
-      // for (var i = 0; i < ageRanges.length; i++) {
-      //   const obj = { ageRange: '', male: 0, female: 0.0 };
-      //   obj.ageRange = ageRanges[i];
-      //   obj.male = male[i];
-      //   obj.female = female[i];
-      //   dataTable.push(obj);
-      // }
-      // this.jobDemandByAgeAndGender.data = dataTable;
+      const dataTable = [];
+      for (let i = 0; i < ageRanges.length; i++) {
+        const obj = { ageRange: '', male: 0, female: 0.0 };
+        obj.ageRange = ageRanges[i];
+        obj.male = male[i];
+        obj.female = female[i];
+        dataTable.push(obj);
+      }
+      this.jobDemandByAgeAndGender.data = dataTable;
       const options = {
         series: [{
           name: ' Nam',
@@ -1742,7 +1757,7 @@ export class RegionDetailComponent implements OnInit {
           const growth = data[milestones[milestones.length - 1]].growth;
           const dataTable = [];
 
-          for (var i = 0; i < literacies.length; i++) {
+          for (let i = 0; i < literacies.length; i++) {
             const obj = { literacy: '', numJob: 0, growth: 0.0 };
             obj.literacy = literacies[i].name;
             obj.numJob = numJob[i];
@@ -1816,7 +1831,7 @@ export class RegionDetailComponent implements OnInit {
       const growth = this.dataJobDemandByLiteracy[milestones[index]].growth;
       const dataTable = [];
 
-      for (var i = 0; i < literacies.length; i++) {
+      for (let i = 0; i < literacies.length; i++) {
         const obj = { literacy: '', numJob: 0, growth: 0.0 };
         obj.literacy = literacies[i].name;
         obj.numJob = numJob[i];
