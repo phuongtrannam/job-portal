@@ -32,6 +32,7 @@ import { LuotDangTinTheoNganhNgheComponent } from './region/luot-dang-tin-theo-n
     LeafletModule.forRoot(),
     BrowserAnimationsModule,
     CountToModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

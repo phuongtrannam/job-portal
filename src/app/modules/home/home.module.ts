@@ -65,7 +65,6 @@ import {PlatformModule} from '@angular/cdk/platform';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MatTabsModule,

@@ -23,8 +23,15 @@ export class CompaniesService {
         const specificPath = '/get_company_list';
         const url = this.rootUrl + specificPath;
         return this.http.get(url);
+    }   
+    searchCompany(companyNameParam: string) {
+        const postData = {
+            companyName: companyNameParam,
+        };
+        const specificPath = '/search_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
     }
-
     getBusinessLinesOfCompany(idCompany: string) {
         const postData = {
             id: idCompany,

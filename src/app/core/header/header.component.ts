@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
     {name: '/jobs', text: 'Vị trí công việc'},
     {name: '/companies', text: 'Công ty'}
   ];
+  searchJobTerm = '';
   constructor(
     private router: Router,
     private activeRoute: ActivatedRoute,
@@ -28,6 +29,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+  searchJob(jobNameParam: string ){
+    this.router.navigate(['/jobs/search', jobNameParam ]);
   }
 
 }
