@@ -11,6 +11,26 @@ export class FooterComponent implements OnInit {
     from: 0,
     duration: 1
   };
+  countPostJob = {
+    countTo: 58142,
+    from: 0,
+    duration: 1
+  };
+  countJobSite = {
+    countTo: 5,
+    from: 0,
+    duration: 1
+  };
+  countCompany = {
+    countTo: 15617,
+    from: 0,
+    duration: 1
+  };
+  countJob = {
+    countTo: 12618,
+    from: 0,
+    duration: 1
+  };
   constructor() {
 
 
