@@ -116,19 +116,19 @@ export class RegionDetailComponent implements OnInit {
     }
     console.log("daydaydaya" + this.selectedCity)
     this.getCityList();
-    this.getDashboardData(this.selectedCity);
-    this.showJobDemandByIndustry(this.selectedCity);
-    this.showAverageSalaryByIndustry(this.selectedCity);
-    this.showHighestDemandJobs(this.selectedCity);
-    this.showHighestSalaryJobs(this.selectedCity);
-    this.showTopHiringCompanies(this.selectedCity);
-    this.showHighestPayingCompanies(this.selectedCity);
-    this.showJobDemandByAge(this.selectedCity);
-    this.showJobDemandByLiteracy(this.selectedCity);
-    new ApexCharts(document.querySelector('#chart-viec-lam-moi'), chartViecLamMoi).render();
-    new ApexCharts(document.querySelector('#chart-cong-ty'), chartCongTy).render();
-    new ApexCharts(document.querySelector('#chart-luong-trung-binh'), chartLuongTrungBinh).render();
-    new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
+    // this.getDashboardData(this.selectedCity);
+    // this.showJobDemandByIndustry(this.selectedCity);
+    // this.showAverageSalaryByIndustry(this.selectedCity);
+    // this.showHighestDemandJobs(this.selectedCity);
+    // this.showHighestSalaryJobs(this.selectedCity);
+    // this.showTopHiringCompanies(this.selectedCity);
+    // this.showHighestPayingCompanies(this.selectedCity);
+    // this.showJobDemandByAge(this.selectedCity);
+    // this.showJobDemandByLiteracy(this.selectedCity);
+    // new ApexCharts(document.querySelector('#chart-viec-lam-moi'), chartViecLamMoi).render();
+    // new ApexCharts(document.querySelector('#chart-cong-ty'), chartCongTy).render();
+    // new ApexCharts(document.querySelector('#chart-luong-trung-binh'), chartLuongTrungBinh).render();
+    // new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
 
     // new ApexCharts(document.querySelector('#muc-luong-trung-binh-theo-nganh-nghe'), mucLuongTrungBinhTheoNganhNghe).render();
     // new ApexCharts(document.querySelector('#luot-dang-tin-theo-nganh-nghe'), luotDangTinTheoNganhNghe).render();
@@ -175,16 +175,16 @@ export class RegionDetailComponent implements OnInit {
         console.log('getCityList');
         console.log(data.result);
         this.cityList = data.result;
-        if(this.selectedCity != null || this.selectedCity !== 'P0'){
-          this.selectedCityName = this.cityList.find(x => x.id ===  this.selectedCity).name;
-        } 
+        // if(this.selectedCity != null || this.selectedCity !== 'P0'){
+        //   this.selectedCityName = this.cityList.find(x => x.id ===  this.selectedCity).name;
+        // } 
         this.filteredOptions = this.control.valueChanges
           .pipe(
             startWith<string | City>(''),
             map(value => typeof value === 'string' ? value : value.name),
             map(name => name ? this._filter(name) : this.cityList.slice())
           );
-        // console.log(this.filteredOptions);
+        // console.log("this.filteredOptions" +this.filteredOptions);
       });
   }
   changeTimeIndustryChart(index) {
