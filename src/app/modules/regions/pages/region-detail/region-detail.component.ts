@@ -744,6 +744,8 @@ export class RegionDetailComponent implements OnInit {
 
   analysisRegion() {
     console.log(this.selectedCities);
+    this.isLoading = true;
+    this.numApi = 0;
     if (this.selectedCities.length === 1) {
       this.showChart = true;
       const cityId = this.selectedCities[0].id;

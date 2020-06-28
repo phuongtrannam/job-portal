@@ -102,7 +102,9 @@ export class IndustryDetailComponent {
     }
   }
   onCitySelected(selectedCityId) {
+    this.numApi = 0;
     this.selectedCity = selectedCityId;
+    this.isLoading = true;
     console.log('this.selectedCity ' + this.selectedCity);
     this.selectedCityName = this.cityList.find(x => x.id === selectedCityId).name;
     this.showChart = false;
