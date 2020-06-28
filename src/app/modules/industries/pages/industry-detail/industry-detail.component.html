@@ -1,6 +1,6 @@
-<div class="pb-3 bg-gray">
+<!-- <div class="pb-3 bg-gray">
     <div class="container">
-        <h2>Các công ty lớn trong lĩnh vực </h2>
+        <h2>Các công ty lớn trong lĩnh vực Công nghệ thông tin</h2>
         
         <div class="row row-cols-4">
             <div class="col" *ngFor="let cty of congtylon_linhvuc">
@@ -22,9 +22,6 @@
                                 <h2 class="employer-title"><a href="/companies/viettel" rel="bookmark">{{cty.name}}</a>
                                 </h2>
                             </div>
-                            <!-- <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
-                                class="text-theme">An toàn thông tin</a> -->
-
                             <div class="employer-location">
                                 <i class="flaticon-location-pin"></i>
                                 <a href="https://apusthemes.com/wp-demo/careerup/employer-location/new-york/">{{cty.vitri}}</a>
@@ -32,14 +29,17 @@
                         </div>
                     </div>
                 </article>                  
-
             </div>
-            
-
         </div>
     </div>
+</div> -->
+<div class="pb-3 bg-gray">
+    <div class="container">
+        <h1 *ngIf = "selectedCity != 'P0'">{{selectedIndustryName}}({{selectedCityName}})</h1>
+        <h1 *ngIf = "selectedCity == 'P0'">{{selectedIndustryName}}(Việt Nam)</h1>
+    </div>
 </div>
-<div class=" pb-3">
+<div class=" pb-3 bg-gray">
     <div class="container">
         <div class = "row">
             <div class="col-sm-4 col-xs-4">
@@ -62,14 +62,14 @@
         </div>
     </div>
 </div>
-<div class=" pb-3" >
+<!-- <div class=" pb-3" >
     <div class="container">
         <h2>Các phân tích thị trường việc làm</h2>
         <div class="row row-cols-2">
             
         </div>
     </div>
-</div>
+</div> -->
 <div class=" pb-3" id="jump1">
     <div class="container">
         <div class="row row-cols-2">
@@ -103,13 +103,40 @@
                 </table>
             </div>
         </div>
+        <div class="row row-cols-2" [hidden]="!showChart">
+            <div class="col ">
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of timeRegionNumJobChart; index as i" (click)="changeTimeRegionNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of timeRegionSalaryChart; index as i" (click)="changeTimeRegionSalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="row row-cols-2" [hidden]="!showChart">
+            <div class="col ">
+                <div id="nhu_cau_tuyen_dung_theo_khu_vuc"></div>
+            </div>
+            <div class="col">
+                <div id="khu_vuc_tra_luong_cao"></div>
+            </div>
+        </div>
     </div>
 </div>
 <div class=" pb-3" id="jump2">
     <div class="container">
         <div class="row row-cols-2">
-            <div class="chon-quy-wrap">
-                <div class="item" *ngFor="let item of timeCompanyChart; index as i" (click)="changeTimeCompanyChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            <div class="col ">
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of timeCompanyNumJobChart; index as i" (click)="changeTimeCompanyNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of timeCompanySalaryChart; index as i" (click)="changeTimeCompanySalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
             </div>
         </div>
         <div class="row row-cols-2">
@@ -125,8 +152,15 @@
 <div class=" pb-3" id="jump2">
     <div class="container"> 
         <div class="row row-cols-2">
-            <div class="chon-quy-wrap">
-                <div class="item" *ngFor="let item of timeJobChart; index as i" (click)="changeTimeJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            <div class="col ">
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of timeJobNumJobChart; index as i" (click)="changeTimeJobNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
+            </div>
+            <div class="col ">
+                <div class="chon-quy-wrap">
+                    <div class="item" *ngFor="let item of timeJobSalaryChart; index as i" (click)="changeTimeJobSalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                </div>
             </div>
         </div>
         <div class="row row-cols-2">

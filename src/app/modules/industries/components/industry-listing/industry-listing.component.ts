@@ -20,7 +20,7 @@ export class IndustryListingComponent implements OnInit {
   { id: 'J6', name: 'Angular Developer' }];
   private defaultSelected = 0;
   private selection: number;
-  private industryTypes = [{ id: 1, name: "fulltime" }, { id: 2, name: "freelance" }, { id: 3, name: "Parttime" }];
+  private industryTypes = [{ id: 1, name: "Toàn thời gian" }, { id: 2, name: "Bán thời gian" }, { id: 3, name: "Tự do" }];
   literacies = [
     { checked: false, name: "Đại học" },
     { checked: false, name: "Cao đẳng" },

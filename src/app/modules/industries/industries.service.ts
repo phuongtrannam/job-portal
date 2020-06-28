@@ -97,6 +97,24 @@ export class IndustriesService {
         return this.http.post(url, postData, httpOptions);
     }
 
+    getTopHiringRegion(industryIdParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+        };
+        const specificPath = '/get_top_hiring_region';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getHighestSalaryRegion(industryIdParam: string) {
+        const postData = {
+            industryId: industryIdParam,
+        };
+        const specificPath = '/get_highest_salary_region';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
     getJobDemandByAge(industryIdParam: string, idProvinceParam: string) {
         const postData = {
             industryId: industryIdParam,
