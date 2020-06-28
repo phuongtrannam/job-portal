@@ -70,7 +70,7 @@ export class JobDetailComponent implements OnInit {
     this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
     this.getRelatedJobs(this.selectedJobId);
     this.showTopHiringCompany(this.selectedJobId, this.selectedCity);
-    this.showTopCompanyHighestSalary(this.selectedJobId, this.selectedCity)
+    this.showTopCompanyHighestSalary(this.selectedJobId, this.selectedCity);
   }
 
   displayFn(cityList: City[]): (id: string) => string | null {
@@ -97,6 +97,7 @@ export class JobDetailComponent implements OnInit {
     this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
     this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
     this.showTopHiringCompany(this.selectedJobId, this.selectedCity);
+    this.showTopCompanyHighestSalary(this.selectedJobId, this.selectedCity);
     // console.log(this.selectedCity);
   }
 
