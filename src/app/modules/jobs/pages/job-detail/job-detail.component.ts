@@ -39,25 +39,24 @@ export class JobDetailComponent implements OnInit {
 
   selectedCity = 'P0';
   selectedCityName = '';
+  showChart = true;
   control = new FormControl();
   cityList: City[] = [{id: '1', name: 'Champs-Élysées'},
               {id: '2', name: 'Lombard Street'},
               {id: '3', name: 'Abbey Road'},
               {id: '4', name: 'Fifth Avenue'}];
+  dataTopHiringRegion;
+  dataHighestSalaryRegion;
+  dataTopHiringCompany;
+  dataHighestSalaryCompany;
   dataJobDemandByAge;
   dataJobDemandByLiteracy;
-  public timeAgeChart: any = [
-    { name: 'III/2019', selected: false },
-    { name: 'IV/2019', selected: false },
-    { name: 'I/2020', selected: false },
-    { name: 'II/2020', selected: true },
-  ];
-  public timeLiteracyChart: any = [
-    { name: 'III/2019', selected: false },
-    { name: 'IV/2019', selected: false },
-    { name: 'I/2020', selected: false },
-    { name: 'II/2020', selected: true },
-  ];
+  public timeAgeChart: any = [];
+  public timeLiteracyChart: any = [];
+  public timeRegionNumJobChart: any = [];
+  public timeRegionSalaryChart: any = [];
+  public timeCompanyNumJobChart: any = [];
+  public timeCompanySalaryChart: any = [];
   jobInfo = {name: '', minSalary: '', maxSalary: '', numJob: 0};
   filteredOptions: Observable<City[]>;
   ngOnInit() {
@@ -65,9 +64,13 @@ export class JobDetailComponent implements OnInit {
     this.selectedJobId = this.route.snapshot.paramMap.get('id');
     this.jobInfoHeader(this.selectedJobId);
     this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
+    this.showTopHiringRegion(this.selectedJobId);
+    this.showHighestSalaryRegion(this.selectedJobId);
     this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
     this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
     this.getRelatedJobs(this.selectedJobId);
+    this.showTopHiringCompany(this.selectedJobId, this.selectedCity);
+    this.showTopCompanyHighestSalary(this.selectedJobId, this.selectedCity)
   }
 
   displayFn(cityList: City[]): (id: string) => string | null {
@@ -87,14 +90,52 @@ export class JobDetailComponent implements OnInit {
     // console.log('### Trigger');
     // console.log(this.selectedCity);
     // console.log(selectedCityId);
-    
+    this.showChart = false;
     this.selectedCity = selectedCityId;
     this.selectedCityName = this.cityList.find(x => x.id === selectedCityId).name;
     this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
     this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
     this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
+    this.showTopHiringCompany(this.selectedJobId, this.selectedCity);
     // console.log(this.selectedCity);
   }
+
+  changeTimeRegionNumJobChart(index) {
+    this.timeRegionNumJobChart.forEach(element => {
+      element.selected = false;
+    });
+    this.timeRegionNumJobChart[index].selected = true;
+    console.log(index);
+    this.reloadTopHiringRegion(index);
+  }
+
+  changeTimeRegionSalaryChart(index) {
+    this.timeRegionSalaryChart.forEach(element => {
+      element.selected = false;
+    });
+    this.timeRegionSalaryChart[index].selected = true;
+    console.log(index);
+    this.reloadHighestSalaryRegion(index);
+  }
+
+  changeTimeCompanyNumJobChart(index) {
+    this.timeCompanyNumJobChart.forEach(element => {
+      element.selected = false;
+    });
+    this.timeCompanyNumJobChart[index].selected = true;
+    console.log(index);
+    this.reloadTopHiringCompany(index);
+  }
+
+  changeTimeCompanySalaryChart(index) {
+    this.timeCompanySalaryChart.forEach(element => {
+      element.selected = false;
+    });
+    this.timeCompanySalaryChart[index].selected = true;
+    console.log(index);
+    this.reloadTopCompanyHighestSalary(index);
+  }
+
   changeTimeAgeChart(index) {
     this.timeAgeChart.forEach(element => {
       element.selected = false;
@@ -248,6 +289,16 @@ export class JobDetailComponent implements OnInit {
         this.dataJobDemandByAge = data; 
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
+          this.timeAgeChart = [];
+          let j = 0;
+          for(const time of milestones){
+            j++;
+            if ( j < milestones.length){
+              this.timeAgeChart.push({name: time, selected: false});
+            } else {
+              this.timeAgeChart.push({name: time, selected: true});
+            }
+          }
           const ageRanges = data.ageRange;
           const male = data[milestones[milestones.length -1]].male;
           const female = data[milestones[milestones.length -1]].female;
@@ -416,6 +467,16 @@ export class JobDetailComponent implements OnInit {
         this.dataJobDemandByLiteracy = data; 
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
+          this.timeLiteracyChart = [];
+          let j = 0;
+          for(const time of milestones){
+            j++;
+            if ( j < milestones.length){
+              this.timeLiteracyChart.push({name: time, selected: false});
+            } else {
+              this.timeLiteracyChart.push({name: time, selected: true});
+            }
+          }
           const literacies = data.literacy;
           const numJob = data[milestones[milestones.length -1]].data;
           const growth = data[milestones[milestones.length -1]].growth;
@@ -552,6 +613,878 @@ export class JobDetailComponent implements OnInit {
     } else {
       // alert("Khu vực bạn chọn không có dữ liệu về trình độ học vấn");
     }
+  }
+  showTopHiringRegion(idJob: string) {
+    document.getElementById('nhu_cau_tuyen_dung_theo_khu_vuc').innerHTML = '';
+    this.jobsService.getTopHiringRegion(idJob)
+      .subscribe((data: any) => {
+        console.log('getTopHiringRegion');
+        console.log(data);
+        this.dataTopHiringRegion = data;
+        const milestones = data.timestamps;
+        this.timeRegionNumJobChart = [];
+        let j = 0;
+        for(const time of milestones){
+          j++;
+          if ( j < milestones.length){
+            this.timeRegionNumJobChart.push({name: time, selected: false});
+          } else {
+            this.timeRegionNumJobChart.push({name: time, selected: true});
+          }
+        }
+        const numJob = data[milestones[milestones.length - 1]].data;
+        const companyObj = data[milestones[milestones.length - 1]].object;
+        const companyName = companyObj.map(function (el) { return el.name; })
+        const options = {
+          series: [{
+            name: 'Số lượng công việc',
+            data: numJob,
+          }],
+          chart: {
+            height: 350,
+            type: 'bar',
+            zoom: {
+              enabled: false
+            },
+            toolbar: {
+              show: false
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            textAnchor: 'start',
+            formatter: val => {
+              return val + '';
+            },
+            offsetX: 0,
+            style: {
+              fontSize: '12px',
+              colors: ['#36a800']
+            }
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              startingShape: 'flat',
+              endingShape: 'flat',
+              columnWidth: '70%',
+              barHeight: '70%',
+              distributed: false,
+              // rangeBarOverlap: true,
+              dataLabels: {
+                position: 'bot', // top, center, bottom
+              },
+              colors: {
+                ranges: [{
+                  from: 0,
+                  to: 10000000000000,
+                  color: '#37933c'
+                }],
+                backgroundBarColors: [],
+                backgroundBarOpacity: 1,
+                backgroundBarRadius: 0,
+              },
+            }
+          },
+          xaxis: {
+            categories: companyName,
+            position: 'top',
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false
+            },
+            labels: {
+              show: true,
+              formatter: val => {
+                return '';
+              }
+            },
+            tooltip: {
+              enabled: true,
+            }
+          },
+          yaxis: {
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false,
+            }
+          },
+          title: {
+            text: 'Các khu vực có nhu cầu tuyển dụng lớn',
+            align: 'left',
+            style: {
+              fontSize: '18px',
+              fontFamily: 'Nunito, Arial, sans-serif',
+              fontWeight: '600',
+            },
+          },
+          subtitle: {
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+            align: 'left'
+          },
+        };
+        const chart = new ApexCharts(document.querySelector('#nhu_cau_tuyen_dung_theo_khu_vuc'), options);
+        chart.render();
+      });
+  }
+  reloadTopHiringRegion(index: number){
+    document.getElementById('nhu_cau_tuyen_dung_theo_khu_vuc').innerHTML = '';
+    const milestones = this.dataTopHiringRegion.timestamps;
+    const numJob = this.dataTopHiringRegion[milestones[index]].data;
+    const companyObj = this.dataTopHiringRegion[milestones[index]].object;
+    const companyName = companyObj.map(function (el) { return el.name; })
+    const options = {
+      series: [{
+        name: 'Số lượng công việc',
+        data: numJob,
+      }],
+      chart: {
+        height: 350,
+        type: 'bar',
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        formatter: val => {
+          return val + '';
+        },
+        offsetX: 0,
+        style: {
+          fontSize: '12px',
+          colors: ['#36a800']
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          startingShape: 'flat',
+          endingShape: 'flat',
+          columnWidth: '70%',
+          barHeight: '70%',
+          distributed: false,
+          // rangeBarOverlap: true,
+          dataLabels: {
+            position: 'bot', // top, center, bottom
+          },
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 10000000000000,
+              color: '#37933c'
+            }],
+            backgroundBarColors: [],
+            backgroundBarOpacity: 1,
+            backgroundBarRadius: 0,
+          },
+        }
+      },
+      xaxis: {
+        categories: companyName,
+        position: 'top',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: val => {
+            return '';
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        }
+      },
+      title: {
+        text: 'Các khu vực có nhu cầu tuyển dụng lớn',
+        align: 'left',
+        style: {
+          fontSize: '18px',
+          fontFamily: 'Nunito, Arial, sans-serif',
+          fontWeight: '600',
+        },
+      },
+      subtitle: {
+        text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[index],
+        align: 'left'
+      },
+    };
+    const chart = new ApexCharts(document.querySelector('#nhu_cau_tuyen_dung_theo_khu_vuc'), options);
+    chart.render();
+  }
+  showHighestSalaryRegion(idJob: string) {
+    document.getElementById('khu_vuc_tra_luong_cao').innerHTML = '';
+    this.jobsService.getHighestSalaryRegion(idJob)
+      .subscribe((data: any) => {
+        console.log('getHighestSalaryRegion');
+        console.log(data);
+        this.dataHighestSalaryRegion = data;
+        const milestones = data.timestamps;
+        this.timeRegionSalaryChart = [];
+        let j = 0;
+        for(const time of milestones){
+          j++;
+          if ( j < milestones.length){
+            this.timeRegionSalaryChart.push({name: time, selected: false});
+          } else {
+            this.timeRegionSalaryChart.push({name: time, selected: true});
+          }
+        }
+        const numJob = data[milestones[milestones.length - 1]].data;
+        const companyObj = data[milestones[milestones.length - 1]].object;
+        const companyName = companyObj.map(function (el) { return el.name; })
+        const options = {
+          series: [{
+            name: 'Mức lương trung bình',
+            data: numJob
+          }],
+          chart: {
+            height: 350,
+            type: 'bar',
+            zoom: {
+              enabled: false
+            },
+            toolbar: {
+              show: false
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            textAnchor: 'start',
+            formatter: val => {
+              return val + '';
+            },
+            offsetX: 0,
+            style: {
+              fontSize: '12px',
+              colors: ['#36a800']
+            }
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              startingShape: 'flat',
+              endingShape: 'flat',
+              columnWidth: '70%',
+              barHeight: '70%',
+              distributed: false,
+              // rangeBarOverlap: true,
+              dataLabels: {
+                position: 'bot', // top, center, bottom
+              },
+              colors: {
+                ranges: [{
+                  from: 0,
+                  to: 10000000000000,
+                  color: '#37933c'
+                }],
+                backgroundBarColors: [],
+                backgroundBarOpacity: 1,
+                backgroundBarRadius: 0,
+              },
+            }
+          },
+          xaxis: {
+            categories: companyName,
+            position: 'top',
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false
+            },
+            labels: {
+              show: true,
+              formatter: val => {
+                return '';
+              }
+            },
+            tooltip: {
+              enabled: true,
+            }
+          },
+          yaxis: {
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false,
+            }
+          },
+          title: {
+            text: 'Các khu vực có mức lương trung bình cao',
+            align: 'left',
+            style: {
+              fontSize: '18px',
+              fontFamily: 'Nunito, Arial, sans-serif',
+              fontWeight: '600',
+            },
+          },
+          subtitle: {
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+            align: 'left'
+          },
+        };
+        const chart = new ApexCharts(document.querySelector('#khu_vuc_tra_luong_cao'), options);
+        chart.render();
+      });
+  }
+  reloadHighestSalaryRegion(index: number){
+    document.getElementById('khu_vuc_tra_luong_cao').innerHTML = '';
+    const milestones = this.dataHighestSalaryRegion.timestamps;
+    const numJob = this.dataHighestSalaryRegion[milestones[index]].data;
+    const companyObj = this.dataHighestSalaryRegion[milestones[index]].object;
+    const companyName = companyObj.map(function (el) { return el.name; })
+    const options = {
+      series: [{
+        name: 'Mức lương trung bình',
+        data: numJob
+      }],
+      chart: {
+        height: 350,
+        type: 'bar',
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        formatter: val => {
+          return val + '';
+        },
+        offsetX: 0,
+        style: {
+          fontSize: '12px',
+          colors: ['#36a800']
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          startingShape: 'flat',
+          endingShape: 'flat',
+          columnWidth: '70%',
+          barHeight: '70%',
+          distributed: false,
+          // rangeBarOverlap: true,
+          dataLabels: {
+            position: 'bot', // top, center, bottom
+          },
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 10000000000000,
+              color: '#37933c'
+            }],
+            backgroundBarColors: [],
+            backgroundBarOpacity: 1,
+            backgroundBarRadius: 0,
+          },
+        }
+      },
+      xaxis: {
+        categories: companyName,
+        position: 'top',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: val => {
+            return '';
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        }
+      },
+      title: {
+        text: 'Các khu vực có mức lương trung bình cao',
+        align: 'left',
+        style: {
+          fontSize: '18px',
+          fontFamily: 'Nunito, Arial, sans-serif',
+          fontWeight: '600',
+        },
+      },
+      subtitle: {
+        text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[index],
+        align: 'left'
+      },
+    };
+    const chart = new ApexCharts(document.querySelector('#khu_vuc_tra_luong_cao'), options);
+    chart.render();
+  }
+  showTopHiringCompany(idJob: string, idLocation: string) {
+    document.getElementById('nhu-cau_tuyen_dung_theo_cong_ty').innerHTML = '';
+    this.jobsService.getTopHiringCompanies(idJob, idLocation)
+      .subscribe((data: any) => {
+        console.log('getTopHiringCompanies');
+        console.log(data);
+        this.dataTopHiringCompany = data;
+        const milestones = data.timestamps;
+        this.timeCompanyNumJobChart = [];
+        let j = 0;
+        for(const time of milestones){
+          j++;
+          if ( j < milestones.length){
+            this.timeCompanyNumJobChart.push({name: time, selected: false});
+          } else {
+            this.timeCompanyNumJobChart.push({name: time, selected: true});
+          }
+        }
+        const numJob = data[milestones[milestones.length - 1]].data;
+        const companyObj = data[milestones[milestones.length - 1]].object;
+        const companyName = companyObj.map(function (el) { return el.name; })
+        const options = {
+          series: [{
+            name: 'Số lượng công việc',
+            data: numJob,
+          }],
+          chart: {
+            height: 350,
+            type: 'bar',
+            zoom: {
+              enabled: false
+            },
+            toolbar: {
+              show: false
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            textAnchor: 'start',
+            formatter: val => {
+              return val + '';
+            },
+            offsetX: 0,
+            style: {
+              fontSize: '12px',
+              colors: ['#36a800']
+            }
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              startingShape: 'flat',
+              endingShape: 'flat',
+              columnWidth: '70%',
+              barHeight: '70%',
+              distributed: false,
+              // rangeBarOverlap: true,
+              dataLabels: {
+                position: 'bot', // top, center, bottom
+              },
+              colors: {
+                ranges: [{
+                  from: 0,
+                  to: 10000000000000,
+                  color: '#37933c'
+                }],
+                backgroundBarColors: [],
+                backgroundBarOpacity: 1,
+                backgroundBarRadius: 0,
+              },
+            }
+          },
+          xaxis: {
+            categories: companyName,
+            position: 'top',
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false
+            },
+            labels: {
+              show: true,
+              formatter: val => {
+                return '';
+              }
+            },
+            tooltip: {
+              enabled: true,
+            }
+          },
+          yaxis: {
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false,
+            }
+          },
+          title: {
+            text: 'Các công ty có nhu cầu tuyển dụng lớn',
+            align: 'left',
+            style: {
+              fontSize: '18px',
+              fontFamily: 'Nunito, Arial, sans-serif',
+              fontWeight: '600',
+            },
+          },
+          subtitle: {
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+            align: 'left'
+          },
+        };
+        const chart = new ApexCharts(document.querySelector('#nhu-cau_tuyen_dung_theo_cong_ty'), options);
+        chart.render();
+      });
+  }
+  reloadTopHiringCompany(index: number){
+    document.getElementById('nhu-cau_tuyen_dung_theo_cong_ty').innerHTML = '';
+    const milestones = this.dataTopHiringCompany.timestamps;
+    const numJob = this.dataTopHiringCompany[milestones[index]].data;
+    const companyObj = this.dataTopHiringCompany[milestones[index]].object;
+    const companyName = companyObj.map(function (el) { return el.name; })
+    const options = {
+      series: [{
+        name: 'Số lượng công việc',
+        data: numJob,
+      }],
+      chart: {
+        height: 350,
+        type: 'bar',
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        formatter: val => {
+          return val + '';
+        },
+        offsetX: 0,
+        style: {
+          fontSize: '12px',
+          colors: ['#36a800']
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          startingShape: 'flat',
+          endingShape: 'flat',
+          columnWidth: '70%',
+          barHeight: '70%',
+          distributed: false,
+          // rangeBarOverlap: true,
+          dataLabels: {
+            position: 'bot', // top, center, bottom
+          },
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 10000000000000,
+              color: '#37933c'
+            }],
+            backgroundBarColors: [],
+            backgroundBarOpacity: 1,
+            backgroundBarRadius: 0,
+          },
+        }
+      },
+      xaxis: {
+        categories: companyName,
+        position: 'top',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: val => {
+            return '';
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        }
+      },
+      title: {
+        text: 'Các công ty có nhu cầu tuyển dụng lớn',
+        align: 'left',
+        style: {
+          fontSize: '18px',
+          fontFamily: 'Nunito, Arial, sans-serif',
+          fontWeight: '600',
+        },
+      },
+      subtitle: {
+        text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[index],
+        align: 'left'
+      },
+    };
+    const chart = new ApexCharts(document.querySelector('#nhu-cau_tuyen_dung_theo_cong_ty'), options);
+    chart.render();
+  }
+  showTopCompanyHighestSalary(idJob: string, idLocation: string) {
+    document.getElementById('cong_ty_tra_luong_cao').innerHTML = '';
+    this.jobsService.getTopHighestSalaryCompanies(idJob, idLocation)
+      .subscribe((data: any) => {
+        console.log('getTopHighestSalaryCompanies');
+        console.log(data);
+        this.dataHighestSalaryCompany = data;
+        const milestones = data.timestamps;
+        this.timeCompanySalaryChart = [];
+        let j = 0;
+        for(const time of milestones){
+          j++;
+          if ( j < milestones.length){
+            this.timeCompanySalaryChart.push({name: time, selected: false});
+          } else {
+            this.timeCompanySalaryChart.push({name: time, selected: true});
+          }
+        }
+        const numJob = data[milestones[milestones.length - 1]].data;
+        const companyObj = data[milestones[milestones.length - 1]].object;
+        const companyName = companyObj.map(function (el) { return el.name; })
+        const options = {
+          series: [{
+            name: 'Mức lương trung bình',
+            data: numJob
+          }],
+          chart: {
+            height: 350,
+            type: 'bar',
+            zoom: {
+              enabled: false
+            },
+            toolbar: {
+              show: false
+            }
+          },
+          dataLabels: {
+            enabled: true,
+            textAnchor: 'start',
+            formatter: val => {
+              return val + '';
+            },
+            offsetX: 0,
+            style: {
+              fontSize: '12px',
+              colors: ['#36a800']
+            }
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true,
+              startingShape: 'flat',
+              endingShape: 'flat',
+              columnWidth: '70%',
+              barHeight: '70%',
+              distributed: false,
+              // rangeBarOverlap: true,
+              dataLabels: {
+                position: 'bot', // top, center, bottom
+              },
+              colors: {
+                ranges: [{
+                  from: 0,
+                  to: 10000000000000,
+                  color: '#37933c'
+                }],
+                backgroundBarColors: [],
+                backgroundBarOpacity: 1,
+                backgroundBarRadius: 0,
+              },
+            }
+          },
+          xaxis: {
+            categories: companyName,
+            position: 'top',
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false
+            },
+            labels: {
+              show: true,
+              formatter: val => {
+                return '';
+              }
+            },
+            tooltip: {
+              enabled: true,
+            }
+          },
+          yaxis: {
+            axisBorder: {
+              show: false
+            },
+            axisTicks: {
+              show: false,
+            }
+          },
+          title: {
+            text: 'Các công ty có mức lương trung bình cao',
+            align: 'left',
+            style: {
+              fontSize: '18px',
+              fontFamily: 'Nunito, Arial, sans-serif',
+              fontWeight: '600',
+            },
+          },
+          subtitle: {
+            text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[milestones.length - 1],
+            align: 'left'
+          },
+        };
+        const chart = new ApexCharts(document.querySelector('#cong_ty_tra_luong_cao'), options);
+        chart.render();
+      });
+  }
+  reloadTopCompanyHighestSalary(index: number){
+    document.getElementById('cong_ty_tra_luong_cao').innerHTML = '';
+    const milestones = this.dataHighestSalaryCompany.timestamps;
+    const numJob = this.dataHighestSalaryCompany[milestones[index]].data;
+    const companyObj = this.dataHighestSalaryCompany[milestones[index]].object;
+    const companyName = companyObj.map(function (el) { return el.name; })
+    const options = {
+      series: [{
+        name: 'Mức lương trung bình',
+        data: numJob
+      }],
+      chart: {
+        height: 350,
+        type: 'bar',
+        zoom: {
+          enabled: false
+        },
+        toolbar: {
+          show: false
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        textAnchor: 'start',
+        formatter: val => {
+          return val + '';
+        },
+        offsetX: 0,
+        style: {
+          fontSize: '12px',
+          colors: ['#36a800']
+        }
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          startingShape: 'flat',
+          endingShape: 'flat',
+          columnWidth: '70%',
+          barHeight: '70%',
+          distributed: false,
+          // rangeBarOverlap: true,
+          dataLabels: {
+            position: 'bot', // top, center, bottom
+          },
+          colors: {
+            ranges: [{
+              from: 0,
+              to: 10000000000000,
+              color: '#37933c'
+            }],
+            backgroundBarColors: [],
+            backgroundBarOpacity: 1,
+            backgroundBarRadius: 0,
+          },
+        }
+      },
+      xaxis: {
+        categories: companyName,
+        position: 'top',
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: val => {
+            return '';
+          }
+        },
+        tooltip: {
+          enabled: true,
+        }
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false,
+        }
+      },
+      title: {
+        text: 'Các công ty có mức lương trung bình cao',
+        align: 'left',
+        style: {
+          fontSize: '18px',
+          fontFamily: 'Nunito, Arial, sans-serif',
+          fontWeight: '600',
+        },
+      },
+      subtitle: {
+        text: 'Dữ liệu cập nhật lần cuối quý ' + milestones[index],
+        align: 'left'
+      },
+    };
+    const chart = new ApexCharts(document.querySelector('#cong_ty_tra_luong_cao'), options);
+    chart.render();
   }
   getRelatedJobs(idJob: string): void {
     this.jobsService.getRelatedJobs(idJob)

@@ -10,7 +10,7 @@ import { JobsService } from '../../jobs.service';
 export class JobFilterComponent implements OnInit {
   private defaultSelected = 0;
   private selection: number;
-  private jobTypes = [{ id: 1, name: "fulltime" }, { id: 2, name: "freelance" }, { id: 3, name: "Parttime" }];
+  private jobTypes = [{ id: 1, name: "Toàn thời gian" }, { id: 2, name: "Bán thời gian" }, { id: 3, name: "Tự do" }];
   literacies = [
     { checked: false, name: "Đại học" },
     { checked: false, name: "Cao đẳng" },

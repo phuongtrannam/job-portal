@@ -98,10 +98,10 @@
         <div class="row content-job-detail" style="margin: auto;">
             <div class="row"><h3 class="title-detail-job">Phân tích thị trường</h3></div>
             <div class = "row">
-                <div class="col-7 mt-3">
+                <div class="col-6 mt-3">
                     <div id="chart"></div>
                 </div>
-                <div class="col-5 mt-3">
+                <div class="col-6 mt-3">
                    
                     <table mat-table [dataSource]="jobDemandAndAverageSalary" class="table-top-luong mt-3">
                         <ng-container matColumnDef="timestamp">
@@ -128,11 +128,68 @@
                         <tr mat-row *matRowDef="let row; columns: jobDemandAndAverageSalaryTable;"></tr>
                     </table>
                 </div>
-                
-                <div class="col-7 mt-3">
+                <div class=" pb-3" id="jump2">
+                    <div class="container">
+                        <div class="row row-cols-2" [hidden]="!showChart">
+                            <div class="col ">
+                                <div class="chon-quy-wrap">
+                                    <div class="item" *ngFor="let item of timeRegionNumJobChart; index as i" (click)="changeTimeRegionNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                                </div>
+                            </div>
+                            <div class="col ">
+                                <div class="chon-quy-wrap">
+                                    <div class="item" *ngFor="let item of timeRegionSalaryChart; index as i" (click)="changeTimeRegionSalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-2" [hidden]="!showChart">
+                            <div class="col ">
+                                <div id="nhu_cau_tuyen_dung_theo_khu_vuc"></div>
+                            </div>
+                            <div class="col">
+                                <div id="khu_vuc_tra_luong_cao"></div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-2">
+                            <div class="col ">
+                                <div class="chon-quy-wrap">
+                                    <div class="item" *ngFor="let item of timeCompanyNumJobChart; index as i" (click)="changeTimeCompanyNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                                </div>
+                            </div>
+                            <div class="col ">
+                                <div class="chon-quy-wrap">
+                                    <div class="item" *ngFor="let item of timeCompanySalaryChart; index as i" (click)="changeTimeCompanySalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-cols-2">
+                            <div class="col ">
+                                <div id="nhu-cau_tuyen_dung_theo_cong_ty"></div>
+                            </div>
+                            <div class="col">
+                                <div id="cong_ty_tra_luong_cao"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-6 mt-3">
+                    <div class="chon-quy-wrap">
+                        <div class="item" *ngFor="let item of timeAgeChart; index as i" (click)="changeTimeAgeChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                    </div>
+                </div>
+                <div class="col-6 mt-3"></div>
+                <div class="col-6 mt-3">
+                    
+                    <div id="nhu-cau_tuyen_dung_theo_cong_ty"></div>
+                </div>
+                <div class="col-6 mt-3">
+                    
+                    <div id="nhu-cau_tuyen_dung_theo_cong_ty"></div>
+                </div> -->
+                <div class="col-6 mt-3">
                     <div id="nhu-cau-viec-lam-theo-do-tuoi"></div>
                 </div>
-                <div class="col-5 mt-3">
+                <div class="col-6 mt-3">
                     <div class="chon-quy-wrap">
                         <div class="item" *ngFor="let item of timeAgeChart; index as i" (click)="changeTimeAgeChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
                     </div>
@@ -156,10 +213,10 @@
                 </div>
                 
             
-                <div class="col-7 mt-3">
+                <div class="col-6 mt-3">
                     <div id="nhu-cau-viec-lam-theo-trinh-do"></div>
                 </div>
-                <div class="col-5 mt-3">
+                <div class="col-6 mt-3">
                     <div class="chon-quy-wrap">
                         <div class="item" *ngFor="let item of timeLiteracyChart; index as i" (click)="changeTimeLiteracyChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
                     </div>
@@ -194,7 +251,7 @@
                     <article *ngIf="i<5" class=" job-list-v1 job_listing type-job_listing status-publish has-post-thumbnail hentry job_listing_type-freelance job_listing_category-telecommunications job_listing_location-new-york is-featured is-urgent">
                         <div class=" flex-sm">
                             <div class="job-information flex-middle">
-                                <div class="col-12 mt-3 inner">
+                                <div class="col-6 mt-3 inner">
                                     <a class="type-job" href="https://apusthemes.com/wp-demo/careerup/job-type/freelance/">{{job.jobType}}</a>
                                     <div class="job-title-wrapper">
                                         <h2 class="job-title"><a [href]="'/jobs/' + job.id" rel="bookmark">{{job.name}}</a></h2> <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i class="fa fa-star text-theme"></i></span>
@@ -209,6 +266,9 @@
                                 <div class="ali-right hidden-xs">
                                     <a class="btn btn-theme btn-outline" [href]="'/jobs/' + job.id">Chi tiết</a>
                                 </div>
+                                <!-- <div class="ali-right hidden-xs">
+                                    <a class="btn btn-theme btn-outline" [href]="'/jobs/' + job.id">So sánh</a>
+                                </div> -->
                             </div>
                         </div>
                     </article>

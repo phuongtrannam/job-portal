@@ -64,6 +64,45 @@ export class JobsService {
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
+
+    getTopHiringCompanies(idJobParam: string, idLocationParam: string) {
+        const postData = {
+            idJob: idJobParam,
+            idLocation: idLocationParam,
+        };
+        const specificPath = '/get_top_hiring_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getTopHighestSalaryCompanies(idJobParam: string, idLocationParam: string) {
+        const postData = {
+            idJob: idJobParam,
+            idLocation: idLocationParam,
+        };
+        const specificPath = '/get_highest_salary_company';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getTopHiringRegion(idJobParam: string) {
+        const postData = {
+            idJob: idJobParam,
+        };
+        const specificPath = '/get_top_hiring_region';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getHighestSalaryRegion(idJobParam: string) {
+        const postData = {
+            idJob: idJobParam,
+        };
+        const specificPath = '/get_highest_salary_region';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
     getJobDemandByAge(idJobParam: string, idLocationParam: string) {
         const postData = {
             idJob: idJobParam,
