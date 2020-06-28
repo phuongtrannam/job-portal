@@ -12,7 +12,7 @@ import { chartDoTuoiTrungBinh } from './config.chart-do-tuoi-trung-binh';
 import { chartCongTy } from './config.chart-cong-ty';
 import { ActivatedRoute } from '@angular/router';
 import { SelectAutocompleteComponent } from 'mat-select-autocomplete';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 declare var ApexCharts: any;
 export interface City {
@@ -35,7 +35,7 @@ export class DialogCompare {
 
   constructor(
     public dialogRef: MatDialogRef<DialogCompare>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -48,7 +48,7 @@ export class DialogCompare {
     this.showAgeAndGenderChart1();
     this.showAgeAndGenderChart2();
   }
-  showCompareNumJob(){
+  showCompareNumJob() {
     const options = {
       series: [{
         name: 'Nhân viên kinh doanh',
@@ -149,7 +149,7 @@ export class DialogCompare {
     const chart = new ApexCharts(document.querySelector('#nhu-cau-theo-vi-tri-cong-viec-dialog'), options);
     chart.render();
   }
-  showCompareSalary(){
+  showCompareSalary() {
     const options = {
       series: [{
         name: 'Nhân viên kinh doanh',
@@ -251,14 +251,14 @@ export class DialogCompare {
     const chart = new ApexCharts(document.querySelector('#muc-luong-trung-binh-theo-vi-tri-cong-viec-dialog'), options);
     chart.render();
   }
-  showAgeAndGenderChart1(){
+  showAgeAndGenderChart1() {
     const options = {
       series: [{
         name: ' Nam',
-        data: [36,407,457,88,25,16584]
+        data: [36, 407, 457, 88, 25, 16584]
       }, {
         name: 'Nữ',
-        data: [23,339,367,76,19,15003]
+        data: [23, 339, 367, 76, 19, 15003]
       }],
       chart: {
         type: 'bar',
@@ -300,7 +300,7 @@ export class DialogCompare {
       },
       xaxis: {
         // type: 'datetime',
-        categories: [ '0-18', '18-25', '25-35', '35-50', '50+', 'Không xác định' ],
+        categories: ['0-18', '18-25', '25-35', '35-50', '50+', 'Không xác định'],
       },
       legend: {
         position: 'right',
@@ -314,14 +314,14 @@ export class DialogCompare {
     const chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh1'), options);
     chart.render();
   }
-  showAgeAndGenderChart2(){
+  showAgeAndGenderChart2() {
     const options = {
       series: [{
         name: ' Nam',
-        data: [0,2,2,2,0,182]
+        data: [0, 2, 2, 2, 0, 182]
       }, {
         name: 'Nữ',
-        data: [0,2,2,2,0,146]
+        data: [0, 2, 2, 2, 0, 146]
       }],
       chart: {
         type: 'bar',
@@ -363,7 +363,7 @@ export class DialogCompare {
       },
       xaxis: {
         // type: 'datetime',
-        categories: [ '0-18', '18-25', '25-35', '35-50', '50+', 'Không xác định' ],
+        categories: ['0-18', '18-25', '25-35', '35-50', '50+', 'Không xác định'],
       },
       legend: {
         position: 'right',
@@ -377,7 +377,7 @@ export class DialogCompare {
     const chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh2'), options);
     chart.render();
   }
-  showLiteracyChart1(){
+  showLiteracyChart1() {
     const options = {
       series: [514, 2939, 7147, 6613],
       chart: {
@@ -407,7 +407,7 @@ export class DialogCompare {
         },
       },
       subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020' ,
+        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
         align: 'left'
       },
       responsive: [{
@@ -426,7 +426,7 @@ export class DialogCompare {
     const chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-trinh-do-hoc-van1'), options);
     chart.render();
   }
-  showLiteracyChart2(){
+  showLiteracyChart2() {
     const options = {
       series: [1, 32, 46, 96],
       chart: {
@@ -456,7 +456,7 @@ export class DialogCompare {
         },
       },
       subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020' ,
+        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
         align: 'left'
       },
       responsive: [{
@@ -526,9 +526,9 @@ export class RegionDetailComponent implements OnInit {
   cityControl = new FormControl();
 
   cities: City[] = [{ id: '1', name: 'Hà Nội', selected: false },
-                  { id: '2', name: 'Lombard Street' , selected: false},
-                  { id: '3', name: 'Abbey Road' , selected: false},
-                  { id: '4', name: 'Fifth Avenue' , selected: false}];
+  { id: '2', name: 'Lombard Street', selected: false },
+  { id: '3', name: 'Abbey Road', selected: false },
+  { id: '4', name: 'Fifth Avenue', selected: false }];
   selectedCities: City[] = new Array<City>();
 
   filteredCities: Observable<City[]>;
@@ -551,7 +551,7 @@ export class RegionDetailComponent implements OnInit {
         if (index === 0) {
           displayValue = city.name;
         } else {
-          displayValue += ', ' + city.name ;
+          displayValue += ', ' + city.name;
         }
       });
     } else {
@@ -559,7 +559,7 @@ export class RegionDetailComponent implements OnInit {
     }
     return displayValue;
   }
-  
+
   optionClicked(event: Event, city: City) {
     event.stopPropagation();
     this.toggleSelection(city);
@@ -570,7 +570,7 @@ export class RegionDetailComponent implements OnInit {
     if (city.selected) {
       this.selectedCities.push(city);
     } else {
-      const i = this.selectedCities.findIndex(value => value.name === city.name );
+      const i = this.selectedCities.findIndex(value => value.name === city.name);
       this.selectedCities.splice(i, 1);
     }
 
@@ -597,7 +597,8 @@ export class RegionDetailComponent implements OnInit {
   dataHighestPayingCompany;
   dataJobDemandByAge;
   dataJobDemandByLiteracy;
-  
+
+  numApi = 0;
   public quickTab: any = [
     { name: 'Theo ngành nghề', selected: true },
     { name: 'Theo vị trí công việc', selected: false },
@@ -626,7 +627,7 @@ export class RegionDetailComponent implements OnInit {
   public timeCompanySalaryChart: any = [];
   public timeAgeAndGenderChart: any = [];
   public timeLiteracyChart: any = [];
-  
+
   jobDemandAndAverageSalaryTable = ['timestamp', 'numJob', 'salary'];
   jobDemandAndAverageSalary = new MatTableDataSource<any>([]);
 
@@ -636,10 +637,10 @@ export class RegionDetailComponent implements OnInit {
   jobDemandByLiteracyTable = ['literacy', 'numJob', 'growth'];
   jobDemandByLiteracy = new MatTableDataSource<any>([]);
   constructor(private regionsService: RegionsService,
-              private jobsService: JobsService,
-              public headerService: HeaderService,
-              private route: ActivatedRoute,
-              public dialog: MatDialog) {
+    private jobsService: JobsService,
+    public headerService: HeaderService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog) {
 
   }
   city1 = 'Hà Nội';
@@ -647,7 +648,7 @@ export class RegionDetailComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogCompare, {
       width: '80%',
-      data: {city1: this.city1, city2: this.city2}
+      data: { city1: this.city1, city2: this.city2 }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -656,7 +657,9 @@ export class RegionDetailComponent implements OnInit {
     });
   }
   showChart = true;
-  selectedCity = 'P0';
+  isLoading = true;
+  // selectedCity = 'P0';
+  selectedCity: string;
   selectedCityName = '';
   control = new FormControl();
   cityList: City[] = [{ id: '1', name: 'Champs-Élysées' },
@@ -667,19 +670,16 @@ export class RegionDetailComponent implements OnInit {
   ngOnInit() {
     this.headerService.regions = '/regions';
     this.selectedCity = this.route.snapshot.paramMap.get('id');
-    if(this.selectedCity == null){
+    if (this.selectedCity == null) {
       this.selectedCity = 'P0';
-    }else{
-      this.selectedCityName = this.cities.find(x => x.id === this.selectedCity).name;
     }
-    
     console.log("daydaydaya" + this.selectedCity);
-
-    this.filteredCities = this.cityControl.valueChanges.pipe(
-      startWith<string | City[]>(''),
-      map(value => typeof value === 'string' ? value : this.lastFilter),
-      map(filter => this.filter(filter))
-    );
+    this.numApi = 0;
+    // this.filteredCities = this.cityControl.valueChanges.pipe(
+    //   startWith<string | City[]>(''),
+    //   map(value => typeof value === 'string' ? value : this.lastFilter),
+    //   map(filter => this.filter(filter))
+    // );
     this.getCityList();
     this.getDashboardData(this.selectedCity);
     this.showJobDemandAndAverageSalary(this.selectedCity);
@@ -711,6 +711,18 @@ export class RegionDetailComponent implements OnInit {
     return this.cityList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  increaseNumApi() {
+    this.numApi += 1;
+    if (this.showChart) {
+      if (this.numApi === 10) {
+        this.isLoading = false;
+      }
+    } else {
+      if (this.numApi === 4) {
+        this.isLoading = false;
+      }
+    }
+  }
   onCitySelected(selectedCityId) {
     // console.log('### Trigger');
     // console.log(this.selectedCity);
@@ -730,9 +742,9 @@ export class RegionDetailComponent implements OnInit {
     this.showJobDemandByLiteracy(this.selectedCity);
   }
 
-  analysisRegion(){
+  analysisRegion() {
     console.log(this.selectedCities);
-    if(this.selectedCities.length === 1){
+    if (this.selectedCities.length === 1) {
       this.showChart = true;
       const cityId = this.selectedCities[0].id;
       this.getDashboardData(cityId);
@@ -745,7 +757,7 @@ export class RegionDetailComponent implements OnInit {
       this.showHighestPayingCompanies(cityId);
       this.showJobDemandByAge(cityId);
       this.showJobDemandByLiteracy(cityId);
-    } else if (this.selectedCities.length >= 2){
+    } else if (this.selectedCities.length >= 2) {
       this.showChart = false;
       const listId = this.selectedCities.map(a => a.id);
       const cityId = listId.toString();
@@ -761,10 +773,11 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getCityList');
         console.log(data.result);
+        // this.increaseNumApi();
         this.cityList = data.result;
-        // if(this.selectedCity != null || this.selectedCity !== 'P0'){
-        //   this.selectedCityName = this.cityList.find(x => x.id ===  this.selectedCity).name;
-        // } 
+        if (this.selectedCity != null && this.selectedCity != 'P0') {
+          this.selectedCityName = this.cityList.find(x => x.id === this.selectedCity).name;
+        }
         this.filteredOptions = this.control.valueChanges
           .pipe(
             startWith<string | City>(''),
@@ -772,7 +785,7 @@ export class RegionDetailComponent implements OnInit {
             map(name => name ? this._filter(name) : this.cityList.slice())
           );
         // console.log("this.filteredOptions" +this.filteredOptions);
-        
+
         this.filteredCities = this.control.valueChanges
           .pipe(
             startWith<string | City>(''),
@@ -857,6 +870,7 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log("getDashboardData");
         console.log(data);
+        this.increaseNumApi();
         this.newJob = Math.ceil(data.result.numJobPosting.data / 1000);
         this.newJobGrowth = data.result.numJobPosting.growth;
         this.averageSalary = Math.ceil(data.result.averageSalary.data);
@@ -873,6 +887,7 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getJobDemandByPeriodOfTime');
         console.log(data);
+        this.increaseNumApi();
         this.dataJobDemand = data;
         // this.jobDemandByPeriodOfTime = data.result;
         const dataTable = [];
@@ -884,6 +899,7 @@ export class RegionDetailComponent implements OnInit {
             .subscribe((data1: any) => {
               console.log('getAverageSalary');
               console.log(data1);
+              this.increaseNumApi();
               this.dataAverageSalary = data1;
               if (Object.keys(data1).length > 1) {
                 const salary = data1.data;
@@ -971,23 +987,24 @@ export class RegionDetailComponent implements OnInit {
         }
       });
   }
-  
+
   showJobDemandByIndustry(locationId: string) {
     document.getElementById('nhu-cau-theo-nganh-nghe').innerHTML = '';
     this.regionsService.getJobDemandByIndustry(locationId)
       .subscribe((data: any) => {
         console.log('getJobDemandByIndustry');
         console.log(data);
+        this.increaseNumApi();
         this.dataJobDemandByIndustry = data;
         const milestones = data.timestamps;
         this.timeIndustryNumJobChart = [];
         let i = 0;
-        for(const time of milestones){
+        for (const time of milestones) {
           i++;
-          if ( i < milestones.length){
-            this.timeIndustryNumJobChart.push({name: time, selected: false});
+          if (i < milestones.length) {
+            this.timeIndustryNumJobChart.push({ name: time, selected: false });
           } else {
-            this.timeIndustryNumJobChart.push({name: time, selected: true});
+            this.timeIndustryNumJobChart.push({ name: time, selected: true });
           }
         }
         const numJob = data.result[milestones[milestones.length - 1]].numJob;
@@ -1197,16 +1214,17 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getAverageSalaryByIndustry');
         console.log(data);
+        this.increaseNumApi();
         this.dataAverageSalaryByIndustry = data;
         const milestones = data.timestamps;
         this.timeIndustrySalaryChart = [];
         let i = 0;
-        for(const time of milestones){
+        for (const time of milestones) {
           i++;
-          if ( i < milestones.length){
-            this.timeIndustrySalaryChart.push({name: time, selected: false})
+          if (i < milestones.length) {
+            this.timeIndustrySalaryChart.push({ name: time, selected: false })
           } else {
-            this.timeIndustrySalaryChart.push({name: time, selected: true});
+            this.timeIndustrySalaryChart.push({ name: time, selected: true });
           }
         }
         const numJob = data.result[milestones[milestones.length - 1]].numJob;
@@ -1417,16 +1435,17 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log("getHighestDemandJobs");
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestDemandJob = data;
         const milestones = data.timestamps;
         this.timeJobNumJobChart = [];
         let i = 0;
-        for(const time of milestones){
+        for (const time of milestones) {
           i++;
-          if ( i < milestones.length){
-            this.timeJobNumJobChart.push({name: time, selected: false});
+          if (i < milestones.length) {
+            this.timeJobNumJobChart.push({ name: time, selected: false });
           } else {
-            this.timeJobNumJobChart.push({name: time, selected: true});
+            this.timeJobNumJobChart.push({ name: time, selected: true });
           }
         }
         const numJob = data.result[milestones[milestones.length - 1]].numJob;
@@ -1635,16 +1654,17 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getHighestSalaryJobs');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestSalaryJob = data;
         const milestones = data.timestamps;
         this.timeJobSalaryChart = [];
         let i = 0;
-        for(const time of milestones){
+        for (const time of milestones) {
           i++;
-          if ( i < milestones.length){
-            this.timeJobSalaryChart.push({name: time, selected: false});
+          if (i < milestones.length) {
+            this.timeJobSalaryChart.push({ name: time, selected: false });
           } else {
-            this.timeJobSalaryChart.push({name: time, selected: true});
+            this.timeJobSalaryChart.push({ name: time, selected: true });
           }
         }
         const numJob = data.result[milestones[milestones.length - 1]].numJob;
@@ -1855,16 +1875,17 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getTopHiringCompanies');
         console.log(data);
+        this.increaseNumApi();
         this.dataTopHiringCompany = data;
         const milestones = data.timestamps;
         this.timeCompanyNumJobChart = [];
         let i = 0;
-        for(const time of milestones){
+        for (const time of milestones) {
           i++;
-          if ( i < milestones.length){
-            this.timeCompanyNumJobChart.push({name: time, selected: false});
+          if (i < milestones.length) {
+            this.timeCompanyNumJobChart.push({ name: time, selected: false });
           } else {
-            this.timeCompanyNumJobChart.push({name: time, selected: true});
+            this.timeCompanyNumJobChart.push({ name: time, selected: true });
           }
         }
         const numJob = data.result[milestones[milestones.length - 1]].numJob;
@@ -2075,16 +2096,17 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getHighestPayingCompanies');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestPayingCompany = data;
         const milestones = data.timestamps;
         this.timeCompanySalaryChart = [];
         let i = 0;
-        for(const time of milestones){
+        for (const time of milestones) {
           i++;
-          if ( i < milestones.length){
-            this.timeCompanySalaryChart.push({name: time, selected: false});
+          if (i < milestones.length) {
+            this.timeCompanySalaryChart.push({ name: time, selected: false });
           } else {
-            this.timeCompanySalaryChart.push({name: time, selected: true});
+            this.timeCompanySalaryChart.push({ name: time, selected: true });
           }
         }
         const numJob = data.result[milestones[milestones.length - 1]].numJob.slice(0, 10);
@@ -2295,17 +2317,18 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getJobDemandByAge');
         console.log(data);
+        this.increaseNumApi();
         this.dataJobDemandByAge = data;
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
           this.timeAgeAndGenderChart = [];
           let i = 0;
-          for(const time of milestones){
+          for (const time of milestones) {
             i++;
-            if ( i < milestones.length){
-              this.timeAgeAndGenderChart.push({name: time, selected: false});
+            if (i < milestones.length) {
+              this.timeAgeAndGenderChart.push({ name: time, selected: false });
             } else {
-              this.timeAgeAndGenderChart.push({name: time, selected: true});
+              this.timeAgeAndGenderChart.push({ name: time, selected: true });
             }
           }
           const ageRanges = data.ageRange;
@@ -2473,17 +2496,18 @@ export class RegionDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getJobDemandByLiteracy');
         console.log(data);
+        this.increaseNumApi();
         this.dataJobDemandByLiteracy = data;
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
           this.timeLiteracyChart = [];
           let i = 0;
-          for(const time of milestones){
+          for (const time of milestones) {
             i++;
-            if ( i < milestones.length){
-              this.timeLiteracyChart.push({name: time, selected: false});
+            if (i < milestones.length) {
+              this.timeLiteracyChart.push({ name: time, selected: false });
             } else {
-              this.timeLiteracyChart.push({name: time, selected: true});
+              this.timeLiteracyChart.push({ name: time, selected: true });
             }
           }
           const literacies = data.literacy;

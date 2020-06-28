@@ -67,6 +67,9 @@ import { MainSliderComponent } from '../../block/main-slider/main-slider.compone
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
+
+import { LoadingComponent } from './../../core/loading/loading.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -150,6 +153,7 @@ import { SelectAutocompleteModule } from 'mat-select-autocomplete';
     RegionDetailComponent,
     MainSliderComponent,
     DialogCompare,
+    LoadingComponent,
   ],
   entryComponents: [DialogCompare]
 })
