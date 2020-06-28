@@ -1,161 +1,21 @@
 <div class="elementor-row">
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-                <a href="industries/job-category/media">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-youtube-square"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Thiết kế &amp; Đa phương tiện                                    </h4>
-
-                                <div class="number"><strong>2</strong> Công việc</div>
+    <div *ngFor="let industry of industryList">
+        <div class="col-xs-6 col-md-3">
+            <div class="elementor-widget-container">
+                <div class="widget-job-category-banner ">
+                    <a [routerLink]="['/industries', industry.id]" rel="bookmark">
+                        <div class="category-banner-inner style1">
+                            <div class="content-inner">
+                                <!-- <div class="category-icon"><i class="fa fa-youtube-square"></i></div> -->
+                                <div class="inner">
+                                    <h4 class="title">{{industry.name}}</h4>
+                                    <div class="number"><strong>{{industry.averageSalary}}</strong> triệu</div>   
+                                    <div class="number"><strong>{{industry.numJob}}</strong> vị trí công việc</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-
-                <a href="industries/job-category/education-training/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-graduation-cap"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Giáo dục                                    
-                                </h4>
-                                <div class="number"><strong>3</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-
-                <a href="industries/job-category/accounting-finance/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-bar-chart"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Tài chính ngân hàng                                    
-                                </h4>
-                                <div class="number"><strong>3</strong>Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-
-                <a href="industries/job-category/human-resource/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-address-card-o"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Bất động sản                                    
-                                </h4>
-                                <div class="number"><strong>1</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/telecommunications/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-signal"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Viễn thông                                    
-                                </h4>
-                                <div class="number"><strong>1</strong>Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/restaurant-food-service/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-cutlery"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                   Du lịch   
-                                </h4>
-                                <div class="number"><strong>2</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/construction-facilities/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-steam-square"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Xây dựng
-                                </h4>
-        
-                                <div class="number"><strong>1</strong> Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-6 col-md-3">
-        <div class="elementor-widget-container">
-            <div class="widget-job-category-banner ">
-        
-                <a href="industries/job-category/health/">
-                    <div class="category-banner-inner style1">
-                        <div class="content-inner">
-                            <div class="category-icon"><i class="fa fa-heartbeat"></i></div>
-                            <div class="inner">
-                                <h4 class="title">
-                                    Y tế                                    
-                                </h4>
-                                <div class="number"><strong>3</strong>Công việc</div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

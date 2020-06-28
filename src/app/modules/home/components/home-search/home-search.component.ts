@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  Output, EventEmitter } from '@angular/core';
 import { HomeService } from '../../home.service';
 import { HeaderService } from 'src/app/core/header/header.service';
 import { FormControl } from '@angular/forms';
@@ -49,6 +49,8 @@ export class HomeSearchComponent implements OnInit {
   filteredOptionsIndustry: Observable<Industry[]>;
   jobName = '';
   companyName = '';
+  numApi = 0;
+  @Output() send_search = new EventEmitter();
   changeSearchType(index) {
     this.menu.forEach(element => {
       element.selected = false;
@@ -112,6 +114,7 @@ export class HomeSearchComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getCityList');
         console.log(data.result);
+        this.send_search.emit(this.numApi+=1);
         this.cityList = data.result;
         this.filteredOptionsCity = this.controlCity.valueChanges
           .pipe(
@@ -128,6 +131,7 @@ export class HomeSearchComponent implements OnInit {
         console.log('getIndustryList');
         console.log(data.result);
         this.industryList = data.result;
+        this.send_search.emit(this.numApi+=1);
         this.filteredOptionsIndustry = this.controlIndustry.valueChanges
           .pipe(
             startWith<string | Industry>(''),

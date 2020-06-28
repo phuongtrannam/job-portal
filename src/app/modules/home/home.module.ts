@@ -61,6 +61,9 @@ import {BidiModule} from '@angular/cdk/bidi';
 import {ObserversModule} from '@angular/cdk/observers';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {PlatformModule} from '@angular/cdk/platform';
+
+
+import { LoadingComponent } from './../../core/loading/loading.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -136,6 +139,7 @@ import {PlatformModule} from '@angular/cdk/platform';
     IndustryListingComponent,
     BriefPageComponent,
     HomeSearchComponent,
+    LoadingComponent,
   ]
 })
 export class HomeModule { }

@@ -1,10 +1,12 @@
+<app-loading *ngIf="isLoading">{{ isLoading }}</app-loading>
+
 <div class="main-slider">
     <app-slideshow></app-slideshow>
     <div class="sologan-wraper">
         <div class="container">
             <div class="sologan-text">Phân tích dữ liệu thị trường lao động Việt Nam thời gian thực</div>
             <section id="main-container" class="wrapper-main-page container inner" style="margin-top: -75px;">
-                <app-home-search></app-home-search>
+                <app-home-search  (send_search)="increase_search($event)"></app-home-search>
             </section>
         </div>
     </div>
@@ -17,7 +19,7 @@
     
     <section id="main-container" class="wrapper-main-page container inner">
         <h2 class="title-industry">Các ngành nghề phổ biến</h2>
-        <app-industry-listing></app-industry-listing>
+        <app-industry-listing (send_industry)="increase_industry($event)"></app-industry-listing>
     </section>
     <div class = "container">
         <div class="elementor-row browse-job">

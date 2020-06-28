@@ -9,12 +9,24 @@ import { HomeService } from '../../home.service';
 })
 export class HomeComponent implements OnInit {
 
-
-  constructor(private homeService: HomeService) {
+  numApi = 0;
+  isLoading = true;
+  constructor() {
 
   }
   ngOnInit() {
-
+  }
+  increase_industry(e){
+    this.numApi += 1;
+    if(this.numApi === 3){
+      this.isLoading = false;
+    }
+  }
+  increase_search(e){
+    this.numApi += 1;
+    if(this.numApi === 3){
+      this.isLoading = false;
+    }
   }
 
 }
