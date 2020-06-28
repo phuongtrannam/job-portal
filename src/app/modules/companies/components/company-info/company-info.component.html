@@ -2,7 +2,6 @@
 <div class="row content-job-detail" style="margin: auto;">
     <div class="col-xs-12 col-md-8">
 
-        <!-- employer description -->
         <div id="employer-detail-description" class="employer-detail-description">
             <h3 class="title-detail-employer">Thông tin chung</h3>
             <div class="inner">
@@ -36,82 +35,29 @@
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-dribbble"></i></a> </div>
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+         </div>
 
-        <!-- realted companies -->
-        <div id="job-employer-portfolio" class="employer-detail-portfolio candidate-detail-portfolio widget">
-            <h4 class="widget-title">Công ty liên quan</h4>
-            <div class="content-bottom">
-                <div class="row">
-                    <div *ngFor="let company of relatedCompanies | paginate: { itemsPerPage: 6, currentPage: p }"
-                        class="col-xs-4 md-clearfix sm-clearfix">
-                        <article id="" class="">
-                            <div class="employer-grid">
-                                <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i
-                                        class="fa fa-star text-theme"></i></span>
-                                <div class="open-job">
-                                    <!-- <span class="text-theme">{{company.numberOfJob}}</span> Công việc </div> -->
-                                    <span class="text-theme">50</span> Công việc </div>
-                                <div class="employer-thumbnail">
-                                    <a href="/companies/viettel">
-                                        <img width="180" height="75"
-                                            src="https://thietkelogo.vn/wp-content/uploads/2015/12/viettel.png"
-                                            class="attachment-full size-full wp-post-image" alt=""> </a>
-                                </div>
-                                <div class="employer-information">
-                                    <div class="employer-title-wrapper">
-                                        <h6 class="employer-title"><a href="/companies/viettel"
-                                                rel="bookmark">{{company.name}}</a></h6>
-                                    </div>
-                                    <!-- <a href="https://apusthemes.com/wp-demo/careerup/employer-category/accounting-finance/"
-                                    class="text-theme">{{company.website}}</a> -->
-
-                                    <div class="employer-location">
-                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        {{company.location}}
-                                        <!-- <a
-                                        href="https://apusthemes.com/wp-demo/careerup/employer-location/new-york/">{{company.location}}</a> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                        <!-- #post-## -->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- current jobs -->
         <div class="widget">
             <h4 class="widget-title">
-                <span>Công việc</span>
+                <span>Công ty tương tự</span>
             </h4>
 
             <div class="widget-content">
-                <div *ngFor="let job of recentJobsByCompany"
+                <div *ngFor="let company of relatedCompanies"
                     >
                     <article class="job-list job_listing type-job_listing status-publish has-post-thumbnail hentry ">
                         <div class="clearfix">
                             <div class="job-information flex-middle no-padding width-full">
                                 <div class="inner">
-                                    <!-- <a class="text-theme type-job"
-                                        href="https://apusthemes.com/wp-demo/careerup/job-type/full-time/">Full
-                                        Time</a> -->
-                                        Full Time
                                     <div class="job-title-wrapper">
                                         <h2 class="job-title"><a
-                                                href="https://apusthemes.com/wp-demo/careerup/job/senior-staff-nurse/"
-                                                rel="bookmark">{{job.job_name}}</a></h2> <span class="featured"
+                                            [routerLink]="['/companies', company.id]" rel="bookmark">{{company.name}}</a></h2> <span class="featured"
                                             data-toggle="tooltip" title="" data-original-title="featured"><i
                                                 class="fa fa-star text-theme"></i></span>
                                     </div>
                                     <div class="job-metas">
-                                        <div class="job-location"><i class="fa fa-map-marker"></i>{{job.province}}</div>
-                                        <div class="date"><i class="fa fa-calendar" aria-hidden="true"></i>04/06/2019
-                                        </div>
-                                        <div class="job-salary"><i class="fa fa-money"></i>$<span
-                                                class="price-text">{{job.min_salary}}</span> - <span class="price-text">{{job.max_salary}}</span> triệu
-                                        </div>
+                                        <div class="job-location"><i class="fa fa-map-marker"></i>{{company.location}}</div>
                                     </div>
                                 </div>
                                 <div class="ali-right">
@@ -131,7 +77,6 @@
         <aside class="widget widget_apus_employer_maps">
             <h2 class="widget-title"><span>Vị trí</span></h2>
             <div class="employer-detail-map-location job_maps_sidebar">
-                <!-- Map -->
                 <div leaflet style="height: 300px;" [leafletOptions]="options" [leafletLayers]="markers"
                     [leafletZoom]="zoom" (leafletZoomChange)="onZoomChange($event)" [leafletCenter]="center"
                     (leafletCenterChange)="onCenterChange($event)">
@@ -209,54 +154,37 @@
                 </ul>
             </div>
         </aside>
-        <!-- <aside class="widget widget_apus_employer_contact_form">
-            <h2 class="widget-title"><span>Contact Form</span></h2>
-
-            <div class="contact-form contact-form-employer in-sidebar">
-
-                <form method="post" action="?" class=" contact-form-wrapper">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control style2" name="subject" placeholder="Subject" required="required">
+        <div id="job-employer-portfolio" class="employer-detail-portfolio candidate-detail-portfolio widget">
+            <h4 class="widget-title">Công việc</h4>
+            <div class="content-bottom">
+                <div class="row">
+                    <div *ngFor="let job of recentJobsByCompany "
+                        class="col-xs-12 md-clearfix sm-clearfix">
+                        <article id="" class="">
+                            <div class="employer-grid">
+                                <span class="featured" data-toggle="tooltip" title="" data-original-title="featured"><i
+                                        class="fa fa-star text-theme"></i></span>
+                               
+                                <div class="employer-information">
+                                    <div class="employer-title-wrapper">
+                                        <h6 class="employer-title"><a [routerLink]="['/jobs', job.id]" rel="bookmark"
+                                                rel="bookmark">{{job.job_name}}</a></h6>
+                                    </div>
+                                    
+                                    <div class="job-salary"><i class="fa fa-money"></i> <span
+                                        class="price-text"> {{job.min_salary}}</span> - <span class="price-text">{{job.max_salary}}</span> triệu
+                                    </div>
+                                    <div class="employer-location">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                        {{job.province}}
+                                        
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <input type="email" class="form-control style2" name="email" placeholder="E-mail" required="required" value="">
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <input type="text" class="form-control style2" name="phone" placeholder="Phone" required="required" value="">
-                            </div>
-                        </div>
+                        </article>
                     </div>
-                    <div class="form-group space-30">
-                        <textarea class="form-control style2" name="message" placeholder="Message" required="required"></textarea>
-                    </div>
-
-                    <div id="recaptcha-contact-form" class="ga-recaptcha" data-sitekey="6Lezm6oUAAAAABDn8kjWz4f5K2NH1HLzFTVWjOy7">
-                        <div style="width: 304px; height: 78px;">
-                            <div>
-                                <iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Lezm6oUAAAAABDn8kjWz4f5K2NH1HLzFTVWjOy7&amp;co=aHR0cHM6Ly9hcHVzdGhlbWVzLmNvbTo0NDM.&amp;hl=vi&amp;v=61bII03-TtCmSUR7dw9MJF9q&amp;size=normal&amp;cb=c26iilvxr6ab" width="304" height="78" role="presentation" name="a-bxe7lprwhxnp" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
-                            </div>
-                            <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
-                        </div>
-                        <iframe style="display: none;"></iframe>
-                    </div>
-
-                    <input type="hidden" name="post_id" value="635">
-                    <button class="button btn btn-theme btn-block" name="contact-form">Send Message</button>
-
-                </form>
-
-                <div class="send-private-wrapper">
-                    <a href="javascript:void(0);" class="send-private-message-btn"><i class="fa fa-hand-o-right" aria-hidden="true"></i>Send Private Message</a>
                 </div>
-                <div class="send-private-message-wrapper-hidden hidden"></div>
-
             </div>
-        </aside> -->
+        </div>
     </div>
 </div>

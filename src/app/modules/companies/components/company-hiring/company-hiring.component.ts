@@ -300,8 +300,8 @@ export class CompanyHiringComponent implements OnInit {
   reloadTopHiringJob(index: number){
     document.getElementById('nhu_cau_tuyen_dung_theo_cong_viec').innerHTML = '';
     const milestones = this.dataTopHiringJob.timestamps;
-    const numJob = this.dataTopHiringJob.result[milestones[index]].data;
-    const jobObj = this.dataTopHiringJob.result[milestones[index]].object;
+    const numJob = this.dataTopHiringJob.result[milestones[index]].numJob;
+    const jobObj = this.dataTopHiringJob.result[milestones[index]].job;
     const jobName = jobObj.map(function (el) { return el.name; })
     const options = {
       series: [{
