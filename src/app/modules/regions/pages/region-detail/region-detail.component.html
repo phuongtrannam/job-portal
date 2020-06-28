@@ -3,10 +3,10 @@
         <h1 *ngIf = "selectedCity != 'P0'">{{selectedCityName}} / Việt Nam</h1>
         <h1 *ngIf = "selectedCity == 'P0'">Việt Nam</h1>
         <div class = "row">
-            <div class="col-sm-4 col-xs-4">
+            <div class="col-sm-3 col-xs-3">
                 <h4>Chọn khu vực phân tích</h4>
             </div>
-            <div class="col-sm-8 col-xs-8">
+            <!-- <div class="col-sm-8 col-xs-8">
                 <form class="example-form">
                     <input type="text" [(ngModel)]="selectedCity" style="width: 100%;margin-top: 14px;margin-bottom: 14px;"
                            placeholder="Chọn khu vực cần phân tích (Mặc định chọn khu vực toàn quốc)"
@@ -19,10 +19,50 @@
                       </mat-option>
                     </mat-autocomplete>
                   </form>
+            </div> -->
+            <div class="col-sm-7 col-xs-7">
+                <form class="example-form" >
+                    <!-- <mat-select-autocomplete class="grid-7-11" style="width: -webkit-fill-available;"
+                        [placeholder]="'Options Selection'"
+                        [errorMsg]="errorMessage"
+                        [showErrorMsg]="showError"
+                        [options]="options"
+                        [display]="'display'"
+                        [appearance] = "'standard'"
+                        [value]="'value'"
+                        [multiple]='true'
+                        [labelCount]="2"
+                        [selectedOptions]="selectedOptions"
+                        (selectionChange)="getSelectedOptions($event)">
+                    </mat-select-autocomplete> -->
+
+                    <mat-form-field class="example-full-width">
+                        <input  type="text" placeholder="Lưa chọn các thành phố"  matInput [matAutocomplete]="auto"
+                            [formControl]="cityControl">
+                        <mat-hint></mat-hint>
+                    </mat-form-field>
+                    
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnCity">
+                        <mat-option *ngFor="let city of filteredCities | async" [value]="selectedCities">
+                            <div (click)="optionClicked($event, city)">
+                                <mat-checkbox [checked]="city.selected" (change)="toggleSelection(city)" (click)="$event.stopPropagation()">
+                                    {{ city.name }}
+                                </mat-checkbox>
+                            </div>
+                        </mat-option>
+                    </mat-autocomplete>
+                </form>
+            </div>
+            <!-- <div class="col-sm-2 col-xs-2">
+                <input style=" margin-top: 30px; " [(ngModel)]="myProperty" type="checkbox"> So sánh khu vực
+            </div> -->
+            <div class="col-sm-2 col-xs-2">
+                <!-- <button style=" margin-top: 15px; " mat-raised-button (click)="openDialog()">Phân tích</button> -->
+                <button style=" margin-top: 15px; " mat-raised-button (click)="analysisRegion()">Phân tích</button>
             </div>
         </div>
         <app-main-slider></app-main-slider>
-        <div class="row">
+        <div class="row" >
             <div class="col-3">
                 <div class="d-flex flex-column static">
                     <div class="title">Việc làm mới</div>
@@ -70,8 +110,8 @@
                     <div class="title">Độ tuổi trung bình</div>
                     <div class="d-flex">
                         <div class="d-flex flex-column">
-                            <div class="highlight">{{numCompany}}K</div>
-                            <div class="grow">+{{numCompanyGrowth}}%</div>
+                            <div class="highlight">{{averageAge}}</div>
+                            <div class="grow">+{{averageAgeGrowth}}%</div>
                         </div>
                         <div class="">
                             <div class="small-chart" style = "width: 165px !important;" id="chart-do-tuoi-trung-binh"></div>
@@ -83,18 +123,53 @@
     </div>
 </div>
 <div class="container">
-    <div class="quick-tab">
+    <div class="quick-tab" [hidden]="!showChart">
         <div class="item" *ngFor="let item of quickTab" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
     </div>
 
-    
-    
+    <div class="row row-cols-2">
+        <div class="col ">
+            <div id="chart"></div>
+        </div>
+        <div class="col">
+            <table mat-table [dataSource]="jobDemandAndAverageSalary" class="table-top-luong mt-3">
+                <ng-container matColumnDef="timestamp">
+                    <th mat-header-cell *matHeaderCellDef>Thời gian</th>
+                    <td mat-cell *matCellDef="let element"> {{element.timestamp}} </td>
+                </ng-container>
+                <ng-container matColumnDef="numJob">
+                    <th mat-header-cell *matHeaderCellDef>Nhu cầu</th>
+                    <td mat-cell *matCellDef="let element" [class.text-success]="element.growthJob >= 0"
+                        [class.text-danger]="element.growthJob < 0">
+                        <p [hidden]="element.growthJob < 0">{{element.numJob}}(+{{element.growthJob}}%)</p>
+                        <p [hidden]="element.growthJob >= 0">{{element.numJob}}({{element.growthJob}}%)</p>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="salary">
+                    <th mat-header-cell *matHeaderCellDef>Lương TB</th>
+                    <td mat-cell *matCellDef="let element" [class.text-success]="element.growthSalary >= 0"
+                        [class.text-danger]="element.growthSalary < 0">
+                        <p [hidden]="element.growthSalary < 0">{{element.salary}}(+{{element.growthSalary}}%)</p>
+                        <p [hidden]="element.growthSalary >= 0">{{element.salary}}({{element.growthSalary}}%)</p>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="jobDemandAndAverageSalaryTable"></tr>
+                <tr mat-row *matRowDef="let row; columns: jobDemandAndAverageSalaryTable;"></tr>
+            </table>
+        </div>
+    </div>
 
-    <div class="row">
-        <div class="col-12">
+    <div class="row" [hidden]="!showChart">
+        <div class="col-6">
             <!-- <h2>Phân bố việc làm theo ngành nghề</h2> -->
             <div class="chon-quy-wrap">
-                <div class="item" *ngFor="let item of timeIndustryChart; index as i" (click)="changeTimeIndustryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                <div class="item" *ngFor="let item of timeIndustryNumJobChart; index as i" (click)="changeTimeIndustryNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <!-- <h2>Phân bố việc làm theo ngành nghề</h2> -->
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeIndustrySalaryChart; index as i" (click)="changeTimeIndustrySalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
             </div>
         </div>
         <div class="col-6">
@@ -104,11 +179,17 @@
             <div id="muc-luong-trung-binh-theo-nganh-nghe"></div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
+    <div class="row" [hidden]="!showChart">
+        <div class="col-6">
             <!-- <h2>Phân bố việc làm theo vị trí công việc</h2> -->
             <div class="chon-quy-wrap">
-                <div class="item" *ngFor="let item of timeJobChart; index as i" (click)="changeTimeJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                <div class="item" *ngFor="let item of timeJobNumJobChart; index as i" (click)="changeTimeJobNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <!-- <h2>Phân bố việc làm theo vị trí công việc</h2> -->
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeJobSalaryChart; index as i" (click)="changeTimeJobSalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
             </div>
         </div>
         <div class="col-6">
@@ -119,11 +200,17 @@
         </div>
         
     </div>
-    <div class="row">
-        <div class="col-12">
+    <div class="row" [hidden]="!showChart">
+        <div class="col-6">
             <!-- <h2>Phân bố việc làm theo công ty</h2> -->
             <div class="chon-quy-wrap">
-                <div class="item" *ngFor="let item of timeCompanyChart; index as i" (click)="changeTimeCompanyChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+                <div class="item" *ngFor="let item of timeCompanyNumJobChart; index as i" (click)="changeTimeCompanyNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <!-- <h2>Phân bố việc làm theo công ty</h2> -->
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeCompanySalaryChart; index as i" (click)="changeTimeCompanySalaryChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
             </div>
         </div>
         <div class="col-6">
@@ -168,7 +255,7 @@
             <div id="nhu-cau-tuyen-dung-theo-trinh-do-hoc-van"></div>
         </div>
         <div class="col-6">
-            <div class="chon-quy-wrap">
+            <div class="chon-quy-wrap" id="quy-trinh-do-hoc-van">
                 <div class="item" *ngFor="let item of timeLiteracyChart; index as i" (click)="changeLiteracyChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
             </div>
             <table mat-table [dataSource]="jobDemandByLiteracy" class="table-top-luong mt-3">

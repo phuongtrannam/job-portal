@@ -34,6 +34,24 @@ export class RegionsService {
         return this.http.post(url, postData, httpOptions);
     }
 
+    getJobDemandByPeriodOfTime(locationIdParam: string) {
+        const postData = {
+            locationId: locationIdParam,
+        };
+        const specificPath = '/get_job_demand_by_period_of_time';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
+    getAverageSalaryByPeriodOfTime(locationIdParam: string) {
+        const postData = {
+            locationId: locationIdParam,
+        };
+        const specificPath = '/get_average_salary_by_period_of_time';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
     getAverageSalaryByIndustry(locationIdParam: string) {
         const postData = {
             locationId: locationIdParam,
@@ -100,6 +118,7 @@ export class RegionsService {
     getJobDemandByLiteracy(locationIdParam: string) {
         const postData = {
             locationId: locationIdParam,
+            isCompare: false
         };
         const specificPath = '/get_job_demand_by_literacy';
         const url = this.rootUrl + specificPath;

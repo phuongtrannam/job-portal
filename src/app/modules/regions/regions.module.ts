@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegionsRoutingModule } from './regions-routing.module';
 import { RegionDetailComponent } from './pages/region-detail/region-detail.component';
-
+import {DialogCompare} from './pages/region-detail/region-detail.component';
 
 
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -62,6 +62,11 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {PlatformModule} from '@angular/cdk/platform';
 import { MainSliderComponent } from '../../block/main-slider/main-slider.component';
 
+
+// import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SelectAutocompleteModule } from 'mat-select-autocomplete';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -81,6 +86,14 @@ import { MainSliderComponent } from '../../block/main-slider/main-slider.compone
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+
+    // BrowserModule,
+    // BrowserAnimationsModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+    SelectAutocompleteModule,
+    MatDialogModule,
   ],
   exports: [
     PlatformModule,
@@ -136,6 +149,8 @@ import { MainSliderComponent } from '../../block/main-slider/main-slider.compone
   declarations: [
     RegionDetailComponent,
     MainSliderComponent,
-  ]
+    DialogCompare,
+  ],
+  entryComponents: [DialogCompare]
 })
 export class RegionsModule { }
