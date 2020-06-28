@@ -33,6 +33,8 @@
         </div>
     </div>
 </div> -->
+<app-loading *ngIf="isLoading">{{ isLoading }}</app-loading>
+
 <div class="pb-3 bg-gray">
     <div class="container">
         <h1 *ngIf = "selectedCity != 'P0'">{{selectedIndustryName}}({{selectedCityName}})</h1>

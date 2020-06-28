@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeService } from '../../home.service';
-
+import { LoadingComponent } from './../../../../core/loading/loading.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

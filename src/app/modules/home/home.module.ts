@@ -63,7 +63,9 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {PlatformModule} from '@angular/cdk/platform';
 
 
-import { LoadingComponent } from './../../core/loading/loading.component';
+// import { LoadingComponent } from './../../core/loading/loading.component';
+import { CoreModule } from './../../core/core.module'
+// import { LoadingComponent } from 'src/app/core/loading/loading.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -81,6 +83,7 @@ import { LoadingComponent } from './../../core/loading/loading.component';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    CoreModule,
   ],
   exports: [
     PlatformModule,
@@ -132,6 +135,7 @@ import { LoadingComponent } from './../../core/loading/loading.component';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    CoreModule,
   ],
   declarations: [
     HomeComponent,
@@ -139,7 +143,7 @@ import { LoadingComponent } from './../../core/loading/loading.component';
     IndustryListingComponent,
     BriefPageComponent,
     HomeSearchComponent,
-    LoadingComponent,
+    // LoadingComponent,
   ]
 })
 export class HomeModule { }

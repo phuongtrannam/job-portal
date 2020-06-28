@@ -1,9 +1,10 @@
+<app-loading *ngIf="isLoading">{{ isLoading }}</app-loading>
 
 <div id="apus-main-content">
     <section id="main-container" class="wrapper-main-page container inner">
         <!-- <section class="elementor-element elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default elementor-section elementor-top-section" data-element_type="section"  style="width: 1294px; left: -77px;">
             <div class="elementor-container elementor-column-gap-extended"> -->
-                <app-industry-listing></app-industry-listing>
+                <app-industry-listing (send_industry)="increase_industry($event)"></app-industry-listing>
             <!-- </div>
         </section> -->
     </section>

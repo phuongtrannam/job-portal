@@ -68,7 +68,8 @@ import {BidiModule} from '@angular/cdk/bidi';
 import {ObserversModule} from '@angular/cdk/observers';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {PlatformModule} from '@angular/cdk/platform';
-
+// import { LoadingComponent } from './../../core/loading/loading.component';
+import { CoreModule } from './../../core/core.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -95,6 +96,7 @@ import {PlatformModule} from '@angular/cdk/platform';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    CoreModule,
   ],
   exports: [
     PlatformModule,
@@ -146,6 +148,7 @@ import {PlatformModule} from '@angular/cdk/platform';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    CoreModule
   ],
   declarations: [
     IndustryListComponent,
@@ -159,7 +162,7 @@ import {PlatformModule} from '@angular/cdk/platform';
     JobFilterComponent,
     JobListingComponent,
     JobAnalysisComponent,
-    
+    // LoadingComponent,
   ]
 })
 export class IndustriesModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input , Output, EventEmitter } from '@angular/core';
 import { IndustriesService } from '../../industries.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
@@ -46,7 +46,8 @@ export class IndustryListingComponent implements OnInit {
   // ];
 
   industryList = [];
-
+  numApi = 0;
+  @Output() send_industry = new EventEmitter();
   constructor( private industriesService: IndustriesService,
     public headerService: HeaderService,
     private route: ActivatedRoute) {
@@ -63,6 +64,7 @@ export class IndustryListingComponent implements OnInit {
       .subscribe((data: any) => {
         console.log("getJobsRelated");
         console.log(data.result);
+        this.send_industry.emit(this.numApi+=1);
         this.industryList = data.result;
       });
   }

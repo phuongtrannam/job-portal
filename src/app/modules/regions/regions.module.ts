@@ -68,8 +68,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { SelectAutocompleteModule } from 'mat-select-autocomplete';
 
 
-import { LoadingComponent } from './../../core/loading/loading.component';
-
+// import { LoadingComponent } from './../../core/loading/loading.component';
+import { CoreModule } from './../../core/core.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -97,6 +97,7 @@ import { LoadingComponent } from './../../core/loading/loading.component';
     MatIconModule,
     SelectAutocompleteModule,
     MatDialogModule,
+    CoreModule
   ],
   exports: [
     PlatformModule,
@@ -148,12 +149,13 @@ import { LoadingComponent } from './../../core/loading/loading.component';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    CoreModule
   ],
   declarations: [
     RegionDetailComponent,
     MainSliderComponent,
     DialogCompare,
-    LoadingComponent,
+    // LoadingComponent,
   ],
   entryComponents: [DialogCompare]
 })

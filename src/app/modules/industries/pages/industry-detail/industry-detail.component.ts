@@ -69,6 +69,8 @@ export class IndustryDetailComponent {
   selectedCity = 'P0';
   selectedCityName = '';
   showChart = true;
+  numApi = 0;
+  isLoading = true;
   control = new FormControl();
   cityList: City[] = [{ id: '1', name: 'Champs-Élysées' },
   { id: '2', name: 'Lombard Street' },
@@ -87,7 +89,18 @@ export class IndustryDetailComponent {
 
     return this.cityList.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
-
+  increaseNumApi() {
+    this.numApi += 1;
+    if (this.showChart) {
+      if (this.numApi === 9) {
+        this.isLoading = false;
+      }
+    } else {
+      if (this.numApi === 7) {
+        this.isLoading = false;
+      }
+    }
+  }
   onCitySelected(selectedCityId) {
     this.selectedCity = selectedCityId;
     console.log('this.selectedCity ' + this.selectedCity);
@@ -95,6 +108,7 @@ export class IndustryDetailComponent {
     this.showChart = false;
     this.showJobDemandAndAverageSalary(this.selectedIndustryId, this.selectedCity);
     this.showTopHiringCompany(this.selectedIndustryId, this.selectedCity);
+    this.showTopCompanyHighestSalary(this.selectedIndustryId, this.selectedCity);
     this.showTopHiringJob(this.selectedIndustryId, this.selectedCity);
     this.showHighestSalaryJob(this.selectedIndustryId, this.selectedCity);
     this.showJobDemandByAge(this.selectedIndustryId, this.selectedCity);
@@ -372,6 +386,7 @@ export class IndustryDetailComponent {
         console.log('getJobDemandByPeriodOfTime');
         console.log(data);
         this.dataJobDemand = data;
+        this.increaseNumApi();
         // this.jobDemandByPeriodOfTime = data.result;
         const dataTable = [];
         if (Object.keys(data).length > 1) {
@@ -622,6 +637,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getTopHiringRegion');
         console.log(data);
+        this.increaseNumApi();
         this.dataTopHiringRegion = data;
         const milestones = data.timestamps;
         this.timeRegionNumJobChart = [];
@@ -840,6 +856,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getHighestSalaryRegion');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestSalaryRegion = data;
         const milestones = data.timestamps;
         this.timeRegionSalaryChart = [];
@@ -1164,6 +1181,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getTopHiringCompany');
         console.log(data);
+        this.increaseNumApi();
         this.dataTopHiringCompany = data;
         const milestones = data.timestamps;
         this.timeCompanyNumJobChart = [];
@@ -1488,6 +1506,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getTopCompanyHighestSalary');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestPayingCompany = data;
         const milestones = data['timestamps'];
         this.timeCompanySalaryChart = [];
@@ -1812,6 +1831,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getTopHiringJob');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestDemandJob = data;
         const milestones = data.timestamps;
         this.timeJobNumJobChart = [];
@@ -2138,6 +2158,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getHighestSalaryJob');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestSalaryJob = data;
         const milestones = data.timestamps;
         this.timeJobSalaryChart = [];
@@ -2446,6 +2467,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getJobDemandByAge');
         console.log(data);
+        this.increaseNumApi();
         this.dataJobDemandByAge = data;
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
@@ -2702,6 +2724,7 @@ export class IndustryDetailComponent {
       .subscribe((data: any) => {
         console.log('getJobDemandByLiteracy');
         console.log(data);
+        this.increaseNumApi();
         this.dataJobDemandByLiteracy = data;
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
