@@ -4,7 +4,7 @@
         <div class="form-group ">
             <label class="heading-label">
                 Từ khóa </label>
-            <input type="text" class="form-control" placeholder="vd. web developer">
+            <input type="text" [(ngModel)]="jobName" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Nhân viên kinh doanh">
         </div>
     </form>
 
@@ -12,7 +12,35 @@
         <div class="form-group ">
             <label class="heading-label">
                 Khu vực </label>
-            <input type="text" class="form-control" placeholder="vd. Hà Nội">
+                <!-- <mat-form-field class="example-full-width">
+                    <input  type="text" placeholder="vd. Hà Nội"  matInput [matAutocomplete]="auto1"
+                        [formControl]="cityControl">
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+                
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFnCity">
+                    <mat-option *ngFor="let city of filteredCities | async" [value]="selectedCities">
+                        <div (click)="optionClicked($event, city)">
+                            <mat-checkbox [checked]="city.selected" (change)="toggleSelection(city)" (click)="$event.stopPropagation()">
+                                {{ city.name }}
+                            </mat-checkbox>
+                        </div>
+                    </mat-option>
+                </mat-autocomplete> -->
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="vd. Hà Nội" matInput [matAutocomplete]="auto1" [formControl]="cityControl" style=" border: aliceblue; ">
+                  <!-- <mat-hint>Enter text to find users by name</mat-hint> -->
+                </mat-form-field>
+                
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFnCity">
+                    <mat-option *ngFor="let city of filteredCities | async" [value]="selectedCities">
+                        <div (click)="optionClickedCity($event, city)">
+                            <mat-checkbox [checked]="city.selected" (change)="toggleSelectionCity(city)" (click)="$event.stopPropagation()">
+                                {{ city.name }}
+                            </mat-checkbox>
+                        </div>
+                    </mat-option>
+                </mat-autocomplete>
         </div>
     </form>
 
@@ -21,7 +49,7 @@
             <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
                 Ngành nghề
             </label>
-            <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
+            <!-- <cdk-virtual-scroll-viewport itemSize="50" style="height: 200px;">
                 <mat-list role="list">
                     <mat-list-item role="listitem" *cdkVirtualFor="let item of industries">
                         <mat-checkbox [(ngModel)]="item.checked" name="something"></mat-checkbox>
@@ -29,7 +57,21 @@
                         <br />
                     </mat-list-item>
                 </mat-list>
-            </cdk-virtual-scroll-viewport>
+            </cdk-virtual-scroll-viewport> -->
+            <mat-form-field class="example-full-width">
+                <input type="text" placeholder="vd. Bán hàng - Kinh doanh" matInput [matAutocomplete]="auto2" [formControl]="industryControl" style=" border: aliceblue; ">
+              <!-- <mat-hint>Enter text to find users by name</mat-hint> -->
+            </mat-form-field>
+            
+            <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFnIndustry">
+                <mat-option *ngFor="let industry of filteredIndustries | async" [value]="selectedIndustries">
+                    <div (click)="optionClickedIndustry($event, industry)">
+                        <mat-checkbox [checked]="industry.selected" (change)="toggleSelectionIndustry(industry)" (click)="$event.stopPropagation()">
+                            {{ industry.name }}
+                        </mat-checkbox>
+                    </div>
+                </mat-option>
+            </mat-autocomplete>
         </div>
     </form>
     
@@ -40,16 +82,16 @@
                 Mức lương </label>
             <div class="row">
                 <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Từ:</p>
-                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
+                <input [(ngModel)]="minSalary" [ngModelOptions]="{standalone: true}" type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
             </div>
             <div class="row" style="margin-top: 10px;">
                 <p class="col-md-3 col-sm-3 col-xs-3" style="margin-top: 12px;">Đến:</p>
-                <input type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
+                <input [(ngModel)]="maxSalary" [ngModelOptions]="{standalone: true}" type="number" class="form-control col-md-9 col-sm-9 col-xs-9" placeholder="triệu đồng">
             </div>
         </div>
     </form>
 
-    <form class="filter-listing-form">
+    <!-- <form class="filter-listing-form">
         <div class="form-group">
             <label style=" font-size: 20px; font-family: 'Nunito'" class="heading-label">
                 Loại công việc
@@ -61,11 +103,9 @@
                     </mat-radio-button>
                 </mat-list-item>
             </mat-list>
-            <!-- <mat-card style="margin-top: 1rem"> -->
-            <!-- Currently selected: {{selection}} -->
-            <!-- </mat-card> -->
+       
         </div>
-    </form>
+    </form> -->
     
     <form class="filter-listing-form">
         <div class="form-group">
@@ -110,7 +150,7 @@
     
     <form class="filter-listing-form">
         <div class="form-group">
-            <button class="button">Lọc kết quả <i class="fa fa-chevron-right"></i></button>
+            <button class="button" (click) = advancedSearch()>Lọc kết quả <i class="fa fa-chevron-right"></i></button>
         </div>
     </form>
     

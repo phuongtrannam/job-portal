@@ -25,10 +25,13 @@
         <app-job-highlight></app-job-highlight>
         <div class = "row">
             <div class = "sidebar-wrapper col-md-3 col-sm-12 col-xs-12">
-                <app-job-filter></app-job-filter>
+                <app-job-filter (sendJobName)="changeJobName($event)" (sendRegionId)="changeRegionId($event)" 
+                (sendIndustryId)="changeIndustryId($event)"
+                (sendMinSalary)="changeMinSalary($event)" (sendMaxSalary)="changeMaxSalary($event)" ></app-job-filter>
             </div>
             <div class="col-sm-12 col-md-9 col-sm-12 col-xs-12" >
-                <app-job-listing></app-job-listing>
+                <app-job-listing [jobName]="jobName" [regionId]="regionId"  [industryId]="industryId"
+                [minSalary]="minSalary"  [maxSalary]="maxSalary"></app-job-listing>
             </div>
         </div>
     </div>

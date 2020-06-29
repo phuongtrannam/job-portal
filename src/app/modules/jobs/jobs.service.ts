@@ -36,6 +36,21 @@ export class JobsService {
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
+
+    advancedSearchJob(jobNameParam: string, regionIdParam: string, 
+            industryIdParam: string, minSalaryParam: string, maxSalaryParam: string) {
+        const postData = {
+            jobName: jobNameParam,
+            regionId: regionIdParam,
+            industryId: industryIdParam,
+            minSalary: minSalaryParam,
+            maxSalary: maxSalaryParam,
+        };
+        const specificPath = '/advanced_search_job';
+        const url = this.rootUrl + specificPath;
+        return this.http.post(url, postData, httpOptions);
+    }
+
     getTopJob(numJobParam: string) {
         const postData = {
             numJob: numJobParam,

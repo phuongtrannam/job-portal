@@ -68,6 +68,12 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {PlatformModule} from '@angular/cdk/platform';
 
 
+import { BrowserModule } from '@angular/platform-browser';
+
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import { SelectAutocompleteModule } from 'mat-select-autocomplete';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -87,6 +93,7 @@ import {PlatformModule} from '@angular/cdk/platform';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    SelectAutocompleteModule
   ],
   exports: [
     PlatformModule,
