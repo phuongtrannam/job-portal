@@ -32,6 +32,20 @@ export class CompaniesService {
         const url = this.rootUrl + specificPath;
         return this.http.post(url, postData, httpOptions);
     }
+
+    advancedSearchCompany(companyNameParam: string, industryIdParam: string, 
+                    minSalaryParam: string, maxSalaryParam: string) {
+    const postData = {
+        companyName: companyNameParam,
+        industryId: industryIdParam,
+        minSalary: minSalaryParam,
+        maxSalary: maxSalaryParam,
+    };
+    const specificPath = '/advanced_search_company';
+    const url = this.rootUrl + specificPath;
+    return this.http.post(url, postData, httpOptions);
+    }
+
     getBusinessLinesOfCompany(idCompany: string) {
         const postData = {
             id: idCompany,

@@ -2,10 +2,13 @@
   <section id="main-container" class="main-content container inner">
       <div class="row">
             <div class="sidebar-wrapper col-md-3 col-sm-12 col-xs-12">
-                <app-company-filter></app-company-filter>
+                <app-company-filter  (sendCompanyName)="changeCompanyName($event)" (sendRegionId)="changeRegionId($event)" (sendIndustryId)="changeIndustryId($event)"
+                (sendMinSalary)="changeMinSalary($event)" (sendMaxSalary)="changeMaxSalary($event)"></app-company-filter>
             </div>
           <div id="main-content" class="col-sm-12 col-md-9 col-sm-12 col-xs-12">
-              <app-company-listing></app-company-listing>
+              <app-company-listing  [companyName]="companyName" [industryId]="industryId"
+              [minSalary]="minSalary"  [maxSalary]="maxSalary">
+              </app-company-listing>
           </div>
 
       </div>

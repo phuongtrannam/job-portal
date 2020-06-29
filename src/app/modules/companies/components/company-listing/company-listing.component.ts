@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { CompaniesService } from '../../companies.service';
 import { ActivatedRoute } from '@angular/router';
 import { HeaderService } from 'src/app/core/header/header.service';
-
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 @Component({
   selector: 'app-company-listing',
   templateUrl: './company-listing.component.html',
@@ -13,6 +12,11 @@ export class CompanyListingComponent implements OnInit {
   companyList = [];
   numberOfCompanies;
   searchCompanyTerm = '';
+  @Input() companyName: string;
+  @Input() industryId: string;
+  @Input() minSalary: string;
+  @Input() maxSalary: string;
+
   constructor(private companiesService: CompaniesService,
               public headerService: HeaderService,
                 private route: ActivatedRoute) {
@@ -51,5 +55,19 @@ export class CompanyListingComponent implements OnInit {
         console.log("number of company " +this.numberOfCompanies);
       });
   }
+  ngOnChanges() {
+    console.log("this.companyName companyName " +this.companyName);
+    console.log("this.industryId  industryId " +this.industryId);
+    console.log("this.minSalary  minSalary " +this.minSalary);
+    console.log("this.maxSalary  maxSalary " +this.maxSalary);
+    if(this.companyName != null && this.industryId != null && this.minSalary != null && this.maxSalary != null ){
+      this.companiesService.advancedSearchCompany(this.companyName, this.industryId, this.minSalary, this.maxSalary)
+      .subscribe((data: any) => {
+        console.log("advancedSearchCompany");
+        console.log(data.result);
+        this.companyList = data.result;
+      });
+    }
   
+  }
 }
