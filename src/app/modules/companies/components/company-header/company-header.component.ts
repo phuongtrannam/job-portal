@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   providers: [CompaniesService]
 })
 export class CompanyHeaderComponent implements OnInit {
-  companyInfo = {};
+  companyInfo: any;
   selectedCompanyId: string;
   constructor(private companiesService: CompaniesService,
               private route: ActivatedRoute) {

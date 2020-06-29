@@ -1,4 +1,4 @@
-import { RegionComponent } from './region/region.component';
+// import { RegionComponent } from './region/region.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 

@@ -35,7 +35,7 @@ export class CompanyInfoComponent implements OnInit {
   markers: Layer[] = [];
 
   businessLinesOfCompany = [];
-  companyInfo = {};
+  companyInfo: any;
   relatedCompanies = [];
   recentJobsByCompany = [];
   selectedJobId: string;

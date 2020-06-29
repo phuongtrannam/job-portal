@@ -9,6 +9,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
   providers: [ CompaniesService, HeaderService ]
 })
 export class CompanyListingComponent implements OnInit {
+  p = 0;
   companyList = [];
   numberOfCompanies;
   searchCompanyTerm = '';

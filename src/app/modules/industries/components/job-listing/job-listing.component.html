@@ -4,7 +4,7 @@
         <div class="jobs-alert-ordering-wrapper">
             <div class="results-count">
                 Tìm được {{jobs.length}} công việc phù hợp</div>
-            <div class="jobs-ordering-wrapper">
+            <!-- <div class="jobs-ordering-wrapper">
                 <form class="jobs-ordering" >
                     <div class="label">Sắp xếp theo:</div>
                     <select name="filter-orderby" class="orderby select2-hidden-accessible" 
@@ -16,7 +16,7 @@
                     </select>
                     <input type="hidden" name="paged" value="1">
                 </form>
-            </div>
+            </div> -->
         </div>
 
         <div class="jobs-wrapper items-wrapper" *ngFor = "let job of jobs| paginate: { itemsPerPage: 8, currentPage: p }">

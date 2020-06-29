@@ -12,6 +12,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 })
 export class JobListingComponent implements OnInit {
   topJobSearch = [];
+  p = 0;
   jobId: string;
   @Input() jobName: string;
   @Input() regionId: string;

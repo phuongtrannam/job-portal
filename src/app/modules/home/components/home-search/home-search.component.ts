@@ -144,4 +144,7 @@ export class HomeSearchComponent implements OnInit {
   searchJob(jobNameParam: string ){
     this.router.navigate(['/jobs/search',jobNameParam ]);
   }
+  searchCompany(jobNameParam: string ){
+    this.router.navigate(['/companies/search',jobNameParam ]);
+  }
 }

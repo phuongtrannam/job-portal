@@ -12,15 +12,16 @@ import { HeaderService } from 'src/app/core/header/header.service';
   providers: [IndustriesService]
 })
 export class IndustryListingComponent implements OnInit {
+  p = 0;
   trendingindustrys = [{ id: 'J1', name: 'Java Engineer' },
   { id: 'J2', name: 'PHP Developer' },
   { id: 'J3', name: 'IOS Developer' },
   { id: 'J4', name: 'Web Developer' },
   { id: 'J5', name: 'Designer' },
   { id: 'J6', name: 'Angular Developer' }];
-  private defaultSelected = 0;
-  private selection: number;
-  private industryTypes = [{ id: 1, name: "Toàn thời gian" }, { id: 2, name: "Bán thời gian" }, { id: 3, name: "Tự do" }];
+  defaultSelected = 0;
+  selection: number;
+  industryTypes = [{ id: 1, name: "Toàn thời gian" }, { id: 2, name: "Bán thời gian" }, { id: 3, name: "Tự do" }];
   literacies = [
     { checked: false, name: "Đại học" },
     { checked: false, name: "Cao đẳng" },

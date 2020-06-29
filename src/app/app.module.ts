@@ -11,7 +11,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CountToModule } from 'angular-count-to';
 // import { RegionComponent } from './region/region.component';
-import { LuotDangTinTheoNganhNgheComponent } from './region/luot-dang-tin-theo-nganh-nghe/luot-dang-tin-theo-nganh-nghe.component';
+// import { LuotDangTinTheoNganhNgheComponent } from './region/luot-dang-tin-theo-nganh-nghe/luot-dang-tin-theo-nganh-nghe.component';
 // import { MainSliderComponent } from './block/main-slider/main-slider.component';
 // import { LoadingComponent } from './core/loading/loading.component';
 // import {HomeModule} from './modules/home/home.module';
@@ -22,7 +22,7 @@ import { LuotDangTinTheoNganhNgheComponent } from './region/luot-dang-tin-theo-n
     HeaderComponent,
     FooterComponent,
     // RegionComponent,
-    LuotDangTinTheoNganhNgheComponent,
+    // LuotDangTinTheoNganhNgheComponent,
     // MainSliderComponent,
     // HomeComponent,
     // LoadingComponent
