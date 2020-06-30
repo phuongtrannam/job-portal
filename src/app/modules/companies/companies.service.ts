@@ -12,7 +12,8 @@ const httpOptions = {
 };
 @Injectable()
 export class CompaniesService {
-    rootUrl = 'http://localhost:8080/companies';
+    // rootUrl = 'http://localhost:8080/companies';
+    rootUrl = 'http://' + document.location.hostname + ':8080/companies';
     // postData = {
     //     id: 'C188',
     // }

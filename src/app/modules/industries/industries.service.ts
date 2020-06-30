@@ -12,7 +12,8 @@ const httpOptions = {
 
 @Injectable()
 export class IndustriesService {
-    rootUrl = 'http://localhost:8080/industries';
+    // rootUrl = 'http://localhost:8080/industries';
+    rootUrl = 'http://' + document.location.hostname + ':8080/industries';
     constructor(private http: HttpClient) { 
 
     }

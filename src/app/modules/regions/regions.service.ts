@@ -12,7 +12,7 @@ const httpOptions = {
 };
 @Injectable()
 export class RegionsService {
-    rootUrl = 'http://localhost:8080/regions';
+    rootUrl = 'http://' + document.location.hostname + ':8080/regions';
     constructor(private http: HttpClient) {
     }
 

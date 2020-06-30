@@ -12,7 +12,8 @@ const httpOptions = {
 };
 @Injectable()
 export class JobsService {
-    rootUrl = 'http://localhost:8080/jobs';
+    // rootUrl = 'http://localhost:8080/jobs';
+    rootUrl = 'http://' + document.location.hostname + ':8080/jobs';
     constructor(private http: HttpClient) {
     }
 
