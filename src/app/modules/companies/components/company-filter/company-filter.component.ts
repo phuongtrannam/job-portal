@@ -64,7 +64,9 @@ export class CompanyFilterComponent implements OnInit {
     const listIndustryId = this.selectedIndustries.map(a => a.id);
     const industryId = listIndustryId.toString();
     console.log(industryId);
-
+    if (this.companyName == null || this.companyName === '' || this.selectedCities.length === 0 || this.selectedIndustries.length === 0 || this.minSalary == null || this.minSalary === ''|| this.maxSalary == null || this.maxSalary === ''){
+      alert("Bạn cần nhập đủ số trường thông tin");
+    }
     this.sendCompanyName.emit(this.companyName);
     this.sendRegionId.emit(cityId);
     this.sendIndustryId.emit(industryId);

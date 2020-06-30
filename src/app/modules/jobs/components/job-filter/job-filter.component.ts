@@ -82,6 +82,9 @@ export class JobFilterComponent implements OnInit {
     const listIndustryId = this.selectedIndustries.map(a => a.id);
     const industryId = listIndustryId.toString();
     console.log(industryId);
+     if (this.jobName == null || this.jobName === '' || this.selectedCities.length === 0 || this.selectedIndustries.length === 0 || this.minSalary == null || this.minSalary === ''|| this.maxSalary == null || this.maxSalary === ''){
+      alert("Bạn cần nhập đủ số trường thông tin");
+    }
     this.sendJobName.emit(this.jobName);
     this.sendRegionId.emit(cityId);
     this.sendIndustryId.emit(industryId);
