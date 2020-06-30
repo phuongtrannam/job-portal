@@ -10,7 +10,7 @@ import { chartViecLamMoi } from './config.chart-viec-lam-moi';
 import { MatTableDataSource } from '@angular/material/table';
 import { chartDoTuoiTrungBinh } from './config.chart-do-tuoi-trung-binh';
 import { chartCongTy } from './config.chart-cong-ty';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SelectAutocompleteComponent } from 'mat-select-autocomplete';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -640,6 +640,7 @@ export class RegionDetailComponent implements OnInit {
     private jobsService: JobsService,
     public headerService: HeaderService,
     private route: ActivatedRoute,
+    private router: Router,
     public dialog: MatDialog) {
 
   }
@@ -697,20 +698,24 @@ export class RegionDetailComponent implements OnInit {
     new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
 
   }
-
-  public ngAfterViewInit(): void {
-    const subscription = this.route.fragment
-      .subscribe(fragment => {
-          console.log(fragment);
-          const targetElement = document.querySelector('' + fragment);
-          if (fragment && targetElement) {
-              targetElement.scrollIntoView();
-          } else {
-              window.scrollTo(0, 0);
-          }
-      });
+  fragment = '';
+  ngAfterViewInit() {
+    this.route.fragment.subscribe(fragment => {
+      this.fragment = fragment;
+      setTimeout(() => this.scrollToAnchor(), 10);
+    });
   }
 
+  scrollToAnchor(): void {
+    try {
+      if (this.fragment) {
+        document.querySelector('#' + this.fragment).scrollIntoView();
+      }
+    } catch (e) { }
+  }
+  goToHere():void{
+    this.router.navigate(['/product'], { fragment: 'here' });
+  }
   displayFn(cityList: City[]): (id: string) => string | null {
     return (id: string) => {
       const correspondingOption = Array.isArray(cityList) ? cityList.find(option => option.id === id) : null;
