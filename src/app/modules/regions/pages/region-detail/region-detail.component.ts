@@ -600,9 +600,9 @@ export class RegionDetailComponent implements OnInit {
 
   numApi = 0;
   public quickTab: any = [
-    { name: 'Theo ngành nghề', selected: true },
-    { name: 'Theo vị trí công việc', selected: false },
-    { name: 'Theo công ty', selected: false },
+    { name: 'Theo ngành nghề', selected: true, link: 'industryChart' },
+    { name: 'Theo vị trí công việc', selected: false, link: 'jobChart' },
+    { name: 'Theo công ty', selected: false, link: 'companyChart' },
   ];
 
   public quy: any = [
@@ -696,6 +696,19 @@ export class RegionDetailComponent implements OnInit {
     new ApexCharts(document.querySelector('#chart-luong-trung-binh'), chartLuongTrungBinh).render();
     new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
 
+  }
+
+  public ngAfterViewInit(): void {
+    const subscription = this.route.fragment
+      .subscribe(fragment => {
+          console.log(fragment);
+          const targetElement = document.querySelector('' + fragment);
+          if (fragment && targetElement) {
+              targetElement.scrollIntoView();
+          } else {
+              window.scrollTo(0, 0);
+          }
+      });
   }
 
   displayFn(cityList: City[]): (id: string) => string | null {

@@ -64,6 +64,7 @@ export class CompanyFilterComponent implements OnInit {
     const listIndustryId = this.selectedIndustries.map(a => a.id);
     const industryId = listIndustryId.toString();
     console.log(industryId);
+
     this.sendCompanyName.emit(this.companyName);
     this.sendRegionId.emit(cityId);
     this.sendIndustryId.emit(industryId);

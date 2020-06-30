@@ -125,7 +125,7 @@
 </div>
 <div class="container">
     <div class="quick-tab" [hidden]="!showChart">
-        <div class="item" *ngFor="let item of quickTab" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+        <div class="item" *ngFor="let item of quickTab" [routerLink]='"."' [fragment]="item.link" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
     </div>
 
     <div class="row row-cols-2">
@@ -160,7 +160,7 @@
         </div>
     </div>
 
-    <div class="row" [hidden]="!showChart">
+    <div class="row" [hidden]="!showChart" [attr.id]= "industryChart">
         <div class="col-6">
             <!-- <h2>Phân bố việc làm theo ngành nghề</h2> -->
             <div class="chon-quy-wrap">
@@ -180,7 +180,7 @@
             <div id="muc-luong-trung-binh-theo-nganh-nghe"></div>
         </div>
     </div>
-    <div class="row" [hidden]="!showChart">
+    <div class="row" [hidden]="!showChart" [attr.id]= "jobChart">
         <div class="col-6">
             <!-- <h2>Phân bố việc làm theo vị trí công việc</h2> -->
             <div class="chon-quy-wrap">
@@ -201,7 +201,7 @@
         </div>
         
     </div>
-    <div class="row" [hidden]="!showChart">
+    <div class="row" [hidden]="!showChart" [attr.id]= "companyChart">
         <div class="col-6">
             <!-- <h2>Phân bố việc làm theo công ty</h2> -->
             <div class="chon-quy-wrap">
