@@ -483,6 +483,14 @@ export class DialogCompare {
   providers: [RegionsService, HeaderService, JobsService]
 })
 export class RegionDetailComponent implements OnInit {
+  constructor(private regionsService: RegionsService,
+    private jobsService: JobsService,
+    public headerService: HeaderService,
+    private route: ActivatedRoute,
+    private router: Router,
+    public dialog: MatDialog) {
+
+  }
 
   // @ViewChild(SelectAutocompleteComponent, {static: true}) multiSelect: SelectAutocompleteComponent;
   // options = [
@@ -533,57 +541,9 @@ export class RegionDetailComponent implements OnInit {
 
   filteredCities: Observable<City[]>;
   lastFilter = '';
-  filter(filter: string): City[] {
-    this.lastFilter = filter;
-    if (filter) {
-      return this.cities.filter(option => {
-        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
-      })
-    } else {
-      return this.cities.slice();
-    }
-  }
-
-  displayFnCity(value: City[] | string): string | undefined {
-    let displayValue: string;
-    if (Array.isArray(value)) {
-      value.forEach((city, index) => {
-        if (index === 0) {
-          displayValue = city.name;
-        } else {
-          displayValue += ', ' + city.name;
-        }
-      });
-    } else {
-      displayValue = value;
-    }
-    return displayValue;
-  }
-
-  optionClicked(event: Event, city: City) {
-    event.stopPropagation();
-    this.toggleSelection(city);
-  }
   isSelectAll = false;
-  toggleSelection(city: City) {
-    city.selected = !city.selected;
-    if (city.selected) {
-      this.selectedCities.push(city);
-      if(city.id === 'P0'){
-        this.isSelectAll = true;
-      }
-    } else {
-      if(city.id === 'P0'){
-        this.isSelectAll = false;
-      }
-      const i = this.selectedCities.findIndex(value => value.name === city.name);
-      this.selectedCities.splice(i, 1);
-    }
-    // console.log(this.selectedCities);
-    this.cityControl.setValue(this.selectedCities);
-  }
 
-
+  
   newJob = 0;
   newJobGrowth = 0.0;
   averageSalary = 0.0;
@@ -642,16 +602,179 @@ export class RegionDetailComponent implements OnInit {
 
   jobDemandByLiteracyTable = ['literacy', 'numJob', 'growth'];
   jobDemandByLiteracy = new MatTableDataSource<any>([]);
-  constructor(private regionsService: RegionsService,
-    private jobsService: JobsService,
-    public headerService: HeaderService,
-    private route: ActivatedRoute,
-    private router: Router,
-    public dialog: MatDialog) {
-
-  }
   city1 = 'Hà Nội';
   city2 = 'TP. Hồ Chí Minh';
+  showChart = true;
+  isLoading = true;
+  isComparing = false;
+  // selectedCity = 'P0';
+  selectedCity: string;
+  selectedCityName = '';
+  control = new FormControl();
+  cityList: City[] = [{ id: '1', name: 'Champs-Élysées' },
+  { id: '2', name: 'Lombard Street' },
+  { id: '3', name: 'Abbey Road' },
+  { id: '4', name: 'Fifth Avenue' }];
+  cityList1: City[];
+  cityList2: City[];
+  filteredOptions: Observable<City[]>;
+  fragment = '';
+  filter(filter: string): City[] {
+    this.lastFilter = filter;
+    if (filter) {
+      return this.cities.filter(option => {
+        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+      })
+    } else {
+      return this.cities.slice();
+    }
+  }
+
+  displayFnCity(value: City[] | string): string | undefined {
+    let displayValue: string;
+    if (Array.isArray(value)) {
+      value.forEach((city, index) => {
+        if (index === 0) {
+          displayValue = city.name;
+        } else {
+          displayValue += ', ' + city.name;
+        }
+      });
+    } else {
+      displayValue = value;
+    }
+    return displayValue;
+  }
+
+  optionClicked(event: Event, city: City) {
+    event.stopPropagation();
+    this.toggleSelection(city);
+  }
+  toggleSelection(city: City) {
+    city.selected = !city.selected;
+    if (city.selected) {
+      this.selectedCities.push(city);
+      if (city.id === 'P0') {
+        this.isSelectAll = true;
+      }
+    } else {
+      if (city.id === 'P0') {
+        this.isSelectAll = false;
+      }
+      const i = this.selectedCities.findIndex(value => value.name === city.name);
+      this.selectedCities.splice(i, 1);
+    }
+    // console.log(this.selectedCities);
+    this.cityControl.setValue(this.selectedCities);
+  }
+  
+
+  lastFilter1: string = '';
+  filter1(filter: string): City[] {
+    this.lastFilter1 = filter;
+    if (filter) {
+      return this.cityList1.filter(option => {
+        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+      })
+    } else {
+      return this.cityList1.slice();
+    }
+  }
+  cityControl1 = new FormControl();
+  selectedCities1: City[] = new Array<City>();
+  filteredCities1: Observable<City[]>;
+  displayFn1(value: City[] | string): string | undefined {
+    let displayValue: string;
+    if (Array.isArray(value)) {
+      value.forEach((city, index) => {
+        if (index === 0) {
+          displayValue = city.name;
+        } else {
+          displayValue += ', ' + city.name;
+        }
+      });
+    } else {
+      displayValue = value;
+    }
+    return displayValue;
+  }
+
+  optionClicked1(event: Event, city: City) {
+    event.stopPropagation();
+    this.toggleSelection1(city);
+  }
+  isSelectAll1 = false;
+  toggleSelection1(city: City) {
+    city.selected = !city.selected;
+    if (city.selected) {
+      this.selectedCities1.push(city);
+      if(city.id === 'P0'){
+        this.isSelectAll1 = true;
+      }
+    } else {
+      if(city.id === 'P0'){
+        this.isSelectAll1 = false;
+      }
+      const i = this.selectedCities1.findIndex(value => value.name === city.name && value.name === city.name);
+      this.selectedCities1.splice(i, 1);
+    }
+
+    this.cityControl1.setValue(this.selectedCities1);
+  }
+
+  lastFilter2: string = '';
+  filter2(filter: string): City[] {
+    this.lastFilter1 = filter;
+    if (filter) {
+      return this.cityList2.filter(option => {
+        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+      })
+    } else {
+      return this.cityList2.slice();
+    }
+  }
+  cityControl2 = new FormControl();
+  selectedCities2: City[] = new Array<City>();
+  filteredCities2: Observable<City[]>;
+  displayFn2(value: City[] | string): string | undefined {
+    let displayValue: string;
+    if (Array.isArray(value)) {
+      value.forEach((city, index) => {
+        if (index === 0) {
+          displayValue = city.name;
+        } else {
+          displayValue += ', ' + city.name;
+        }
+      });
+    } else {
+      displayValue = value;
+    }
+    return displayValue;
+  }
+
+  optionClicked2(event: Event, city: City) {
+    event.stopPropagation();
+    this.toggleSelection2(city);
+  }
+  isSelectAll2 = false;
+  toggleSelection2(city: City) {
+    city.selected = !city.selected;
+    if (city.selected) {
+      this.selectedCities2.push(city);
+      if(city.id === 'P0'){
+        this.isSelectAll2 = true;
+      }
+    } else {
+      if(city.id === 'P0'){
+        this.isSelectAll2 = false;
+      }
+      const i = this.selectedCities2.findIndex(value => value.name === city.name && value.name === city.name);
+      this.selectedCities2.splice(i, 1);
+    }
+
+    this.cityControl2.setValue(this.selectedCities2);
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogCompare, {
       width: '80%',
@@ -663,17 +786,6 @@ export class RegionDetailComponent implements OnInit {
       // this.animal = result;
     });
   }
-  showChart = true;
-  isLoading = true;
-  // selectedCity = 'P0';
-  selectedCity: string;
-  selectedCityName = '';
-  control = new FormControl();
-  cityList: City[] = [{ id: '1', name: 'Champs-Élysées' },
-  { id: '2', name: 'Lombard Street' },
-  { id: '3', name: 'Abbey Road' },
-  { id: '4', name: 'Fifth Avenue' }];
-  filteredOptions: Observable<City[]>;
   ngOnInit() {
     this.headerService.regions = '/regions';
     this.selectedCity = this.route.snapshot.paramMap.get('id');
@@ -704,7 +816,6 @@ export class RegionDetailComponent implements OnInit {
     new ApexCharts(document.querySelector('#chart-do-tuoi-trung-binh'), chartDoTuoiTrungBinh).render();
 
   }
-  fragment = '';
   ngAfterViewInit() {
     this.route.fragment.subscribe(fragment => {
       this.fragment = fragment;
@@ -719,7 +830,7 @@ export class RegionDetailComponent implements OnInit {
       }
     } catch (e) { }
   }
-  goToHere():void{
+  goToHere(): void {
     this.router.navigate(['/product'], { fragment: 'here' });
   }
   // displayFn(cityList: City[]): (id: string) => string | null {
@@ -765,7 +876,6 @@ export class RegionDetailComponent implements OnInit {
     this.showJobDemandByAge(this.selectedCity);
     this.showJobDemandByLiteracy(this.selectedCity);
   }
-
   analysisRegion() {
     console.log(this.selectedCities);
     this.isLoading = true;
@@ -785,7 +895,7 @@ export class RegionDetailComponent implements OnInit {
       this.showJobDemandByLiteracy(cityId);
     } else if (this.selectedCities.length >= 2) {
       const listId = this.selectedCities.map(a => a.id);
-      if(listId.includes('P0')){
+      if (listId.includes('P0')) {
         this.showChart = true;
         console.log("co P0 ne")
         const cityId = 'P0';
@@ -799,7 +909,7 @@ export class RegionDetailComponent implements OnInit {
         this.showHighestPayingCompanies(cityId);
         this.showJobDemandByAge(cityId);
         this.showJobDemandByLiteracy(cityId);
-      } else{
+      } else {
         this.showChart = false;
         const cityId = listId.toString();
         console.log(cityId);
@@ -817,10 +927,12 @@ export class RegionDetailComponent implements OnInit {
         console.log(data.result);
         // this.increaseNumApi();
         this.cityList = data.result;
-        this.cityList.splice(0, 0, {name: 'Cả nước', id: "P0"});
+        this.cityList.splice(0, 0, { name: 'Cả nước', id: "P0" });
         if (this.selectedCity != null && this.selectedCity != 'P0') {
           this.selectedCityName = this.cityList.find(x => x.id === this.selectedCity).name;
-        }
+        };
+        this.cityList2 = JSON.parse(JSON.stringify(data.result));
+        this.cityList1 = JSON.parse(JSON.stringify(data.result));
         // if (this.selectedCity === 'P0'){
         //   this.selectedCities.push({name: 'Cả nước', id: 'P0', selected: true});
         // } else {
@@ -841,6 +953,17 @@ export class RegionDetailComponent implements OnInit {
             map(value => typeof value === 'string' ? value : value.name),
             map(name => name ? this._filter(name) : this.cityList.slice())
           );
+        this.filteredCities1 = this.cityControl1.valueChanges.pipe(
+          startWith<string | City[]>(''),
+          map(value => typeof value === 'string' ? value : this.lastFilter1),
+          map(filter => this.filter1(filter))
+        );
+    
+        this.filteredCities2 = this.cityControl2.valueChanges.pipe(
+          startWith<string | City[]>(''),
+          map(value => typeof value === 'string' ? value : this.lastFilter2),
+          map(filter => this.filter2(filter))
+        );
       });
   }
   changeTimeIndustryNumJobChart(index) {

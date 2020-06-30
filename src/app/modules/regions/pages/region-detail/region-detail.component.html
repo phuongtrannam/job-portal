@@ -21,28 +21,13 @@
                     </mat-autocomplete>
                   </form>
             </div> -->
-            <div class="col-sm-7 col-xs-7">
+            <div class="col-sm-6 col-xs-6" [hidden]="isComparing">
                 <form class="example-form" >
-                    <!-- <mat-select-autocomplete class="grid-7-11" style="width: -webkit-fill-available;"
-                        [placeholder]="'Options Selection'"
-                        [errorMsg]="errorMessage"
-                        [showErrorMsg]="showError"
-                        [options]="options"
-                        [display]="'display'"
-                        [appearance] = "'standard'"
-                        [value]="'value'"
-                        [multiple]='true'
-                        [labelCount]="2"
-                        [selectedOptions]="selectedOptions"
-                        (selectionChange)="getSelectedOptions($event)">
-                    </mat-select-autocomplete> -->
-
                     <mat-form-field class="example-full-width">
                         <input  type="text" placeholder="Lưa chọn các thành phố"  matInput [matAutocomplete]="auto"
                             [formControl]="cityControl">
                         <mat-hint></mat-hint>
                     </mat-form-field>
-                    
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnCity">
                         <mat-option *ngFor="let city of filteredCities | async" [value]="selectedCities">
                             <div (click)="optionClicked($event, city)">
@@ -55,10 +40,40 @@
                     </mat-autocomplete>
                 </form>
             </div>
-            <!-- <div class="col-sm-2 col-xs-2">
-                <input style=" margin-top: 30px; " [(ngModel)]="myProperty" type="checkbox"> So sánh khu vực
-            </div> -->
+            <div class="col-sm-3 col-xs-3" [hidden]="!isComparing">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Chọn các thành phố"  matInput [matAutocomplete]="auto1" [formControl]="cityControl1">
+                </mat-form-field>
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn1">
+                    <mat-option *ngFor="let city of filteredCities1 | async" [value]="selectedCities1">
+                        <div (click)="optionClicked1($event, city)">
+                            <mat-checkbox [checked]="city.selected" (change)="toggleSelection1(city)" (click)="$event.stopPropagation()"
+                      [disabled]="isSelectAll1 && city.id != 'P0'" >
+                                {{ city.name }}
+                            </mat-checkbox>
+                        </div>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="col-sm-3 col-xs-3" [hidden]="!isComparing">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Chọn các thành phố" matInput [matAutocomplete]="auto2" [formControl]="cityContro2">
+                </mat-form-field>
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn2">
+                    <mat-option *ngFor="let city of filteredCities2 | async" [value]="selectedCities2">
+                        <div (click)="optionClicked2($event, city)">
+                            <mat-checkbox [checked]="city.selected" (change)="toggleSelection2(city)" (click)="$event.stopPropagation()"
+                      [disabled]="isSelectAll2 && city.id != 'P0'" >
+                                {{ city.name }}
+                            </mat-checkbox>
+                        </div>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
             <div class="col-sm-2 col-xs-2">
+                <input style=" margin-top: 30px; " [(ngModel)]="isComparing" type="checkbox"> So sánh khu vực
+            </div>
+            <div class="col-sm-1 col-xs-1">
                 <!-- <button style=" margin-top: 15px; " mat-raised-button (click)="openDialog()">Phân tích</button> -->
                 <button style=" margin-top: 15px; " mat-raised-button (click)="analysisRegion()">Phân tích</button>
             </div>
