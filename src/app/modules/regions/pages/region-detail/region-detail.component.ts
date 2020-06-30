@@ -564,16 +564,22 @@ export class RegionDetailComponent implements OnInit {
     event.stopPropagation();
     this.toggleSelection(city);
   }
-
+  isSelectAll = false;
   toggleSelection(city: City) {
     city.selected = !city.selected;
     if (city.selected) {
       this.selectedCities.push(city);
+      if(city.id === 'P0'){
+        this.isSelectAll = true;
+      }
     } else {
+      if(city.id === 'P0'){
+        this.isSelectAll = false;
+      }
       const i = this.selectedCities.findIndex(value => value.name === city.name);
       this.selectedCities.splice(i, 1);
     }
-
+    // console.log(this.selectedCities);
     this.cityControl.setValue(this.selectedCities);
   }
 
@@ -716,12 +722,12 @@ export class RegionDetailComponent implements OnInit {
   goToHere():void{
     this.router.navigate(['/product'], { fragment: 'here' });
   }
-  displayFn(cityList: City[]): (id: string) => string | null {
-    return (id: string) => {
-      const correspondingOption = Array.isArray(cityList) ? cityList.find(option => option.id === id) : null;
-      return correspondingOption ? correspondingOption.name : '';
-    };
-  }
+  // displayFn(cityList: City[]): (id: string) => string | null {
+  //   return (id: string) => {
+  //     const correspondingOption = Array.isArray(cityList) ? cityList.find(option => option.id === id) : null;
+  //     return correspondingOption ? correspondingOption.name : '';
+  //   };
+  // }
 
   private _filter(name: string): City[] {
     const filterValue = name.toLowerCase();
@@ -778,14 +784,30 @@ export class RegionDetailComponent implements OnInit {
       this.showJobDemandByAge(cityId);
       this.showJobDemandByLiteracy(cityId);
     } else if (this.selectedCities.length >= 2) {
-      this.showChart = false;
       const listId = this.selectedCities.map(a => a.id);
-      const cityId = listId.toString();
-      console.log(cityId);
-      this.getDashboardData(cityId);
-      this.showJobDemandAndAverageSalary(cityId);
-      this.showJobDemandByAge(cityId);
-      this.showJobDemandByLiteracy(cityId);
+      if(listId.includes('P0')){
+        this.showChart = true;
+        console.log("co P0 ne")
+        const cityId = 'P0';
+        this.getDashboardData(cityId);
+        this.showJobDemandAndAverageSalary(cityId);
+        this.showJobDemandByIndustry(cityId);
+        this.showAverageSalaryByIndustry(cityId);
+        this.showHighestDemandJobs(cityId);
+        this.showHighestSalaryJobs(cityId);
+        this.showTopHiringCompanies(cityId);
+        this.showHighestPayingCompanies(cityId);
+        this.showJobDemandByAge(cityId);
+        this.showJobDemandByLiteracy(cityId);
+      } else{
+        this.showChart = false;
+        const cityId = listId.toString();
+        console.log(cityId);
+        this.getDashboardData(cityId);
+        this.showJobDemandAndAverageSalary(cityId);
+        this.showJobDemandByAge(cityId);
+        this.showJobDemandByLiteracy(cityId);
+      }
     }
   }
   getCityList(): void {
@@ -795,9 +817,16 @@ export class RegionDetailComponent implements OnInit {
         console.log(data.result);
         // this.increaseNumApi();
         this.cityList = data.result;
+        this.cityList.splice(0, 0, {name: 'Cả nước', id: "P0"});
         if (this.selectedCity != null && this.selectedCity != 'P0') {
           this.selectedCityName = this.cityList.find(x => x.id === this.selectedCity).name;
         }
+        // if (this.selectedCity === 'P0'){
+        //   this.selectedCities.push({name: 'Cả nước', id: 'P0', selected: true});
+        // } else {
+        //   this.selectedCities.push({name: this.selectedCityName, id: this.selectedCity, selected: true});
+        // }
+        // console.log(this.selectedCities);
         this.filteredOptions = this.control.valueChanges
           .pipe(
             startWith<string | City>(''),

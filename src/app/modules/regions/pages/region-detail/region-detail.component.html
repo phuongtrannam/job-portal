@@ -46,7 +46,8 @@
                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnCity">
                         <mat-option *ngFor="let city of filteredCities | async" [value]="selectedCities">
                             <div (click)="optionClicked($event, city)">
-                                <mat-checkbox [checked]="city.selected" (change)="toggleSelection(city)" (click)="$event.stopPropagation()">
+                                <mat-checkbox [checked]="city.selected" (change)="toggleSelection(city)" 
+                                        (click)="$event.stopPropagation()" [disabled]="isSelectAll && city.id != 'P0'">
                                     {{ city.name }}
                                 </mat-checkbox>
                             </div>
