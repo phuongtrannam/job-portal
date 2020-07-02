@@ -57,7 +57,7 @@
             </div>
             <div class="col-sm-3 col-xs-3" [hidden]="!isComparing">
                 <mat-form-field class="example-full-width">
-                    <input type="text" placeholder="Chọn các thành phố" matInput [matAutocomplete]="auto2" [formControl]="cityContro2">
+                    <input type="text" placeholder="Chọn các thành phố" matInput [matAutocomplete]="auto2" [formControl]="cityControl2">
                 </mat-form-field>
                 <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn2">
                     <mat-option *ngFor="let city of filteredCities2 | async" [value]="selectedCities2">

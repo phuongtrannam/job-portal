@@ -11,8 +11,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { chartDoTuoiTrungBinh } from './config.chart-do-tuoi-trung-binh';
 import { chartCongTy } from './config.chart-cong-ty';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SelectAutocompleteComponent } from 'mat-select-autocomplete';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 declare var ApexCharts: any;
 export interface City {
@@ -22,460 +22,7 @@ export interface City {
   selected?: boolean;
 }
 
-export interface DialogData {
-  animal: string;
-  name: string;
-}
 
-@Component({
-  selector: 'dialog-compare',
-  templateUrl: 'dialog.html',
-})
-export class DialogCompare {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogCompare>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-  ngOnInit() {
-    this.showCompareNumJob();
-    this.showCompareSalary();
-    this.showLiteracyChart1();
-    this.showLiteracyChart2();
-    this.showAgeAndGenderChart1();
-    this.showAgeAndGenderChart2();
-  }
-  showCompareNumJob() {
-    const options = {
-      series: [{
-        name: 'Nhân viên kinh doanh',
-        data: [49, 88, 301, 17213]
-      },
-      {
-        name: 'Nhân viên kinh doanh phát triển thị trường',
-        data: [0, 0, 10, 175]
-      }],
-      chart: {
-        height: 350,
-        type: 'bar',
-        zoom: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      colors: ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
-      dataLabels: {
-        enabled: true,
-        textAnchor: 'start',
-        formatter: val => {
-          return val + '';
-        },
-        offsetX: 0,
-        style: {
-          fontSize: '12px',
-          colors: ['#36a800']
-        }
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          startingShape: 'flat',
-          endingShape: 'flat',
-          columnWidth: '70%',
-          barHeight: '70%',
-          distributed: false,
-          // rangeBarOverlap: true,
-          dataLabels: {
-            position: 'bot', // top, center, bottom
-          },
-          // colors: {
-          //   ranges: [{
-          //     from: 0,
-          //     to: 100000000,
-          //     color: '#37933c'
-          //   }],
-          //   backgroundBarColors: [],
-          //   backgroundBarOpacity: 1,
-          //   backgroundBarRadius: 0,
-          // },
-        }
-      },
-      xaxis: {
-        categories: ['3/2019', '4/2019', '1/2020', '2/2020'],
-        position: 'top',
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        labels: {
-          show: true,
-          formatter: val => {
-            return '';
-          }
-        },
-        tooltip: {
-          enabled: true,
-        }
-      },
-      yaxis: {
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false,
-        }
-      },
-      title: {
-        text: 'So sánh nhu cầu tuyển dụng của hai vị trí công việc',
-        align: 'left',
-        style: {
-          fontSize: '18px',
-          fontFamily: 'Nunito, Arial, sans-serif',
-          fontWeight: '600',
-        },
-      },
-      subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
-        align: 'left'
-      },
-    };
-    const chart = new ApexCharts(document.querySelector('#nhu-cau-theo-vi-tri-cong-viec-dialog'), options);
-    chart.render();
-  }
-  showCompareSalary() {
-    const options = {
-      series: [{
-        name: 'Nhân viên kinh doanh',
-        data: [9.9, 10.5, 12.0, 12.4]
-      },
-      {
-        name: 'Nhân viên kinh doanh phát triển thị trường',
-        data: [0, 0, 8.5, 12.7]
-      }],
-      chart: {
-        height: 350,
-        type: 'line',
-        zoom: {
-          enabled: false
-        },
-        toolbar: {
-          show: false
-        }
-      },
-      colors: ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
-      dataLabels: {
-        enabled: true,
-        textAnchor: 'start',
-        formatter: val => {
-          return val + '';
-        },
-        offsetX: 0,
-        style: {
-          fontSize: '12px',
-          colors: ['#36a800']
-        }
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false,
-          startingShape: 'flat',
-          endingShape: 'flat',
-          columnWidth: '70%',
-          barHeight: '70%',
-          distributed: false,
-          // rangeBarOverlap: true,
-          dataLabels: {
-            position: 'bot', // top, center, bottom
-          },
-          // colors: {
-          //   ranges: [{
-          //     from: 0,
-          //     to: 100000000,
-          //     color: '#37933c'
-          //   }],
-          //   backgroundBarColors: [],
-          //   backgroundBarOpacity: 1,
-          //   backgroundBarRadius: 0,
-          // },
-        }
-      },
-      xaxis: {
-        categories: ['3/2019', '4/2019', '1/2020', '2/2020'],
-        position: 'top',
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        labels: {
-          show: true,
-          formatter: val => {
-            return '';
-          }
-        },
-        tooltip: {
-          enabled: true,
-        }
-      },
-      yaxis: {
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false,
-        },
-        min: 0,
-      },
-      title: {
-        text: 'So sánh mức lương trung bình của hai khu vực',
-        align: 'left',
-        style: {
-          fontSize: '18px',
-          fontFamily: 'Nunito, Arial, sans-serif',
-          fontWeight: '600',
-        },
-      },
-      subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
-        align: 'left'
-      },
-    };
-    const chart = new ApexCharts(document.querySelector('#muc-luong-trung-binh-theo-vi-tri-cong-viec-dialog'), options);
-    chart.render();
-  }
-  showAgeAndGenderChart1() {
-    const options = {
-      series: [{
-        name: ' Nam',
-        data: [36, 407, 457, 88, 25, 16584]
-      }, {
-        name: 'Nữ',
-        data: [23, 339, 367, 76, 19, 15003]
-      }],
-      chart: {
-        type: 'bar',
-        height: 350,
-        stacked: true,
-        toolbar: {
-          show: true
-        },
-        zoom: {
-          enabled: true
-        }
-      },
-      colors: ['#38933d', '#8dc971'],
-      title: {
-        text: 'Nhu cầu việc làm theo độ tuổi, giới tính của vị trí Nhân viên kinh doanh',
-        align: 'left',
-        style: {
-          fontSize: '18px',
-        },
-      },
-      subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
-        align: 'left'
-      },
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          legend: {
-            position: 'bottom',
-            offsetX: -10,
-            offsetY: 0
-          }
-        }
-      }],
-      plotOptions: {
-        bar: {
-          horizontal: true,
-        },
-      },
-      xaxis: {
-        // type: 'datetime',
-        categories: ['0-18', '18-25', '25-35', '35-50', '50+', 'Không xác định'],
-      },
-      legend: {
-        position: 'right',
-        offsetY: 40
-      },
-      fill: {
-        opacity: 1
-      }
-    };
-
-    const chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh1'), options);
-    chart.render();
-  }
-  showAgeAndGenderChart2() {
-    const options = {
-      series: [{
-        name: ' Nam',
-        data: [0, 2, 2, 2, 0, 182]
-      }, {
-        name: 'Nữ',
-        data: [0, 2, 2, 2, 0, 146]
-      }],
-      chart: {
-        type: 'bar',
-        height: 350,
-        stacked: true,
-        toolbar: {
-          show: true
-        },
-        zoom: {
-          enabled: true
-        }
-      },
-      colors: ['#38933d', '#8dc971'],
-      title: {
-        text: 'Nhu cầu việc làm theo độ tuổi, giới tính của vị trí Nhân viên kinh doanh phát triển thị trường',
-        align: 'left',
-        style: {
-          fontSize: '18px',
-        },
-      },
-      subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
-        align: 'left'
-      },
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          legend: {
-            position: 'bottom',
-            offsetX: -10,
-            offsetY: 0
-          }
-        }
-      }],
-      plotOptions: {
-        bar: {
-          horizontal: true,
-        },
-      },
-      xaxis: {
-        // type: 'datetime',
-        categories: ['0-18', '18-25', '25-35', '35-50', '50+', 'Không xác định'],
-      },
-      legend: {
-        position: 'right',
-        offsetY: 40
-      },
-      fill: {
-        opacity: 1
-      }
-    };
-
-    const chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh2'), options);
-    chart.render();
-  }
-  showLiteracyChart1() {
-    const options = {
-      series: [514, 2939, 7147, 6613],
-      chart: {
-        width: '100%',
-        height: 350,
-        type: 'donut',
-
-      },
-      colors: ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
-      labels: ['Đại học', 'Cao đẳng', 'Trung cấp', 'Khác'],
-      // theme: {
-      //   palette: 'palette2',
-      //   monochrome: {
-      //     enabled: true,
-      //     color: '#82b440',
-      //   }
-      // },
-
-      title: {
-        text: 'Biểu đồ phân bổ việc làm theo trình độ học vấn của vị trí Nhân viên kinh doanh',
-        align: 'left',
-        style: {
-          fontSize: '18px',
-          fontWeight: 'bold',
-          fontFamily: undefined,
-          color: '#263238'
-        },
-      },
-      subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
-        align: 'left'
-      },
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
-    };
-
-    const chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-trinh-do-hoc-van1'), options);
-    chart.render();
-  }
-  showLiteracyChart2() {
-    const options = {
-      series: [1, 32, 46, 96],
-      chart: {
-        width: '100%',
-        height: 350,
-        type: 'donut',
-
-      },
-      colors: ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
-      labels: ['Đại học', 'Cao đẳng', 'Trung cấp', 'Khác'],
-      // theme: {
-      //   palette: 'palette2',
-      //   monochrome: {
-      //     enabled: true,
-      //     color: '#82b440',
-      //   }
-      // },
-
-      title: {
-        text: 'Biểu đồ phân bổ việc làm theo trình độ học vấn của vị trí Nhân viên kinh doanh phát triển thị trường',
-        align: 'left',
-        style: {
-          fontSize: '18px',
-          fontWeight: 'bold',
-          fontFamily: undefined,
-          color: '#263238'
-        },
-      },
-      subtitle: {
-        text: 'Dữ liệu cập nhật lần cuối quý 2/2020',
-        align: 'left'
-      },
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
-          },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
-    };
-
-    const chart = new ApexCharts(document.querySelector('#nhu-cau-tuyen-dung-theo-trinh-do-hoc-van2'), options);
-    chart.render();
-  }
-}
 @Component({
   selector: 'app-region-detail',
   templateUrl: './region-detail.component.html',
@@ -602,8 +149,10 @@ export class RegionDetailComponent implements OnInit {
 
   jobDemandByLiteracyTable = ['literacy', 'numJob', 'growth'];
   jobDemandByLiteracy = new MatTableDataSource<any>([]);
-  city1 = 'Hà Nội';
-  city2 = 'TP. Hồ Chí Minh';
+  city1 = '';
+  cityName1 = '';
+  city2 = '';
+  cityName2 = '';
   showChart = true;
   isLoading = true;
   isComparing = false;
@@ -776,9 +325,9 @@ export class RegionDetailComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(DialogCompare, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '80%',
-      data: { city1: this.city1, city2: this.city2 }
+      data: { city1: this.city1, city2: this.city2, cityName1: this.cityName1, cityName2: this.cityName2 }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -878,27 +427,56 @@ export class RegionDetailComponent implements OnInit {
   }
   analysisRegion() {
     console.log(this.selectedCities);
-    this.isLoading = true;
-    this.numApi = 0;
-    if (this.selectedCities.length === 1) {
-      this.showChart = true;
-      const cityId = this.selectedCities[0].id;
-      this.getDashboardData(cityId);
-      this.showJobDemandAndAverageSalary(cityId);
-      this.showJobDemandByIndustry(cityId);
-      this.showAverageSalaryByIndustry(cityId);
-      this.showHighestDemandJobs(cityId);
-      this.showHighestSalaryJobs(cityId);
-      this.showTopHiringCompanies(cityId);
-      this.showHighestPayingCompanies(cityId);
-      this.showJobDemandByAge(cityId);
-      this.showJobDemandByLiteracy(cityId);
-    } else if (this.selectedCities.length >= 2) {
-      const listId = this.selectedCities.map(a => a.id);
-      if (listId.includes('P0')) {
+    if (this.isComparing) {
+      if (this.selectedCities1.length === 1) {
+        this.city1 = this.selectedCities1[0].id;
+        if(this.city1 === 'P0'){
+          this.cityName1 = 'Toàn quốc';
+        } else{
+          this.cityName1 = this.cityList.find(x => x.id === this.city1).name;
+        }
+      } else if (this.selectedCities1.length >= 2) {
+        const listIdCompare1 = this.selectedCities1.map(a => a.id);
+        if (listIdCompare1.includes('P0')) {
+          this.city1 = 'P0';
+          this.cityName1 = 'Toàn quốc';
+        } else {
+          const listNameCompare1 = [];
+          for(const idCity of listIdCompare1){
+            listNameCompare1.push(this.cityList.find(x => x.id === idCity).name);
+          }
+          this.city1 = listIdCompare1.toString();
+          this.cityName1 = listNameCompare1.toString();
+        }
+      }
+      if (this.selectedCities2.length === 1) {
+        this.city2 = this.selectedCities2[0].id;
+        if(this.city2 === 'P0'){
+          this.cityName2 = 'Toàn quốc';
+        } else{
+          this.cityName2 = this.cityList.find(x => x.id === this.city2).name;
+        }
+      } else if (this.selectedCities2.length >= 2) {
+        const listIdCompare2 = this.selectedCities2.map(a => a.id);
+        if (listIdCompare2.includes('P0')) {
+          this.city2 = 'P0';
+          this.cityName2 = 'Toàn quốc';
+        } else {
+          const listNameCompare2 = [];
+          for(const idCity2 of listIdCompare2){
+            listNameCompare2.push(this.cityList.find(x => x.id === idCity2).name);
+          }
+          this.city2 = listIdCompare2.toString();
+          this.cityName2 = listNameCompare2.toString();
+        }
+      }
+      this.openDialog();
+    } else {
+      this.isLoading = true;
+      this.numApi = 0;
+      if (this.selectedCities.length === 1) {
         this.showChart = true;
-        console.log("co P0 ne")
-        const cityId = 'P0';
+        const cityId = this.selectedCities[0].id;
         this.getDashboardData(cityId);
         this.showJobDemandAndAverageSalary(cityId);
         this.showJobDemandByIndustry(cityId);
@@ -909,14 +487,31 @@ export class RegionDetailComponent implements OnInit {
         this.showHighestPayingCompanies(cityId);
         this.showJobDemandByAge(cityId);
         this.showJobDemandByLiteracy(cityId);
-      } else {
-        this.showChart = false;
-        const cityId = listId.toString();
-        console.log(cityId);
-        this.getDashboardData(cityId);
-        this.showJobDemandAndAverageSalary(cityId);
-        this.showJobDemandByAge(cityId);
-        this.showJobDemandByLiteracy(cityId);
+      } else if (this.selectedCities.length >= 2) {
+        const listId = this.selectedCities.map(a => a.id);
+        if (listId.includes('P0')) {
+          this.showChart = true;
+          console.log('co P0 ne')
+          const cityId = 'P0';
+          this.getDashboardData(cityId);
+          this.showJobDemandAndAverageSalary(cityId);
+          this.showJobDemandByIndustry(cityId);
+          this.showAverageSalaryByIndustry(cityId);
+          this.showHighestDemandJobs(cityId);
+          this.showHighestSalaryJobs(cityId);
+          this.showTopHiringCompanies(cityId);
+          this.showHighestPayingCompanies(cityId);
+          this.showJobDemandByAge(cityId);
+          this.showJobDemandByLiteracy(cityId);
+        } else {
+          this.showChart = false;
+          const cityId = listId.toString();
+          console.log(cityId);
+          this.getDashboardData(cityId);
+          this.showJobDemandAndAverageSalary(cityId);
+          this.showJobDemandByAge(cityId);
+          this.showJobDemandByLiteracy(cityId);
+        }
       }
     }
   }

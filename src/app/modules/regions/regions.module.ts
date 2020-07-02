@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RegionsRoutingModule } from './regions-routing.module';
 import { RegionDetailComponent } from './pages/region-detail/region-detail.component';
-import {DialogCompare} from './pages/region-detail/region-detail.component';
+import {DialogComponent} from './components/dialog/dialog.component';
 
 
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -154,9 +154,9 @@ import { CoreModule } from './../../core/core.module';
   declarations: [
     RegionDetailComponent,
     MainSliderComponent,
-    DialogCompare,
+    DialogComponent,
     // LoadingComponent,
   ],
-  entryComponents: [DialogCompare]
+  entryComponents: [DialogComponent]
 })
 export class RegionsModule { }
