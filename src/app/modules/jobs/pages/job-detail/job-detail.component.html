@@ -308,9 +308,9 @@
                                 <div class="ali-right hidden-xs">
                                     <a class="btn btn-theme btn-outline" [href]="'/jobs/' + job.id">Chi tiết</a>
                                 </div>
-                                <!-- <div class="ali-right hidden-xs">
-                                    <a class="btn btn-theme btn-outline" [href]="'/jobs/' + job.id">So sánh</a>
-                                </div> -->
+                                <div class="ali-right hidden-xs">
+                                    <a class="btn btn-theme btn-outline" (click)="comparingJob(job)">So sánh</a>
+                                </div>
                             </div>
                         </div>
                     </article>

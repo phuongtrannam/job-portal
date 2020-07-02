@@ -46,11 +46,11 @@
             <div class="widget-content">
                 <div *ngFor="let company of relatedCompanies"
                     >
-                    <article class="job-list job_listing type-job_listing status-publish has-post-thumbnail hentry ">
+                    <article class="job-list job_listing type-job_listing status-publish has-post-thumbnail hentry" style=" height: 150px; " >
                         <div class="clearfix">
                             <div class="job-information flex-middle no-padding width-full">
                                 <div class="inner">
-                                    <div class="job-title-wrapper">
+                                    <div class="job-title-wrapper" style=" margin-bottom: 20px; ">
                                         <h2 class="job-title"><a
                                             [routerLink]="['/companies', company.id]" rel="bookmark">{{company.name}}</a></h2> <span class="featured"
                                             data-toggle="tooltip" title="" data-original-title="featured"><i
@@ -61,9 +61,12 @@
                                     </div>
                                 </div>
                                 <div class="ali-right">
-                                    <div class="wrapper-shortlist">
+                                    <!-- <div class="wrapper-shortlist">
                                         <a href="javascript:void(0);" class="btn-add-job-shortlist" data-job_id="1318"
                                             data-nonce="43ad379e72"><i class="fa fa-star"></i></a>
+                                    </div> -->
+                                    <div class="ali-right hidden-xs">
+                                        <a class="btn btn-theme btn-outline" (click)="comparingCompany(company)">So sánh</a>
                                     </div>
                                 </div>
                             </div>

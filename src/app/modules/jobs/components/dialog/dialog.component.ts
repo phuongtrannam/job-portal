@@ -89,7 +89,7 @@ export class DialogComponent implements OnInit {
       this.timeLiteracyChart1[index].selected = true;
       console.log(index);
       console.log(selector);
-      this.reloadJobDemandByLiteracy(index, selector, this.dataJobDemandByLiteracy2, this.nameCity1);
+      this.reloadJobDemandByLiteracy(index, selector, this.dataJobDemandByLiteracy1, this.nameCity1);
     } else if(selector === 'job-demand-by-literacy2'){
       this.timeLiteracyChart2.forEach(element => {
         element.selected = false;
@@ -446,10 +446,10 @@ export class DialogComponent implements OnInit {
     document.getElementById(selector).innerHTML = '';
     if (Object.keys(dataJobDemandByLiteracy).length > 2) {
       const milestones = dataJobDemandByLiteracy.timestamps;
-      const literacies = dataJobDemandByLiteracy.literacy;
-      const literacyObj = dataJobDemandByLiteracy.literacy;
-      const literacyName = literacyObj.map(function (el) { return el.name; })
-
+      // const literacies = dataJobDemandByLiteracy.literacy;
+      // const literacyObj = dataJobDemandByLiteracy.literacy;
+      // const literacyName = literacyObj.map(function (el) { return el.name; })
+      const literacyName = dataJobDemandByLiteracy.literacy;
       const numJob = dataJobDemandByLiteracy[milestones[index]].data;
       const growth = dataJobDemandByLiteracy[milestones[index]].growth;
       const options = {

@@ -1,0 +1,77 @@
+
+<app-loading *ngIf="isLoading">{{ isLoading }}</app-loading>
+<h1 mat-dialog-title>So sánh nhu cầu tuyển dụng của hai công ty</h1>
+<h2 mat-dialog-title>{{data.companyName1}} - {{data.companyName2}}</h2>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-6">
+            <div id="compare-number-job-salary-1"></div>
+        </div>
+        <div class="col-6">
+            <div id="compare-number-job-salary-2"></div>
+        </div>
+        <div class="col-6">
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeLiteracyChart1; index as i" (click)="changeLiteracyChart(i, 'job-demand-by-literacy1')" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeLiteracyChart2; index as i" (click)="changeLiteracyChart(i, 'job-demand-by-literacy2')" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div id="job-demand-by-literacy1"></div>
+        </div>
+        <div class="col-6">
+            <div id="job-demand-by-literacy2"></div>
+        </div>
+        <div class="col-6">
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeAgeAndGenderChart1; index as i" (click)="changeAgeAndGenderChart(i, 'job-demand-by-age-and-gender1')" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="chon-quy-wrap">
+                <div class="item" *ngFor="let item of timeAgeAndGenderChart2; index as i" (click)="changeAgeAndGenderChart(i, 'job-demand-by-age-and-gender2')" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div id="job-demand-by-age-and-gender1"></div>
+        </div>
+        <div class="col-6">
+            <div id="job-demand-by-age-and-gender2"></div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Thoát</button>
+</div>
+
+<!-- <h1 mat-dialog-title>So sánh nhu cầu tuyển dụng của hai công việc</h1>
+<h2 mat-dialog-title>Nhân viên kinh doanh - Nhân viên kinh doanh phát triển thị trường</h2>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col-6">
+            <div id="nhu-cau-theo-vi-tri-cong-viec-dialog"></div>
+        </div>
+        <div class="col-6">
+            <div id="muc-luong-trung-binh-theo-vi-tri-cong-viec-dialog"></div>
+        </div>
+        <div class="col-6">
+            <div id="nhu-cau-tuyen-dung-theo-trinh-do-hoc-van1"></div>
+        </div>
+        <div class="col-6">
+            <div id="nhu-cau-tuyen-dung-theo-trinh-do-hoc-van2"></div>
+        </div>
+        <div class="col-6">
+            <div id="nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh1"></div>
+        </div>
+        <div class="col-6">
+            <div id="nhu-cau-tuyen-dung-theo-do-tuoi-gioi-tinh2"></div>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Thoát</button>
+</div> -->

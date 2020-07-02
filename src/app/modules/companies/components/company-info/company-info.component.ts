@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CompaniesService } from '../../companies.service';
 import { icon, latLng, LatLng, Layer, marker, tileLayer } from 'leaflet';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ComparingCompanyComponent } from '../../components/comparing-company/comparing-company.component';
 @Component({
   selector: 'app-company-info',
   templateUrl: './company-info.component.html',
@@ -38,20 +40,37 @@ export class CompanyInfoComponent implements OnInit {
   companyInfo: any;
   relatedCompanies = [];
   recentJobsByCompany = [];
-  selectedJobId: string;
+  selectedCompanyId: string;
   constructor(private companiesService: CompaniesService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public dialog: MatDialog) {
 
   }
   ngOnInit() {
     // this.addMarker();
-    this.selectedJobId = this.route.snapshot.paramMap.get('id');
-    this.showCompanyInfo(this.selectedJobId);
-    this.showBusinessLinesOfCompany(this.selectedJobId);
-    this.showRelatedCompanies(this.selectedJobId);
-    this.showRecentJobsByCompany(this.selectedJobId);
+    this.selectedCompanyId = this.route.snapshot.paramMap.get('id');
+    this.showCompanyInfo(this.selectedCompanyId);
+    this.showBusinessLinesOfCompany(this.selectedCompanyId);
+    this.showRelatedCompanies(this.selectedCompanyId);
+    this.showRecentJobsByCompany(this.selectedCompanyId);
   }
-
+  openComparingJob(company2Id, company2Name): void {
+    const dialogRef = this.dialog.open(ComparingCompanyComponent, {
+      width: '80%',
+      height: '80%',
+      data: {company1: this.selectedCompanyId, companyName1: this.companyInfo.name, company2: company2Id, companyName2: company2Name}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+  comparingCompany(company: any){
+    const companyId = company.id;
+    const companyName = company.name;
+    
+    this.openComparingJob(companyId, companyName);
+  }
   showCompanyInfo(idCompany: string){
     this.companiesService.getCompanyInfo(idCompany)
       .subscribe((data: any) => {

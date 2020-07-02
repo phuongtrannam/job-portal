@@ -11,6 +11,7 @@ import { JobHeaderComponent } from './components/job-header/job-header.component
 import { JobDescriptionComponent } from './components/job-description/job-description.component';
 import { JobAnalysisComponent } from './components/job-analysis/job-analysis.component';
 import {DialogComponent} from './components/dialog/dialog.component';
+import { ComparingJobComponent } from './components/comparing-job/comparing-job.component';
 import { CoreModule } from './../../core/core.module';
 
 
@@ -160,10 +161,11 @@ import { SelectAutocompleteModule } from 'mat-select-autocomplete';
     JobDescriptionComponent,
     JobAnalysisComponent,
     DialogComponent,
+    ComparingJobComponent,
     // CompanyHeaderComponent,
     // CompanyInfoComponent,
     // CompanyHiringComponent,
   ],
-  entryComponents: [DialogComponent]
+  entryComponents: [DialogComponent, ComparingJobComponent]
 })
 export class JobsModule { }

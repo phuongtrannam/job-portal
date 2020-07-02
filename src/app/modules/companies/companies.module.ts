@@ -10,6 +10,9 @@ import { CompanyListingComponent } from './components/company-listing/company-li
 import { CompanyHeaderComponent } from './components/company-header/company-header.component';
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { CompanyHiringComponent } from './components/company-hiring/company-hiring.component';
+import { ComparingCompanyComponent } from './components/comparing-company/comparing-company.component'
+import { CoreModule } from './../../core/core.module';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { MatTableModule } from '@angular/material';
@@ -87,6 +90,7 @@ import {PlatformModule} from '@angular/cdk/platform';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
+    CoreModule,
   ],
   exports: [
     PlatformModule,
@@ -147,6 +151,8 @@ import {PlatformModule} from '@angular/cdk/platform';
     CompanyHeaderComponent,
     CompanyInfoComponent,
     CompanyHiringComponent,
-  ]
+    ComparingCompanyComponent,
+  ],
+  entryComponents: [ComparingCompanyComponent]
 })
 export class CompaniesModule { }

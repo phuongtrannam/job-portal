@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogComponent } from '../../components/dialog/dialog.component';
+import { ComparingJobComponent } from '../../components/comparing-job/comparing-job.component';
 
 export interface City {
   name: string;
@@ -212,6 +213,8 @@ export class JobDetailComponent implements OnInit {
     this.cityControl2.setValue(this.selectedCities2);
   }
 
+  dataJobDemand;
+  dataAverageSalary;
   dataTopHiringRegion;
   dataHighestSalaryRegion;
   dataTopHiringCompany;
@@ -305,6 +308,52 @@ export class JobDetailComponent implements OnInit {
       console.log('The dialog was closed');
       // this.animal = result;
     });
+  }
+
+  openComparingJob(cityIdParam, cityNameParam, job2Id, job2Name): void {
+    const dialogRef = this.dialog.open(ComparingJobComponent, {
+      width: '80%',
+      height: '80%',
+      data: {cityId: cityIdParam, cityName: cityNameParam, job1: this.selectedJobId,
+              jobName1: this.jobInfo.name, job2: job2Id, jobName2: job2Name,
+              dataJobDemand: this.dataJobDemand, dataAverageSalary: this.dataAverageSalary,
+              dataJobDemandByAge: this.dataJobDemandByAge, dataJobDemandByLiteracy: this.dataJobDemandByLiteracy}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+  comparingJob(job: any){
+    const jobId = job.id;
+    const jobName = job.name;
+    let cityId = '' ;
+    let cityName = '' ;
+    if (this.selectedCities.length === 1) {
+      cityId = this.selectedCities[0].id;
+      if(cityId === 'P0'){
+        cityName = 'Toàn quốc';
+      } else{
+        cityName = this.cityList.find(x => x.id === cityId).name;
+      }
+    } else if (this.selectedCities.length >= 2) {
+      const listCityId = this.selectedCities.map(a => a.id);
+      if (listCityId.includes('P0')) {
+        cityId = 'P0';
+        cityName = 'Toàn quốc';
+      } else {
+        const listNameCity = [];
+        for(const idCity of listCityId){
+          listNameCity.push(this.cityList.find(x => x.id === idCity).name);
+        }
+        cityId = listCityId.toString();
+        cityName = listNameCity.toString();
+      }
+    } else{
+      cityId = 'P0';
+      cityName = 'Toàn quốc';
+    }
+    this.openComparingJob(cityId, cityName, jobId, jobName);
   }
   analysisRegion() {
     console.log(this.selectedCities);
@@ -515,6 +564,7 @@ export class JobDetailComponent implements OnInit {
         console.log('getJobDemandByPeriodOfTime');
         console.log(data);
         // this.jobDemandByPeriodOfTime = data.result;
+        this.dataJobDemand = data;
         const dataTable = [];
         if (Object.keys(data).length > 1) {
           const milestones = data.timestamp;
@@ -523,6 +573,7 @@ export class JobDetailComponent implements OnInit {
           this.jobsService.getAverageSalary(idJob, idLocation)
             .subscribe((data1: any) => {
               // const milestones = data.timestamp;
+              this.dataAverageSalary = data1;
               this.increaseNumApi();
               if (Object.keys(data1).length > 1) {
                 const salary = data1.data;

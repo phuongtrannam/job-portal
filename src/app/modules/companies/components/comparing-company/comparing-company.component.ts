@@ -1,37 +1,28 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { RegionsService } from '../../regions.service';
-import { JobsService } from '../../../jobs/jobs.service';
-import { HeaderService } from '../../../../core/header/header.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { CompaniesService } from '../../companies.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 declare var ApexCharts: any;
 
 export interface DialogData {
-  city1: string;
-  cityName1: string;
-  city2: string;
-  cityName2: string;
+  company1: string;
+  companyName1: string;
+  company2: string;
+  companyName2: string;
 }
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: 'dialog.component.html',
-  styleUrls: ['./dialog.component.scss'],
-  providers: [JobsService, RegionsService]
+  selector: 'app-comparing-company',
+  templateUrl: 'comparing-company.component.html',
+  styleUrls: ['./comparing-company.component.scss'],
+  providers: [CompaniesService]
 })
-export class DialogComponent implements OnInit {
+export class ComparingCompanyComponent implements OnInit {
 
   public timeAgeAndGenderChart1: any = [];
   public timeLiteracyChart1: any = [];
   public timeAgeAndGenderChart2: any = [];
   public timeLiteracyChart2: any = [];
-  nameCity1 = '';
-  nameCity2 = '';
   dataJobDemandByAge1: any;
   dataJobDemandByLiteracy1: any;
   dataJobDemandByAge2: any;
@@ -39,11 +30,9 @@ export class DialogComponent implements OnInit {
   isLoading = true;
   numApi = 0;
   constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
+    public dialogRef: MatDialogRef<ComparingCompanyComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private regionsService: RegionsService,
-    private jobsService: JobsService,
-    public headerService: HeaderService) { }
+    private companiesService: CompaniesService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -51,25 +40,12 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
     this.numApi = 0;
     this.isLoading = true;
-    this.nameCity1 = '';
-    if (this.data.city1.split(',').length > 1 ) {
-      this.nameCity1 = 'nhóm khu vực 1';
-    } else {
-      this.nameCity1 = this.data.cityName1;
-    }
-    this.nameCity2 = '';
-    if (this.data.city2.split(',').length > 1 ) {
-      this.nameCity2 = 'nhóm khu vực 2';
-    } else {
-      this.nameCity2 = this.data.cityName2;
-    }
-
-    this.showNumJobAndSalaryCity('compare-number-job-salary-1', this.data.city1, this.nameCity1);
-    this.showNumJobAndSalaryCity('compare-number-job-salary-2', this.data.city2, this.nameCity2);
-    this.showAgeAndGenderChart('job-demand-by-age-and-gender1', this.data.city1, this.nameCity1);
-    this.showAgeAndGenderChart('job-demand-by-age-and-gender2', this.data.city2, this.nameCity2);
-    this.showJobDemandByLiteracy('job-demand-by-literacy1', this.data.city1, this.nameCity1);
-    this.showJobDemandByLiteracy('job-demand-by-literacy2', this.data.city2, this.nameCity2);
+    this.showNumJobAndSalary('compare-number-job-salary-1', this.data.company1, this.data.companyName1);
+    this.showNumJobAndSalary('compare-number-job-salary-2', this.data.company2, this.data.companyName2);
+    this.showAgeAndGenderChart('job-demand-by-age-and-gender1', this.data.company1, this.data.companyName1);
+    this.showAgeAndGenderChart('job-demand-by-age-and-gender2', this.data.company2, this.data.companyName2);
+    this.showJobDemandByLiteracy('job-demand-by-literacy1', this.data.company1, this.data.companyName1);
+    this.showJobDemandByLiteracy('job-demand-by-literacy2', this.data.company2, this.data.companyName2);
   }
   changeAgeAndGenderChart(index: number, selector: string) {
     if(selector === 'job-demand-by-age-and-gender1'){
@@ -78,14 +54,14 @@ export class DialogComponent implements OnInit {
       });
       this.timeAgeAndGenderChart1[index].selected = true;
       console.log(index);
-      this.reloadJobDemandByAge(index, selector, this.dataJobDemandByAge1, this.nameCity1);
+      this.reloadJobDemandByAge(index, selector, this.dataJobDemandByAge1, this.data.companyName1);
     } else if(selector === 'job-demand-by-age-and-gender2'){
       this.timeAgeAndGenderChart2.forEach(element => {
         element.selected = false;
       });
       this.timeAgeAndGenderChart2[index].selected = true;
       console.log(index);
-      this.reloadJobDemandByAge(index, selector, this.dataJobDemandByAge2, this.nameCity2);
+      this.reloadJobDemandByAge(index, selector, this.dataJobDemandByAge2, this.data.companyName2);
     }
   }
   changeLiteracyChart(index: number, selector: string) {
@@ -96,19 +72,20 @@ export class DialogComponent implements OnInit {
       this.timeLiteracyChart1[index].selected = true;
       console.log(index);
       console.log(selector);
-      this.reloadJobDemandByLiteracy(index, selector, this.dataJobDemandByLiteracy1, this.nameCity1);
+      this.reloadJobDemandByLiteracy(index, selector, this.dataJobDemandByLiteracy1, this.data.companyName1);
     } else if(selector === 'job-demand-by-literacy2'){
       this.timeLiteracyChart2.forEach(element => {
         element.selected = false;
       });
       this.timeLiteracyChart2[index].selected = true;
       console.log(index);
-      this.reloadJobDemandByLiteracy(index, selector, this.dataJobDemandByLiteracy2, this.nameCity2);
+      this.reloadJobDemandByLiteracy(index, selector, this.dataJobDemandByLiteracy2, this.data.companyName2);
     }
   }
-  showNumJobAndSalaryCity(selector: string, cityId: string, nameCity: string) {
+  
+  showNumJobAndSalary(selector: string, companyId: string, nameCompany: string) {
     document.getElementById(selector).innerHTML = '';
-    this.regionsService.getJobDemandByPeriodOfTime(cityId)
+    this.companiesService.getJobDemandByCompany(companyId)
       .subscribe((data: any) => {
         console.log('getJobDemandByPeriodOfTime');
         console.log(data);
@@ -120,8 +97,7 @@ export class DialogComponent implements OnInit {
         if (Object.keys(data).length > 1) {
           const milestones = data.timestamp;
           const numJob = data.data;
-          const growthJob = data.growth;
-          this.regionsService.getAverageSalaryByPeriodOfTime(cityId)
+          this.companiesService.getSalaryByCompany(companyId)
             .subscribe((data1: any) => {
               console.log('getAverageSalary');
               console.log(data1);
@@ -132,7 +108,6 @@ export class DialogComponent implements OnInit {
               // this.increaseNumApi();
               if (Object.keys(data1).length > 1) {
                 const salary = data1.data;
-                const growthSalary = data1.growth;
                 const options = {
                   series: [{
                     name: 'Số lượng công việc',
@@ -152,7 +127,7 @@ export class DialogComponent implements OnInit {
                   },
                   colors: ['#38933d', '#8dc971'],
                   title: {
-                    text: 'Nhu cầu việc làm và lương trung bình tại ' + nameCity,
+                    text: 'Nhu cầu việc làm và lương trung bình tại ' + nameCompany,
                     align: 'left',
                     style: {
                       fontSize: '18px',
@@ -197,9 +172,9 @@ export class DialogComponent implements OnInit {
         }
       });
   }
-  showAgeAndGenderChart(selector: string, cityId: string, nameCity: string) {
+  showAgeAndGenderChart(selector: string, companyId: string, nameCompany: string) {
     document.getElementById(selector).innerHTML = '';
-    this.regionsService.getJobDemandByAge(cityId)
+    this.companiesService.getJobDemandByAge(companyId)
       .subscribe((data: any) => {
         console.log('getJobDemandByAge');
         console.log(data);
@@ -228,7 +203,7 @@ export class DialogComponent implements OnInit {
             this.dataJobDemandByAge2 = data;
             this.timeAgeAndGenderChart2 = timeAgeAndGenderChart;
           }
-          console.log(this.timeAgeAndGenderChart1);
+          console.log(this.dataJobDemandByAge1);
           const ageRanges = data.ageRange;
           const male = data[milestones[milestones.length - 1]].male;
           const female = data[milestones[milestones.length - 1]].female;
@@ -253,7 +228,7 @@ export class DialogComponent implements OnInit {
             },
             colors: ['#38933d', '#8dc971'],
             title: {
-              text: 'Nhu cầu việc làm theo độ tuổi, giới tính tại' + nameCity,
+              text: 'Nhu cầu việc làm theo độ tuổi, giới tính tại' + nameCompany,
               align: 'left',
               style: {
                 fontSize: '18px',
@@ -298,7 +273,7 @@ export class DialogComponent implements OnInit {
         }
       });
   }
-  reloadJobDemandByAge(index: number, selector: string, dataJobDemandByAge: any, nameCity: string) {
+  reloadJobDemandByAge(index: number, selector: string, dataJobDemandByAge: any, nameCompany: string) {
     document.getElementById(selector).innerHTML = '';
     if (Object.keys(dataJobDemandByAge).length > 2) {
       const milestones = dataJobDemandByAge.timestamps;
@@ -326,7 +301,7 @@ export class DialogComponent implements OnInit {
         },
         colors: ['#38933d', '#8dc971'],
         title: {
-          text: 'Nhu cầu việc làm theo độ tuổi, giới tính tại ' + nameCity,
+          text: 'Nhu cầu việc làm theo độ tuổi, giới tính tại ' + nameCompany,
           align: 'left',
           style: {
             fontSize: '18px',
@@ -370,9 +345,9 @@ export class DialogComponent implements OnInit {
       alert("Khu vực bạn chọn không có dữ liệu về độ tuổi");
     }
   }
-  showJobDemandByLiteracy(selector: string, cityId: string, nameCity: string): void {
+  showJobDemandByLiteracy(selector: string, companyId: string, nameCompany: string): void {
     document.getElementById(selector).innerHTML = '';
-    this.regionsService.getJobDemandByLiteracy(cityId)
+    this.companiesService.getJobDemandByLiteracy(companyId)
       .subscribe((data: any) => {
         console.log('getJobDemandByLiteracy');
         console.log(data);
@@ -403,12 +378,10 @@ export class DialogComponent implements OnInit {
             this.dataJobDemandByLiteracy2 = data;
             this.timeLiteracyChart2 = timeLiteracyChart;
           }
-          const literacies = data.literacy;
-          const literacyObj = data.literacy;
-          const literacyName = literacyObj.map(function (el) { return el.name; })
-
+          // const literacyObj = data.literacy;
+          // const literacyName = literacyObj.map(function (el) { return el.name; })
+          const literacyName = data.literacy;
           const numJob = data[milestones[milestones.length - 1]].data;
-          const growth = data[milestones[milestones.length - 1]].growth;
           const options = {
             series: numJob,
             chart: {
@@ -420,7 +393,7 @@ export class DialogComponent implements OnInit {
             colors: ['#2e7932', '#77792e', '#9e9c00', '#649628', '#0890a9'],
             labels: literacyName,
             title: {
-              text: 'Biểu đồ phân bổ việc làm theo trình độ học vấn tại ' + nameCity ,
+              text: 'Biểu đồ phân bổ việc làm theo trình độ học vấn tại ' + nameCompany ,
               align: 'left',
               style: {
                 fontSize: '18px',
@@ -453,16 +426,17 @@ export class DialogComponent implements OnInit {
         }
       });
   }
-  reloadJobDemandByLiteracy(index: number, selector: string, dataJobDemandByLiteracy: any, nameCity: string) {
+  reloadJobDemandByLiteracy(index: number, selector: string, dataJobDemandByLiteracy: any, nameCompany: string) {
     document.getElementById(selector).innerHTML = '';
     if (Object.keys(dataJobDemandByLiteracy).length > 2) {
       const milestones = dataJobDemandByLiteracy.timestamps;
-      const literacies = dataJobDemandByLiteracy.literacy;
-      const literacyObj = dataJobDemandByLiteracy.literacy;
-      const literacyName = literacyObj.map(function (el) { return el.name; })
-
+      console.log(milestones);
+      console.log(dataJobDemandByLiteracy);
+      // const literacies = dataJobDemandByLiteracy.literacy;
+      // const literacyObj = dataJobDemandByLiteracy.literacy;
+      // const literacyName = literacyObj.map(function (el) { return el.name; })
+      const literacyName = dataJobDemandByLiteracy.literacy;
       const numJob = dataJobDemandByLiteracy[milestones[index]].data;
-      const growth = dataJobDemandByLiteracy[milestones[index]].growth;
       const options = {
         series: numJob,
         chart: {
@@ -482,7 +456,7 @@ export class DialogComponent implements OnInit {
         // },
 
         title: {
-          text: 'Biểu đồ phân bổ việc làm theo trình độ học vấn tại ' + nameCity,
+          text: 'Biểu đồ phân bổ việc làm theo trình độ học vấn tại ' + nameCompany,
           align: 'left',
           style: {
             fontSize: '18px',
