@@ -42,7 +42,7 @@
     </section>
 
 </div> -->
-
+<app-loading *ngIf="isLoading">{{ isLoading }}</app-loading>
 <div class="bg-gray pb-3">
     <div class="container">
         <!-- <app-job-header></app-job-header> -->
@@ -73,22 +73,64 @@
             </mat-form-field>
         </form> -->
         <div class = "row">
-            <div class="col-sm-4 col-xs-4">
+            <div class="col-sm-3 col-xs-3">
                 <h4>Chọn khu vực phân tích</h4>
             </div>
-            <div class="col-sm-8 col-xs-8">
-                <form class="example-form">
-                    <input type="text" [(ngModel)]="selectedCity" 
-                           placeholder="Chọn khu vực cần phân tích (Mặc định chọn khu vực toàn quốc)"
-                           [formControl]="control"
-                           [matAutocomplete]="auto" style = "width: 100%;">
-                    <mat-autocomplete #auto="matAutocomplete"  [displayWith]="displayFn(filteredOptions | async)" >
-                      <mat-option (click)="onCitySelected(selectedCity)" *ngFor="let city of filteredOptions | async" 
-                                    [value]="city.id">
-                        {{city.name}}
-                      </mat-option>
+            <div class="col-sm-6 col-xs-6" [hidden]="isComparing">
+                <form class="example-form" >
+                    <mat-form-field class="example-full-width">
+                        <input  type="text" placeholder="Lưa chọn các thành phố"  matInput [matAutocomplete]="auto"
+                            [formControl]="cityControl">
+                        <mat-hint></mat-hint>
+                    </mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFnCity">
+                        <mat-option *ngFor="let city of filteredCities | async" [value]="selectedCities">
+                            <div (click)="optionClicked($event, city)">
+                                <mat-checkbox [checked]="city.selected" (change)="toggleSelection(city)" 
+                                        (click)="$event.stopPropagation()" [disabled]="isSelectAll && city.id != 'P0'">
+                                    {{ city.name }}
+                                </mat-checkbox>
+                            </div>
+                        </mat-option>
                     </mat-autocomplete>
-                  </form>
+                </form>
+            </div>
+            <div class="col-sm-3 col-xs-3" [hidden]="!isComparing">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Chọn các thành phố"  matInput [matAutocomplete]="auto1" [formControl]="cityControl1">
+                </mat-form-field>
+                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFn1">
+                    <mat-option *ngFor="let city of filteredCities1 | async" [value]="selectedCities1">
+                        <div (click)="optionClicked1($event, city)">
+                            <mat-checkbox [checked]="city.selected" (change)="toggleSelection1(city)" (click)="$event.stopPropagation()"
+                      [disabled]="isSelectAll1 && city.id != 'P0'" >
+                                {{ city.name }}
+                            </mat-checkbox>
+                        </div>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="col-sm-3 col-xs-3" [hidden]="!isComparing">
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Chọn các thành phố" matInput [matAutocomplete]="auto2" [formControl]="cityControl2">
+                </mat-form-field>
+                <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn2">
+                    <mat-option *ngFor="let city of filteredCities2 | async" [value]="selectedCities2">
+                        <div (click)="optionClicked2($event, city)">
+                            <mat-checkbox [checked]="city.selected" (change)="toggleSelection2(city)" (click)="$event.stopPropagation()"
+                      [disabled]="isSelectAll2 && city.id != 'P0'" >
+                                {{ city.name }}
+                            </mat-checkbox>
+                        </div>
+                    </mat-option>
+                </mat-autocomplete>
+            </div>
+            <div class="col-sm-2 col-xs-2">
+                <input style=" margin-top: 30px; " [(ngModel)]="isComparing" type="checkbox"> So sánh khu vực
+            </div>
+            <div class="col-sm-1 col-xs-1">
+                <!-- <button style=" margin-top: 15px; " mat-raised-button (click)="openDialog()">Phân tích</button> -->
+                <button style=" margin-top: 15px; " mat-raised-button (click)="analysisRegion()">Phân tích</button>
             </div>
         </div>
         
@@ -130,7 +172,7 @@
                 </div>
                 <div class=" pb-3" id="jump2">
                     <div class="container">
-                        <div class="row row-cols-2" [hidden]="!showChart">
+                        <div class="row row-cols-2" [hidden]="!showChartRegion && isManyRegion">
                             <div class="col ">
                                 <div class="chon-quy-wrap">
                                     <div class="item" *ngFor="let item of timeRegionNumJobChart; index as i" (click)="changeTimeRegionNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
@@ -142,7 +184,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row row-cols-2" [hidden]="!showChart">
+                        <div class="row row-cols-2" [hidden]="!showChartRegion && isManyRegion">
                             <div class="col ">
                                 <div id="nhu_cau_tuyen_dung_theo_khu_vuc"></div>
                             </div>
@@ -150,7 +192,7 @@
                                 <div id="khu_vuc_tra_luong_cao"></div>
                             </div>
                         </div>
-                        <div class="row row-cols-2">
+                        <div class="row row-cols-2"  [hidden]="isManyRegion">
                             <div class="col ">
                                 <div class="chon-quy-wrap">
                                     <div class="item" *ngFor="let item of timeCompanyNumJobChart; index as i" (click)="changeTimeCompanyNumJobChart(i)" [ngClass]="{'selected': item.selected}">{{item.name}}</div>
@@ -162,7 +204,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row row-cols-2">
+                        <div class="row row-cols-2"  [hidden]="isManyRegion">
                             <div class="col ">
                                 <div id="nhu-cau_tuyen_dung_theo_cong_ty"></div>
                             </div>

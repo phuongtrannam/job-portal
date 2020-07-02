@@ -14,6 +14,11 @@ import { JobSearchComponent } from './components/job-search/job-search.component
 import { JobFilterComponent } from './components/job-filter/job-filter.component';
 import { JobListingComponent } from './components/job-listing/job-listing.component';
 import { JobAnalysisComponent } from './components/job-analysis/job-analysis.component';
+import {DialogComponent} from './components/dialog/dialog.component';
+
+
+
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster'
@@ -163,7 +168,8 @@ import { CoreModule } from './../../core/core.module';
     JobFilterComponent,
     JobListingComponent,
     JobAnalysisComponent,
-    // LoadingComponent,
-  ]
+    DialogComponent,
+  ],
+  entryComponents: [DialogComponent]
 })
 export class IndustriesModule { }

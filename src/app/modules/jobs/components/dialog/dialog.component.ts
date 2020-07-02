@@ -1,11 +1,5 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-import { IndustriesService } from '../../industries.service';
-import { HeaderService } from '../../../../core/header/header.service';
-import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
+import { JobsService } from '../../jobs.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 declare var ApexCharts: any;
@@ -15,15 +9,15 @@ export interface DialogData {
   cityName1: string;
   city2: string;
   cityName2: string;
-  industryId: string;
-  industryName: string;
+  jobId: string;
+  jobName: string;
 }
 
 @Component({
   selector: 'app-dialog',
   templateUrl: 'dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  providers: [IndustriesService]
+  providers: [JobsService]
 })
 export class DialogComponent implements OnInit {
 
@@ -42,7 +36,7 @@ export class DialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private industriesService: IndustriesService) { }
+    private jobsService: JobsService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -107,7 +101,7 @@ export class DialogComponent implements OnInit {
   }
   showNumJobAndSalaryCity(selector: string, cityId: string, nameCity: string) {
     document.getElementById(selector).innerHTML = '';
-    this.industriesService.getJobDemandByPeriodOfTime(this.data.industryId, cityId)
+    this.jobsService.getJobDemandByPeriodOfTime(this.data.jobId, cityId)
       .subscribe((data: any) => {
         console.log('getJobDemandByPeriodOfTime');
         console.log(data);
@@ -117,9 +111,9 @@ export class DialogComponent implements OnInit {
         }
         // this.increaseNumApi();
         if (Object.keys(data).length > 1) {
-          const milestones = data.timestamps;
+          const milestones = data.timestamp;
           const numJob = data.data;
-          this.industriesService.getAverageSalary(this.data.industryId, cityId)
+          this.jobsService.getAverageSalary(this.data.jobId, cityId)
             .subscribe((data1: any) => {
               console.log('getAverageSalary');
               console.log(data1);
@@ -196,7 +190,7 @@ export class DialogComponent implements OnInit {
   }
   showAgeAndGenderChart(selector: string, cityId: string, nameCity: string) {
     document.getElementById(selector).innerHTML = '';
-    this.industriesService.getJobDemandByAge(this.data.industryId, cityId)
+    this.jobsService.getJobDemandByAge(this.data.jobId, cityId)
       .subscribe((data: any) => {
         console.log('getJobDemandByAge');
         console.log(data);
@@ -369,7 +363,7 @@ export class DialogComponent implements OnInit {
   }
   showJobDemandByLiteracy(selector: string, cityId: string, nameCity: string): void {
     document.getElementById(selector).innerHTML = '';
-    this.industriesService.getJobDemandByLiteracy(this.data.industryId, cityId)
+    this.jobsService.getJobDemandByLiteracy(this.data.jobId, cityId)
       .subscribe((data: any) => {
         console.log('getJobDemandByLiteracy');
         console.log(data);
@@ -400,9 +394,9 @@ export class DialogComponent implements OnInit {
             this.dataJobDemandByLiteracy2 = data;
             this.timeLiteracyChart2 = timeLiteracyChart;
           }
-          const literacyObj = data.literacy;
-          const literacyName = literacyObj.map(function (el) { return el.name; })
-
+          // const literacyObj = data.literacy;
+          // const literacyName = literacyObj.map(function (el) { return el.name; })
+          const literacyName = data.literacy;
           const numJob = data[milestones[milestones.length - 1]].data;
           const options = {
             series: numJob,

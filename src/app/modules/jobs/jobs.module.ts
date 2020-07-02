@@ -10,6 +10,8 @@ import { JobHighlightComponent } from './components/job-highlight/job-highlight.
 import { JobHeaderComponent } from './components/job-header/job-header.component';
 import { JobDescriptionComponent } from './components/job-description/job-description.component';
 import { JobAnalysisComponent } from './components/job-analysis/job-analysis.component';
+import {DialogComponent} from './components/dialog/dialog.component';
+import { CoreModule } from './../../core/core.module';
 
 
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -93,7 +95,9 @@ import { SelectAutocompleteModule } from 'mat-select-autocomplete';
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
-    SelectAutocompleteModule
+    MatButtonModule,
+    CoreModule,
+    // SelectAutocompleteModule
   ],
   exports: [
     PlatformModule,
@@ -155,9 +159,11 @@ import { SelectAutocompleteModule } from 'mat-select-autocomplete';
     JobHeaderComponent,
     JobDescriptionComponent,
     JobAnalysisComponent,
+    DialogComponent,
     // CompanyHeaderComponent,
     // CompanyInfoComponent,
     // CompanyHiringComponent,
-  ]
+  ],
+  entryComponents: [DialogComponent]
 })
 export class JobsModule { }

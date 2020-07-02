@@ -70,7 +70,6 @@ export class IndustryDetailComponent {
   numApi = 0;
   isLoading = true;
   isComparing = false;
-  // control = new FormControl();
   city1 = '';
   cityName1 = '';
   city2 = '';
@@ -309,7 +308,9 @@ export class IndustryDetailComponent {
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '80%',
-      data: { city1: this.city1, city2: this.city2, cityName1: this.cityName1, cityName2: this.cityName2 }
+      height: '80%',
+      data: {industryId: this.selectedIndustryId, industryName: this.selectedIndustryName, city1: this.city1,
+              city2: this.city2, cityName1: this.cityName1, cityName2: this.cityName2 }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -340,6 +341,8 @@ export class IndustryDetailComponent {
           this.city1 = listIdCompare1.toString();
           this.cityName1 = listNameCompare1.toString();
         }
+      } else{
+        alert('Bạn chưa chọn khu vực phân tích');
       }
       if (this.selectedCities2.length === 1) {
         this.city2 = this.selectedCities2[0].id;
@@ -362,8 +365,12 @@ export class IndustryDetailComponent {
           this.city2 = listIdCompare2.toString();
           this.cityName2 = listNameCompare2.toString();
         }
+      } else{
+        alert('Bạn chưa chọn khu vực phân tích');
       }
-      this.openDialog();
+      if(this.selectedCities1.length >= 1 && this.selectedCities2.length >= 1){
+        this.openDialog();
+      }
     } else {
       this.isLoading = true;
       this.numApi = 0;

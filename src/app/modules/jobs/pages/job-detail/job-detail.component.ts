@@ -5,11 +5,13 @@ import { map, startWith } from 'rxjs/operators';
 import { JobsService } from '../../jobs.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 export interface City {
   name: string;
   id: string;
-  // area: string;
+  selected?: boolean;
 }
 
 @Component({
@@ -22,7 +24,8 @@ export class JobDetailComponent implements OnInit {
 
 
   constructor(private jobsService: JobsService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public dialog: MatDialog) {
 
   }
   selectedJobId: string;
@@ -39,12 +42,176 @@ export class JobDetailComponent implements OnInit {
 
   selectedCity = 'P0';
   selectedCityName = '';
-  showChart = true;
-  control = new FormControl();
-  cityList: City[] = [{id: '1', name: 'Champs-Élysées'},
-              {id: '2', name: 'Lombard Street'},
-              {id: '3', name: 'Abbey Road'},
-              {id: '4', name: 'Fifth Avenue'}];
+  showChartRegion = true;
+  isManyRegion = false;
+  numApi = 0;
+  isLoading = true;
+  isComparing = false;
+  city1 = '';
+  cityName1 = '';
+  city2 = '';
+  cityName2 = '';
+  cityList: City[];
+  cityList1: City[];
+  cityList2: City[];
+  selectedCities: City[] = new Array<City>();
+  filteredCities: Observable<City[]>;
+  lastFilter = '';
+  cityControl = new FormControl();
+  filter(filter: string): City[] {
+    this.lastFilter = filter;
+    if (filter) {
+      return this.cityList.filter(option => {
+        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+      })
+    } else {
+      return this.cityList.slice();
+    }
+  }
+  displayFnCity(value: City[] | string): string | undefined {
+    let displayValue: string;
+    if (Array.isArray(value)) {
+      value.forEach((city, index) => {
+        if (index === 0) {
+          displayValue = city.name;
+        } else {
+          displayValue += ', ' + city.name;
+        }
+      });
+    } else {
+      displayValue = value;
+    }
+    return displayValue;
+  }
+
+  optionClicked(event: Event, city: City) {
+    event.stopPropagation();
+    this.toggleSelection(city);
+  }
+  isSelectAll = false;
+  toggleSelection(city: City) {
+    city.selected = !city.selected;
+    if (city.selected) {
+      this.selectedCities.push(city);
+      if (city.id === 'P0') {
+        this.isSelectAll = true;
+      }
+    } else {
+      if (city.id === 'P0') {
+        this.isSelectAll = false;
+      }
+      const i = this.selectedCities.findIndex(value => value.name === city.name);
+      this.selectedCities.splice(i, 1);
+    }
+    // console.log(this.selectedCities);
+    this.cityControl.setValue(this.selectedCities);
+  }
+  lastFilter1: string = '';
+  filter1(filter: string): City[] {
+    this.lastFilter1 = filter;
+    if (filter) {
+      return this.cityList1.filter(option => {
+        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+      })
+    } else {
+      return this.cityList1.slice();
+    }
+  }
+  cityControl1 = new FormControl();
+  selectedCities1: City[] = new Array<City>();
+  filteredCities1: Observable<City[]>;
+  displayFn1(value: City[] | string): string | undefined {
+    let displayValue: string;
+    if (Array.isArray(value)) {
+      value.forEach((city, index) => {
+        if (index === 0) {
+          displayValue = city.name;
+        } else {
+          displayValue += ', ' + city.name;
+        }
+      });
+    } else {
+      displayValue = value;
+    }
+    return displayValue;
+  }
+
+  optionClicked1(event: Event, city: City) {
+    event.stopPropagation();
+    this.toggleSelection1(city);
+  }
+  isSelectAll1 = false;
+  toggleSelection1(city: City) {
+    city.selected = !city.selected;
+    if (city.selected) {
+      this.selectedCities1.push(city);
+      if(city.id === 'P0'){
+        this.isSelectAll1 = true;
+      }
+    } else {
+      if(city.id === 'P0'){
+        this.isSelectAll1 = false;
+      }
+      const i = this.selectedCities1.findIndex(value => value.name === city.name && value.name === city.name);
+      this.selectedCities1.splice(i, 1);
+    }
+
+    this.cityControl1.setValue(this.selectedCities1);
+  }
+
+  lastFilter2: string = '';
+  filter2(filter: string): City[] {
+    this.lastFilter1 = filter;
+    if (filter) {
+      return this.cityList2.filter(option => {
+        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+      })
+    } else {
+      return this.cityList2.slice();
+    }
+  }
+  cityControl2 = new FormControl();
+  selectedCities2: City[] = new Array<City>();
+  filteredCities2: Observable<City[]>;
+  displayFn2(value: City[] | string): string | undefined {
+    let displayValue: string;
+    if (Array.isArray(value)) {
+      value.forEach((city, index) => {
+        if (index === 0) {
+          displayValue = city.name;
+        } else {
+          displayValue += ', ' + city.name;
+        }
+      });
+    } else {
+      displayValue = value;
+    }
+    return displayValue;
+  }
+
+  optionClicked2(event: Event, city: City) {
+    event.stopPropagation();
+    this.toggleSelection2(city);
+  }
+  isSelectAll2 = false;
+  toggleSelection2(city: City) {
+    city.selected = !city.selected;
+    if (city.selected) {
+      this.selectedCities2.push(city);
+      if(city.id === 'P0'){
+        this.isSelectAll2 = true;
+      }
+    } else {
+      if(city.id === 'P0'){
+        this.isSelectAll2 = false;
+      }
+      const i = this.selectedCities2.findIndex(value => value.name === city.name && value.name === city.name);
+      this.selectedCities2.splice(i, 1);
+    }
+
+    this.cityControl2.setValue(this.selectedCities2);
+  }
+
   dataTopHiringRegion;
   dataHighestSalaryRegion;
   dataTopHiringCompany;
@@ -63,14 +230,8 @@ export class JobDetailComponent implements OnInit {
     this.getCityList();
     this.selectedJobId = this.route.snapshot.paramMap.get('id');
     this.jobInfoHeader(this.selectedJobId);
-    this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
-    this.showTopHiringRegion(this.selectedJobId);
-    this.showHighestSalaryRegion(this.selectedJobId);
-    this.showJobDemandByAge(this.selectedJobId, this.selectedCity);
-    this.showJobDemandByLiteracy(this.selectedJobId, this.selectedCity);
     this.getRelatedJobs(this.selectedJobId);
-    this.showTopHiringCompany(this.selectedJobId, this.selectedCity);
-    this.showTopCompanyHighestSalary(this.selectedJobId, this.selectedCity);
+    this.callApiForCountry();
   }
 
   displayFn(cityList: City[]): (id: string) => string | null {
@@ -90,7 +251,7 @@ export class JobDetailComponent implements OnInit {
     // console.log('### Trigger');
     // console.log(this.selectedCity);
     // console.log(selectedCityId);
-    this.showChart = false;
+    this.showChartRegion = false;
     this.selectedCity = selectedCityId;
     this.selectedCityName = this.cityList.find(x => x.id === selectedCityId).name;
     this.showJobDemandAndAverageSalary(this.selectedJobId, this.selectedCity);
@@ -100,7 +261,161 @@ export class JobDetailComponent implements OnInit {
     this.showTopCompanyHighestSalary(this.selectedJobId, this.selectedCity);
     // console.log(this.selectedCity);
   }
+  increaseNumApi() {
+    this.numApi += 1;
+    if (this.selectedCities.length === 1) {
+      const cityId = this.selectedCities[0].id;
+      if(cityId === 'P0'){
+        if (this.numApi === 7) {
+          this.isLoading = false;
+        }
+      } else{
+        if (this.numApi === 5) {
+          this.isLoading = false;
+        }
+      }
+    } else if (this.selectedCities.length >= 2) {
+      const listId = this.selectedCities.map(a => a.id);
+      if (listId.includes('P0')) {
+        if (this.numApi === 7) {
+          this.isLoading = false;
+        }
+      } else {
+        if (this.numApi === 3) {
+          this.isLoading = false;
+        }
+      }
+    } else {
+      if (this.showChartRegion) {
+        if (this.numApi === 7) {
+          this.isLoading = false;
+        }
+      }
+    }
+  }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '80%',
+      height: '80%',
+      data: {jobId: this.selectedJobId, jobName: this.jobInfo.name, city1: this.city1,
+              city2: this.city2, cityName1: this.cityName1, cityName2: this.cityName2 }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+  analysisRegion() {
+    console.log(this.selectedCities);
+    if (this.isComparing) {
+      if (this.selectedCities1.length === 1) {
+        this.city1 = this.selectedCities1[0].id;
+        if(this.city1 === 'P0'){
+          this.cityName1 = 'Toàn quốc';
+        } else{
+          this.cityName1 = this.cityList.find(x => x.id === this.city1).name;
+        }
+      } else if (this.selectedCities1.length >= 2) {
+        const listIdCompare1 = this.selectedCities1.map(a => a.id);
+        if (listIdCompare1.includes('P0')) {
+          this.city1 = 'P0';
+          this.cityName1 = 'Toàn quốc';
+        } else {
+          const listNameCompare1 = [];
+          for(const idCity of listIdCompare1){
+            listNameCompare1.push(this.cityList.find(x => x.id === idCity).name);
+          }
+          this.city1 = listIdCompare1.toString();
+          this.cityName1 = listNameCompare1.toString();
+        }
+      } else{
+        alert('Bạn chưa chọn khu vực phân tích');
+      }
+      if (this.selectedCities2.length === 1) {
+        this.city2 = this.selectedCities2[0].id;
+        if(this.city2 === 'P0'){
+          this.cityName2 = 'Toàn quốc';
+        } else{
+          this.cityName2 = this.cityList.find(x => x.id === this.city2).name;
+        }
+      } else if (this.selectedCities2.length >= 2) {
+        const listIdCompare2 = this.selectedCities2.map(a => a.id);
+        if (listIdCompare2.includes('P0')) {
+          this.city2 = 'P0';
+          this.cityName2 = 'Toàn quốc';
+        } else {
+          const listNameCompare2 = [];
+          for(const idCity2 of listIdCompare2){
+            listNameCompare2.push(this.cityList.find(x => x.id === idCity2).name);
+          }
+          this.city2 = listIdCompare2.toString();
+          this.cityName2 = listNameCompare2.toString();
+        }
+      } else{
+        alert('Bạn chưa chọn khu vực phân tích');
+      }
+      if(this.selectedCities1.length >= 1 && this.selectedCities2.length >= 1){
+        this.openDialog();
+      }
+    } else {
+      this.numApi = 0;
+      this.isLoading = true;
+      this.numApi = 0;
+      if (this.selectedCities.length === 1) {
+        this.isManyRegion = false;
+        // this.selectedCity = selectedCityId;
+        const cityId = this.selectedCities[0].id;
+        this.isLoading = true;
+        console.log('this.selectedCity ' + this.selectedCity);
+        this.selectedCityName = this.cityList.find(x => x.id === cityId).name;
+        if(cityId === 'P0'){
+          this.showChartRegion = true;
+          this.callApiForCountry();
+        } else{
+          this.showChartRegion = false;
+          this.callApiForOneRegion(cityId);
+        }
+      } else if (this.selectedCities.length >= 2) {
+        const listId = this.selectedCities.map(a => a.id);
+        if (listId.includes('P0')) {
+          this.isManyRegion = false;
+          this.showChartRegion = true;
+          console.log('co P0 ne');
+          this.callApiForCountry();
+        } else {
+          this.isManyRegion = true;
+          console.log(this.isManyRegion);
+          this.showChartRegion = false;
+          const cityId = listId.toString();
+          console.log(cityId);
+          this.callApiForManyRegion(cityId);
+        }
+      }
+    }
+  }
+  callApiForCountry(){
+    const cityId = 'P0';
+    this.showJobDemandAndAverageSalary(this.selectedJobId, cityId);
+    this.showTopHiringRegion(this.selectedJobId);
+    this.showHighestSalaryRegion(this.selectedJobId);
+    this.showJobDemandByAge(this.selectedJobId, cityId);
+    this.showJobDemandByLiteracy(this.selectedJobId, cityId);
+    this.showTopHiringCompany(this.selectedJobId, cityId);
+    this.showTopCompanyHighestSalary(this.selectedJobId, cityId);
+  }
+  callApiForOneRegion(cityId: string){
+    this.showJobDemandAndAverageSalary(this.selectedJobId, cityId);
+    this.showJobDemandByAge(this.selectedJobId, cityId);
+    this.showJobDemandByLiteracy(this.selectedJobId, cityId);
+    this.showTopHiringCompany(this.selectedJobId, cityId);
+    this.showTopCompanyHighestSalary(this.selectedJobId, cityId);
+  }
+  callApiForManyRegion(cityId: string){
+    this.showJobDemandAndAverageSalary(this.selectedJobId, cityId);
+    this.showJobDemandByAge(this.selectedJobId, cityId);
+    this.showJobDemandByLiteracy(this.selectedJobId, cityId);
+  }
   changeTimeRegionNumJobChart(index) {
     this.timeRegionNumJobChart.forEach(element => {
       element.selected = false;
@@ -160,13 +475,27 @@ export class JobDetailComponent implements OnInit {
         console.log('getCityList');
         console.log(data.result);
         this.cityList = data.result;
-        this.filteredOptions = this.control.valueChanges
-          .pipe(
-            startWith<string | City>(''),
-            map(value => typeof value === 'string' ? value : value.name),
-            map(name => name ? this._filter(name) : this.cityList.slice())
-          );
-        // console.log(this.filteredOptions);
+        this.cityList.splice(0, 0, { name: 'Cả nước', id: "P0" });
+        if (this.selectedCity != null && this.selectedCity != 'P0') {
+          this.selectedCityName = this.cityList.find(x => x.id === this.selectedCity).name;
+        };
+        this.cityList2 = JSON.parse(JSON.stringify(data.result));
+        this.cityList1 = JSON.parse(JSON.stringify(data.result));
+        this.filteredCities = this.cityControl.valueChanges.pipe(
+          startWith<string | City[]>(''),
+          map(value => typeof value === 'string' ? value : this.lastFilter),
+          map(filter => this.filter(filter))
+        );
+        this.filteredCities1 = this.cityControl1.valueChanges.pipe(
+          startWith<string | City[]>(''),
+          map(value => typeof value === 'string' ? value : this.lastFilter1),
+          map(filter => this.filter1(filter))
+        );
+        this.filteredCities2 = this.cityControl2.valueChanges.pipe(
+          startWith<string | City[]>(''),
+          map(value => typeof value === 'string' ? value : this.lastFilter2),
+          map(filter => this.filter2(filter))
+        );
     });
   }
   jobInfoHeader(idJob: string): void {
@@ -194,6 +523,7 @@ export class JobDetailComponent implements OnInit {
           this.jobsService.getAverageSalary(idJob, idLocation)
             .subscribe((data1: any) => {
               // const milestones = data.timestamp;
+              this.increaseNumApi();
               if (Object.keys(data1).length > 1) {
                 const salary = data1.data;
                 const growthSalary = data1.growth;
@@ -287,6 +617,7 @@ export class JobDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getJobDemandByAge');
         console.log(data);
+        this.increaseNumApi();
         this.dataJobDemandByAge = data; 
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
@@ -465,6 +796,7 @@ export class JobDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getJobDemandByLiteracy');
         // console.log(data.result);
+        this.increaseNumApi();
         this.dataJobDemandByLiteracy = data; 
         if (Object.keys(data).length > 2) {
           const milestones = data.timestamps;
@@ -621,6 +953,7 @@ export class JobDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getTopHiringRegion');
         console.log(data);
+        this.increaseNumApi();
         this.dataTopHiringRegion = data;
         const milestones = data.timestamps;
         this.timeRegionNumJobChart = [];
@@ -839,6 +1172,7 @@ export class JobDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getHighestSalaryRegion');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestSalaryRegion = data;
         const milestones = data.timestamps;
         this.timeRegionSalaryChart = [];
@@ -1057,6 +1391,7 @@ export class JobDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getTopHiringCompanies');
         console.log(data);
+        this.increaseNumApi();
         this.dataTopHiringCompany = data;
         const milestones = data.timestamps;
         this.timeCompanyNumJobChart = [];
@@ -1275,6 +1610,7 @@ export class JobDetailComponent implements OnInit {
       .subscribe((data: any) => {
         console.log('getTopHighestSalaryCompanies');
         console.log(data);
+        this.increaseNumApi();
         this.dataHighestSalaryCompany = data;
         const milestones = data.timestamps;
         this.timeCompanySalaryChart = [];
