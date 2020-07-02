@@ -97,6 +97,7 @@ import { CoreModule } from './../../core/core.module';
     MatFormFieldModule,
     MatInputModule,
     CoreModule,
+    MatButtonModule,
   ],
   exports: [
     PlatformModule,

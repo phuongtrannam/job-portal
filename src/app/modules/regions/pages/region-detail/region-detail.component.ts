@@ -407,24 +407,24 @@ export class RegionDetailComponent implements OnInit {
       }
     }
   }
-  onCitySelected(selectedCityId) {
-    // console.log('### Trigger');
-    // console.log(this.selectedCity);
-    // console.log(selectedCityId);
-    this.selectedCity = selectedCityId;
-    this.selectedCityName = this.cityList.find(x => x.id === selectedCityId).name;
-    console.log(this.selectedCityName);
-    this.getDashboardData(this.selectedCity);
-    this.showJobDemandAndAverageSalary(this.selectedCity);
-    this.showJobDemandByIndustry(this.selectedCity);
-    this.showAverageSalaryByIndustry(this.selectedCity);
-    this.showHighestDemandJobs(this.selectedCity);
-    this.showHighestSalaryJobs(this.selectedCity);
-    this.showTopHiringCompanies(this.selectedCity);
-    this.showHighestPayingCompanies(this.selectedCity);
-    this.showJobDemandByAge(this.selectedCity);
-    this.showJobDemandByLiteracy(this.selectedCity);
-  }
+  // onCitySelected(selectedCityId) {
+  //   // console.log('### Trigger');
+  //   // console.log(this.selectedCity);
+  //   // console.log(selectedCityId);
+  //   this.selectedCity = selectedCityId;
+  //   this.selectedCityName = this.cityList.find(x => x.id === selectedCityId).name;
+  //   console.log(this.selectedCityName);
+  //   this.getDashboardData(this.selectedCity);
+  //   this.showJobDemandAndAverageSalary(this.selectedCity);
+  //   this.showJobDemandByIndustry(this.selectedCity);
+  //   this.showAverageSalaryByIndustry(this.selectedCity);
+  //   this.showHighestDemandJobs(this.selectedCity);
+  //   this.showHighestSalaryJobs(this.selectedCity);
+  //   this.showTopHiringCompanies(this.selectedCity);
+  //   this.showHighestPayingCompanies(this.selectedCity);
+  //   this.showJobDemandByAge(this.selectedCity);
+  //   this.showJobDemandByLiteracy(this.selectedCity);
+  // }
   analysisRegion() {
     console.log(this.selectedCities);
     if (this.isComparing) {
@@ -477,43 +477,40 @@ export class RegionDetailComponent implements OnInit {
       if (this.selectedCities.length === 1) {
         this.showChart = true;
         const cityId = this.selectedCities[0].id;
-        this.getDashboardData(cityId);
-        this.showJobDemandAndAverageSalary(cityId);
-        this.showJobDemandByIndustry(cityId);
-        this.showAverageSalaryByIndustry(cityId);
-        this.showHighestDemandJobs(cityId);
-        this.showHighestSalaryJobs(cityId);
-        this.showTopHiringCompanies(cityId);
-        this.showHighestPayingCompanies(cityId);
-        this.showJobDemandByAge(cityId);
-        this.showJobDemandByLiteracy(cityId);
+        this.callApiForOneRegion(cityId);
       } else if (this.selectedCities.length >= 2) {
         const listId = this.selectedCities.map(a => a.id);
         if (listId.includes('P0')) {
           this.showChart = true;
           console.log('co P0 ne')
           const cityId = 'P0';
-          this.getDashboardData(cityId);
-          this.showJobDemandAndAverageSalary(cityId);
-          this.showJobDemandByIndustry(cityId);
-          this.showAverageSalaryByIndustry(cityId);
-          this.showHighestDemandJobs(cityId);
-          this.showHighestSalaryJobs(cityId);
-          this.showTopHiringCompanies(cityId);
-          this.showHighestPayingCompanies(cityId);
-          this.showJobDemandByAge(cityId);
-          this.showJobDemandByLiteracy(cityId);
+          this.callApiForOneRegion(cityId);
         } else {
           this.showChart = false;
           const cityId = listId.toString();
           console.log(cityId);
-          this.getDashboardData(cityId);
-          this.showJobDemandAndAverageSalary(cityId);
-          this.showJobDemandByAge(cityId);
-          this.showJobDemandByLiteracy(cityId);
+          this.callApiForManyRegion(cityId);
         }
       }
     }
+  }
+  callApiForOneRegion(cityId: string){
+    this.getDashboardData(cityId);
+    this.showJobDemandAndAverageSalary(cityId);
+    this.showJobDemandByIndustry(cityId);
+    this.showAverageSalaryByIndustry(cityId);
+    this.showHighestDemandJobs(cityId);
+    this.showHighestSalaryJobs(cityId);
+    this.showTopHiringCompanies(cityId);
+    this.showHighestPayingCompanies(cityId);
+    this.showJobDemandByAge(cityId);
+    this.showJobDemandByLiteracy(cityId);
+  }
+  callApiForManyRegion(cityId: string){
+    this.getDashboardData(cityId);
+    this.showJobDemandAndAverageSalary(cityId);
+    this.showJobDemandByAge(cityId);
+    this.showJobDemandByLiteracy(cityId);
   }
   getCityList(): void {
     this.jobsService.getCityList()
@@ -542,7 +539,7 @@ export class RegionDetailComponent implements OnInit {
           );
         // console.log("this.filteredOptions" +this.filteredOptions);
 
-        this.filteredCities = this.control.valueChanges
+        this.filteredCities = this.cityControl.valueChanges
           .pipe(
             startWith<string | City>(''),
             map(value => typeof value === 'string' ? value : value.name),
